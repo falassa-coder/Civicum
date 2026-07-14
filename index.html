@@ -360,6 +360,14 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
   }
 
 
+
+/* ===== TABS LANDING ===== */
+.tab-link{position:relative;padding-bottom:2px;}
+.tab-link.active{color:var(--brick)!important;font-weight:700;}
+.tab-link.active::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--brick);border-radius:1px;}
+.tab-content{animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
 /* ===== LANDING PAGE (screen-landing) ===== */
 #screen-landing { display:block; }
 #screen-landing.hidden { display:none; }
@@ -375,211 +383,250 @@ html { scroll-behavior:smooth; }
 <!-- ===== LANDING PAGE ===== -->
 <div id="screen-landing">
 
-
 <header class="nav">
   <div class="wrap nav-in">
     <div class="brand"><div class="mono">C</div><div class="brand-name">CIVICUM</div></div>
-    <nav class="nav-links">
-      <a class="navlink" href="#atouts">Atouts</a>
-      <a class="navlink" href="#tarifs">Tarifs</a>
-      <a class="navlink" href="#faq">FAQ</a>
+    <nav class="nav-links" id="main-nav">
+      <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
+      <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
+      <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
+      <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Accéder à la plateforme</a>
     </nav>
   </div>
 </header>
 
-<main>
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Préparation à l'examen civique</div>
-      <h1>Réussissez l'examen civique,<br><span class="em">à votre rythme.</span></h1>
-      <p class="lead">La plateforme en ligne pour vous préparer sereinement&nbsp;: des cours clairs et illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#" onclick="showApp();return false;">Accéder à la plateforme</a>
-        <a class="btn btn-ghost" href="#" onclick="showApp();setTimeout(function(){var el=document.getElementById('screen-contact');if(el)el.hidden=false;},400);return false;">Demander mon code</a>
+<!-- ===== TAB : ACCUEIL ===== -->
+<div id="tab-accueil" class="tab-content" style="display:block;">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Préparation à l'examen civique</div>
+        <h1>Réussissez l'examen civique,<br><span class="em">à votre rythme.</span></h1>
+        <p class="lead">La plateforme en ligne pour vous préparer sereinement&nbsp;: des cours clairs et illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Accéder à la plateforme</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander mon code</a>
+        </div>
+        <div class="hero-trust">
+          <span><i class="dot"></i>Un aperçu libre d'accès</span>
+          <span><i class="dot"></i>Sans installation</span>
+          <span><i class="dot"></i>Sur mobile &amp; ordinateur</span>
+        </div>
       </div>
-      <div class="hero-trust">
-        <span><i class="dot"></i>Un aperçu libre d'accès</span>
-        <span><i class="dot"></i>Sans installation</span>
-        <span><i class="dot"></i>Sur mobile &amp; ordinateur</span>
-      </div>
-    </div>
-    <div class="qcard" aria-hidden="true">
-      <div class="qcard-top"><span class="qcard-meta">Question 3 / 40</span><span class="qcard-timer">42:15</span></div>
-      <div class="qcard-q">Quelle est la devise de la République française&nbsp;?</div>
-      <div class="opt good"><span class="k">A</span>Liberté, Égalité, Fraternité<span class="tick">✓</span></div>
-      <div class="opt"><span class="k">B</span>Union, Travail, Justice</div>
-      <div class="opt"><span class="k">C</span>Paix, Ordre, Nation</div>
-    </div>
-  </div>
-</section>
-
-<section id="public">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Pour qui&nbsp;?</div>
-      <h2>Une préparation adaptée à votre démarche</h2>
-      <p>Que vous visiez un titre de séjour ou la nationalité française, choisissez le niveau qui correspond à votre situation.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card aud">
-        <div class="aud-badge">CSP</div>
-        <h3>Carte de séjour pluriannuelle</h3>
-        <p>Le niveau fondamental&nbsp;: l'essentiel des connaissances et des questions à 3 réponses.</p>
-      </article>
-      <article class="card aud">
-        <div class="aud-badge">CR</div>
-        <h3>Carte de résident</h3>
-        <p>Un niveau intermédiaire, avec des contenus approfondis et des questions à 4 réponses.</p>
-      </article>
-      <article class="card aud">
-        <div class="aud-badge">N</div>
-        <h3>Naturalisation</h3>
-        <p>Le niveau le plus complet, avec des repères historiques et culturels étendus.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="atouts">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Ce que vous y trouvez</div>
-      <h2>Tout pour réviser efficacement</h2>
-    </div>
-    <div class="grid-4">
-      <article class="card feat">
-        <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M24 13c-4-3-9-3-13-2v25c4-1 9-1 13 2 4-3 9-3 13-2V11c-4-1-9-1-13 2Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="24" y1="13" x2="24" y2="38" stroke="#16233F" stroke-width="2.2"/></svg></div>
-        <h3>Cours structurés &amp; illustrés</h3>
-        <p>Les 5 thématiques officielles, simplifiées et imagées, en fiches courtes que l'on retient.</p>
-      </article>
-      <article class="card feat">
-        <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="30" width="7" height="9" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="20.5" y="23" width="7" height="16" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="31" y="16" width="7" height="23" rx="1" fill="#B3402F" stroke="#B3402F" stroke-width="2.2"/></svg></div>
-        <h3>Questions par niveau</h3>
-        <p>Un entraînement adapté à votre démarche&nbsp;: carte de séjour, carte de résident ou naturalisation.</p>
-      </article>
-      <article class="card feat">
-        <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="13" fill="none" stroke="#16233F" stroke-width="2.2"/><line x1="24" y1="27" x2="24" y2="19" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="24" y1="27" x2="29" y2="30" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><line x1="20" y1="9" x2="28" y2="9" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><line x1="24" y1="9" x2="24" y2="14" stroke="#16233F" stroke-width="2.2"/></svg></div>
-        <h3>Examen blanc chronométré</h3>
-        <p>40 questions en 45 minutes, dans les conditions réelles de l'entretien.</p>
-      </article>
-      <article class="card feat">
-        <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><path d="M33 15a13 13 0 0 1 0 18" fill="none" stroke="#16233F" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Lecture audio</h3>
-        <p>Écoutez les questions et les réponses pour mieux mémoriser, même en déplacement.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="comment" class="how">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Comment ça marche</div>
-      <h2>Commencez en trois étapes</h2>
-    </div>
-    <ol class="steps">
-      <li class="step">
-        <span class="step-n">1</span>
-        <div><h3>Demandez votre code</h3><p>Écrivez-nous à falassaservices@gmail.com en indiquant la formule choisie.</p></div>
-      </li>
-      <li class="step">
-        <span class="step-n">2</span>
-        <div><h3>Réglez votre abonnement</h3><p>Par virement bancaire ou via Wero. Simple et rapide.</p></div>
-      </li>
-      <li class="step">
-        <span class="step-n">3</span>
-        <div><h3>Accédez à tout</h3><p>Vous recevez votre code personnel&nbsp;: cours et questions se débloquent aussitôt.</p></div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section id="tarifs">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Tarifs</div>
-      <h2>Un abonnement simple, sans engagement</h2>
-    </div>
-    <div class="pricing">
-      <div class="plan">
-        <div class="plan-name">1 mois</div>
-        <div class="plan-price">10<small>&nbsp;€</small></div>
-        <div class="plan-sub">Pour une révision intensive</div>
-        <a class="btn btn-ghost" href="mailto:falassaservices@gmail.com?subject=Abonnement%201%20mois%20Civicum">Choisir</a>
-      </div>
-      <div class="plan pop">
-        <div class="plan-tag">Le plus choisi</div>
-        <div class="plan-name">3 mois</div>
-        <div class="plan-price">20<small>&nbsp;€</small></div>
-        <div class="plan-sub">Le temps de tout maîtriser</div>
-        <a class="btn btn-gold" href="mailto:falassaservices@gmail.com?subject=Abonnement%203%20mois%20Civicum">Choisir</a>
-      </div>
-      <div class="plan">
-        <div class="plan-name">Accès à vie</div>
-        <div class="plan-price">50<small>&nbsp;€</small></div>
-        <div class="plan-sub">Un accès sans limite de durée</div>
-        <a class="btn btn-ghost" href="mailto:falassaservices@gmail.com?subject=Acc%C3%A8s%20%C3%A0%20vie%20Civicum">Choisir</a>
+      <div class="qcard" aria-hidden="true">
+        <div class="qcard-top"><span class="qcard-meta">Question 3 / 40</span><span class="qcard-timer">42:15</span></div>
+        <div class="qcard-q">Quelle est la devise de la République française&nbsp;?</div>
+        <div class="opt good"><span class="k">A</span>Liberté, Égalité, Fraternité<span class="tick">✓</span></div>
+        <div class="opt"><span class="k">B</span>Union, Travail, Justice</div>
+        <div class="opt"><span class="k">C</span>Paix, Ordre, Nation</div>
       </div>
     </div>
-    <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
-    <p class="pricing-pay">Paiement par virement bancaire ou Wero. Paiement automatique depuis la plateforme bientôt disponible.</p>
-  </div>
-</section>
+  </section>
 
-<section id="faq">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Questions fréquentes</div>
-      <h2>Vous vous demandez peut-être…</h2>
-    </div>
-    <div class="faq">
-      <details class="faq-item">
-        <summary>Qu'est-ce que l'examen civique&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>C'est un test de connaissances sur la France, ses valeurs, son histoire et son fonctionnement, demandé lors de certaines démarches de séjour ou de naturalisation. Civicum vous aide à le préparer.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary>Faut-il installer une application&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Non. Tout se passe en ligne, depuis un ordinateur, une tablette ou un téléphone. Un simple navigateur suffit.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary>Comment j'obtiens mon code d'accès&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Écrivez-nous à falassaservices@gmail.com. Après règlement (virement ou Wero), vous recevez votre code personnel par retour de mail.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary>Quels sont les moyens de paiement&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Virement bancaire ou Wero. Le paiement automatique directement depuis la plateforme sera bientôt disponible.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary>Puis-je partager mon code&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Non&nbsp;: chaque accès est strictement individuel et personnel.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary>Le contenu est-il officiel&nbsp;?<span class="faq-plus" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Civicum est un service privé de préparation, indépendant de l'administration. Le contenu est pédagogique et indicatif&nbsp;: il vous entraîne, sans se substituer aux sources officielles.</p></div>
-      </details>
-    </div>
-  </div>
-</section>
-</main>
-
-<section class="final">
-  <div class="wrap">
-    <div>
-      <h2>Prêt à préparer votre examen&nbsp;?</h2>
-      <p>Découvrez un aperçu gratuit, puis demandez votre code pour débloquer l'ensemble des cours et des questions.</p>
-      <div class="final-cta">
-        <a class="btn btn-primary" href="#" onclick="showApp();return false;">Accéder à la plateforme</a>
-        <a class="btn btn-ghost" href="#" onclick="showApp();setTimeout(function(){var el=document.getElementById('screen-contact');if(el)el.hidden=false;},400);return false;">Demander mon code</a>
+  <section id="public">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Pour qui&nbsp;?</div>
+        <h2>Une préparation adaptée à votre démarche</h2>
+        <p>Que vous visiez un titre de séjour ou la nationalité française, choisissez le niveau qui correspond à votre situation.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card aud">
+          <div class="aud-badge">CSP</div>
+          <h3>Carte de séjour pluriannuelle</h3>
+          <p>Le niveau fondamental&nbsp;: l'essentiel des connaissances et des questions à 3 réponses.</p>
+        </article>
+        <article class="card aud">
+          <div class="aud-badge">CR</div>
+          <h3>Carte de résident</h3>
+          <p>Un niveau intermédiaire, avec des contenus approfondis et des questions à 4 réponses.</p>
+        </article>
+        <article class="card aud">
+          <div class="aud-badge">N</div>
+          <h3>Naturalisation</h3>
+          <p>Le niveau le plus complet, avec des repères historiques et culturels étendus.</p>
+        </article>
       </div>
     </div>
-    <div class="qr-share">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAIAAAAG+WgKAAAEL0lEQVR4nO3d22ksRxRAUcs4ByfgQBy6A3ECjmL87wZTHHZVtcRanxdN9+hqU3Cofnx9Pp9foPPr7S/ATyMpYpIiJilikiImKWKSIiYpYpIiJilikiL228oP/f7Hn5u/xv/55++//vMvz++z8jOzI8/MvvOKt/0tnqxSxCRFTFLEJEVMUsSWJr6n2bSyoprUVn5m9ql9R35a+X+++7d4skoRkxQxSRGTFDFJERtOfE+z6aCaVmaT0ew7n/zUzN2/hVWKmKSISYqYpIhJilg28Z108trL2af27ei9n1WKmKSISYqYpIhJiti3nPieVmalaudr5Tj7Jsf3s0oRkxQxSRGTFDFJEcsmvrfNJtVc9lQ9cWXfdZ53/xZWKWKSIiYpYpIiJiliw4nv7hMjZ6qrMau9ubv3Fe5jlSImKWKSIiYpYpIitjTxvW3/bubkntpsh/HukzkrVilikiImKWKSIiYpYsP38VVXNu7b56ru7Nt3nH3Xna6Y/V7ex8cFkiImKWKSIiYpYl+fz2fwsbvXQ+478sq5VlQ7cW+7YtPExwWSIiYpYpIiJiliwz2+2c9U5zr5/MwV+97yMDt7xRvYeQVJEZMUMUkRkxSx7D6+fXel3X1H3oqTs+TK2e/+b1iliEmKmKSISYqYpIhle3yz45y8FvSp2h3bt+e48pvue97L7FNWKWKSIiYpYpIiJiliS/fx/dR72fa9t/39Z59xHx8XSIqYpIhJipikiA2v6tw3iZyccapz7duFnLl7X6FVipikiEmKmKSISYrY8FmdTz/jqSP77oDbdy9kdZzqt7BKEZMUMUkRkxQxSRFb2uN7OvlEzZP3oO2bE2fnuvuWdvfx8QqSIiYpYpIiJiliw/v49t2D9rYdtJNPkllx8krUlU89WaWISYqYpIhJipikiF2+qnOf9+/x3X0f375J1ipFTFLEJEVMUsQkRWzjxFdNEHdnyZOT48rZ9737zx4fLyUpYpIiJilikiJ29H18J68FrY68cpx975qffefZ7OZZnbyUpIhJipikiEmK2PDtDPtUs1v1jM2T13muHGfF3XdDWKWISYqYpIhJipikiB3d45vZ91SW99/rt3L2k29eWGGVIiYpYpIiJilikiI2fDvD3WdRrkxP73/C58y+d1VUc71VipikiEmKmKSISYrYcOJ7unvV4sqR774jb98debPjuI+Pb0NSxCRFTFLEJEUsm/hOmu3x7Xt26Mlp9/2sUsQkRUxSxCRFTFLEvuXE91TNgNXZn07etVedfcYqRUxSxCRFTFLEJEUsm/ju7lhV13nuuxb05D2DK6prOJ+sUsQkRUxSxCRFTFLEhhPf3ad33t0ve9o3Pd19z8LsXFYpYpIiJilikiImKWJfn8/n9nfgR7FKEZMUMUkRkxQxSRGTFDFJEZMUMUkRkxQxSRH7F0bAEu7F3S8GAAAAAElFTkSuQmCC" alt="QR code vers la plateforme Civicum" style="width:150px;height:150px;display:block;margin:0 auto 10px;image-rendering:pixelated;">
-      <span>Scannez pour ouvrir sur mobile</span>
+  </section>
+
+  <section id="atouts">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Ce que vous y trouvez</div>
+        <h2>Tout pour réviser efficacement</h2>
+      </div>
+      <div class="grid-4">
+        <article class="card feat">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M24 13c-4-3-9-3-13-2v25c4-1 9-1 13 2 4-3 9-3 13-2V11c-4-1-9-1-13 2Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="24" y1="13" x2="24" y2="38" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <h3>Cours structurés &amp; illustrés</h3>
+          <p>Les 5 thématiques officielles, simplifiées et imagées, en fiches courtes que l'on retient.</p>
+        </article>
+        <article class="card feat">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="30" width="7" height="9" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="20.5" y="23" width="7" height="16" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="31" y="16" width="7" height="23" rx="1" fill="#B3402F" stroke="#B3402F" stroke-width="2.2"/></svg></div>
+          <h3>Questions par niveau</h3>
+          <p>Un entraînement adapté à votre démarche&nbsp;: carte de séjour, carte de résident ou naturalisation.</p>
+        </article>
+        <article class="card feat">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="13" fill="none" stroke="#16233F" stroke-width="2.2"/><line x1="24" y1="27" x2="24" y2="19" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="24" y1="27" x2="29" y2="30" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><line x1="20" y1="9" x2="28" y2="9" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><line x1="24" y1="9" x2="24" y2="14" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <h3>Examen blanc chronométré</h3>
+          <p>40 questions en 45 minutes, dans les conditions réelles de l'entretien.</p>
+        </article>
+        <article class="card feat">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><path d="M33 15a13 13 0 0 1 0 18" fill="none" stroke="#16233F" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Lecture audio</h3>
+          <p>Écoutez les questions et les réponses pour mieux mémoriser, même en déplacement.</p>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="final">
+    <div class="wrap" style="display:block;text-align:center;padding:60px 22px;">
+      <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,3.6vw,34px);margin-bottom:14px;">Prêt à préparer votre examen&nbsp;?</h2>
+      <p style="color:rgba(246,242,233,.82);font-size:15px;margin-bottom:24px;">Découvrez un aperçu gratuit, puis demandez votre code pour débloquer l'ensemble des cours et des questions.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Accéder à la plateforme</a>
+        <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Demander mon code</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : À PROPOS ===== -->
+<div id="tab-apropos" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:760px;">
+      <div class="eyebrow" style="margin-bottom:12px;">À propos de Civicum</div>
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,4vw,36px);margin-bottom:28px;color:var(--navy);">Une réponse pensée pour ceux qui en ont besoin</h2>
+
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
+          Civicum est né d'une volonté d'accompagner. À la demande de plusieurs personnes que j'accompagnais dans leurs démarches, j'ai mis en place cette plateforme pour répondre de la meilleure façon à un besoin réel&nbsp;: aider les gens à réussir leur examen civique.
+        </p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
+          Des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas sans conséquences — et que le repassage n'est pas gratuit. Civicum permet à chacun de se préparer sérieusement, sans se ruiner.
+        </p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">
+          En tant que formateur depuis 7 ans dans les dispositifs d'intégration, je suis profondément sensible aux problématiques des personnes étrangères. Civicum est une réponse efficace au besoin d'autonomie pour une intégration réussie.
+        </p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:20px;background:var(--navy);border-radius:12px;padding:24px 28px;color:var(--cream);">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Libre Caslon Display',serif;font-size:24px;flex:none;">M</div>
+        <div>
+          <div style="font-family:'Source Serif 4',serif;font-weight:700;font-size:17px;margin-bottom:2px;">Mamoudou Falassa SIDIBE</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.75);">Formateur en intégration depuis 7 ans · Fondateur de Civicum</div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;">
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:36px;color:var(--brick);">7</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px;">ans de formation à l'intégration</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:36px;color:var(--brick);">3</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px;">niveaux adaptés à chaque démarche</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:36px;color:var(--brick);">5</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px;">thématiques officielles couvertes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : TARIFS ===== -->
+<div id="tab-tarifs" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Tarifs</div>
+        <h2>Un abonnement simple, sans engagement</h2>
+        <p>Des tarifs accessibles pour que personne ne soit bloqué par le prix.</p>
+      </div>
+      <div class="pricing">
+        <div class="plan">
+          <div class="plan-name">1 mois</div>
+          <div class="plan-price">10<small>&nbsp;€</small></div>
+          <div class="plan-sub">Pour une révision intensive</div>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+        </div>
+        <div class="plan pop">
+          <div class="plan-tag">Le plus choisi</div>
+          <div class="plan-name">3 mois</div>
+          <div class="plan-price">20<small>&nbsp;€</small></div>
+          <div class="plan-sub">Le temps de tout maîtriser</div>
+          <a class="btn btn-gold" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Accès à vie</div>
+          <div class="plan-price">50<small>&nbsp;€</small></div>
+          <div class="plan-sub">Un accès sans limite de durée</div>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+        </div>
+      </div>
+      <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
+      <p class="pricing-pay">Paiement par virement bancaire ou Wero. Paiement automatique depuis la plateforme bientôt disponible.</p>
+
+      <div style="max-width:560px;margin:40px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
+        <div class="eyebrow" style="margin-bottom:10px;">Comment ça marche</div>
+        <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2;">
+          <li>Choisissez votre formule et écrivez-nous à <b style="color:var(--navy);">falassaservices@gmail.com</b></li>
+          <li>Réglez par virement IBAN ou Wero au <b style="color:var(--navy);">06 51 46 09 72</b></li>
+          <li>Vous recevez votre code personnel par retour de mail</li>
+          <li>Accédez immédiatement à la plateforme</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : CONTACT ===== -->
+<div id="tab-contact-tab" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:640px;">
+      <div class="sec-head" style="text-align:left;margin-left:0;">
+        <div class="eyebrow">Contact</div>
+        <h2>Nous contacter</h2>
+        <p>Pour toute demande de code, question ou renseignement, écrivez-nous ici ou directement par mail.</p>
+      </div>
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
+        <form id="landing-contact-form" action="https://formspree.io/f/mpqvzboj" method="POST">
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Nom</label>
+            <input type="text" name="nom" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">E-mail</label>
+            <input type="email" name="email" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Message</label>
+            <textarea name="message" rows="4" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;resize:vertical;background:white;"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Message depuis Civicum">
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Envoyer</button>
+          <p id="landing-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
+        </form>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">E-mail</div>
+          <a href="mailto:falassaservices@gmail.com" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">falassaservices@gmail.com</a>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Téléphone / Wero</div>
+          <a href="tel:+33651460972" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">06 51 46 09 72</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <footer>
   <div class="wrap foot">
@@ -599,11 +646,11 @@ html { scroll-behavior:smooth; }
   </div>
 </footer>
 
-
 </div>
 
+
 <!-- ===== APP PLATFORM ===== -->
-<div id="app-wrapper" class="app-wrapper">
+<div id="app-wrapper" class="app-wrapper"><div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;"><a href="#" onclick="document.getElementById('app-wrapper').classList.remove('visible');document.getElementById('screen-landing').classList.remove('hidden');checkExistingUnlock||true;return false;" style="font-size:13px;color:var(--navy2);text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;">← Retour à l'accueil</a></div>
 <div id="app-platform">
 
 <div class="wrap">
@@ -1834,6 +1881,32 @@ checkExistingUnlock();
    colonnes : code | nom | formule | debut | fin
    fin = date d'expiration au format YYYY-MM-DD  (vide = accès à vie)
 ============================================================ */
+
+/* ===== TAB NAVIGATION ===== */
+function switchTab(id){
+  document.querySelectorAll('.tab-content').forEach(function(el){el.style.display='none';});
+  document.querySelectorAll('.tab-link').forEach(function(a){a.classList.remove('active');});
+  var target = document.getElementById('tab-'+id);
+  if(target){ target.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+  document.querySelectorAll('.tab-link[data-tab="'+id+'"]').forEach(function(a){a.classList.add('active');});
+}
+
+/* Landing contact form */
+(function(){
+  var lf = document.getElementById('landing-contact-form');
+  if(!lf) return;
+  lf.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var msg = document.getElementById('landing-form-msg');
+    try {
+      var res = await fetch(lf.action, {method:'POST', body:new FormData(lf), headers:{'Accept':'application/json'}});
+      if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons rapidement."; msg.style.color='green'; lf.reset(); }
+      else { msg.textContent="Erreur. Écrivez-nous directement à falassaservices@gmail.com"; msg.style.color='var(--brick)'; }
+    } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
+    msg.style.display='block';
+  });
+})();
+
 /* ===== LANDING ↔ APP SWITCH ===== */
 function showApp(){
   document.getElementById('screen-landing').classList.add('hidden');
