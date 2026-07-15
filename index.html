@@ -58,6 +58,11 @@ section{padding:76px 0;}
 .nav-links a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--navy2);}
 .nav-links a.navlink:hover{color:var(--brick);}
 .nav-cta{padding:10px 18px;font-size:14px;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-left:8px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .25s;}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
 /* hero */
 .hero{padding:64px 0 40px;}
@@ -167,11 +172,29 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
   .grid-3,.steps,.pricing{grid-template-columns:1fr;}
   .final .wrap{grid-template-columns:1fr;}
   .qr-share{max-width:220px;margin:0 auto;}
-  .nav-links .navlink{display:none;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;z-index:999;padding:18px 22px 22px;border-bottom:1px solid var(--line);gap:0;box-shadow:0 8px 24px rgba(0,0,0,.12);}
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:13px 0;border-bottom:1px solid var(--line);font-size:16px;width:100%;}
+  .nav-links a:last-child{border-bottom:none;margin-top:8px;}
+  .nav-links .nav-cta{width:100%;text-align:center;justify-content:center;border-radius:8px;}
+  .hamburger{display:flex;}
 }
 @media (max-width:480px){
   .grid-4{grid-template-columns:1fr;}
   section{padding:58px 0;}
+}
+@media (max-width:600px){
+  h1{font-size:clamp(26px,7vw,38px)!important;}
+  h2{font-size:clamp(20px,5.5vw,28px)!important;}
+  .lead{font-size:15px!important;}
+  .eyebrow{font-size:11px!important;}
+  .plan-price{font-size:42px!important;}
+  .card{padding:20px 16px!important;}
+  .hero-cta{flex-direction:column;gap:10px;}
+  .hero-cta .btn{width:100%;text-align:center;justify-content:center;}
+  .hero-trust{flex-wrap:wrap;gap:8px 14px;}
+  .feat-ic{width:44px;height:44px;}
+  section{padding:44px 0!important;}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{transition:none!important;}}
 
@@ -386,6 +409,7 @@ html { scroll-behavior:smooth; }
 <header class="nav">
   <div class="wrap nav-in">
     <div class="brand"><div class="mono">C</div><div class="brand-name">CIVICUM</div></div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
       <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
@@ -575,7 +599,7 @@ html { scroll-behavior:smooth; }
       <div style="max-width:560px;margin:40px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Comment ça marche</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2;">
-          <li>Choisissez votre formule et écrivez-nous à <b style="color:var(--navy);">falassaservices@gmail.com</b></li>
+          <li>Choisissez votre formule et écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b></li>
           <li>Réglez par virement IBAN ou Wero au <b style="color:var(--navy);">06 51 46 09 72</b></li>
           <li>Vous recevez votre code personnel par retour de mail</li>
           <li>Accédez immédiatement à la plateforme</li>
@@ -617,7 +641,7 @@ html { scroll-behavior:smooth; }
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
           <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">E-mail</div>
-          <a href="mailto:falassaservices@gmail.com" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">falassaservices@gmail.com</a>
+          <a href="mailto:contact@civicum.fr" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">contact@civicum.fr</a>
         </div>
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
           <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Téléphone / Wero</div>
@@ -636,9 +660,9 @@ html { scroll-behavior:smooth; }
       SIRET 910&nbsp;558&nbsp;220&nbsp;00018
     </div>
     <div class="foot-links">
-      <a href="mailto:falassaservices@gmail.com">falassaservices@gmail.com</a>
+      <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
       <a href="tel:+33651460972">06 51 46 09 72 &middot; Wero</a>
-      <a href="https://falassa-coder.github.io/Civicum/">falassa-coder.github.io/Civicum</a>
+      <a href="https://civicum.fr/">civicum.fr</a>
     </div>
     <div class="foot-legal">
       Service privé de préparation, indépendant de l'administration. Contenu pédagogique indicatif.
@@ -673,7 +697,7 @@ html { scroll-behavior:smooth; }
   <section id="screen-level" class="card" hidden>
     <div class="qmeta" style="margin-bottom:14px;">Choisir un niveau</div>
     <div class="levels" id="level-list"></div>
-    <button class="btn btn-primary" id="btn-to-themes" style="margin-top:6px;">Continuer vers l'entraînement</button>
+    <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer vers l'entraînement</button>
     <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center;">
       <button class="btn" id="open-courses" style="background:var(--gold);color:#fff;border:none;width:100%;">📚 Accéder aux cours structurés</button>
     </div>
@@ -882,8 +906,8 @@ function isExpired(finStr){
 
 /* Erreurs lisibles */
 const MSG = {
-  NOT_FOUND : "Code non reconnu. Vérifiez la saisie ou contactez falassaservices@gmail.com",
-  EXPIRED   : "Votre accès a expiré. Contactez falassaservices@gmail.com pour renouveler.",
+  NOT_FOUND : "Code non reconnu. Vérifiez la saisie ou contactez contact@civicum.fr",
+  EXPIRED   : "Votre accès a expiré. Contactez contact@civicum.fr pour renouveler.",
   NETWORK   : "Impossible de vérifier votre code (connexion). Réessayez dans un instant.",
   LOADING   : "Vérification en cours…"
 };
@@ -1123,7 +1147,7 @@ function renderLevelList(){
     el.type = 'button';
     el.dataset.value = lv.key;
     el.innerHTML = `<span class="l-left"><span class="l-name">${lv.name}</span><span class="l-desc">${lv.desc}</span></span><span class="l-count">${count} questions</span>`;
-    el.addEventListener('click', () => { selectedLevel = lv.key; updateLevelActive(); });
+    el.addEventListener('click', () => { selectedLevel = lv.key; updateLevelActive(); selectedTheme='ALL'; renderThemeList(); show('screen-setup'); });
     levelListEl.appendChild(el);
   });
   updateLevelActive();
@@ -1752,11 +1776,11 @@ async function tryCourseUnlock(){
     const rows = parseCSV(await res.text());
     const row = rows.find(r => r[0] && r[0].trim().toUpperCase() === val);
     if(!row){
-      setCourseError("Code non reconnu. Contactez falassaservices@gmail.com");
+      setCourseError("Code non reconnu. Contactez contact@civicum.fr");
     } else if(isExpired(row[4])){
-      setCourseError("Votre accès a expiré. Contactez falassaservices@gmail.com pour renouveler.");
+      setCourseError("Votre accès a expiré. Contactez contact@civicum.fr pour renouveler.");
     } else if(!rowHasCours(row)){
-      setCourseError("Votre formule ("+( row[2]||"?")+" ) n'inclut pas l'accès aux cours. Contactez falassaservices@gmail.com");
+      setCourseError("Votre formule ("+( row[2]||"?")+" ) n'inclut pas l'accès aux cours. Contactez contact@civicum.fr");
     } else {
       clearCourseError();
       try{ localStorage.setItem('course_unlocked','true'); localStorage.setItem('course_ts',Date.now().toString()); }catch(e){}
@@ -1882,6 +1906,22 @@ checkExistingUnlock();
    fin = date d'expiration au format YYYY-MM-DD  (vide = accès à vie)
 ============================================================ */
 
+
+/* ===== HAMBURGER MENU ===== */
+function toggleMenu(){
+  var nav = document.getElementById('main-nav');
+  var btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+}
+// Fermer le menu quand on clique sur un lien
+document.querySelectorAll('#main-nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('main-nav').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  });
+});
+
 /* ===== TAB NAVIGATION ===== */
 function switchTab(id){
   document.querySelectorAll('.tab-content').forEach(function(el){el.style.display='none';});
@@ -1901,7 +1941,7 @@ function switchTab(id){
     try {
       var res = await fetch(lf.action, {method:'POST', body:new FormData(lf), headers:{'Accept':'application/json'}});
       if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons rapidement."; msg.style.color='green'; lf.reset(); }
-      else { msg.textContent="Erreur. Écrivez-nous directement à falassaservices@gmail.com"; msg.style.color='var(--brick)'; }
+      else { msg.textContent="Erreur. Écrivez-nous directement à contact@civicum.fr"; msg.style.color='var(--brick)'; }
     } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
     msg.style.display='block';
   });
@@ -1924,7 +1964,7 @@ function showApp(){
     try {
       var res = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}});
       if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons sous 48h."; msg.style.color='green'; f.reset(); }
-      else { msg.textContent="Erreur d'envoi. Écrivez-nous à falassaservices@gmail.com"; msg.style.color='var(--brick)'; }
+      else { msg.textContent="Erreur d'envoi. Écrivez-nous à contact@civicum.fr"; msg.style.color='var(--brick)'; }
     } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
     msg.style.display='block';
   });
