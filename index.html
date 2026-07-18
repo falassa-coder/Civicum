@@ -287,9 +287,16 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
   .points-gain{ position:absolute; top:-2px; right:0; font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:700; color:var(--green); opacity:0; animation: pointsFloat .9s ease forwards; pointer-events:none; }
   @keyframes pointsFloat{ 0%{ opacity:1; transform:translateY(0); } 100%{ opacity:0; transform:translateY(-22px); } }
 
-  .portraits-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:14px; margin-bottom:8px; }
-  .portrait-slot{ border:1px solid var(--line); border-radius:8px; padding:12px 8px; text-align:center; background:#fff; }
-  .portrait-slot .icon-wrap svg{ width:60px; height:60px; }
+  .portraits-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:16px; margin-bottom:8px; }
+  .portrait-slot{ border:2px solid var(--line); border-radius:12px; padding:16px 10px; text-align:center; background:#fff; transition:border-color .15s, box-shadow .15s; }
+  .portrait-slot:hover{ border-color:var(--gold); }
+  .portrait-slot.correct{ border-color:var(--green)!important; background:#f0f7f3; }
+  .portrait-slot.wrong{ border-color:var(--brick)!important; background:#fdf3f2; }
+  .portrait-slot .icon-wrap{ display:flex; justify-content:center; margin-bottom:10px; }
+  .portrait-slot .icon-wrap svg{ width:72px; height:72px; display:block; }
+  .portrait-slot .drop-target{ font-size:12px; color:var(--muted); min-height:36px; display:flex; align-items:center; justify-content:center; border:1.5px dashed var(--line); border-radius:6px; padding:6px; cursor:pointer; transition:border-color .15s, background .15s; }
+  .portrait-slot .drop-target.filled{ border-style:solid; border-color:var(--navy); color:var(--navy); font-weight:600; font-size:12px; background:var(--paper); }
+  .portrait-slot .drop-target:hover{ border-color:var(--gold); background:rgba(169,132,62,.06); }
   .drop-target{ margin-top:8px; min-height:36px; border:2px dashed var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; padding:5px; line-height:1.3; cursor:pointer; color:#8a8a8a; }
   .drop-target.filled{ border-style:solid; border-color:var(--navy); background:#F5F1E8; color:var(--ink); font-weight:600; }
   .drop-target.correct{ border-color:var(--green); background:rgba(63,107,78,.09); color:var(--green); font-weight:600; }
@@ -544,21 +551,32 @@ html { scroll-behavior:smooth; }
 
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
         <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
-          Civicum est né d'une volonté d'accompagner. À la demande de plusieurs personnes que j'accompagnais dans leurs démarches, j'ai mis en place cette plateforme pour répondre de la meilleure façon à un besoin réel&nbsp;: aider les gens à réussir leur examen civique.
+          Civicum est une plateforme de préparation en ligne à l'examen civique, conçue pour accompagner toute personne engagée dans une démarche d'intégration en France — qu'il s'agisse d'une demande de carte de séjour, de carte de résident ou de naturalisation.
         </p>
         <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
-          Des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas sans conséquences — et que le repassage n'est pas gratuit. Civicum permet à chacun de se préparer sérieusement, sans se ruiner.
+          Notre objectif : rendre la préparation accessible, autonome et efficace. Des cours structurés par thématique, des séries de questions par niveau, un examen blanc chronométré — tout est pensé pour permettre à chacun de se préparer sérieusement, à son rythme, depuis n'importe quel appareil.
         </p>
         <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">
-          En tant que formateur depuis 7 ans dans les dispositifs d'intégration, je suis profondément sensible aux problématiques des personnes étrangères. Civicum est une réponse efficace au besoin d'autonomie pour une intégration réussie.
+          Civicum propose des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas anodin — le repassage a un coût, humain et administratif. Nous croyons qu'une bonne préparation ne devrait pas être un luxe.
         </p>
       </div>
 
-      <div style="display:flex;align-items:center;gap:20px;background:var(--navy);border-radius:12px;padding:24px 28px;color:var(--cream);">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Libre Caslon Display',serif;font-size:24px;flex:none;">M</div>
-        <div>
-          <div style="font-family:'Source Serif 4',serif;font-weight:700;font-size:17px;margin-bottom:2px;">Mamoudou Falassa SIDIBE</div>
-          <div style="font-size:13px;color:rgba(246,242,233,.75);">Formateur en intégration depuis 7 ans · Fondateur de Civicum</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">3</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">niveaux de préparation<br>(CSP, CR, Naturalisation)</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">5</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">thématiques officielles<br>couvertes en cours illustrés</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">40</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">questions en examen blanc<br>chronométré 45 min</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">100%</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">en ligne, sur mobile<br>et ordinateur</div>
         </div>
       </div>
 
@@ -587,27 +605,27 @@ html { scroll-behavior:smooth; }
       <div class="sec-head">
         <div class="eyebrow">Tarifs</div>
         <h2>Un abonnement simple, sans engagement</h2>
-        <p>Des tarifs accessibles pour que personne ne soit bloqué par le prix.</p>
+        <p>Des tarifs accessibles à tous. L'abonnement se fait sur demande par mail — nous vous communiquerons les coordonnées de paiement après votre prise de contact.</p>
       </div>
       <div class="pricing">
         <div class="plan">
           <div class="plan-name">1 mois</div>
           <div class="plan-price">10<small>&nbsp;€</small></div>
           <div class="plan-sub">Pour une révision intensive</div>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
         </div>
         <div class="plan pop">
           <div class="plan-tag">Le plus choisi</div>
           <div class="plan-name">3 mois</div>
           <div class="plan-price">20<small>&nbsp;€</small></div>
           <div class="plan-sub">Le temps de tout maîtriser</div>
-          <a class="btn btn-gold" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+          <a class="btn btn-gold" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
         </div>
         <div class="plan">
           <div class="plan-name">Accès à vie</div>
           <div class="plan-price">50<small>&nbsp;€</small></div>
           <div class="plan-sub">Un accès sans limite de durée</div>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Choisir</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
         </div>
       </div>
       <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
@@ -616,10 +634,10 @@ html { scroll-behavior:smooth; }
       <div style="max-width:560px;margin:40px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Comment ça marche</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2;">
-          <li>Choisissez votre formule et écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b></li>
-          <li>Réglez par virement IBAN ou Wero au <b style="color:var(--navy);">06 51 46 09 72</b></li>
-          <li>Vous recevez votre code personnel par retour de mail</li>
-          <li>Accédez immédiatement à la plateforme</li>
+          <li>Écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b> en indiquant la formule souhaitée</li>
+          <li>Nous vous communiquons les coordonnées de paiement par retour de mail</li>
+          <li>Dès réception du règlement, vous recevez votre code personnel</li>
+          <li>Accédez immédiatement à la plateforme avec votre code</li>
         </ol>
       </div>
     </div>
@@ -661,8 +679,8 @@ html { scroll-behavior:smooth; }
           <a href="mailto:contact@civicum.fr" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">contact@civicum.fr</a>
         </div>
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
-          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Téléphone / Wero</div>
-          <a href="tel:+33651460972" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">06 51 46 09 72</a>
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Site web</div>
+          <a href="https://civicum.fr" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">civicum.fr</a>
         </div>
       </div>
     </div>
@@ -678,7 +696,6 @@ html { scroll-behavior:smooth; }
     </div>
     <div class="foot-links">
       <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
-      <a href="tel:+33651460972">06 51 46 09 72 &middot; Wero</a>
       <a href="https://civicum.fr/">civicum.fr</a>
     </div>
     <div class="foot-legal">
@@ -708,7 +725,7 @@ html { scroll-behavior:smooth; }
     <input type="text" id="gate-code" placeholder="CODE D'ACCÈS" autocomplete="off">
     <div class="gate-error" id="gate-error">Code incorrect. Vérifiez la saisie et réessayez.</div>
     <button class="btn btn-primary" id="btn-unlock">Accéder à l'entraînement</button>
-    <div class="gate-hint">Le code vous a été communiqué par votre accompagnateur ou l'organisme référent.</div>
+    <div class="gate-hint">Votre code est strictement personnel et nominatif. Il ne peut être utilisé que sur un seul appareil à la fois.</div>
   </section>
 
   <section id="screen-level" class="card" hidden>
@@ -716,8 +733,9 @@ html { scroll-behavior:smooth; }
     <div class="levels" id="level-list"></div>
     <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer vers l'entraînement</button>
     <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center;">
-      <button class="btn" id="open-courses" style="background:var(--gold);color:#fff;border:none;width:100%;">📚 Accéder aux cours structurés</button>
-      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;width:100%;margin-top:10px;">🖼️ Portraits &amp; Symboles (nouveau)</button>
+      <button class="btn" id="open-courses" style="background:var(--gold);color:#fff;border:none;width:100%;font-size:16px;padding:15px 22px;">📚 Cours structurés — Accéder</button>
+      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;width:100%;margin-top:10px;font-size:16px;padding:15px 22px;">🖼️ Portraits &amp; Symboles</button>
+      <button class="btn btn-ghost" id="open-dashboard" style="width:100%;margin-top:10px;font-size:14px;">📊 Mon tableau de bord</button>
     </div>
   </section>
 
@@ -788,6 +806,18 @@ html { scroll-behavior:smooth; }
     </div>
   </section>
 
+
+  <section id="screen-dashboard" class="card" hidden>
+    <button class="btn-link" id="btn-dashboard-back">← Retour</button>
+    <div class="qmeta" style="margin-bottom:16px;">📊 Mon tableau de bord</div>
+    <div id="dashboard-content">
+      <p style="color:var(--muted);font-size:14px;text-align:center;padding:20px 0;">Aucune session enregistrée pour le moment.</p>
+    </div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);">
+      <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
+    </div>
+  </section>
+
   <section id="screen-course-gate" class="card" hidden>
     <div class="gate-icon">📚</div>
     <div class="gate-label">Entrez le code d'accès aux cours structurés</div>
@@ -839,7 +869,7 @@ html { scroll-behavior:smooth; }
 
   <footer>
     © 2026 MFS Services &amp; Conseils. Contenu pédagogique indicatif — vérifiez les informations officielles et les textes de référence avant votre entretien.<br>
-    <a id="open-contact" onclick="document.getElementById('screen-contact').hidden=false;return false;" href="#">Nous contacter</a> — Falassaservices@gmail.com
+    <a id="open-contact" onclick="document.getElementById('screen-contact').hidden=false;return false;" href="#">Nous contacter</a> 
   </footer>
 </div>
 
@@ -1517,6 +1547,12 @@ function renderResults(timeExpired){
     });
   }
 
+  // Sauvegarder dans le tableau de bord
+  try{
+    const dur = examStartTime ? Math.round((Date.now()-examStartTime)/1000) : null;
+    saveScore(selectedLevel, selectedTheme==='ALL'?'Tous les thèmes':selectedTheme, score, queue.length+score, dur, isExamMode);
+    saveLastSession(selectedLevel, selectedTheme==='ALL'?'Tous les thèmes':selectedTheme);
+  }catch(e){}
   show('screen-results');
 }
 
@@ -1524,7 +1560,7 @@ function renderResults(timeExpired){
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits'].forEach(s => {
+   'screen-portraits','screen-dashboard'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -2323,6 +2359,127 @@ document.getElementById('btn-close-contact').addEventListener('click', function(
 });
 
 
+
+
+
+/* ============ TABLEAU DE BORD ============ */
+const SCORES_KEY = 'civicum_scores';
+const LAST_SESSION_KEY = 'civicum_last_session';
+const MAX_SCORES = 20;
+
+function saveScore(level, theme, score, total, durationSec, isExam){
+  let scores = [];
+  try{ scores = JSON.parse(localStorage.getItem(SCORES_KEY)||'[]'); }catch(e){}
+  scores.unshift({
+    date: new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
+    level, theme, score, total,
+    pct: Math.round(score/total*100),
+    duration: durationSec ? Math.round(durationSec/60)+'min' : null,
+    isExam: !!isExam
+  });
+  if(scores.length > MAX_SCORES) scores = scores.slice(0, MAX_SCORES);
+  try{ localStorage.setItem(SCORES_KEY, JSON.stringify(scores)); }catch(e){}
+}
+
+function saveLastSession(level, theme){
+  try{ localStorage.setItem(LAST_SESSION_KEY, JSON.stringify({level, theme})); }catch(e){}
+}
+
+function getLastSession(){
+  try{ return JSON.parse(localStorage.getItem(LAST_SESSION_KEY)||'null'); }catch(e){ return null; }
+}
+
+function renderDashboard(){
+  const content = document.getElementById('dashboard-content');
+  let scores = [];
+  try{ scores = JSON.parse(localStorage.getItem(SCORES_KEY)||'[]'); }catch(e){}
+
+  const last = getLastSession();
+  let html = '';
+
+  // Reprendre dernière session
+  if(last){
+    html += `<div style="background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:16px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px;">Reprendre</div>
+        <div style="font-weight:700;color:var(--navy);font-size:15px;">${last.level} — ${last.theme}</div>
+      </div>
+      <button class="btn btn-primary" style="font-size:13px;padding:10px 16px;" onclick="resumeLastSession()">▶ Reprendre</button>
+    </div>`;
+  }
+
+  if(scores.length === 0){
+    html += '<p style="color:var(--muted);font-size:14px;text-align:center;padding:20px 0;">Aucune session enregistrée pour le moment.</p>';
+  } else {
+    // Statistiques globales
+    const avg = Math.round(scores.reduce((s,r)=>s+r.pct,0)/scores.length);
+    const best = Math.max(...scores.map(r=>r.pct));
+    html += `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${scores.length}</div>
+        <div style="font-size:11px;color:var(--muted);">sessions</div>
+      </div>
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${avg}%</div>
+        <div style="font-size:11px;color:var(--muted);">moyenne</div>
+      </div>
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${best}%</div>
+        <div style="font-size:11px;color:var(--muted);">meilleur score</div>
+      </div>
+    </div>`;
+
+    // Liste des sessions
+    html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+    scores.forEach(s => {
+      const color = s.pct >= 75 ? 'var(--green)' : s.pct >= 50 ? 'var(--gold)' : 'var(--brick)';
+      html += `<div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div>
+          <div style="font-weight:600;font-size:13px;color:var(--navy);">${s.isExam?'📋 Examen blanc':'🎯 Entraînement'} · ${s.level}</div>
+          <div style="font-size:12px;color:var(--muted);">${s.theme} · ${s.date}${s.duration?' · '+s.duration:''}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif;font-size:22px;color:${color};font-weight:700;">${s.pct}%</div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  content.innerHTML = html;
+}
+
+function resumeLastSession(){
+  const last = getLastSession();
+  if(!last) return;
+  selectedLevel = last.level;
+  selectedTheme = last.theme;
+  updateLevelActive();
+  renderThemeList();
+  show('screen-setup');
+}
+
+document.getElementById('open-dashboard').addEventListener('click', ()=>{
+  renderDashboard();
+  show('screen-dashboard');
+});
+document.getElementById('btn-dashboard-back').addEventListener('click', ()=>{ show('screen-level'); });
+document.getElementById('btn-clear-scores').addEventListener('click', ()=>{
+  if(confirm('Effacer tout l\u2019historique de scores ?')){
+    try{ localStorage.removeItem(SCORES_KEY); localStorage.removeItem(LAST_SESSION_KEY); }catch(e){}
+    renderDashboard();
+  }
+});
+
+/* ============ ANTI-PARTAGE CODE ============ */
+// Générer un identifiant d'appareil unique et stable
+function getDeviceId(){
+  let id = '';
+  try{ id = localStorage.getItem('civicum_device')||''; }catch(e){}
+  if(!id){
+    id = Math.random().toString(36).slice(2)+Date.now().toString(36);
+    try{ localStorage.setItem('civicum_device', id); }catch(e){}
+  }
+  return id;
+}
 
 </script>
 </body>
