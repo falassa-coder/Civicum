@@ -281,6 +281,23 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
   .qcounter{ font-family:'Source Serif 4', serif; font-size:13px; color:#7a7a7a; white-space:nowrap; }
   .quiz-timer{ font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; color:var(--navy); background:#fff; border:1px solid var(--line); border-radius:4px; padding:4px 9px; white-space:nowrap; }
   .quiz-timer.low{ color:#fff; background:var(--brick); border-color:var(--brick); }
+  .quiz-points{ font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; color:var(--gold); background:#fff; border:1px solid var(--line); border-radius:4px; padding:4px 9px; white-space:nowrap; display:flex; align-items:center; gap:4px; transition: transform .18s ease; }
+  .quiz-points.pulse{ transform: scale(1.18); }
+  .points-flyout{ position:relative; }
+  .points-gain{ position:absolute; top:-2px; right:0; font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:700; color:var(--green); opacity:0; animation: pointsFloat .9s ease forwards; pointer-events:none; }
+  @keyframes pointsFloat{ 0%{ opacity:1; transform:translateY(0); } 100%{ opacity:0; transform:translateY(-22px); } }
+
+  .portraits-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:14px; margin-bottom:8px; }
+  .portrait-slot{ border:1px solid var(--line); border-radius:8px; padding:12px 8px; text-align:center; background:#fff; }
+  .portrait-slot .icon-wrap svg{ width:60px; height:60px; }
+  .drop-target{ margin-top:8px; min-height:36px; border:2px dashed var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; padding:5px; line-height:1.3; cursor:pointer; color:#8a8a8a; }
+  .drop-target.filled{ border-style:solid; border-color:var(--navy); background:#F5F1E8; color:var(--ink); font-weight:600; }
+  .drop-target.correct{ border-color:var(--green); background:rgba(63,107,78,.09); color:var(--green); font-weight:600; }
+  .drop-target.wrong{ border-color:var(--brick); background:rgba(179,64,47,.08); color:var(--brick); font-weight:600; }
+  .names-bank{ display:flex; flex-wrap:wrap; gap:8px; }
+  .name-chip{ border:1px solid var(--line); border-radius:20px; padding:9px 15px; font-size:13px; background:#fff; cursor:pointer; font-family:inherit; }
+  .name-chip.selected{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .name-chip.placed{ opacity:.3; pointer-events:none; }
   .end-exam-link{ font-size:11.5px; color:var(--navy-2); text-decoration:underline; cursor:pointer; background:none; border:none; font-family:inherit; padding:0; margin-bottom:14px; }
 
   .progress-track{ height:3px; background: var(--line); border-radius:2px; overflow:hidden; margin-bottom: 22px; }
@@ -700,6 +717,7 @@ html { scroll-behavior:smooth; }
     <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer vers l'entraînement</button>
     <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center;">
       <button class="btn" id="open-courses" style="background:var(--gold);color:#fff;border:none;width:100%;">📚 Accéder aux cours structurés</button>
+      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;width:100%;margin-top:10px;">🖼️ Portraits &amp; Symboles (nouveau)</button>
     </div>
   </section>
 
@@ -720,11 +738,23 @@ html { scroll-behavior:smooth; }
     <button class="btn btn-primary" id="btn-start">Commencer l'entraînement</button>
   </section>
 
+  <section id="screen-portraits" class="card" hidden>
+    <button class="btn-link" id="btn-portraits-back">← Retour</button>
+    <div class="qmeta" style="margin-bottom:14px;">Associez chaque nom à son portrait ou symbole</div>
+    <div class="portraits-grid" id="portraits-grid"></div>
+    <div class="qmeta" style="margin:20px 0 10px;">Noms à placer</div>
+    <div class="names-bank" id="names-bank"></div>
+    <button class="btn btn-primary" id="btn-portraits-check" style="margin-top:20px;width:100%;">Valider</button>
+    <div id="portraits-feedback" class="feedback" style="margin-top:14px;"></div>
+    <button class="btn" id="btn-portraits-retry" hidden style="margin-top:10px;width:100%;">Rejouer avec d'autres portraits</button>
+  </section>
+
   <section id="screen-quiz" class="card" hidden>
     <button class="end-exam-link" id="btn-end-exam" hidden>Terminer l'examen maintenant</button>
     <div class="quiz-top">
       <div class="qmeta" id="quiz-theme-label"></div>
       <div class="qright">
+        <div class="quiz-points" id="quiz-points" hidden>★ <span id="quiz-points-num">0</span></div>
         <div class="quiz-timer" id="quiz-timer" hidden></div>
         <div class="qcounter" id="quiz-counter"></div>
       </div>
@@ -1122,6 +1152,18 @@ let timerInterval = null;
 const EXAM_QUESTION_COUNT = 40;
 const EXAM_DURATION_SECONDS = 45 * 60;
 
+/* ============ SCORING GAMIFIÉ ============ */
+const POINTS_BASE = 10;           // points pour une bonne réponse
+const POINTS_SPEED_FAST = 5;      // bonus si répondu en moins de FAST_SECONDS
+const POINTS_SPEED_MED = 2;       // bonus si répondu en moins de MED_SECONDS
+const FAST_SECONDS = 5;
+const MED_SECONDS = 12;
+const STREAK_BONUS_STEP = 3;      // points additionnels tous les STREAK_BONUS_EVERY bonnes réponses d'affilée
+const STREAK_BONUS_EVERY = 3;
+let sessionPoints = 0;
+let currentStreak = 0;
+let questionStartTs = 0;
+
 function shuffle(arr){
   const a = arr.slice();
   for(let i=a.length-1;i>0;i--){
@@ -1229,6 +1271,8 @@ function startQuiz(){
   order = shuffle(pool.map((_,i)=>i));
   current = 0;
   score = 0;
+  sessionPoints = 0;
+  currentStreak = 0;
   userAnswers = [];
   missedQuestions = [];
   show('screen-quiz');
@@ -1243,6 +1287,8 @@ function startExam(){
   order = pool.map((_,i)=>i);
   current = 0;
   score = 0;
+  sessionPoints = 0;
+  currentStreak = 0;
   userAnswers = [];
   missedQuestions = [];
   timeRemaining = EXAM_DURATION_SECONDS;
@@ -1297,6 +1343,8 @@ const els = {
   options: document.getElementById('quiz-options'),
   feedback: document.getElementById('quiz-feedback'),
   nextBtn: document.getElementById('btn-next'),
+  pointsWrap: document.getElementById('quiz-points'),
+  pointsNum: document.getElementById('quiz-points-num'),
 };
 
 els.nextBtn.addEventListener('click', () => {
@@ -1318,6 +1366,9 @@ function renderQuestion(){
   const lastLabel = examMode ? 'Terminer l\'examen' : 'Voir les résultats';
   els.nextBtn.textContent = (current === order.length - 1) ? lastLabel : 'Question suivante';
   updateTimerDisplay();
+  questionStartTs = Date.now();
+  els.pointsWrap.hidden = false;
+  els.pointsNum.textContent = sessionPoints;
   const q = pool[order[current]];
   els.themeLabel.textContent = q.theme;
   els.counter.textContent = `Question ${current+1} / ${order.length}`;
@@ -1341,8 +1392,21 @@ function selectAnswer(letter, q){
   if(answered) return;
   answered = true;
   const isCorrect = letter === q.correct;
-  if(isCorrect) score++;
-  else missedQuestions.push(q);
+  let pointsGained = 0;
+  if(isCorrect){
+    score++;
+    currentStreak++;
+    const elapsedSec = (Date.now() - questionStartTs) / 1000;
+    let speedBonus = 0;
+    if(elapsedSec <= FAST_SECONDS) speedBonus = POINTS_SPEED_FAST;
+    else if(elapsedSec <= MED_SECONDS) speedBonus = POINTS_SPEED_MED;
+    const streakBonus = (currentStreak % STREAK_BONUS_EVERY === 0) ? STREAK_BONUS_STEP : 0;
+    pointsGained = POINTS_BASE + speedBonus + streakBonus;
+    sessionPoints += pointsGained;
+  } else {
+    currentStreak = 0;
+    missedQuestions.push(q);
+  }
   userAnswers.push({q, chosen: letter, correct: isCorrect});
 
   [...els.options.children].forEach(btn => {
@@ -1355,13 +1419,28 @@ function selectAnswer(letter, q){
   els.feedback.classList.add('show');
   if(isCorrect){
     els.feedback.classList.add('ok');
-    els.feedback.textContent = '✓ Bonne réponse.';
+    els.feedback.textContent = `✓ Bonne réponse. +${pointsGained} pts${currentStreak>=STREAK_BONUS_EVERY && currentStreak%STREAK_BONUS_EVERY===0 ? ` (série de ${currentStreak} !)` : ''}`;
   } else {
     els.feedback.classList.add('ko');
     els.feedback.textContent = `✗ Réponse correcte : ${q.correct}. ${q.options[q.correct]}`;
   }
+  updatePointsBadge(pointsGained);
   els.progress.style.width = ((current+1) / order.length * 100) + '%';
   els.nextBtn.disabled = false;
+}
+
+function updatePointsBadge(pointsGained){
+  els.pointsNum.textContent = sessionPoints;
+  els.pointsWrap.classList.add('pulse');
+  setTimeout(() => els.pointsWrap.classList.remove('pulse'), 220);
+  if(pointsGained > 0){
+    const fly = document.createElement('span');
+    fly.className = 'points-gain';
+    fly.textContent = '+' + pointsGained;
+    els.pointsWrap.style.position = 'relative';
+    els.pointsWrap.appendChild(fly);
+    setTimeout(() => fly.remove(), 900);
+  }
 }
 
 // ---------- RESULTS SCREEN ----------
@@ -1384,6 +1463,8 @@ resultsEls.retryBtn.addEventListener('click', () => {
   order = shuffle(pool.map((_,i)=>i));
   current = 0;
   score = 0;
+  sessionPoints = 0;
+  currentStreak = 0;
   userAnswers = [];
   missedQuestions = [];
   show('screen-quiz');
@@ -1395,7 +1476,7 @@ function renderResults(timeExpired){
   score = userAnswers.filter(a => a.correct).length;
   const pct = Math.round((score/total)*100);
   resultsEls.scoreNum.textContent = pct + '%';
-  resultsEls.scoreLabel.textContent = `${score} bonne${score>1?'s':''} réponse${score>1?'s':''} sur ${total}`;
+  resultsEls.scoreLabel.textContent = `${score} bonne${score>1?'s':''} réponse${score>1?'s':''} sur ${total} — ★ ${sessionPoints} points`;
   const timeFlag = document.getElementById('time-flag');
   timeFlag.hidden = !timeExpired;
 
@@ -1442,7 +1523,8 @@ function renderResults(timeExpired){
 // ---------- SCREEN SWITCHING ----------
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
-   'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson'].forEach(s => {
+   'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
+   'screen-portraits'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1474,234 +1556,499 @@ const ICON_INNERS = {
   health:`<circle cx="40" cy="40" r="17" fill="none" stroke="#16233F" stroke-width="2.4"/><path d="M40 31 v18 M31 40 h18" stroke="#B3402F" stroke-width="4" stroke-linecap="round"/>`,
   briefcase:`<rect x="24" y="34" width="32" height="22" rx="2.5" fill="none" stroke="#16233F" stroke-width="2.4"/><path d="M34 34 v-3 a2 2 0 0 1 2 -2 h8 a2 2 0 0 1 2 2 v3" fill="none" stroke="#16233F" stroke-width="2.4"/><line x1="24" y1="44" x2="56" y2="44" stroke="#233457" stroke-width="1.6"/><rect x="36" y="41" width="8" height="6" rx="1.2" fill="#B3402F"/>`,
   family:`<circle cx="30" cy="31" r="5" fill="none" stroke="#16233F" stroke-width="2.2"/><path d="M23 54 V47 a7 7 0 0 1 14 0 V54" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><circle cx="50" cy="31" r="5" fill="none" stroke="#B3402F" stroke-width="2.2"/><path d="M43 54 V47 a7 7 0 0 1 14 0 V54" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><circle cx="40" cy="41" r="3.6" fill="none" stroke="#A9843E" stroke-width="2"/><path d="M35 54 V50 a5 5 0 0 1 10 0 V54" fill="none" stroke="#A9843E" stroke-width="2" stroke-linecap="round"/>`,
-  phone:`<path d="M31 25 c-4 0 -7 3 -7 7 c0 14 12 26 26 26 c4 0 7 -3 7 -7 l-1 -6 c0 -2 -2 -3 -4 -3 l-5 1 c-1 0 -2 0 -3 -1 l-6 -6 c-1 -1 -1 -2 -1 -3 l1 -5 c0 -2 -1 -4 -3 -4 Z" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/><circle cx="50" cy="30" r="2.4" fill="#B3402F"/>`
+  phone:`<path d="M31 25 c-4 0 -7 3 -7 7 c0 14 12 26 26 26 c4 0 7 -3 7 -7 l-1 -6 c0 -2 -2 -3 -4 -3 l-5 1 c-1 0 -2 0 -3 -1 l-6 -6 c-1 -1 -1 -2 -1 -3 l1 -5 c0 -2 -1 -4 -3 -4 Z" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/><circle cx="50" cy="30" r="2.4" fill="#B3402F"/>`,
+  person:`<circle cx="40" cy="31" r="10" fill="none" stroke="#16233F" stroke-width="2.4"/><path d="M22 58 c0 -11 8 -18 18 -18 s18 7 18 18" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/>`
 };
+Object.assign(ICON_INNERS, {
+  relief:`<path d="M18 54 L30 32 L38 44 L48 24 L62 54 Z" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/><line x1="16" y1="54" x2="64" y2="54" stroke="#16233F" stroke-width="2.6" stroke-linecap="round"/><path d="M44 32 L48 24 L52 32 Z" fill="#FBF8F2" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/>`,
+  map:`<path d="M22 26 L34 22 L46 26 L58 22 V54 L46 58 L34 54 L22 58 Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="34" y1="22" x2="34" y2="54" stroke="#16233F" stroke-width="1.4"/><line x1="46" y1="26" x2="46" y2="58" stroke="#16233F" stroke-width="1.4"/><circle cx="40" cy="38" r="2.4" fill="#B3402F"/>`,
+  food:`<path d="M27 20 V38 M23 20 V32 a4 4 0 0 0 8 0 V20" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="27" y1="38" x2="27" y2="58" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><path d="M50 20 c-6 0-8 6-8 12 0 5 3 8 8 8 M50 20 V58" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`,
+  landmark:`<line x1="20" y1="58" x2="60" y2="58" stroke="#16233F" stroke-width="2.6" stroke-linecap="round"/><path d="M24 58 V38 M32 58 V38 M40 58 V38 M48 58 V38 M56 58 V38" stroke="#16233F" stroke-width="2.2"/><path d="M20 38 L40 24 L60 38 Z" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/><circle cx="40" cy="30" r="1.8" fill="#B3402F"/>`,
+  microscope:`<line x1="26" y1="58" x2="50" y2="58" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><path d="M38 58 V50 a8 8 0 0 1 8-8 h2" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="46" y1="24" x2="34" y2="42" stroke="#16233F" stroke-width="3" stroke-linecap="round"/><line x1="42" y1="22" x2="48" y2="28" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><circle cx="30" cy="46" r="3" fill="#B3402F"/>`,
+  clock:`<circle cx="40" cy="40" r="18" fill="none" stroke="#16233F" stroke-width="2.4"/><line x1="40" y1="40" x2="40" y2="28" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="40" y1="40" x2="49" y2="45" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><circle cx="40" cy="40" r="1.8" fill="#16233F"/>`,
+  leaf:`<path d="M26 56 C26 34 44 24 56 24 C56 42 44 56 26 56 Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 54 C34 44 42 36 54 26" fill="none" stroke="#16233F" stroke-width="1.6" stroke-linecap="round"/>`,
+  home:`<path d="M20 40 L40 24 L60 40" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 36 V58 H54 V36" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><rect x="36" y="46" width="8" height="12" fill="#B3402F"/>`,
+  book:`<path d="M40 26 C36 23 28 22 23 23 V52 C28 51 36 52 40 55 C44 52 52 51 57 52 V23 C52 22 44 23 40 26 Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="40" y1="26" x2="40" y2="55" stroke="#16233F" stroke-width="1.6"/>`,
+});
+
 function ICON(key){
   const inner = ICON_INNERS[key] || '';
   return `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/><circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.12)" stroke-width="1"/>${inner}</svg>`;
 }
 
+/* ============ MODE PORTRAITS & SYMBOLES ============ */
+const PORTRAITS_DATA = [
+  { id:'president', icon:'person',  name:'Le Président de la République' },
+  { id:'maire',      icon:'mairie', name:'Le Maire' },
+  { id:'depute',     icon:'person', name:'Le Député' },
+  { id:'juge',       icon:'gavel',  name:'Le Juge' },
+  { id:'marianne',   icon:'cockade', name:'Marianne' },
+  { id:'drapeau',    icon:'flag',   name:'Le drapeau tricolore' },
+  { id:'justice',    icon:'scales', name:'La Justice' },
+  { id:'loi',        icon:'scroll', name:'La loi' },
+  { id:'degaulle',   icon:'person', name:'Charles de Gaulle' },
+  { id:'veil',       icon:'person', name:'Simone Veil' },
+];
+const PORTRAITS_ROUND_SIZE = 6;
+let portraitsRound = [];
+let portraitsPlacements = {};
+let portraitsSelectedChip = null;
+let portraitsChecked = false;
+
+function startPortraitsRound(){
+  portraitsRound = shuffle(PORTRAITS_DATA).slice(0, Math.min(PORTRAITS_ROUND_SIZE, PORTRAITS_DATA.length));
+  portraitsPlacements = {};
+  portraitsSelectedChip = null;
+  portraitsChecked = false;
+  renderPortraitsRound();
+  show('screen-portraits');
+}
+
+function renderPortraitsRound(){
+  const grid = document.getElementById('portraits-grid');
+  grid.innerHTML = '';
+  portraitsRound.forEach(item => {
+    const slot = document.createElement('div');
+    slot.className = 'portrait-slot';
+    slot.innerHTML = `<div class="icon-wrap">${ICON(item.icon)}</div><div class="drop-target" data-slot="${item.id}">Déposer ici</div>`;
+    slot.querySelector('.drop-target').addEventListener('click', () => onPortraitSlotTap(item.id));
+    grid.appendChild(slot);
+  });
+
+  const bank = document.getElementById('names-bank');
+  bank.innerHTML = '';
+  shuffle(portraitsRound.map(i => ({id:i.id, name:i.name}))).forEach(n => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'name-chip';
+    chip.textContent = n.name;
+    chip.dataset.nameId = n.id;
+    chip.addEventListener('click', () => onPortraitChipTap(n.id, chip));
+    bank.appendChild(chip);
+  });
+
+  const fb = document.getElementById('portraits-feedback');
+  fb.textContent = '';
+  fb.className = 'feedback';
+  document.getElementById('btn-portraits-retry').hidden = true;
+  document.getElementById('btn-portraits-check').hidden = false;
+}
+
+function onPortraitChipTap(nameId, chipEl){
+  if(portraitsChecked || chipEl.classList.contains('placed')) return;
+  document.querySelectorAll('.name-chip').forEach(c => c.classList.remove('selected'));
+  if(portraitsSelectedChip === nameId){ portraitsSelectedChip = null; return; }
+  portraitsSelectedChip = nameId;
+  chipEl.classList.add('selected');
+}
+
+function onPortraitSlotTap(slotId){
+  if(portraitsChecked) return;
+  const dropEl = document.querySelector(`.drop-target[data-slot="${slotId}"]`);
+  if(portraitsSelectedChip){
+    const prevNameId = portraitsPlacements[slotId];
+    if(prevNameId){
+      const prevChip = document.querySelector(`.name-chip[data-name-id="${prevNameId}"]`);
+      if(prevChip) prevChip.classList.remove('placed');
+    }
+    portraitsPlacements[slotId] = portraitsSelectedChip;
+    const chipEl = document.querySelector(`.name-chip[data-name-id="${portraitsSelectedChip}"]`);
+    dropEl.textContent = chipEl.textContent;
+    dropEl.classList.add('filled');
+    chipEl.classList.add('placed');
+    chipEl.classList.remove('selected');
+    portraitsSelectedChip = null;
+  } else if(portraitsPlacements[slotId]){
+    const chipEl = document.querySelector(`.name-chip[data-name-id="${portraitsPlacements[slotId]}"]`);
+    if(chipEl) chipEl.classList.remove('placed');
+    delete portraitsPlacements[slotId];
+    dropEl.textContent = 'Déposer ici';
+    dropEl.classList.remove('filled');
+  }
+}
+
+document.getElementById('btn-portraits-check').addEventListener('click', () => {
+  let correctCount = 0;
+  portraitsRound.forEach(item => {
+    const dropEl = document.querySelector(`.drop-target[data-slot="${item.id}"]`);
+    const placedId = portraitsPlacements[item.id];
+    const isCorrect = placedId === item.id;
+    dropEl.classList.remove('filled');
+    dropEl.classList.add(isCorrect ? 'correct' : 'wrong');
+    if(!isCorrect){
+      const placedLabel = placedId ? document.querySelector(`.name-chip[data-name-id="${placedId}"]`).textContent + ' → ' : '';
+      dropEl.textContent = placedLabel + item.name;
+    }
+    if(isCorrect) correctCount++;
+  });
+  portraitsChecked = true;
+  const pointsGained = correctCount * POINTS_BASE;
+  sessionPoints += pointsGained;
+  const fb = document.getElementById('portraits-feedback');
+  fb.classList.add('show', correctCount === portraitsRound.length ? 'ok' : 'ko');
+  fb.textContent = `${correctCount} / ${portraitsRound.length} bonnes associations — +${pointsGained} pts`;
+  document.getElementById('btn-portraits-check').hidden = true;
+  document.getElementById('btn-portraits-retry').hidden = false;
+});
+
+document.getElementById('btn-portraits-retry').addEventListener('click', startPortraitsRound);
+document.getElementById('btn-portraits-back').addEventListener('click', () => show('screen-level'));
+document.getElementById('open-portraits').addEventListener('click', startPortraitsRound);
+
 /* Each theme = intro + up to 5 illustrated pages.
    essentiel:true  -> montré au niveau CSP (l'essentiel).
    Les niveaux CR / Naturalisation affichent toutes les pages. */
 const COURSE_CONTENT = {
-  principes: {
-    title: "Principes et valeurs de la République",
-    intro: "Ce qui fonde la République : sa devise, ses symboles, la laïcité, la démocratie et l'égalité.",
-    pages: [
-      { essentiel:true, icon:"cockade", tag:"Fondations", title:"La devise : Liberté, Égalité, Fraternité",
-        html:`<p>La devise de la France tient en trois mots hérités de la Révolution de 1789.</p>
-        <ul>
-          <li><b>Liberté</b> : penser, croire, s'exprimer, se rassembler — dans le respect des lois et d'autrui. Injurier, diffamer ou appeler à la haine reste interdit.</li>
-          <li><b>Égalité</b> : la loi s'applique de la même façon à tous, sans distinction de sexe, d'origine ou de religion.</li>
-          <li><b>Fraternité</b> : la solidarité collective, concrétisée notamment par la Sécurité sociale financée par tous.</li>
-        </ul>
-        <p>Ces libertés sont inscrites dès l'article 4 de la <b>Déclaration des droits de l'homme et du citoyen</b> de 1789.</p>` },
-      { essentiel:true, icon:"flag", tag:"Symboles", title:"Les symboles de la République",
-        html:`<ul>
-          <li>Le <b>drapeau tricolore</b> bleu-blanc-rouge.</li>
-          <li>L'hymne national, <b>La Marseillaise</b>.</li>
-          <li><b>Marianne</b>, figure qui incarne la République.</li>
-          <li>Le <b>14 juillet</b>, fête nationale, qui commémore la prise de la Bastille en <span class="date">1789</span>.</li>
-          <li>Le <b>coq</b> et le sceau de la République.</li>
-        </ul>
-        <p>Tous remontent à la Révolution française et à la période qui l'a suivie.</p>` },
-      { essentiel:true, icon:"mairie", tag:"Neutralité", title:"La laïcité",
-        html:`<p>Depuis la loi du <span class="date">9 décembre 1905</span>, l'État et les religions sont séparés.</p>
-        <ul>
-          <li>Chacun est libre de croire, de ne pas croire ou de changer de religion.</li>
-          <li>L'État reste <b>neutre</b> : il ne favorise ni ne finance aucun culte.</li>
-          <li>Les agents publics doivent respecter cette neutralité dans leurs fonctions.</li>
-        </ul>
-        <p class="lesson-note">À l'école publique, la loi du 15 mars 2004 interdit aux élèves le port de signes religieux ostensibles, pour protéger la neutralité de l'enseignement.</p>` },
-      { essentiel:false, icon:"ballot", tag:"Participation", title:"Démocratie et citoyenneté",
-        html:`<p>La France est une démocratie : le Président, les parlementaires et les maires sont choisis par les citoyens à travers le <b>vote</b>.</p>
-        <p>La citoyenneté ne se limite pas au vote : s'engager dans une association, participer à la vie locale ou respecter les règles communes en font aussi partie.</p>
-        <p>Le titre de séjour, lui, ne donne pas la citoyenneté : il autorise seulement un ressortissant étranger à résider légalement sur le territoire.</p>` },
-      { essentiel:false, icon:"equality", tag:"Valeur non négociable", title:"L'égalité femmes-hommes",
-        html:`<p>L'égalité entre les femmes et les hommes est une valeur <b>essentielle et non négociable</b> de la République.</p>
-        <ul>
-          <li>Un employeur ne peut refuser d'embaucher quelqu'un en raison de son sexe.</li>
-          <li>Femmes et hommes ont les mêmes droits civils, politiques et sociaux.</li>
-        </ul>
-        <p>L'administration peut refuser une naturalisation si le candidat ne partage manifestement pas ce principe, même marié à une personne française.</p>` }
+  "principes": {
+    "title": "Principes et valeurs de la République",
+    "intro": "Ce qui fonde la République : sa devise, ses symboles, la laïcité, la démocratie et l'égalité.",
+    "pages": [
+      {
+        "essentiel": true,
+        "icon": "cockade",
+        "tag": "Fondations",
+        "title": "La devise : Liberté, Égalité, Fraternité",
+        "html": "<p>La devise de la France tient en trois mots hérités de la Révolution de 1789.</p>\n        <ul>\n          <li><b>Liberté</b> : penser, croire, s'exprimer, se rassembler — dans le respect des lois et d'autrui. Injurier, diffamer ou appeler à la haine reste interdit.</li>\n          <li><b>Égalité</b> : la loi s'applique de la même façon à tous, sans distinction de sexe, d'origine ou de religion.</li>\n          <li><b>Fraternité</b> : la solidarité collective, concrétisée notamment par la Sécurité sociale financée par tous.</li>\n        </ul>\n        <p>Ces libertés sont inscrites dès l'article 4 de la <b>Déclaration des droits de l'homme et du citoyen</b> de 1789.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "flag",
+        "tag": "Symboles",
+        "title": "Les symboles de la République",
+        "html": "<ul>\n          <li>Le <b>drapeau tricolore</b> bleu-blanc-rouge.</li>\n          <li>L'hymne national, <b>La Marseillaise</b>.</li>\n          <li><b>Marianne</b>, figure qui incarne la République.</li>\n          <li>Le <b>14 juillet</b>, fête nationale, qui commémore la prise de la Bastille en <span class=\"date\">1789</span>.</li>\n          <li>Le <b>coq</b> et le sceau de la République.</li>\n        </ul>\n        <p>Tous remontent à la Révolution française et à la période qui l'a suivie.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "mairie",
+        "tag": "Neutralité",
+        "title": "La laïcité",
+        "html": "<p>Depuis la loi du <span class=\"date\">9 décembre 1905</span>, l'État et les religions sont séparés.</p>\n        <ul>\n          <li>Chacun est libre de croire, de ne pas croire ou de changer de religion.</li>\n          <li>L'État reste <b>neutre</b> : il ne favorise ni ne finance aucun culte.</li>\n          <li>Les agents publics doivent respecter cette neutralité dans leurs fonctions.</li>\n        </ul>\n        <p class=\"lesson-note\">À l'école publique, la loi du 15 mars 2004 interdit aux élèves le port de signes religieux ostensibles, pour protéger la neutralité de l'enseignement.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "ballot",
+        "tag": "Participation",
+        "title": "Démocratie et citoyenneté",
+        "html": "<p>La France est une démocratie : le Président, les parlementaires et les maires sont choisis par les citoyens à travers le <b>vote</b>.</p>\n        <p>La citoyenneté ne se limite pas au vote : s'engager dans une association, participer à la vie locale ou respecter les règles communes en font aussi partie.</p>\n        <p>Le titre de séjour, lui, ne donne pas la citoyenneté : il autorise seulement un ressortissant étranger à résider légalement sur le territoire.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "equality",
+        "tag": "Valeur non négociable",
+        "title": "L'égalité femmes-hommes",
+        "html": "<p>L'égalité entre les femmes et les hommes est une valeur <b>essentielle et non négociable</b> de la République.</p>\n        <ul>\n          <li>Un employeur ne peut refuser d'embaucher quelqu'un en raison de son sexe.</li>\n          <li>Femmes et hommes ont les mêmes droits civils, politiques et sociaux.</li>\n        </ul>\n        <p>L'administration peut refuser une naturalisation si le candidat ne partage manifestement pas ce principe, même marié à une personne française.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "cockade",
+        "tag": "Libertés",
+        "title": "Liberté d'expression : droits et limites",
+        "html": "<p>La liberté d'expression est un droit fondamental, garanti dès 1789, mais elle <b>n'est pas sans limite</b>.</p>\n    <ul>\n      <li>Elle permet de dire, écrire ou publier ses opinions, y compris sur les réseaux sociaux.</li>\n      <li>Elle est encadrée par la loi : la <b>diffamation</b>, l'<b>incitation à la haine</b> et les <b>injures publiques</b> sont interdites et punies.</li>\n      <li>Brûler un drapeau français en public est par exemple une infraction, malgré la liberté d'expression.</li>\n    </ul>\n    <p class=\"lesson-note\">Le principe : on est libre de s'exprimer, mais dans le respect de la loi et des droits d'autrui.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "equality",
+        "tag": "Discriminations",
+        "title": "Discriminations : ce que dit la loi",
+        "html": "<p>Une <b>discrimination</b> est une différence de traitement illégale fondée sur un critère prohibé par la loi (origine, sexe, religion, handicap, orientation sexuelle, etc.).</p>\n    <ul>\n      <li>Un employeur ne peut refuser d'embaucher quelqu'un en raison de son sexe ou de son origine.</li>\n      <li>Insulter publiquement une personne en raison de sa différence est interdit et puni par la loi.</li>\n      <li>Le <b>Défenseur des droits</b> est l'institution chargée de défendre les citoyens face à ce type d'atteinte.</li>\n    </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "mairie",
+        "tag": "Laïcité",
+        "title": "La laïcité au quotidien",
+        "html": "<p>La laïcité ne se limite pas à un principe abstrait : elle s'applique concrètement dans la vie de tous les jours.</p>\n    <ul>\n      <li>À l'<b>école publique</b>, les élèves ne peuvent pas porter de signes religieux ostensibles (loi de 2004).</li>\n      <li>Les <b>agents publics</b> (mairie, préfecture...) doivent rester neutres et ne peuvent afficher leurs convictions religieuses dans l'exercice de leurs fonctions.</li>\n      <li>Les <b>usagers</b>, eux, restent libres d'exprimer leurs convictions religieuses en tant que citoyens.</li>\n      <li>Le <b>9 décembre</b> est la journée officielle de la laïcité en France.</li>\n    </ul>"
+      }
     ]
   },
-
-  institutions: {
-    title: "Système institutionnel et politique",
-    intro: "Comment fonctionne la démocratie française : l'État de droit, les trois pouvoirs, le vote, l'organisation du territoire et l'Europe.",
-    pages: [
-      { essentiel:true, icon:"scales", tag:"Fondement", title:"L'État de droit et la séparation des pouvoirs",
-        html:`<p>La France est un <b>État de droit</b> : la loi s'impose à tous, y compris aux gouvernants.</p>
-        <p>Le principe de <b>séparation des pouvoirs</b>, inscrit dans la Déclaration de 1789, a une valeur constitutionnelle. Il distingue trois fonctions :</p>
-        <ul>
-          <li>Faire les lois — le pouvoir <b>législatif</b>.</li>
-          <li>Les appliquer — le pouvoir <b>exécutif</b>.</li>
-          <li>Juger leur respect — l'autorité <b>judiciaire</b>, indépendante.</li>
-        </ul>` },
-      { essentiel:true, icon:"temple", tag:"Les trois pouvoirs", title:"Législatif, exécutif, judiciaire",
-        html:`<ul>
-          <li><b>Législatif</b> : le Parlement — <b>577 députés</b> (Assemblée nationale) et <b>348 sénateurs</b> (Sénat) — propose, débat et vote la loi, et contrôle le gouvernement.</li>
-          <li><b>Exécutif</b> : le Président de la République (élu pour 5 ans) et le Gouvernement (Premier ministre et ministres) appliquent les lois et conduisent la politique nationale.</li>
-          <li><b>Judiciaire</b> : les magistrats, indépendants, jugent en appliquant la loi et décident des peines.</li>
-        </ul>
-        <p>À chaque conflit sa justice : la <b>justice civile</b> (divorce, voisinage), la <b>justice pénale</b> (infractions à la loi) et la <b>justice administrative</b> (litiges avec l'administration).</p>` },
-      { essentiel:true, icon:"ballot", tag:"Voter", title:"Démocratie et droit de vote",
-        html:`<p>Pour voter en France, il faut être <b>majeur</b> (18 ans), avoir la <b>nationalité française</b>, jouir de ses droits civils et politiques et être inscrit sur les listes électorales.</p>
-        <p>Le suffrage est <b>universel</b> ; le vote est <b>personnel, libre et secret</b>. Plusieurs partis se forment librement (pluralité des partis).</p>
-        <ul>
-          <li>Présidentielle et législatives : tous les <b>5 ans</b>.</li>
-          <li>Municipales, départementales, régionales : tous les <b>6 ans</b>.</li>
-          <li>Européennes : tous les <b>5 ans</b>.</li>
-        </ul>` },
-      { essentiel:false, icon:"hexRegions", tag:"Territoire", title:"L'organisation de la République",
-        html:`<p>Des acteurs agissent au niveau <b>national</b> (Président, Gouvernement, députés et sénateurs) et au niveau <b>local</b> (élus municipaux, départementaux et régionaux).</p>
-        <p>Le territoire est découpé en collectivités : environ <b>34 875 communes</b>, <b>101 départements</b> (dont 5 outre-mer) et <b>18 régions</b> (dont 5 outre-mer).</p>
-        <p>Le <b>préfet</b> représente l'État dans le département : sécurité, respect des lois, délivrance de titres. Exemple de répartition : la commune gère les écoles, le département les collèges, la région les lycées.</p>` },
-      { essentiel:false, icon:"euStars", tag:"Europe", title:"Les institutions européennes",
-        html:`<p>Depuis le traité de <b>Maastricht</b> (1992), la France appartient à l'Union européenne, qui compte <b>27 États membres</b> depuis le départ du Royaume-Uni (Brexit, 2020).</p>
-        <ul>
-          <li>Le <b>Conseil européen</b> (chefs d'État) fixe les grandes orientations.</li>
-          <li>La <b>Commission</b> propose les lois et le budget.</li>
-          <li>Le <b>Parlement européen</b> (720 députés, dont 81 Français) vote les lois et le budget.</li>
-        </ul>
-        <p>La monnaie commune, l'<b>euro</b>, circule depuis 2002. Devise : « Unie dans la diversité ».</p>` }
+  "institutions": {
+    "title": "Système institutionnel et politique",
+    "intro": "Comment fonctionne la démocratie française : l'État de droit, les trois pouvoirs, le vote, l'organisation du territoire et l'Europe.",
+    "pages": [
+      {
+        "essentiel": true,
+        "icon": "scales",
+        "tag": "Fondement",
+        "title": "L'État de droit et la séparation des pouvoirs",
+        "html": "<p>La France est un <b>État de droit</b> : la loi s'impose à tous, y compris aux gouvernants.</p>\n        <p>Le principe de <b>séparation des pouvoirs</b>, inscrit dans la Déclaration de 1789, a une valeur constitutionnelle. Il distingue trois fonctions :</p>\n        <ul>\n          <li>Faire les lois — le pouvoir <b>législatif</b>.</li>\n          <li>Les appliquer — le pouvoir <b>exécutif</b>.</li>\n          <li>Juger leur respect — l'autorité <b>judiciaire</b>, indépendante.</li>\n        </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "temple",
+        "tag": "Les trois pouvoirs",
+        "title": "Législatif, exécutif, judiciaire",
+        "html": "<ul>\n          <li><b>Législatif</b> : le Parlement — <b>577 députés</b> (Assemblée nationale) et <b>348 sénateurs</b> (Sénat) — propose, débat et vote la loi, et contrôle le gouvernement.</li>\n          <li><b>Exécutif</b> : le Président de la République (élu pour 5 ans) et le Gouvernement (Premier ministre et ministres) appliquent les lois et conduisent la politique nationale.</li>\n          <li><b>Judiciaire</b> : les magistrats, indépendants, jugent en appliquant la loi et décident des peines.</li>\n        </ul>\n        <p>À chaque conflit sa justice : la <b>justice civile</b> (divorce, voisinage), la <b>justice pénale</b> (infractions à la loi) et la <b>justice administrative</b> (litiges avec l'administration).</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "ballot",
+        "tag": "Voter",
+        "title": "Démocratie et droit de vote",
+        "html": "<p>Pour voter en France, il faut être <b>majeur</b> (18 ans), avoir la <b>nationalité française</b>, jouir de ses droits civils et politiques et être inscrit sur les listes électorales.</p>\n        <p>Le suffrage est <b>universel</b> ; le vote est <b>personnel, libre et secret</b>. Plusieurs partis se forment librement (pluralité des partis).</p>\n        <ul>\n          <li>Présidentielle et législatives : tous les <b>5 ans</b>.</li>\n          <li>Municipales, départementales, régionales : tous les <b>6 ans</b>.</li>\n          <li>Européennes : tous les <b>5 ans</b>.</li>\n        </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "hexRegions",
+        "tag": "Territoire",
+        "title": "L'organisation de la République",
+        "html": "<p>Des acteurs agissent au niveau <b>national</b> (Président, Gouvernement, députés et sénateurs) et au niveau <b>local</b> (élus municipaux, départementaux et régionaux).</p>\n        <p>Le territoire est découpé en collectivités : environ <b>34 875 communes</b>, <b>101 départements</b> (dont 5 outre-mer) et <b>18 régions</b> (dont 5 outre-mer).</p>\n        <p>Le <b>préfet</b> représente l'État dans le département : sécurité, respect des lois, délivrance de titres. Exemple de répartition : la commune gère les écoles, le département les collèges, la région les lycées.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "euStars",
+        "tag": "Europe",
+        "title": "Les institutions européennes",
+        "html": "<p>Depuis le traité de <b>Maastricht</b> (1992), la France appartient à l'Union européenne, qui compte <b>27 États membres</b> depuis le départ du Royaume-Uni (Brexit, 2020).</p>\n        <ul>\n          <li>Le <b>Conseil européen</b> (chefs d'État) fixe les grandes orientations.</li>\n          <li>La <b>Commission</b> propose les lois et le budget.</li>\n          <li>Le <b>Parlement européen</b> (720 députés, dont 81 Français) vote les lois et le budget.</li>\n        </ul>\n        <p>La monnaie commune, l'<b>euro</b>, circule depuis 2002. Devise : « Unie dans la diversité ».</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "cockade",
+        "tag": "Régimes politiques",
+        "title": "Démocratie, monarchie, dictature : les grands régimes",
+        "html": "<p>Un <b>régime politique</b> est la façon dont le pouvoir est organisé et exercé dans un État.</p>\n    <ul>\n      <li><b>La démocratie</b> : le pouvoir vient du peuple, qui élit ses dirigeants au suffrage libre. C'est le régime de la France depuis 1958 (Ve République).</li>\n      <li><b>La monarchie</b> : le pouvoir est détenu par un roi ou une reine, souvent de façon héréditaire. Certains pays gardent une monarchie <i>constitutionnelle</i> (le monarque a un rôle symbolique, comme au Royaume-Uni), d'autres une monarchie <i>absolue</i>.</li>\n      <li><b>La dictature</b> : un individu ou un groupe détient tout le pouvoir sans contrôle ni élection libre, et les libertés fondamentales y sont restreintes.</li>\n    </ul>\n    <p class=\"lesson-note\">La France est une <b>République démocratique</b> : ses dirigeants sont élus, les pouvoirs sont séparés, et les libertés sont garanties par la Constitution.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "scales",
+        "tag": "Régimes politiques",
+        "title": "République et Constitution : comment ça tient ensemble",
+        "html": "<p>Une <b>République</b> est un régime où le chef de l'État n'est pas héréditaire mais désigné (le plus souvent élu), au nom de l'intérêt général.</p>\n    <ul>\n      <li>La France a connu <b>5 Républiques</b> depuis 1792 ; l'actuelle, la Ve, existe depuis 1958.</li>\n      <li>La <b>Constitution</b> est le texte suprême qui organise les pouvoirs publics et garantit les droits fondamentaux. Toute loi doit lui être conforme.</li>\n      <li>Modifier la Constitution est volontairement difficile : il faut un vote du Parlement réuni en Congrès (majorité des 3/5) ou un référendum.</li>\n    </ul>\n    <p>C'est cette stabilité constitutionnelle qui protège la démocratie contre les changements de pouvoir arbitraires.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "mairie",
+        "tag": "Territoire",
+        "title": "Les collectivités territoriales en détail",
+        "html": "<p>La France métropolitaine est organisée en trois échelons de collectivités, chacun avec ses compétences propres :</p>\n    <ul>\n      <li><b>La commune</b> (environ 35 000 en France) : état civil, écoles primaires et maternelles, urbanisme local. Dirigée par le maire et le conseil municipal.</li>\n      <li><b>Le département</b> (101 au total) : collèges, action sociale (RSA, aide aux personnes âgées), routes départementales. Représenté par le préfet pour l'État, et géré par le conseil départemental pour les compétences locales.</li>\n      <li><b>La région</b> (13 en métropole) : lycées, formation professionnelle, transports régionaux (TER), développement économique.</li>\n    </ul>\n    <p class=\"lesson-note\">Le préfet représente l'État dans le département : il veille à l'application des lois et à l'ordre public, mais ne dirige pas les collectivités élues.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "euStars",
+        "tag": "Europe",
+        "title": "L'Union européenne, mode d'emploi",
+        "html": "<p>L'Union européenne (UE) rassemble 27 États depuis le départ du Royaume-Uni en 2020 (Brexit).</p>\n    <ul>\n      <li><b>Le Parlement européen</b> (Strasbourg) : élu par les citoyens européens, il vote les textes européens.</li>\n      <li><b>La Commission européenne</b> (Bruxelles) : propose les lois et veille à leur application.</li>\n      <li><b>Le Conseil de l'UE</b> : réunit les ministres des États membres.</li>\n    </ul>\n    <p>La France est un pays <b>fondateur</b> de la construction européenne, initiée en 1951 avec la CECA, puis approfondie par le traité de Maastricht (1992) qui crée l'Union européenne et la citoyenneté européenne.</p>\n    <p class=\"lesson-note\">Devise de l'UE : <i>« Unie dans la diversité »</i>. Hymne : l'Ode à la joie de Beethoven.</p>"
+      }
     ]
   },
-
-  droits: {
-    title: "Droits et devoirs",
-    intro: "Les grands textes qui garantissent vos droits, les libertés fondamentales, mais aussi les devoirs de toute personne vivant en France.",
-    pages: [
-      { essentiel:true, icon:"scroll", tag:"Les textes", title:"Les grands textes de référence",
-        html:`<ul>
-          <li>La <b>Déclaration des droits de l'homme et du citoyen</b> (<span class="date">1789</span>) : les hommes naissent libres et égaux en droits ; la loi est l'expression de la volonté générale.</li>
-          <li>La <b>Constitution de 1958</b> (Ve République) : elle organise les pouvoirs publics. C'est le texte le plus difficile à modifier (Congrès ou référendum).</li>
-          <li>La <b>Charte de l'environnement</b> (2004) : elle consacre le droit à un environnement équilibré.</li>
-        </ul>` },
-      { essentiel:true, icon:"heart", tag:"Libertés", title:"Les droits fondamentaux",
-        html:`<p>Toute personne bénéficie de droits protégés par la loi :</p>
-        <ul>
-          <li>Les droits liés à la <b>personne</b> : dignité, sûreté, liberté d'expression et de conscience.</li>
-          <li>Les droits <b>économiques et sociaux</b> : travail, santé, éducation, protection sociale.</li>
-          <li>Le droit de <b>disposer de son corps</b>, dont le droit à l'avortement (loi Veil, 1975 ; liberté inscrite dans la Constitution en 2024).</li>
-        </ul>
-        <p>La <b>dignité humaine</b> est le socle : elle appartient à chacun et ne peut être retirée.</p>` },
-      { essentiel:false, icon:"rings", tag:"Vie privée", title:"Libertés du couple et citoyenneté",
-        html:`<p>Chacun est libre de se marier, de divorcer et de choisir son partenaire.</p>
-        <ul>
-          <li>Le <b>mariage</b> est ouvert à deux personnes majeures et consentantes, quel que soit leur sexe (loi du 17 mai 2013).</li>
-          <li>Nul ne peut être marié contre sa volonté ni sans son consentement.</li>
-        </ul>
-        <p>Le <b>citoyen</b> dispose de droits civiques (voter, être élu). Une condamnation grave peut entraîner leur privation temporaire, décidée par le juge.</p>` },
-      { essentiel:true, icon:"checklist", tag:"Devoirs", title:"Les obligations et devoirs",
-        html:`<p>En contrepartie des droits, des devoirs s'imposent à <b>tous les résidents</b>, quelle que soit leur nationalité :</p>
-        <ul>
-          <li>Respecter la loi et les valeurs de la République.</li>
-          <li>Déclarer ses revenus et <b>payer ses impôts</b>.</li>
-          <li>Scolariser ses enfants.</li>
-          <li><b>Porter secours</b> à une personne en danger (la non-assistance est punie).</li>
-          <li>Répondre à une convocation comme juré d'assises.</li>
-        </ul>` },
-      { essentiel:false, icon:"gavel", tag:"Justice", title:"Les infractions et la peine",
-        html:`<p>Les infractions sont classées par gravité croissante :</p>
-        <ul>
-          <li>La <b>contravention</b> : la plus légère (ex. stationnement gênant).</li>
-          <li>Le <b>délit</b> : plus grave (ex. vol), jugé au tribunal correctionnel.</li>
-          <li>Le <b>crime</b> : le plus grave (ex. meurtre), jugé en cour d'assises.</li>
-        </ul>
-        <p>La <b>peine de mort</b> est abolie depuis 1981, et cette abolition est inscrite dans la Constitution depuis 2007.</p>` }
+  "droits": {
+    "title": "Droits et devoirs",
+    "intro": "Les grands textes qui garantissent vos droits, les libertés fondamentales, mais aussi les devoirs de toute personne vivant en France.",
+    "pages": [
+      {
+        "essentiel": true,
+        "icon": "scroll",
+        "tag": "Les textes",
+        "title": "Les grands textes de référence",
+        "html": "<ul>\n          <li>La <b>Déclaration des droits de l'homme et du citoyen</b> (<span class=\"date\">1789</span>) : les hommes naissent libres et égaux en droits ; la loi est l'expression de la volonté générale.</li>\n          <li>La <b>Constitution de 1958</b> (Ve République) : elle organise les pouvoirs publics. C'est le texte le plus difficile à modifier (Congrès ou référendum).</li>\n          <li>La <b>Charte de l'environnement</b> (2004) : elle consacre le droit à un environnement équilibré.</li>\n        </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "heart",
+        "tag": "Libertés",
+        "title": "Les droits fondamentaux",
+        "html": "<p>Toute personne bénéficie de droits protégés par la loi :</p>\n        <ul>\n          <li>Les droits liés à la <b>personne</b> : dignité, sûreté, liberté d'expression et de conscience.</li>\n          <li>Les droits <b>économiques et sociaux</b> : travail, santé, éducation, protection sociale.</li>\n          <li>Le droit de <b>disposer de son corps</b>, dont le droit à l'avortement (loi Veil, 1975 ; liberté inscrite dans la Constitution en 2024).</li>\n        </ul>\n        <p>La <b>dignité humaine</b> est le socle : elle appartient à chacun et ne peut être retirée.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "rings",
+        "tag": "Vie privée",
+        "title": "Libertés du couple et citoyenneté",
+        "html": "<p>Chacun est libre de se marier, de divorcer et de choisir son partenaire.</p>\n        <ul>\n          <li>Le <b>mariage</b> est ouvert à deux personnes majeures et consentantes, quel que soit leur sexe (loi du 17 mai 2013).</li>\n          <li>Nul ne peut être marié contre sa volonté ni sans son consentement.</li>\n        </ul>\n        <p>Le <b>citoyen</b> dispose de droits civiques (voter, être élu). Une condamnation grave peut entraîner leur privation temporaire, décidée par le juge.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "checklist",
+        "tag": "Devoirs",
+        "title": "Les obligations et devoirs",
+        "html": "<p>En contrepartie des droits, des devoirs s'imposent à <b>tous les résidents</b>, quelle que soit leur nationalité :</p>\n        <ul>\n          <li>Respecter la loi et les valeurs de la République.</li>\n          <li>Déclarer ses revenus et <b>payer ses impôts</b>.</li>\n          <li>Scolariser ses enfants.</li>\n          <li><b>Porter secours</b> à une personne en danger (la non-assistance est punie).</li>\n          <li>Répondre à une convocation comme juré d'assises.</li>\n        </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "gavel",
+        "tag": "Justice",
+        "title": "Les infractions et la peine",
+        "html": "<p>Les infractions sont classées par gravité croissante :</p>\n        <ul>\n          <li>La <b>contravention</b> : la plus légère (ex. stationnement gênant).</li>\n          <li>Le <b>délit</b> : plus grave (ex. vol), jugé au tribunal correctionnel.</li>\n          <li>Le <b>crime</b> : le plus grave (ex. meurtre), jugé en cour d'assises.</li>\n        </ul>\n        <p>La <b>peine de mort</b> est abolie depuis 1981, et cette abolition est inscrite dans la Constitution depuis 2007.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "scales",
+        "tag": "Travail",
+        "title": "Droit du travail : les bases à connaître",
+        "html": "<p>Le droit du travail encadre la relation entre salarié et employeur :</p>\n    <ul>\n      <li>Le <b>SMIC</b> est le salaire minimum légal que tout employeur doit respecter.</li>\n      <li>La durée légale du travail est de <b>35 heures</b> par semaine ; au-delà, ce sont des heures supplémentaires, encadrées et rémunérées en conséquence.</li>\n      <li>Le <b>droit de grève</b> permet aux salariés de cesser collectivement le travail pour défendre leurs revendications.</li>\n      <li>Le <b>conseil de prud'hommes</b> traite les litiges individuels entre un salarié et son employeur.</li>\n      <li>Travailler sans être déclaré (« travail au noir ») est interdit et puni par la loi.</li>\n    </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "heart",
+        "tag": "Vie de famille",
+        "title": "Mariage, divorce et autorité parentale",
+        "html": "<p>Le droit de la famille repose sur plusieurs principes :</p>\n    <ul>\n      <li>Seul le <b>mariage civil</b>, célébré à la mairie, est reconnu juridiquement en France (un mariage religieux seul n'a pas de valeur légale).</li>\n      <li>Le <b>divorce</b> est un droit reconnu, quelle que soit la durée du mariage.</li>\n      <li>En cas de divorce, l'<b>autorité parentale</b> reste en général partagée entre les deux parents, sauf décision contraire d'un juge.</li>\n      <li>La <b>polygamie</b> est interdite et sans effet juridique en France.</li>\n    </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "leaf",
+        "tag": "Environnement",
+        "title": "La Charte de l'environnement",
+        "html": "<p>Adossée à la Constitution depuis 2005, la <b>Charte de l'environnement</b> reconnaît :</p>\n    <ul>\n      <li>Le droit de chacun à vivre dans un <b>environnement équilibré</b> et respectueux de la santé.</li>\n      <li>Le devoir de chacun de <b>préserver</b> cet environnement et de participer à sa protection.</li>\n    </ul>\n    <p>Concrètement : trier ses déchets, limiter le gaspillage, ou encore l'interdiction de jeter des déchets sur la voie publique (dépôt sauvage, mégots, etc.), sanctionnée par une amende.</p>"
+      }
     ]
   },
-
-  histoire: {
-    title: "Histoire, géographie et culture",
-    intro: "Des grands régimes politiques depuis 1789 au XXe siècle, jusqu'à la France d'aujourd'hui dans le monde, sa géographie et sa culture.",
-    pages: [
-      { essentiel:true, icon:"timeline", tag:"Repères", title:"Les régimes politiques depuis 1789",
-        html:`<p>La République actuelle s'est construite progressivement, en héritant des régimes qui l'ont précédée :</p>
-        <ul>
-          <li><b>Ancien Régime</b> : monarchie absolue jusqu'en 1789 (ex. Louis XIV).</li>
-          <li><b>Révolution</b> puis Ire République (1792), Consulat et Premier Empire.</li>
-          <li>Restauration, IIe République, Second Empire, puis <b>IIIe République</b> (1870).</li>
-          <li>Régime de Vichy (1940-1944), puis <b>IVe</b> et enfin <b>Ve République</b> depuis 1958.</li>
-        </ul>` },
-      { essentiel:false, icon:"bicorne", tag:"1789-1870", title:"Révolution, Empire et Républiques",
-        html:`<ul>
-          <li><span class="date">14 juillet 1789</span> : prise de la Bastille ; abolition des privilèges.</li>
-          <li><span class="date">26 août 1789</span> : Déclaration des droits de l'homme et du citoyen.</li>
-          <li><span class="date">1792</span> : abolition de la monarchie, proclamation de la Ire République.</li>
-          <li><b>Napoléon Bonaparte</b>, empereur en 1804 : Code civil, création des lycées.</li>
-          <li><span class="date">1848</span> : abolition définitive de l'esclavage et suffrage universel masculin.</li>
-        </ul>` },
-      { essentiel:true, icon:"lorraine", tag:"XXe siècle", title:"Guerres, Résistance et Ve République",
-        html:`<ul>
-          <li>Deux guerres mondiales : <span class="date">1914-1918</span> et <span class="date">1939-1945</span>.</li>
-          <li>La <b>Shoah</b> : extermination des Juifs d'Europe par le régime nazi ; sa mémoire est enseignée à l'école.</li>
-          <li>La <b>Résistance</b> et l'appel du général <b>de Gaulle</b> le 18 juin 1940.</li>
-          <li><span class="date">1944</span> : les femmes obtiennent le droit de vote.</li>
-          <li>De Gaulle fonde la <b>Ve République</b> en 1958, régime actuel.</li>
-        </ul>
-        <p class="lesson-note">Avancées récentes : loi Veil sur l'avortement (1975), abolition de la peine de mort (1981), mariage pour tous (2013).</p>` },
-      { essentiel:false, icon:"globe", tag:"La France et le monde", title:"Colonisation, décolonisation et Europe",
-        html:`<p>Du 17e au 20e siècle, la France a constitué un vaste empire colonial (Afrique, Asie, Caraïbes).</p>
-        <ul>
-          <li><b>Décolonisation</b> (1946-1962) : guerre d'Indochine, guerre d'Algérie, indépendances africaines de 1960.</li>
-          <li>Aujourd'hui, la présence française perdure via les <b>territoires d'outre-mer</b> (Guadeloupe, Martinique, Réunion, Guyane, Mayotte…).</li>
-          <li>La <b>construction européenne</b> démarre après 1945 pour garantir la paix : CECA (1951), CEE (1957), UE (Maastricht, 1992).</li>
-        </ul>` },
-      { essentiel:true, icon:"hexagon", tag:"Géographie et culture", title:"La France aujourd'hui",
-        html:`<p>La France métropolitaine, en forme d'<b>hexagone</b>, est bordée par l'océan Atlantique et la mer Méditerranée, et séparée de l'Angleterre par la Manche. Le <b>Mont-Blanc</b> est son point culminant.</p>
-        <p>Elle compte 13 régions métropolitaines. Sa capitale, <b>Paris</b>, est traversée par la Seine.</p>
-        <p>Grande puissance culturelle : Molière et Victor Hugo en littérature, Monet en peinture, ainsi que des figures naturalisées comme <b>Marie Curie</b> ou <b>Joséphine Baker</b>.</p>` }
+  "histoire": {
+    "title": "Histoire, géographie et culture",
+    "intro": "Des grands régimes politiques depuis 1789 au XXe siècle, jusqu'à la France d'aujourd'hui dans le monde, sa géographie et sa culture.",
+    "pages": [
+      {
+        "essentiel": true,
+        "icon": "timeline",
+        "tag": "Repères",
+        "title": "Les régimes politiques depuis 1789",
+        "html": "<p>La République actuelle s'est construite progressivement, en héritant des régimes qui l'ont précédée :</p>\n        <ul>\n          <li><b>Ancien Régime</b> : monarchie absolue jusqu'en 1789 (ex. Louis XIV).</li>\n          <li><b>Révolution</b> puis Ire République (1792), Consulat et Premier Empire.</li>\n          <li>Restauration, IIe République, Second Empire, puis <b>IIIe République</b> (1870).</li>\n          <li>Régime de Vichy (1940-1944), puis <b>IVe</b> et enfin <b>Ve République</b> depuis 1958.</li>\n        </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "bicorne",
+        "tag": "1789-1870",
+        "title": "Révolution, Empire et Républiques",
+        "html": "<ul>\n          <li><span class=\"date\">14 juillet 1789</span> : prise de la Bastille ; abolition des privilèges.</li>\n          <li><span class=\"date\">26 août 1789</span> : Déclaration des droits de l'homme et du citoyen.</li>\n          <li><span class=\"date\">1792</span> : abolition de la monarchie, proclamation de la Ire République.</li>\n          <li><b>Napoléon Bonaparte</b>, empereur en 1804 : Code civil, création des lycées.</li>\n          <li><span class=\"date\">1848</span> : abolition définitive de l'esclavage et suffrage universel masculin.</li>\n        </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "lorraine",
+        "tag": "XXe siècle",
+        "title": "Guerres, Résistance et Ve République",
+        "html": "<ul>\n          <li>Deux guerres mondiales : <span class=\"date\">1914-1918</span> et <span class=\"date\">1939-1945</span>.</li>\n          <li>La <b>Shoah</b> : extermination des Juifs d'Europe par le régime nazi ; sa mémoire est enseignée à l'école.</li>\n          <li>La <b>Résistance</b> et l'appel du général <b>de Gaulle</b> le 18 juin 1940.</li>\n          <li><span class=\"date\">1944</span> : les femmes obtiennent le droit de vote.</li>\n          <li>De Gaulle fonde la <b>Ve République</b> en 1958, régime actuel.</li>\n        </ul>\n        <p class=\"lesson-note\">Avancées récentes : loi Veil sur l'avortement (1975), abolition de la peine de mort (1981), mariage pour tous (2013).</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "globe",
+        "tag": "La France et le monde",
+        "title": "Colonisation, décolonisation et Europe",
+        "html": "<p>Du 17e au 20e siècle, la France a constitué un vaste empire colonial (Afrique, Asie, Caraïbes).</p>\n        <ul>\n          <li><b>Décolonisation</b> (1946-1962) : guerre d'Indochine, guerre d'Algérie, indépendances africaines de 1960.</li>\n          <li>Aujourd'hui, la présence française perdure via les <b>territoires d'outre-mer</b> (Guadeloupe, Martinique, Réunion, Guyane, Mayotte…).</li>\n          <li>La <b>construction européenne</b> démarre après 1945 pour garantir la paix : CECA (1951), CEE (1957), UE (Maastricht, 1992).</li>\n        </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "hexagon",
+        "tag": "Géographie et culture",
+        "title": "La France aujourd'hui",
+        "html": "<p>La France métropolitaine, en forme d'<b>hexagone</b>, est bordée par l'océan Atlantique et la mer Méditerranée, et séparée de l'Angleterre par la Manche. Le <b>Mont-Blanc</b> est son point culminant.</p>\n        <p>Elle compte 13 régions métropolitaines. Sa capitale, <b>Paris</b>, est traversée par la Seine.</p>\n        <p>Grande puissance culturelle : Molière et Victor Hugo en littérature, Monet en peinture, ainsi que des figures naturalisées comme <b>Marie Curie</b> ou <b>Joséphine Baker</b>.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "relief",
+        "tag": "Atlas — Relief",
+        "title": "Le relief et l'hydrographie de la France",
+        "html": "<p>La France métropolitaine présente une grande diversité de reliefs :</p>\n    <ul>\n      <li><b>Les Alpes</b> (frontière avec l'Italie et la Suisse) : point culminant, le <b>Mont-Blanc</b> (4 809 m), plus haut sommet d'Europe occidentale.</li>\n      <li><b>Les Pyrénées</b> : frontière naturelle avec l'Espagne.</li>\n      <li><b>Le Massif central</b> : relief ancien, volcanique (Puy de Dôme), au cœur du pays.</li>\n      <li><b>Les Vosges</b> : à l'est, vers l'Allemagne.</li>\n    </ul>\n    <p>Quatre grands fleuves structurent le territoire : la <b>Seine</b> (traverse Paris, se jette dans la Manche), la <b>Loire</b> (le plus long fleuve de France), la <b>Garonne</b> et le <b>Rhône</b> (qui rejoint la Méditerranée).</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "map",
+        "tag": "Atlas — Frontières et mers",
+        "title": "Les frontières et façades maritimes",
+        "html": "<p>La France métropolitaine partage des frontières terrestres avec <b>8 pays</b> : Belgique, Luxembourg, Allemagne, Suisse, Italie, Espagne, Andorre et Monaco.</p>\n    <ul>\n      <li><b>Au nord</b> : la Manche, qui la sépare du Royaume-Uni.</li>\n      <li><b>À l'ouest</b> : l'océan Atlantique.</li>\n      <li><b>Au sud</b> : la mer Méditerranée.</li>\n    </ul>\n    <p>La France possède aussi des territoires <b>d'outre-mer</b>, hors d'Europe : Guadeloupe, Martinique, Guyane (Amérique du Sud), La Réunion (océan Indien), entre autres — tous font partie intégrante de la République.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "food",
+        "tag": "Atlas — Gastronomie",
+        "title": "Gastronomie et terroirs régionaux",
+        "html": "<p>La gastronomie française est inscrite au patrimoine culturel immatériel de l'UNESCO. Quelques repères régionaux :</p>\n    <ul>\n      <li><b>Normandie</b> : camembert, cidre, produits laitiers.</li>\n      <li><b>Provence</b> : huile d'olive, ratatouille, herbes de Provence.</li>\n      <li><b>Bourgogne</b> : bœuf bourguignon, vins renommés.</li>\n      <li><b>Alsace</b> : choucroute, influences germaniques.</li>\n      <li><b>Nationale</b> : le coq au vin, la baguette et le fromage, symboles reconnus dans le monde entier.</li>\n    </ul>\n    <p class=\"lesson-note\">Le repas gastronomique des Français, avec ses codes (entrée, plat, fromage, dessert) est lui-même reconnu par l'UNESCO depuis 2010.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "landmark",
+        "tag": "Atlas — Patrimoine",
+        "title": "Patrimoine et monuments emblématiques",
+        "html": "<p>La France est le pays le plus visité au monde, grâce à un patrimoine exceptionnel :</p>\n    <ul>\n      <li><b>Paris</b> : tour Eiffel (1889, Exposition universelle), Notre-Dame (partiellement détruite par un incendie en 2019), le Louvre (plus grand musée du monde, abrite la Joconde).</li>\n      <li><b>Le château de Versailles</b> : symbole du pouvoir absolu de Louis XIV, le « Roi-Soleil ».</li>\n      <li><b>Le Mont-Saint-Michel</b> : abbaye construite sur un îlot rocheux en Normandie.</li>\n      <li><b>La grotte de Lascaux</b> : peintures préhistoriques exceptionnelles (Dordogne).</li>\n    </ul>\n    <p>Chaque année, les <b>Journées européennes du patrimoine</b> permettent de visiter gratuitement de nombreux lieux culturels.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "cockade",
+        "tag": "Personnages",
+        "title": "Grandes figures politiques et historiques",
+        "html": "<ul>\n      <li><b>Charles de Gaulle</b> : lance l'appel à la Résistance le 18 juin 1940, fonde la Ve République en 1958, premier président élu de ce régime.</li>\n      <li><b>Jean Moulin</b> : figure majeure de la Résistance française pendant la Seconde Guerre mondiale.</li>\n      <li><b>Jules Ferry</b> : rend l'école gratuite, laïque et obligatoire dans les années 1880.</li>\n      <li><b>Victor Schœlcher</b> : à l'origine du décret d'abolition définitive de l'esclavage en 1848.</li>\n      <li><b>Simone Veil</b> : fait adopter la loi légalisant l'avortement en 1975 ; rescapée de la Shoah, elle devient une figure morale de la République.</li>\n    </ul>\n    <p class=\"lesson-note\">Ces figures sont régulièrement citées en exemple pour incarner les valeurs et l'histoire de la République.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "book",
+        "tag": "Personnages",
+        "title": "Grandes figures littéraires et artistiques",
+        "html": "<ul>\n      <li><b>Victor Hugo</b> : auteur des <i>Misérables</i>, figure majeure du XIXe siècle, engagé contre la peine de mort.</li>\n      <li><b>Simone de Beauvoir</b> : écrivaine et philosophe féministe, autrice du <i>Deuxième Sexe</i>.</li>\n      <li><b>Albert Camus</b> : écrivain et philosophe, prix Nobel de littérature.</li>\n      <li><b>Claude Monet</b> et <b>Auguste Renoir</b> : peintres impressionnistes français.</li>\n      <li><b>Joséphine Baker</b> : artiste franco-américaine et résistante, entrée au Panthéon en 2021.</li>\n    </ul>\n    <p>Ces figures illustrent le rayonnement culturel français, souvent questionné dans le cadre de « culture générale française ».</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "microscope",
+        "tag": "Personnages",
+        "title": "Grandes figures scientifiques",
+        "html": "<ul>\n      <li><b>Marie Curie</b> : physicienne et chimiste franco-polonaise, seule personne à avoir reçu deux prix Nobel dans deux disciplines scientifiques différentes.</li>\n      <li><b>Louis Pasteur</b> : à l'origine de la pasteurisation et du premier vaccin contre la rage.</li>\n      <li><b>Antoine Lavoisier</b> : père fondateur de la chimie moderne.</li>\n    </ul>\n    <p class=\"lesson-note\">Ces figures sont souvent mobilisées pour illustrer la contribution française aux sciences et à la médecine.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "clock",
+        "tag": "Chronologie",
+        "title": "Repères chronologiques essentiels",
+        "html": "<ul>\n      <li><b>1789</b> — Révolution française, prise de la Bastille (14 juillet).</li>\n      <li><b>1848</b> — Abolition définitive de l'esclavage.</li>\n      <li><b>1881-1882</b> — Lois Jules Ferry : école gratuite, laïque et obligatoire.</li>\n      <li><b>1905</b> — Loi de séparation des Églises et de l'État (laïcité).</li>\n      <li><b>1914-1918</b> puis <b>1939-1945</b> — Première et Seconde Guerres mondiales.</li>\n      <li><b>1944</b> — Les femmes obtiennent le droit de vote.</li>\n      <li><b>1958</b> — Constitution de la Ve République.</li>\n      <li><b>1981</b> — Abolition de la peine de mort.</li>\n      <li><b>1992</b> — Traité de Maastricht, fondation de l'Union européenne.</li>\n      <li><b>2002</b> — L'euro devient la monnaie officielle.</li>\n    </ul>"
+      }
     ]
   },
-
-  societe: {
-    title: "Vivre dans la société française",
-    intro: "Les repères du quotidien : l'école, la santé, le travail, la vie de famille et les numéros à connaître.",
-    pages: [
-      { essentiel:true, icon:"school", tag:"Éducation", title:"L'école et l'instruction",
-        html:`<p>L'instruction est <b>obligatoire de 3 à 16 ans</b> pour tout enfant résidant en France, quelle que soit sa nationalité.</p>
-        <ul>
-          <li>École primaire, puis <b>collège</b> (brevet) et <b>lycée</b> (baccalauréat).</li>
-          <li>L'école publique est gratuite, laïque et obligatoire depuis les lois de Jules Ferry (années 1880).</li>
-          <li>Les enfants non francophones peuvent bénéficier d'un accompagnement en français.</li>
-        </ul>` },
-      { essentiel:true, icon:"health", tag:"Santé", title:"La santé et la Sécurité sociale",
-        html:`<p>L'inscription à l'<b>Assurance maladie</b> est obligatoire pour tout résident.</p>
-        <ul>
-          <li>La <b>carte Vitale</b> permet le remboursement des soins.</li>
-          <li>Une <b>mutuelle</b> complète cette prise en charge.</li>
-          <li>Le <b>secret médical</b> protège vos informations de santé.</li>
-        </ul>
-        <p>Les soins d'urgence sont garantis à toute personne, quelle que soit sa situation.</p>` },
-      { essentiel:true, icon:"briefcase", tag:"Travail", title:"Le travail et ses droits",
-        html:`<ul>
-          <li>Le salaire ne peut être inférieur au <b>SMIC</b> (salaire minimum légal).</li>
-          <li>La durée légale du travail est de <b>35 heures</b> par semaine.</li>
-          <li>Le travail non déclaré est interdit et sanctionné.</li>
-          <li>Droits collectifs : liberté syndicale et <b>droit de grève</b>.</li>
-        </ul>
-        <p>Pour chercher un emploi, la première démarche est de s'inscrire auprès de <b>France Travail</b>.</p>` },
-      { essentiel:false, icon:"family", tag:"Vie civile", title:"La famille et l'état civil",
-        html:`<ul>
-          <li>Un mariage n'est reconnu que s'il est célébré à la <b>mairie</b>.</li>
-          <li>La naissance d'un enfant se déclare à l'état civil dans les <b>5 jours</b>.</li>
-          <li>En cas de divorce, l'<b>autorité parentale</b> reste en général partagée.</li>
-          <li>Les violences éducatives, même légères, sont interdites depuis 2019.</li>
-        </ul>
-        <p>L'aide juridictionnelle permet aux personnes aux revenus modestes de financer un avocat.</p>` },
-      { essentiel:false, icon:"phone", tag:"Urgences", title:"Les numéros à connaître",
-        html:`<p>En cas d'urgence, quelques numéros gratuits sont à retenir :</p>
-        <ul>
-          <li><b>15</b> — le SAMU (urgences médicales).</li>
-          <li><b>17</b> — la police ou la gendarmerie.</li>
-          <li><b>18</b> — les pompiers.</li>
-          <li><b>112</b> — le numéro d'urgence européen.</li>
-        </ul>
-        <p>Face à un danger, chacun a le devoir d'alerter les secours ou de porter assistance.</p>` }
+  "societe": {
+    "title": "Vivre dans la société française",
+    "intro": "Les repères du quotidien : l'école, la santé, le travail, la vie de famille et les numéros à connaître.",
+    "pages": [
+      {
+        "essentiel": true,
+        "icon": "school",
+        "tag": "Éducation",
+        "title": "L'école et l'instruction",
+        "html": "<p>L'instruction est <b>obligatoire de 3 à 16 ans</b> pour tout enfant résidant en France, quelle que soit sa nationalité.</p>\n        <ul>\n          <li>École primaire, puis <b>collège</b> (brevet) et <b>lycée</b> (baccalauréat).</li>\n          <li>L'école publique est gratuite, laïque et obligatoire depuis les lois de Jules Ferry (années 1880).</li>\n          <li>Les enfants non francophones peuvent bénéficier d'un accompagnement en français.</li>\n        </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "health",
+        "tag": "Santé",
+        "title": "La santé et la Sécurité sociale",
+        "html": "<p>L'inscription à l'<b>Assurance maladie</b> est obligatoire pour tout résident.</p>\n        <ul>\n          <li>La <b>carte Vitale</b> permet le remboursement des soins.</li>\n          <li>Une <b>mutuelle</b> complète cette prise en charge.</li>\n          <li>Le <b>secret médical</b> protège vos informations de santé.</li>\n        </ul>\n        <p>Les soins d'urgence sont garantis à toute personne, quelle que soit sa situation.</p>"
+      },
+      {
+        "essentiel": true,
+        "icon": "briefcase",
+        "tag": "Travail",
+        "title": "Le travail et ses droits",
+        "html": "<ul>\n          <li>Le salaire ne peut être inférieur au <b>SMIC</b> (salaire minimum légal).</li>\n          <li>La durée légale du travail est de <b>35 heures</b> par semaine.</li>\n          <li>Le travail non déclaré est interdit et sanctionné.</li>\n          <li>Droits collectifs : liberté syndicale et <b>droit de grève</b>.</li>\n        </ul>\n        <p>Pour chercher un emploi, la première démarche est de s'inscrire auprès de <b>France Travail</b>.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "family",
+        "tag": "Vie civile",
+        "title": "La famille et l'état civil",
+        "html": "<ul>\n          <li>Un mariage n'est reconnu que s'il est célébré à la <b>mairie</b>.</li>\n          <li>La naissance d'un enfant se déclare à l'état civil dans les <b>5 jours</b>.</li>\n          <li>En cas de divorce, l'<b>autorité parentale</b> reste en général partagée.</li>\n          <li>Les violences éducatives, même légères, sont interdites depuis 2019.</li>\n        </ul>\n        <p>L'aide juridictionnelle permet aux personnes aux revenus modestes de financer un avocat.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "phone",
+        "tag": "Urgences",
+        "title": "Les numéros à connaître",
+        "html": "<p>En cas d'urgence, quelques numéros gratuits sont à retenir :</p>\n        <ul>\n          <li><b>15</b> — le SAMU (urgences médicales).</li>\n          <li><b>17</b> — la police ou la gendarmerie.</li>\n          <li><b>18</b> — les pompiers.</li>\n          <li><b>112</b> — le numéro d'urgence européen.</li>\n        </ul>\n        <p>Face à un danger, chacun a le devoir d'alerter les secours ou de porter assistance.</p>"
+      },
+      {
+        "essentiel": false,
+        "icon": "briefcase",
+        "tag": "Emploi",
+        "title": "Chercher un emploi et se former",
+        "html": "<p>Pour chercher un emploi en France, la première démarche est de s'inscrire auprès de <b>France Travail</b> (anciennement Pôle emploi), qui accompagne les demandeurs d'emploi.</p>\n    <ul>\n      <li>Une personne étrangère en situation régulière peut librement créer son entreprise.</li>\n      <li>Les <b>allocations chômage</b> sont versées sous conditions de durée de travail préalable et d'inscription comme demandeur d'emploi.</li>\n      <li>Le <b>droit syndical</b> permet à tout salarié de se regrouper librement pour défendre ses droits.</li>\n    </ul>"
+      },
+      {
+        "essentiel": false,
+        "icon": "home",
+        "tag": "Logement",
+        "title": "Louer un logement : les bases",
+        "html": "<p>Un <b>bail locatif</b> valide doit être écrit et signé par le propriétaire et le locataire.</p>\n    <ul>\n      <li>Le locataire peut vivre normalement dans son logement et y recevoir des proches, sans autorisation du propriétaire.</li>\n      <li>Pour se débarrasser d'un appareil cassé (machine à laver, etc.), il faut le déposer en <b>déchetterie</b> — le dépôt sur le trottoir est un dépôt sauvage puni d'amende.</li>\n      <li>En cas de litige, une <b>aide juridictionnelle</b> peut permettre d'être assisté par un avocat, sous conditions de ressources.</li>\n    </ul>"
+      },
+      {
+        "essentiel": true,
+        "icon": "heart",
+        "tag": "Santé",
+        "title": "Le parcours de soins en France",
+        "html": "<p>Toute personne, quelle que soit sa situation, a accès aux <b>soins d'urgence</b>.</p>\n    <ul>\n      <li>Pour un problème non urgent, on consulte d'abord son <b>médecin traitant</b>, qui oriente si besoin vers un spécialiste.</li>\n      <li>La <b>carte Vitale</b> permet le remboursement des frais de santé par l'Assurance maladie ; une <b>mutuelle</b> peut compléter ce remboursement.</li>\n      <li>Le <b>secret médical</b> protège la confidentialité des informations de santé de chaque patient.</li>\n      <li>La contraception est accessible à toute personne, y compris aux mineurs, de façon anonyme et gratuite.</li>\n    </ul>"
+      }
     ]
   }
 };
