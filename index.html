@@ -424,6 +424,44 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
 html { scroll-behavior:smooth; }
 
 </style>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQjD8NPUtoUSSVQ0A1Lju7kQ6YtBNr7rM",
+    authDomain: "civicum-30071.firebaseapp.com",
+    projectId: "civicum-30071",
+    storageBucket: "civicum-30071.firebasestorage.app",
+    messagingSenderId: "870696168739",
+    appId: "1:870696168739:web:c64ad16f675a2547a0f096"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Exposer globalement pour le JS principal
+  window._fbAuth = auth;
+  window._fbDb = db;
+  window._fbSignIn = signInWithEmailAndPassword;
+  window._fbSignOut = signOut;
+  window._fbCreateUser = createUserWithEmailAndPassword;
+  window._fbOnAuth = onAuthStateChanged;
+  window._fbResetPwd = sendPasswordResetEmail;
+  window._fbDoc = doc;
+  window._fbGetDoc = getDoc;
+  window._fbSetDoc = setDoc;
+  window._fbUpdateDoc = updateDoc;
+  window._fbTimestamp = serverTimestamp;
+
+  // Surveiller l'état d'auth au chargement
+  onAuthStateChanged(auth, (user) => {
+    window._fbCurrentUser = user || null;
+    if(window._fbAuthReady) window._fbAuthReady(user);
+  });
+</script>
 </head>
 <body>
 
@@ -622,7 +660,7 @@ html { scroll-behavior:smooth; }
           <a class="btn btn-gold" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
         </div>
         <div class="plan">
-          <div class="plan-name">Accès à vie</div>
+          <div class="plan-name">Accès illimité (1 an)</div>
           <div class="plan-price">50<small>&nbsp;€</small></div>
           <div class="plan-sub">Un accès sans limite de durée</div>
           <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
@@ -721,11 +759,45 @@ html { scroll-behavior:smooth; }
 
   <section id="screen-gate" class="card">
     <div class="gate-icon">✦</div>
-    <div class="gate-label">Entrez votre code d'accès pour commencer</div>
-    <input type="text" id="gate-code" placeholder="CODE D'ACCÈS" autocomplete="off">
-    <div class="gate-error" id="gate-error">Code incorrect. Vérifiez la saisie et réessayez.</div>
-    <button class="btn btn-primary" id="btn-unlock">Accéder à l'entraînement</button>
-    <div class="gate-hint">Votre code est strictement personnel et nominatif. Il ne peut être utilisé que sur un seul appareil à la fois.</div>
+    <!-- Onglets connexion / inscription -->
+    <div style="display:flex;gap:0;margin-bottom:20px;border:1px solid var(--line);border-radius:7px;overflow:hidden;">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" style="flex:1;padding:10px;background:var(--navy);color:var(--cream);border:none;cursor:pointer;font-weight:600;font-size:14px;">Connexion</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" style="flex:1;padding:10px;background:#fff;color:var(--navy);border:none;cursor:pointer;font-weight:600;font-size:14px;">Créer un compte</button>
+    </div>
+
+    <!-- Formulaire connexion -->
+    <div id="auth-login">
+      <div class="gate-label" style="margin-bottom:14px;">Connectez-vous à votre compte</div>
+      <input type="email" id="login-email" placeholder="Adresse e-mail" autocomplete="email" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:10px;">
+      <input type="password" id="login-pwd" placeholder="Mot de passe" autocomplete="current-password" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:12px;">
+      <button class="btn btn-primary" id="btn-login" style="width:100%;justify-content:center;">Se connecter</button>
+      <div style="text-align:center;margin-top:12px;">
+        <a href="#" id="btn-forgot-pwd" style="font-size:13px;color:var(--muted);" onclick="showForgotPwd();return false;">Mot de passe oublié ?</a>
+      </div>
+    </div>
+
+    <!-- Formulaire inscription -->
+    <div id="auth-register" style="display:none;">
+      <div class="gate-label" style="margin-bottom:14px;">Créer votre compte Civicum</div>
+      <input type="text" id="reg-nom" placeholder="Votre nom complet" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:10px;">
+      <input type="email" id="reg-email" placeholder="Adresse e-mail" autocomplete="email" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:10px;">
+      <input type="password" id="reg-pwd" placeholder="Choisir un mot de passe (min. 6 caractères)" autocomplete="new-password" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:12px;">
+      <button class="btn btn-primary" id="btn-register" style="width:100%;justify-content:center;">Créer mon compte</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center;">En créant un compte, vous acceptez les conditions d'utilisation de Civicum.</p>
+    </div>
+
+    <!-- Réinitialisation mdp -->
+    <div id="auth-forgot" style="display:none;">
+      <div class="gate-label" style="margin-bottom:14px;">Réinitialiser votre mot de passe</div>
+      <input type="email" id="forgot-email" placeholder="Votre adresse e-mail" style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;margin-bottom:12px;">
+      <button class="btn btn-primary" id="btn-send-reset" style="width:100%;justify-content:center;">Envoyer le lien</button>
+      <div style="text-align:center;margin-top:12px;">
+        <a href="#" style="font-size:13px;color:var(--muted);" onclick="switchAuthTab('login');return false;">← Retour à la connexion</a>
+      </div>
+    </div>
+
+    <div class="gate-error" id="gate-error" style="margin-top:12px;"></div>
+    <div id="gate-success" style="font-size:13px;color:var(--green);text-align:center;margin-top:10px;display:none;"></div>
   </section>
 
   <section id="screen-level" class="card" hidden>
@@ -808,12 +880,41 @@ html { scroll-behavior:smooth; }
 
 
   <section id="screen-dashboard" class="card" hidden>
-    <button class="btn-link" id="btn-dashboard-back">← Retour</button>
-    <div class="qmeta" style="margin-bottom:16px;">📊 Mon tableau de bord</div>
-    <div id="dashboard-content">
-      <p style="color:var(--muted);font-size:14px;text-align:center;padding:20px 0;">Aucune session enregistrée pour le moment.</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <button class="btn-link" id="btn-dashboard-back" style="margin:0;">← Retour</button>
+      <div style="font-weight:700;color:var(--navy);font-size:16px;">📊 Mon tableau de bord</div>
+      <button class="btn btn-ghost" onclick="doLogout()" style="font-size:12px;padding:7px 12px;color:var(--muted);">Déconnexion</button>
     </div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);">
+
+    <!-- Profil -->
+    <div id="dash-profil" style="background:var(--navy);border-radius:10px;padding:16px 18px;color:var(--cream);margin-bottom:16px;display:flex;align-items:center;gap:14px;">
+      <div style="width:42px;height:42px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Libre Caslon Display',serif;font-size:20px;flex:none;" id="dash-avatar">?</div>
+      <div>
+        <div style="font-weight:700;font-size:15px;" id="dash-username">—</div>
+        <div style="font-size:12px;color:rgba(246,242,233,.7);" id="dash-formule">Chargement…</div>
+      </div>
+    </div>
+
+    <!-- Stats globales -->
+    <div id="dash-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;"></div>
+
+    <!-- Reprendre -->
+    <div id="dash-reprise" style="display:none;background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    </div>
+
+    <!-- Progression par thème -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Progression par thématique</div>
+      <div id="dash-themes"></div>
+    </div>
+
+    <!-- Historique sessions -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Historique des sessions</div>
+      <div id="dash-history"></div>
+    </div>
+
+    <div style="padding-top:14px;border-top:1px solid var(--line);">
       <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
     </div>
   </section>
@@ -929,110 +1030,154 @@ html { scroll-behavior:smooth; }
 <script>
 
 
-/* ============ GOOGLE SHEETS PERSONAL CODE SYSTEM ============
-   Chaque abonné a son propre code dans le Sheet :
-   colonnes : code | nom | formule | debut | fin
-   fin = date d'expiration au format YYYY-MM-DD  (vide = accès à vie)
-============================================================ */
-const SHEET_ID = "1tFSF7D34-Ahj5HE5gLM-T6ADuBWNDPDhYKh-bp6UOUQ";
-const SHEET_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
-
-const gateInput = document.getElementById('gate-code');
+/* ============ FIREBASE AUTH ============ */
+const gateInput = null; // plus utilisé (remplacé par Firebase)
 const gateError = document.getElementById('gate-error');
-const btnUnlock  = document.getElementById('btn-unlock');
+const gateSuccess = document.getElementById('gate-success');
 
-/* Parse CSV basique (gère les guillemets Google) */
-function parseCSV(text){
-  return text.trim().split('\n').slice(1).map(line => {
-    const cols = [];
-    let cur = '', inQ = false;
-    for(let i=0;i<line.length;i++){
-      const c = line[i];
-      if(c==='"'){ inQ=!inQ; }
-      else if(c===','&&!inQ){ cols.push(cur.trim()); cur=''; }
-      else { cur+=c; }
+function setGateError(msg){ gateError.textContent=msg; gateError.classList.add('show'); if(gateSuccess) gateSuccess.style.display='none'; }
+function clearGateError(){ gateError.classList.remove('show'); gateError.textContent=''; }
+function setGateSuccess(msg){ if(gateSuccess){gateSuccess.textContent=msg;gateSuccess.style.display='block';} clearGateError(); }
+
+function switchAuthTab(tab){
+  document.getElementById('auth-login').style.display = tab==='login' ? 'block':'none';
+  document.getElementById('auth-register').style.display = tab==='register' ? 'block':'none';
+  document.getElementById('auth-forgot').style.display = tab==='forgot' ? 'block':'none';
+  document.getElementById('tab-login').style.background = tab==='login' ? 'var(--navy)' : '#fff';
+  document.getElementById('tab-login').style.color = tab==='login' ? 'var(--cream)' : 'var(--navy)';
+  document.getElementById('tab-register').style.background = tab==='register' ? 'var(--navy)' : '#fff';
+  document.getElementById('tab-register').style.color = tab==='register' ? 'var(--cream)' : 'var(--navy)';
+  clearGateError();
+}
+
+function showForgotPwd(){ switchAuthTab('forgot'); document.getElementById('auth-forgot').style.display='block'; }
+
+/* Erreurs Firebase → messages lisibles */
+function fbErrMsg(code){
+  const map = {
+    'auth/user-not-found':'Aucun compte trouvé avec cet e-mail.',
+    'auth/wrong-password':'Mot de passe incorrect.',
+    'auth/invalid-email':'Adresse e-mail invalide.',
+    'auth/email-already-in-use':'Un compte existe déjà avec cet e-mail.',
+    'auth/weak-password':'Le mot de passe doit faire au moins 6 caractères.',
+    'auth/too-many-requests':'Trop de tentatives. Réessayez dans quelques minutes.',
+    'auth/network-request-failed':'Connexion réseau impossible. Vérifiez votre connexion.',
+    'auth/invalid-credential':'Identifiants incorrects. Vérifiez votre e-mail et mot de passe.',
+  };
+  return map[code] || 'Erreur : '+code;
+}
+
+/* Connexion */
+async function tryLogin(){
+  if(!window._fbAuth){ setGateError('Service non disponible. Rechargez la page.'); return; }
+  const email = document.getElementById('login-email').value.trim();
+  const pwd = document.getElementById('login-pwd').value;
+  if(!email||!pwd){ setGateError('Renseignez votre e-mail et mot de passe.'); return; }
+  clearGateError();
+  const btn = document.getElementById('btn-login');
+  btn.disabled=true; btn.textContent='Connexion…';
+  try{
+    const cred = await window._fbSignIn(window._fbAuth, email, pwd);
+    await onUserConnected(cred.user);
+  } catch(e){
+    setGateError(fbErrMsg(e.code));
+  } finally { btn.disabled=false; btn.textContent='Se connecter'; }
+}
+
+/* Inscription */
+async function tryRegister(){
+  if(!window._fbAuth){ setGateError('Service non disponible. Rechargez la page.'); return; }
+  const nom = document.getElementById('reg-nom').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pwd = document.getElementById('reg-pwd').value;
+  if(!nom||!email||!pwd){ setGateError('Remplissez tous les champs.'); return; }
+  clearGateError();
+  const btn = document.getElementById('btn-register');
+  btn.disabled=true; btn.textContent='Création…';
+  try{
+    const cred = await window._fbCreateUser(window._fbAuth, email, pwd);
+    /* Enregistrer le profil dans Firestore */
+    if(window._fbDb){
+      await window._fbSetDoc(window._fbDoc(window._fbDb,'users',cred.user.uid),{
+        nom, email, createdAt: window._fbTimestamp(), formule:'', actif:false
+      });
     }
-    cols.push(cur.trim());
-    return cols;
-  });
+    setGateSuccess('Compte créé ! Votre accès sera activé après confirmation de votre abonnement. Contactez-nous à contact@civicum.fr');
+  } catch(e){
+    setGateError(fbErrMsg(e.code));
+  } finally { btn.disabled=false; btn.textContent='Créer mon compte'; }
 }
 
-/* Vérifie si la date de fin est dépassée (vide = jamais) */
-function isExpired(finStr){
-  if(!finStr || finStr.trim()==='') return false;
-  const fin = new Date(finStr.trim());
-  return isNaN(fin.getTime()) ? false : fin < new Date();
+/* Réinitialisation mot de passe */
+async function trySendReset(){
+  if(!window._fbAuth){ setGateError('Service non disponible.'); return; }
+  const email = document.getElementById('forgot-email').value.trim();
+  if(!email){ setGateError("Saisissez votre adresse e-mail."); return; }
+  clearGateError();
+  const btn = document.getElementById('btn-send-reset');
+  btn.disabled=true; btn.textContent='Envoi…';
+  try{
+    await window._fbResetPwd(window._fbAuth, email);
+    setGateSuccess('E-mail de réinitialisation envoyé ! Vérifiez votre boîte de réception.');
+  } catch(e){
+    setGateError(fbErrMsg(e.code));
+  } finally { btn.disabled=false; btn.textContent='Envoyer le lien'; }
 }
 
-/* Erreurs lisibles */
-const MSG = {
-  NOT_FOUND : "Code non reconnu. Vérifiez la saisie ou contactez contact@civicum.fr",
-  EXPIRED   : "Votre accès a expiré. Contactez contact@civicum.fr pour renouveler.",
-  NETWORK   : "Impossible de vérifier votre code (connexion). Réessayez dans un instant.",
-  LOADING   : "Vérification en cours…"
-};
-
-function setError(msg){ gateError.textContent = msg; gateError.classList.add('show'); }
-function clearError(){ gateError.classList.remove('show'); }
-
-function netlifyEncode(data){
-  return Object.keys(data).map(k => encodeURIComponent(k)+"="+encodeURIComponent(data[k])).join("&");
+/* Après connexion réussie : vérifier que l'accès est actif dans Firestore */
+async function onUserConnected(user){
+  let actif = false;
+  let nom = user.displayName || user.email;
+  if(window._fbDb){
+    try{
+      const snap = await window._fbGetDoc(window._fbDoc(window._fbDb,'users',user.uid));
+      if(snap.exists()){
+        const data = snap.data();
+        actif = data.actif === true;
+        nom = data.nom || nom;
+      }
+    } catch(e){ /* Firestore indispo : accès refusé par précaution */ }
+  }
+  if(!actif){
+    setGateError("Votre accès n'est pas encore activé. Contactez contact@civicum.fr après votre paiement.");
+    await window._fbSignOut(window._fbAuth).catch(()=>{});
+    return;
+  }
+  /* Accès accordé */
+  try{ localStorage.setItem('access_unlocked','true'); localStorage.setItem('access_nom',nom); }catch(e){}
+  show('screen-level');
 }
-function logConnection(nom, formule){
-  fetch("/",{
-    method:"POST",
-    headers:{"Content-Type":"application/x-www-form-urlencoded"},
-    body: netlifyEncode({"form-name":"access-log","date":new Date().toLocaleString('fr-FR'),"code":gateInput.value.trim().toUpperCase(),"nom":nom||"","formule":formule||""})
-  }).catch(()=>{});
+
+/* Logout */
+function doLogout(){
+  if(window._fbAuth) window._fbSignOut(window._fbAuth).catch(()=>{});
+  try{ localStorage.removeItem('access_unlocked'); localStorage.removeItem('access_nom'); }catch(e){}
+  show('screen-gate');
+  switchAuthTab('login');
 }
 
-async function tryUnlock(){
-  const val = gateInput.value.trim().toUpperCase();
-  if(!val){ setError("Saisissez votre code personnel."); return; }
+/* Événements boutons */
+document.getElementById('btn-login').addEventListener('click', tryLogin);
+document.getElementById('login-pwd').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+document.getElementById('btn-register').addEventListener('click', tryRegister);
+document.getElementById('btn-send-reset').addEventListener('click', trySendReset);
 
-  clearError();
-  btnUnlock.disabled = true;
-  btnUnlock.textContent = MSG.LOADING;
-
-  try {
-    const res = await fetch(SHEET_CSV, { cache:"no-store" });
-    if(!res.ok) throw new Error("http "+res.status);
-    const text = await res.text();
-    const rows = parseCSV(text);
-
-    /* Cherche le code (colonne 0, insensible à la casse) */
-    const row = rows.find(r => r[0] && r[0].trim().toUpperCase() === val);
-
-    if(!row){
-      setError(MSG.NOT_FOUND);
-    } else if(isExpired(row[4])){
-      setError(MSG.EXPIRED);
+function checkExistingUnlock(){
+  show('screen-gate');
+  /* Vérifier si Firebase a déjà une session active */
+  window._fbAuthReady = async (user) => {
+    if(user){
+      await onUserConnected(user);
     } else {
-      /* Accès accordé */
-      const nom = row[1]||"";
-      const formule = row[2]||"";
-      try{
-        localStorage.setItem('access_unlocked','true');
-        localStorage.setItem('access_code', val);
-        localStorage.setItem('access_nom', nom);
-        localStorage.setItem('access_formule', formule);
-        localStorage.setItem('access_fin', row[4]||'');
-        localStorage.setItem('access_ts', Date.now().toString());
-      }catch(e){}
-      logConnection(nom, formule);
-      show('screen-level');
+      /* Pas de session Firebase : afficher la connexion */
+      try{ localStorage.removeItem('access_unlocked'); }catch(e){}
     }
-
-  } catch(err){
-    setError(MSG.NETWORK);
-  } finally {
-    btnUnlock.disabled = false;
-    btnUnlock.textContent = "Accéder à l'entraînement";
+  };
+  /* Si Firebase déjà initialisé et user connu */
+  if(window._fbCurrentUser !== undefined){
+    if(window._fbCurrentUser) onUserConnected(window._fbCurrentUser);
   }
 }
-
-document.getElementById('btn-unlock').addEventListener('click', tryUnlock);
-gateInput.addEventListener('keydown', e => { if(e.key==='Enter') tryUnlock(); });
 
 function checkExistingUnlock(){
   show('screen-gate');
@@ -1607,6 +1752,32 @@ Object.assign(ICON_INNERS, {
   book:`<path d="M40 26 C36 23 28 22 23 23 V52 C28 51 36 52 40 55 C44 52 52 51 57 52 V23 C52 22 44 23 40 26 Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="40" y1="26" x2="40" y2="55" stroke="#16233F" stroke-width="1.6"/>`,
 });
 
+
+Object.assign(ICON_INNERS, {
+  /* Palais de l'Élysée — colonnade + dôme */
+  elysee:`<path d="M20 56 L20 36 L60 36 L60 56" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M16 36 L40 22 L64 36" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/>
+    <ellipse cx="40" cy="29" rx="5" ry="6" fill="none" stroke="#B3402F" stroke-width="2"/>
+    <line x1="27" y1="36" x2="27" y2="56" stroke="#16233F" stroke-width="2.2"/>
+    <line x1="34" y1="36" x2="34" y2="56" stroke="#16233F" stroke-width="2.2"/>
+    <line x1="46" y1="36" x2="46" y2="56" stroke="#16233F" stroke-width="2.2"/>
+    <line x1="53" y1="36" x2="53" y2="56" stroke="#16233F" stroke-width="2.2"/>
+    <line x1="16" y1="58" x2="64" y2="58" stroke="#16233F" stroke-width="2.6" stroke-linecap="round"/>`,
+  /* Assemblée nationale — hémicycle */
+  assemblee:`<path d="M18 52 A22 22 0 0 1 62 52" fill="none" stroke="#16233F" stroke-width="2.4"/>
+    <path d="M23 52 A17 17 0 0 1 57 52" fill="none" stroke="#233457" stroke-width="1.4"/>
+    <path d="M28 52 A12 12 0 0 1 52 52" fill="none" stroke="#233457" stroke-width="1.4"/>
+    <line x1="40" y1="30" x2="40" y2="52" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="30" cy="50" r="2.5" fill="#16233F"/>
+    <circle cx="40" cy="40" r="2.5" fill="#B3402F"/>
+    <circle cx="50" cy="50" r="2.5" fill="#16233F"/>
+    <line x1="16" y1="58" x2="64" y2="58" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/>`,
+  /* Simone Veil — étoile de David + croix médicale stylisée */
+  veil_icon:`<circle cx="40" cy="32" r="10" fill="none" stroke="#16233F" stroke-width="2.2"/>
+    <path d="M40 18 L43 25 L50 25 L44 30 L47 37 L40 32 L33 37 L36 30 L30 25 L37 25 Z" fill="none" stroke="#A9843E" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M28 48 V56 M52 48 V56 M28 52 h24" stroke="#B3402F" stroke-width="2.4" stroke-linecap="round"/>`,
+});
+
 function ICON(key){
   const inner = ICON_INNERS[key] || '';
   return `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/><circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.12)" stroke-width="1"/>${inner}</svg>`;
@@ -1614,16 +1785,18 @@ function ICON(key){
 
 /* ============ MODE PORTRAITS & SYMBOLES ============ */
 const PORTRAITS_DATA = [
-  { id:'president', icon:'person',  name:'Le Président de la République' },
-  { id:'maire',      icon:'mairie', name:'Le Maire' },
-  { id:'depute',     icon:'person', name:'Le Député' },
-  { id:'juge',       icon:'gavel',  name:'Le Juge' },
-  { id:'marianne',   icon:'cockade', name:'Marianne' },
-  { id:'drapeau',    icon:'flag',   name:'Le drapeau tricolore' },
-  { id:'justice',    icon:'scales', name:'La Justice' },
-  { id:'loi',        icon:'scroll', name:'La loi' },
-  { id:'degaulle',   icon:'person', name:'Charles de Gaulle' },
-  { id:'veil',       icon:'person', name:'Simone Veil' },
+  { id:'president', icon:'elysee',   name:'Le Président de la République' },
+  { id:'maire',     icon:'mairie',   name:'Le Maire' },
+  { id:'depute',    icon:'assemblee',name:'Le Député' },
+  { id:'juge',      icon:'gavel',    name:'Le Juge' },
+  { id:'marianne',  icon:'cockade',  name:'Marianne' },
+  { id:'drapeau',   icon:'flag',     name:'Le drapeau tricolore' },
+  { id:'justice',   icon:'scales',   name:'La Justice' },
+  { id:'loi',       icon:'scroll',   name:'La loi' },
+  { id:'degaulle',  icon:'bicorne',  name:'Charles de Gaulle' },
+  { id:'veil',      icon:'veil_icon',name:'Simone Veil' },
+  { id:'marieCurie',icon:'microscope',name:'Marie Curie' },
+  { id:'napoleon',  icon:'bicorne',  name:'Napoléon Bonaparte' },
 ];
 const PORTRAITS_ROUND_SIZE = 6;
 let portraitsRound = [];
@@ -2106,7 +2279,7 @@ function coursePagesFor(themeKey, levelKey){
 /* ============ STRUCTURED COURSES (separate access) ============
    Accès cours : colonne 5 (cours=oui) OU formule 3 mois/à vie.
 ============================================================ */
-const FORMULES_AVEC_COURS = ["3 mois","acces a vie","à vie","vie"];
+const FORMULES_AVEC_COURS = ["3 mois","acces illimite 1 an","à vie","vie"];
 function rowHasCours(row){
   const cours = (row[5]||'').trim().toLowerCase();
   if(cours==='oui'||cours==='yes') return true;
@@ -2286,7 +2459,7 @@ checkExistingUnlock();
 /* ============ GOOGLE SHEETS PERSONAL CODE SYSTEM ============
    Chaque abonné a son propre code dans le Sheet :
    colonnes : code | nom | formule | debut | fin
-   fin = date d'expiration au format YYYY-MM-DD  (vide = accès à vie)
+   fin = date d'expiration au format YYYY-MM-DD  (vide = accès illimité 1 an)
 ============================================================ */
 
 
@@ -2390,61 +2563,82 @@ function getLastSession(){
 }
 
 function renderDashboard(){
-  const content = document.getElementById('dashboard-content');
+  /* Profil Firebase */
+  const user = window._fbCurrentUser;
+  const nom = (user && user.displayName) || (typeof localStorage !== 'undefined' && localStorage.getItem('access_nom')) || '—';
+  const avatar = document.getElementById('dash-avatar');
+  const usernameEl = document.getElementById('dash-username');
+  const formuleEl = document.getElementById('dash-formule');
+  if(avatar) avatar.textContent = nom.charAt(0).toUpperCase();
+  if(usernameEl) usernameEl.textContent = nom;
+  /* Charger formule depuis Firestore si dispo */
+  if(window._fbDb && user){
+    window._fbGetDoc(window._fbDoc(window._fbDb,'users',user.uid)).then(snap=>{
+      if(snap.exists() && formuleEl){
+        const d = snap.data();
+        formuleEl.textContent = d.formule ? 'Formule : '+d.formule : 'Abonnement actif';
+      }
+    }).catch(()=>{});
+  } else if(formuleEl){ formuleEl.textContent = 'Accès actif'; }
+
+  /* Stats */
   let scores = [];
   try{ scores = JSON.parse(localStorage.getItem(SCORES_KEY)||'[]'); }catch(e){}
 
+  const statsEl = document.getElementById('dash-stats');
+  const avg = scores.length ? Math.round(scores.reduce((s,r)=>s+r.pct,0)/scores.length) : 0;
+  const best = scores.length ? Math.max(...scores.map(r=>r.pct)) : 0;
+  statsEl.innerHTML = [
+    [scores.length,'sessions'],
+    [avg+'%','moyenne'],
+    [best+'%','meilleur score']
+  ].map(([v,l])=>`<div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${v}</div><div style="font-size:11px;color:var(--muted);">${l}</div></div>`).join('');
+
+  /* Reprendre */
   const last = getLastSession();
-  let html = '';
+  const repriseEl = document.getElementById('dash-reprise');
+  if(last && repriseEl){
+    repriseEl.style.display='flex';
+    repriseEl.innerHTML=`<div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px;">Reprendre où vous en étiez</div><div style="font-weight:700;color:var(--navy);font-size:15px;">${last.level} — ${last.theme}</div></div><button class="btn btn-primary" style="font-size:13px;padding:10px 16px;" onclick="resumeLastSession()">▶ Reprendre</button>`;
+  } else if(repriseEl){ repriseEl.style.display='none'; }
 
-  // Reprendre dernière session
-  if(last){
-    html += `<div style="background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:16px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-      <div>
-        <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px;">Reprendre</div>
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">${last.level} — ${last.theme}</div>
-      </div>
-      <button class="btn btn-primary" style="font-size:13px;padding:10px 16px;" onclick="resumeLastSession()">▶ Reprendre</button>
-    </div>`;
-  }
-
-  if(scores.length === 0){
-    html += '<p style="color:var(--muted);font-size:14px;text-align:center;padding:20px 0;">Aucune session enregistrée pour le moment.</p>';
+  /* Progression par thème */
+  const themes = {};
+  scores.forEach(s=>{
+    if(!themes[s.theme]) themes[s.theme]={total:0,sum:0,count:0};
+    themes[s.theme].sum+=s.pct; themes[s.theme].count++;
+    themes[s.theme].total=Math.max(themes[s.theme].total,s.total||0);
+  });
+  const themesEl = document.getElementById('dash-themes');
+  if(Object.keys(themes).length===0){
+    themesEl.innerHTML='<p style="font-size:13px;color:var(--muted);padding:10px 0;">Aucune donnée pour le moment.</p>';
   } else {
-    // Statistiques globales
-    const avg = Math.round(scores.reduce((s,r)=>s+r.pct,0)/scores.length);
-    const best = Math.max(...scores.map(r=>r.pct));
-    html += `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;">
-      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
-        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${scores.length}</div>
-        <div style="font-size:11px;color:var(--muted);">sessions</div>
-      </div>
-      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
-        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${avg}%</div>
-        <div style="font-size:11px;color:var(--muted);">moyenne</div>
-      </div>
-      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;">
-        <div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${best}%</div>
-        <div style="font-size:11px;color:var(--muted);">meilleur score</div>
-      </div>
-    </div>`;
-
-    // Liste des sessions
-    html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-    scores.forEach(s => {
-      const color = s.pct >= 75 ? 'var(--green)' : s.pct >= 50 ? 'var(--gold)' : 'var(--brick)';
-      html += `<div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-        <div>
-          <div style="font-weight:600;font-size:13px;color:var(--navy);">${s.isExam?'📋 Examen blanc':'🎯 Entraînement'} · ${s.level}</div>
-          <div style="font-size:12px;color:var(--muted);">${s.theme} · ${s.date}${s.duration?' · '+s.duration:''}</div>
-        </div>
-        <div style="font-family:'Libre Caslon Display',serif;font-size:22px;color:${color};font-weight:700;">${s.pct}%</div>
+    themesEl.innerHTML = Object.entries(themes).map(([name,d])=>{
+      const avg2=Math.round(d.sum/d.count);
+      const color=avg2>=75?'var(--green)':avg2>=50?'var(--gold)':'var(--brick)';
+      return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);">
+        <div style="flex:1;font-size:13px;font-weight:600;color:var(--navy);">${name}</div>
+        <div style="background:var(--line);border-radius:4px;height:6px;width:80px;overflow:hidden;"><div style="height:100%;width:${avg2}%;background:${color};border-radius:4px;"></div></div>
+        <div style="font-size:13px;font-weight:700;color:${color};min-width:36px;text-align:right;">${avg2}%</div>
       </div>`;
-    });
-    html += '</div>';
+    }).join('');
   }
 
-  content.innerHTML = html;
+  /* Historique */
+  const histEl = document.getElementById('dash-history');
+  if(scores.length===0){
+    histEl.innerHTML='<p style="font-size:13px;color:var(--muted);padding:10px 0;">Aucune session enregistrée.</p>';
+  } else {
+    histEl.innerHTML='<div style="display:flex;flex-direction:column;gap:8px;">'+scores.slice(0,10).map(s=>{
+      const color=s.pct>=75?'var(--green)':s.pct>=50?'var(--gold)':'var(--brick)';
+      return `<div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div><div style="font-weight:600;font-size:13px;color:var(--navy);">${s.isExam?'📋 Examen':'🎯 Entraînement'} · ${s.level}</div>
+        <div style="font-size:12px;color:var(--muted);">${s.theme} · ${s.date}</div></div>
+        <div style="font-family:'Libre Caslon Display',serif;font-size:22px;color:${color};">${s.pct}%</div>
+      </div>`;
+    }).join('')+'</div>';
+  }
+
 }
 
 function resumeLastSession(){
