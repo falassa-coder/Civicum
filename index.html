@@ -815,7 +815,11 @@ html { scroll-behavior:smooth; }
 
 
 <!-- ===== APP PLATFORM ===== -->
-<div id="app-wrapper" class="app-wrapper"><div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;"><a href="#" onclick="document.getElementById('app-wrapper').classList.remove('visible');document.getElementById('screen-landing').classList.remove('hidden');checkExistingUnlock||true;return false;" style="font-size:13px;color:var(--navy2);text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;">← Retour à l'accueil</a></div>
+<div id="app-wrapper" class="app-wrapper"><div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;">
+  <a href="#" id="btn-go-home" onclick="goHome();return false;" style="font-size:13px;color:var(--navy2);text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;">🏠 Accueil</a>
+  <span id="topbar-label" style="font-size:12px;color:var(--muted);"></span>
+  <button onclick="doLogout()" style="font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;">Déconnexion</button>
+</div>
 <div id="app-platform">
 
 <div class="wrap">
@@ -1435,6 +1439,7 @@ let pool = [];
 let order = [];
 let current = 0;
 let score = 0;
+let queue = [];
 let answered = false;
 let userAnswers = [];
 let missedQuestions = [];
@@ -1811,10 +1816,11 @@ function renderResults(timeExpired){
 
   // Sauvegarder dans le tableau de bord
   try{
-    const dur = examStartTime ? Math.round((Date.now()-examStartTime)/1000) : null;
-    saveScore(selectedLevel, selectedTheme==='ALL'?'Tous les thèmes':selectedTheme, score, queue.length+score, dur, isExamMode);
+    const _dur = (examMode && typeof timeRemaining !== 'undefined') ? Math.round((EXAM_DURATION_SECONDS - timeRemaining)) : null;
+    const _total = pool ? pool.length : score;
+    saveScore(selectedLevel, selectedTheme==='ALL'?'Tous les thèmes':selectedTheme, score, _total, _dur, examMode);
     saveLastSession(selectedLevel, selectedTheme==='ALL'?'Tous les thèmes':selectedTheme);
-  }catch(e){}
+  }catch(e){ console.error('saveScore error', e); }
   show('screen-results');
 }
 
@@ -2574,6 +2580,21 @@ checkExistingUnlock();
 ============================================================ */
 
 
+
+
+/* ===== NAVIGATION : retour à l'écran principal de la session ===== */
+function goHome(){
+  // Arrêter le quiz/timer en cours si besoin
+  if(typeof timerInterval !== 'undefined') clearInterval(timerInterval);
+  // Revenir à screen-level (vue d'ensemble connectée)
+  show('screen-level');
+}
+
+/* Mettre à jour le label de la barre supérieure selon l'écran */
+function updateTopbar(label){
+  const el = document.getElementById('topbar-label');
+  if(el) el.textContent = label || '';
+}
 
 /* ===== CARROUSEL APERÇU ===== */
 let _previewIdx = 0;
