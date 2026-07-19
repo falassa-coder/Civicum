@@ -408,6 +408,16 @@ footer{background:var(--cream);border-top:1px solid var(--line);padding:34px 0;}
 
 
 
+
+/* ===== APERÇU CARROUSEL ===== */
+.preview-carousel{ position:relative; }
+.preview-dots{ display:flex; gap:8px; justify-content:center; margin-bottom:10px; }
+.pdot{ width:8px; height:8px; border-radius:50%; background:var(--line); border:none; cursor:pointer; padding:0; transition:background .2s; }
+.pdot.active{ background:var(--navy); }
+.preview-slide{ display:none; animation:fadeIn .25s ease; }
+.preview-slide.active{ display:block; }
+.preview-label{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brick); font-weight:700; margin-bottom:8px; text-align:center; }
+
 /* ===== TABS LANDING ===== */
 .tab-link{position:relative;padding-bottom:2px;}
 .tab-link.active{color:var(--brick)!important;font-weight:700;}
@@ -427,7 +437,7 @@ html { scroll-behavior:smooth; }
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBQjD8NPUtoUSSVQ0A1Lju7kQ6YtBNr7rM",
@@ -455,6 +465,7 @@ html { scroll-behavior:smooth; }
   window._fbSetDoc = setDoc;
   window._fbUpdateDoc = updateDoc;
   window._fbTimestamp = serverTimestamp;
+  window._fbOnSnapshot = onSnapshot;
 
   // Surveiller l'état d'auth au chargement
   onAuthStateChanged(auth, (user) => {
@@ -477,7 +488,7 @@ html { scroll-behavior:smooth; }
       <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
-      <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Accéder à la plateforme</a>
+      <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
 </header>
@@ -491,7 +502,7 @@ html { scroll-behavior:smooth; }
         <h1>Réussissez l'examen civique,<br><span class="em">à votre rythme.</span></h1>
         <p class="lead">La plateforme en ligne pour vous préparer sereinement&nbsp;: des cours clairs et illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Accéder à la plateforme</a>
+          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion</a>
           <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander mon code</a>
         </div>
         <div class="hero-trust">
@@ -500,12 +511,84 @@ html { scroll-behavior:smooth; }
           <span><i class="dot"></i>Sur mobile &amp; ordinateur</span>
         </div>
       </div>
-      <div class="qcard" aria-hidden="true">
-        <div class="qcard-top"><span class="qcard-meta">Question 3 / 40</span><span class="qcard-timer">42:15</span></div>
-        <div class="qcard-q">Quelle est la devise de la République française&nbsp;?</div>
-        <div class="opt good"><span class="k">A</span>Liberté, Égalité, Fraternité<span class="tick">✓</span></div>
-        <div class="opt"><span class="k">B</span>Union, Travail, Justice</div>
-        <div class="opt"><span class="k">C</span>Paix, Ordre, Nation</div>
+<!-- ===== CARROUSEL APERÇU 3 PAGES ===== -->
+      <div class="preview-carousel" aria-hidden="true">
+        <!-- Navigation dots -->
+        <div class="preview-dots">
+          <button class="pdot active" onclick="showPreview(0)"></button>
+          <button class="pdot" onclick="showPreview(1)"></button>
+          <button class="pdot" onclick="showPreview(2)"></button>
+        </div>
+
+        <!-- Page 1 : Question -->
+        <div class="preview-slide active" id="prev-0">
+          <div class="preview-label">📝 Question</div>
+          <div class="qcard">
+            <div class="qcard-top"><span class="qcard-meta">Question 3 / 40</span><span class="qcard-timer">42:15</span></div>
+            <div class="qcard-q">Quelle est la devise de la République française&nbsp;?</div>
+            <div class="opt good"><span class="k">A</span>Liberté, Égalité, Fraternité<span class="tick">✓</span></div>
+            <div class="opt"><span class="k">B</span>Union, Travail, Justice</div>
+            <div class="opt"><span class="k">C</span>Paix, Ordre, Nation</div>
+          </div>
+        </div>
+
+        <!-- Page 2 : Cours -->
+        <div class="preview-slide" id="prev-1">
+          <div class="preview-label">📚 Cours structuré</div>
+          <div class="qcard" style="padding:20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg viewBox="0 0 48 48" width="20" height="20"><path d="M24 13c-4-3-9-3-13-2v25c4-1 9-1 13 2 4-3 9-3 13-2V11c-4-1-9-1-13 2Z" fill="none" stroke="#FBF8F2" stroke-width="2.2" stroke-linejoin="round"/><line x1="24" y1="13" x2="24" y2="38" stroke="#FBF8F2" stroke-width="2.2"/></svg>
+              </div>
+              <div>
+                <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;">Thème · Valeurs</div>
+                <div style="font-size:13px;font-weight:700;color:var(--navy);">La laïcité en France</div>
+              </div>
+            </div>
+            <p style="font-family:'Source Serif 4',serif;font-size:13px;line-height:1.6;color:#3a3a3a;margin-bottom:10px;">La laïcité est le principe qui sépare l'État des religions. Elle garantit à chacun la liberté de croire ou de ne pas croire.</p>
+            <div style="background:var(--cream);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--navy);font-weight:600;">💡 La loi du 9 décembre <b>1905</b> sépare les Églises de l'État</div>
+            <div style="display:flex;justify-content:center;gap:6px;margin-top:12px;">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block;"></span>
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3 : Jeu portraits -->
+        <div class="preview-slide" id="prev-2">
+          <div class="preview-label">🖼️ Portraits &amp; Symboles</div>
+          <div class="qcard" style="padding:18px;">
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;text-align:center;">Associez le nom au portrait</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div style="border:2px solid var(--gold);border-radius:8px;padding:8px;text-align:center;background:var(--paper);">
+                <svg viewBox="0 0 80 80" width="44" height="44">
+                  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>
+                  <ellipse cx="40" cy="29" rx="13" ry="10" fill="#4a3e2a" stroke="#16233F" stroke-width="1"/>
+                  <ellipse cx="40" cy="36" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>
+                  <rect x="24" y="18" width="32" height="5" rx="2" fill="#4a5e3a"/>
+                  <ellipse cx="40" cy="18" rx="14" ry="5" fill="#4a5e3a" stroke="#16233F" stroke-width="1"/>
+                  <text x="37" y="20" font-size="5" fill="#A9843E">★★</text>
+                  <path d="M26 55 Q30 75 54 75 Q58 75 54 55" fill="#4a5e3a" stroke="#16233F" stroke-width="1.2"/>
+                </svg>
+                <div style="font-size:10px;color:var(--muted);margin-top:4px;">Déposer ici</div>
+              </div>
+              <div style="border:1.5px dashed var(--line);border-radius:8px;padding:8px;text-align:center;background:#fff;">
+                <svg viewBox="0 0 80 80" width="44" height="44">
+                  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>
+                  <path d="M22 26 L40 18 L58 26 L54 28 L26 28 Z" fill="#16233F"/>
+                  <ellipse cx="40" cy="37" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>
+                  <path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#888" stroke="#16233F" stroke-width="1.2"/>
+                </svg>
+                <div style="font-size:10px;color:var(--muted);margin-top:4px;">Déposer ici</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+              <div style="background:var(--navy);color:var(--cream);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;">Charles de Gaulle</div>
+              <div style="background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy);">Napoléon Bonaparte</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -573,7 +656,7 @@ html { scroll-behavior:smooth; }
       <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,3.6vw,34px);margin-bottom:14px;">Prêt à préparer votre examen&nbsp;?</h2>
       <p style="color:rgba(246,242,233,.82);font-size:15px;margin-bottom:24px;">Découvrez un aperçu gratuit, puis demandez votre code pour débloquer l'ensemble des cours et des questions.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Accéder à la plateforme</a>
+        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Connexion</a>
         <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Demander mon code</a>
       </div>
     </div>
@@ -729,8 +812,7 @@ html { scroll-behavior:smooth; }
   <div class="wrap foot">
     <div class="foot-b">
       <div class="brand" style="margin-bottom:10px;"><div class="mono">C</div><div class="brand-name">CIVICUM</div></div>
-      <b>MFS Services &amp; Conseils</b><br>
-      SIRET 910&nbsp;558&nbsp;220&nbsp;00018
+      <b>MFS Services &amp; Conseils</b>
     </div>
     <div class="foot-links">
       <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
@@ -1124,7 +1206,15 @@ async function trySendReset(){
   } finally { btn.disabled=false; btn.textContent='Envoyer le lien'; }
 }
 
-/* Après connexion réussie : vérifier que l'accès est actif dans Firestore */
+/* ============ SESSION ANTI-PARTAGE ============ */
+let _sessionToken = null;
+let _sessionWatcher = null;
+
+function generateSessionToken(){
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+/* Après connexion réussie : vérifier accès + écrire token de session */
 async function onUserConnected(user){
   let actif = false;
   let nom = user.displayName || user.email;
@@ -1136,20 +1226,60 @@ async function onUserConnected(user){
         actif = data.actif === true;
         nom = data.nom || nom;
       }
-    } catch(e){ /* Firestore indispo : accès refusé par précaution */ }
+    } catch(e){ /* Firestore indispo : accès refusé */ }
   }
   if(!actif){
     setGateError("Votre accès n'est pas encore activé. Contactez contact@civicum.fr après votre paiement.");
     await window._fbSignOut(window._fbAuth).catch(()=>{});
     return;
   }
+
+  /* Générer et enregistrer un token de session unique */
+  _sessionToken = generateSessionToken();
+  if(window._fbDb){
+    try{
+      await window._fbUpdateDoc(window._fbDoc(window._fbDb,'users',user.uid),{
+        sessionToken: _sessionToken,
+        lastLogin: window._fbTimestamp()
+      });
+    } catch(e){}
+  }
+
+  /* Surveiller si une autre session s'ouvre (token change) */
+  startSessionWatcher(user.uid);
+
   /* Accès accordé */
   try{ localStorage.setItem('access_unlocked','true'); localStorage.setItem('access_nom',nom); }catch(e){}
   show('screen-level');
 }
 
+function startSessionWatcher(uid){
+  if(!window._fbDb || !window._fbOnSnapshot) return;
+  /* Arrêter l'ancien watcher si existant */
+  if(_sessionWatcher){ _sessionWatcher(); _sessionWatcher=null; }
+
+  const userRef = window._fbDoc(window._fbDb,'users',uid);
+  _sessionWatcher = window._fbOnSnapshot(userRef, (snap) => {
+    if(!snap.exists()) return;
+    const remoteToken = snap.data().sessionToken;
+    if(remoteToken && _sessionToken && remoteToken !== _sessionToken){
+      /* Token différent = autre appareil connecté → déconnecter */
+      _sessionToken = null;
+      if(_sessionWatcher){ _sessionWatcher(); _sessionWatcher=null; }
+      try{ localStorage.removeItem('access_unlocked'); }catch(e){}
+      /* Afficher message et retourner à la porte */
+      alert("⚠️ Votre session a été ouverte sur un autre appareil. Vous avez été déconnecté.");
+      if(window._fbAuth) window._fbSignOut(window._fbAuth).catch(()=>{});
+      show('screen-gate');
+      switchAuthTab('login');
+    }
+  });
+}
+
 /* Logout */
 function doLogout(){
+  if(_sessionWatcher){ _sessionWatcher(); _sessionWatcher=null; }
+  _sessionToken = null;
   if(window._fbAuth) window._fbSignOut(window._fbAuth).catch(()=>{});
   try{ localStorage.removeItem('access_unlocked'); localStorage.removeItem('access_nom'); }catch(e){}
   show('screen-gate');
@@ -1753,30 +1883,6 @@ Object.assign(ICON_INNERS, {
 });
 
 
-Object.assign(ICON_INNERS, {
-  /* Palais de l'Élysée — colonnade + dôme */
-  elysee:`<path d="M20 56 L20 36 L60 36 L60 56" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/>
-    <path d="M16 36 L40 22 L64 36" fill="none" stroke="#16233F" stroke-width="2.4" stroke-linejoin="round"/>
-    <ellipse cx="40" cy="29" rx="5" ry="6" fill="none" stroke="#B3402F" stroke-width="2"/>
-    <line x1="27" y1="36" x2="27" y2="56" stroke="#16233F" stroke-width="2.2"/>
-    <line x1="34" y1="36" x2="34" y2="56" stroke="#16233F" stroke-width="2.2"/>
-    <line x1="46" y1="36" x2="46" y2="56" stroke="#16233F" stroke-width="2.2"/>
-    <line x1="53" y1="36" x2="53" y2="56" stroke="#16233F" stroke-width="2.2"/>
-    <line x1="16" y1="58" x2="64" y2="58" stroke="#16233F" stroke-width="2.6" stroke-linecap="round"/>`,
-  /* Assemblée nationale — hémicycle */
-  assemblee:`<path d="M18 52 A22 22 0 0 1 62 52" fill="none" stroke="#16233F" stroke-width="2.4"/>
-    <path d="M23 52 A17 17 0 0 1 57 52" fill="none" stroke="#233457" stroke-width="1.4"/>
-    <path d="M28 52 A12 12 0 0 1 52 52" fill="none" stroke="#233457" stroke-width="1.4"/>
-    <line x1="40" y1="30" x2="40" y2="52" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/>
-    <circle cx="30" cy="50" r="2.5" fill="#16233F"/>
-    <circle cx="40" cy="40" r="2.5" fill="#B3402F"/>
-    <circle cx="50" cy="50" r="2.5" fill="#16233F"/>
-    <line x1="16" y1="58" x2="64" y2="58" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/>`,
-  /* Simone Veil — étoile de David + croix médicale stylisée */
-  veil_icon:`<circle cx="40" cy="32" r="10" fill="none" stroke="#16233F" stroke-width="2.2"/>
-    <path d="M40 18 L43 25 L50 25 L44 30 L47 37 L40 32 L33 37 L36 30 L30 25 L37 25 Z" fill="none" stroke="#A9843E" stroke-width="1.8" stroke-linejoin="round"/>
-    <path d="M28 48 V56 M52 48 V56 M28 52 h24" stroke="#B3402F" stroke-width="2.4" stroke-linecap="round"/>`,
-});
 
 function ICON(key){
   const inner = ICON_INNERS[key] || '';
@@ -1785,19 +1891,30 @@ function ICON(key){
 
 /* ============ MODE PORTRAITS & SYMBOLES ============ */
 const PORTRAITS_DATA = [
-  { id:'president', icon:'elysee',   name:'Le Président de la République' },
-  { id:'maire',     icon:'mairie',   name:'Le Maire' },
-  { id:'depute',    icon:'assemblee',name:'Le Député' },
-  { id:'juge',      icon:'gavel',    name:'Le Juge' },
-  { id:'marianne',  icon:'cockade',  name:'Marianne' },
-  { id:'drapeau',   icon:'flag',     name:'Le drapeau tricolore' },
-  { id:'justice',   icon:'scales',   name:'La Justice' },
-  { id:'loi',       icon:'scroll',   name:'La loi' },
-  { id:'degaulle',  icon:'bicorne',  name:'Charles de Gaulle' },
-  { id:'veil',      icon:'veil_icon',name:'Simone Veil' },
-  { id:'marieCurie',icon:'microscope',name:'Marie Curie' },
-  { id:'napoleon',  icon:'bicorne',  name:'Napoléon Bonaparte' },
+  { id:'president', icon:'portrait_president', name:'Le Président de la République' },
+  { id:'maire',     icon:'portrait_maire',     name:'Le Maire' },
+  { id:'depute',    icon:'portrait_depute',    name:'Le Député' },
+  { id:'juge',      icon:'portrait_juge',      name:'Le Juge' },
+  { id:'marianne',  icon:'cockade',            name:'Marianne' },
+  { id:'drapeau',   icon:'flag',               name:'Le drapeau tricolore' },
+  { id:'justice',   icon:'scales',             name:'La Justice' },
+  { id:'loi',       icon:'scroll',             name:'La loi' },
+  { id:'degaulle',  icon:'portrait_degaulle',  name:'Charles de Gaulle' },
+  { id:'veil',      icon:'portrait_veil',      name:'Simone Veil' },
+  { id:'marieCurie',icon:'portrait_marieCurie',name:'Marie Curie' },
+  { id:'napoleon',  icon:'portrait_napoleon',  name:'Napoléon Bonaparte' },
 ];
+Object.assign(ICON_INNERS, {
+  portrait_degaulle: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- visage -->  <ellipse cx="40" cy="36" rx="13" ry="15" fill="#F5DEB3" stroke="#16233F" stroke-width="1.4"/>  <!-- nez proéminent -->  <path d="M40 33 Q44 38 41 42" fill="none" stroke="#c8a882" stroke-width="2" stroke-linecap="round"/>  <!-- yeux -->  <ellipse cx="35" cy="32" rx="2" ry="1.5" fill="#16233F"/>  <ellipse cx="45" cy="32" rx="2" ry="1.5" fill="#16233F"/>  <!-- moustache -->  <path d="M36 40 Q40 42 44 40" fill="none" stroke="#555" stroke-width="1.4" stroke-linecap="round"/>  <!-- képi militaire -->  <rect x="24" y="18" width="32" height="5" rx="2" fill="#4a5e3a" stroke="#16233F" stroke-width="1"/>  <rect x="22" y="21" width="36" height="3" rx="1" fill="#3a4e2a"/>  <ellipse cx="40" cy="18" rx="14" ry="5" fill="#4a5e3a" stroke="#16233F" stroke-width="1"/>  <!-- étoiles képi -->  <text x="37" y="20" font-size="5" fill="#A9843E">★★</text>  <!-- visière -->  <path d="M24 24 Q40 28 56 24" fill="none" stroke="#16233F" stroke-width="1.5"/>  <!-- cou + uniforme kaki -->  <rect x="34" y="51" width="12" height="4" fill="#F5DEB3" stroke="#16233F" stroke-width="0.8"/>  <path d="M26 55 Q30 75 54 75 Q58 75 54 55" fill="#4a5e3a" stroke="#16233F" stroke-width="1.2"/>  <!-- étoiles uniforme -->  <text x="28" y="65" font-size="5" fill="#A9843E">★</text>  <text x="47" y="65" font-size="5" fill="#A9843E">★</text>  <!-- cravate/col -->  <rect x="37" y="54" width="6" height="8" rx="1" fill="#16233F"/> </g> </svg>`,
+  portrait_napoleon: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- visage ovale -->  <ellipse cx="40" cy="37" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.4"/>  <!-- yeux -->  <ellipse cx="35" cy="33" rx="2" ry="1.5" fill="#16233F"/>  <ellipse cx="45" cy="33" rx="2" ry="1.5" fill="#16233F"/>  <!-- nez droit -->  <path d="M40 33 L40 39" stroke="#c8a882" stroke-width="1.5" stroke-linecap="round" fill="none"/>  <!-- bouche -->  <path d="M37 42 Q40 44 43 42" fill="none" stroke="#16233F" stroke-width="1.2" stroke-linecap="round"/>  <!-- bicorne -->  <path d="M22 26 L40 18 L58 26 L54 28 L26 28 Z" fill="#16233F" stroke="#16233F" stroke-width="1"/>  <path d="M26 28 L54 28 L52 30 L28 30 Z" fill="#233457"/>  <!-- cocarde -->  <circle cx="40" cy="24" r="3" fill="#B3402F"/>  <circle cx="40" cy="24" r="1.5" fill="#fff"/>  <!-- cou -->  <rect x="35" y="50" width="10" height="4" fill="#F5DEB3"/>  <!-- redingote grise -->  <path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#888" stroke="#16233F" stroke-width="1.2"/>  <!-- boutons -->  <circle cx="40" cy="58" r="1.2" fill="#A9843E"/>  <circle cx="40" cy="63" r="1.2" fill="#A9843E"/>  <circle cx="40" cy="68" r="1.2" fill="#A9843E"/>  <!-- main dans la veste (droite cachée) -->  <path d="M40 61 L50 59 Q54 58 53 62 L42 64" fill="#F5DEB3" stroke="#c8a882" stroke-width="1"/> </g> </svg>`,
+  portrait_veil: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- cheveux bouclés blancs -->  <ellipse cx="40" cy="30" rx="16" ry="14" fill="#e8e8e8" stroke="#16233F" stroke-width="1"/>  <circle cx="27" cy="28" r="5" fill="#e8e8e8" stroke="#16233F" stroke-width="0.8"/>  <circle cx="53" cy="28" r="5" fill="#e8e8e8" stroke="#16233F" stroke-width="0.8"/>  <circle cx="28" cy="22" r="4" fill="#e8e8e8"/>  <circle cx="52" cy="22" r="4" fill="#e8e8e8"/>  <!-- visage -->  <ellipse cx="40" cy="35" rx="11" ry="12" fill="#F5C5A0" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux avec expression chaleureuse -->  <ellipse cx="36" cy="32" rx="2" ry="1.8" fill="#16233F"/>  <ellipse cx="44" cy="32" rx="2" ry="1.8" fill="#16233F"/>  <!-- sourire -->  <path d="M35 39 Q40 43 45 39" fill="none" stroke="#16233F" stroke-width="1.5" stroke-linecap="round"/>  <!-- joues rosées -->  <ellipse cx="33" cy="38" rx="3" ry="2" fill="#ffb6b6" opacity="0.4"/>  <ellipse cx="47" cy="38" rx="3" ry="2" fill="#ffb6b6" opacity="0.4"/>  <!-- cou -->  <rect x="36" y="47" width="8" height="5" fill="#F5C5A0"/>  <!-- tailleur bleu navy -->  <path d="M26 52 Q28 76 54 76 Q56 76 54 52" fill="#16233F" stroke="#16233F" stroke-width="1"/>  <!-- revers col -->  <path d="M34 52 L38 60 L40 58 L42 60 L46 52" fill="#233457" stroke="#16233F" stroke-width="0.8"/>  <!-- collier perles -->  <path d="M33 50 Q40 53 47 50" fill="none" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>  <circle cx="37" cy="51" r="1.2" fill="#e8e8e8"/>  <circle cx="40" cy="52" r="1.2" fill="#e8e8e8"/>  <circle cx="43" cy="51" r="1.2" fill="#e8e8e8"/> </g> </svg>`,
+  portrait_marieCurie: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- chignon -->  <ellipse cx="40" cy="25" rx="11" ry="8" fill="#8B7355" stroke="#16233F" stroke-width="1"/>  <ellipse cx="40" cy="21" rx="7" ry="5" fill="#8B7355"/>  <!-- visage sérieux -->  <ellipse cx="40" cy="36" rx="11" ry="12" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>  <!-- lunettes rondes -->  <circle cx="35" cy="33" r="4" fill="none" stroke="#16233F" stroke-width="1.5"/>  <circle cx="45" cy="33" r="4" fill="none" stroke="#16233F" stroke-width="1.5"/>  <line x1="39" y1="33" x2="41" y2="33" stroke="#16233F" stroke-width="1.2"/>  <line x1="31" y1="33" x2="28" y2="35" stroke="#16233F" stroke-width="1.2"/>  <line x1="49" y1="33" x2="52" y2="35" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux -->  <ellipse cx="35" cy="33" rx="1.5" ry="1.5" fill="#16233F"/>  <ellipse cx="45" cy="33" rx="1.5" ry="1.5" fill="#16233F"/>  <!-- bouche neutre -->  <path d="M37 41 Q40 42 43 41" fill="none" stroke="#16233F" stroke-width="1.2"/>  <!-- cou -->  <rect x="36" y="48" width="8" height="5" fill="#F5DEB3"/>  <!-- blouse blanche de labo -->  <path d="M26 53 Q28 76 54 76 Q56 76 54 53" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>  <!-- boutons blouse -->  <circle cx="40" cy="57" r="1" fill="#ccc"/>  <circle cx="40" cy="62" r="1" fill="#ccc"/>  <circle cx="40" cy="67" r="1" fill="#ccc"/>  <!-- col blouse -->  <path d="M34 53 L38 58 L42 58 L46 53" fill="#fff" stroke="#ccc" stroke-width="0.8"/> </g> </svg>`,
+  portrait_president: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- cheveux courts -->  <ellipse cx="40" cy="29" rx="13" ry="10" fill="#4a3728" stroke="#16233F" stroke-width="1"/>  <!-- visage -->  <ellipse cx="40" cy="36" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux -->  <ellipse cx="35" cy="33" rx="2" ry="1.6" fill="#16233F"/>  <ellipse cx="45" cy="33" rx="2" ry="1.6" fill="#16233F"/>  <!-- nez -->  <path d="M40 34 Q42 38 40 40" fill="none" stroke="#c8a882" stroke-width="1.4" stroke-linecap="round"/>  <!-- bouche neutre/sérieuse -->  <path d="M37 42 Q40 43 43 42" fill="none" stroke="#16233F" stroke-width="1.2"/>  <!-- cou -->  <rect x="36" y="49" width="8" height="5" fill="#F5DEB3"/>  <!-- costume bleu marine -->  <path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#16233F" stroke="#16233F" stroke-width="1"/>  <!-- chemise blanche + cravate -->  <rect x="38" y="54" width="4" height="14" fill="#C41E3A"/>  <path d="M35 54 L38 60 L42 60 L45 54" fill="#fff" stroke="#ccc" stroke-width="0.8"/>  <!-- ÉCHARPE TRICOLORE (trait distinctif absolu) -->  <path d="M26 54 L30 76" stroke="#002395" stroke-width="4"/>  <path d="M30 54 L34 76" stroke="#fff" stroke-width="4"/>  <path d="M34 54 L38 76" stroke="#ED2939" stroke-width="4"/>  <!-- clip écharpe -->  <rect x="25" y="60" width="8" height="4" rx="1" fill="#A9843E"/> </g> </svg>`,
+  portrait_depute: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- cheveux -->  <ellipse cx="40" cy="28" rx="13" ry="9" fill="#5a4a3a" stroke="#16233F" stroke-width="1"/>  <!-- visage -->  <ellipse cx="40" cy="35" rx="12" ry="12" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux -->  <ellipse cx="35" cy="32" rx="2" ry="1.5" fill="#16233F"/>  <ellipse cx="45" cy="32" rx="2" ry="1.5" fill="#16233F"/>  <!-- nez -->  <path d="M40 33 Q41 37 40 39" fill="none" stroke="#c8a882" stroke-width="1.4"/>  <!-- bouche -->  <path d="M36 41 Q40 43 44 41" fill="none" stroke="#16233F" stroke-width="1.2"/>  <!-- cou -->  <rect x="36" y="47" width="8" height="5" fill="#F5DEB3"/>  <!-- costume -->  <path d="M26 52 Q28 70 54 70 Q56 70 54 52" fill="#233457" stroke="#16233F" stroke-width="1"/>  <!-- cravate -->  <rect x="38" y="52" width="4" height="12" fill="#B3402F"/>  <path d="M34 52 L38 58 L42 58 L46 52" fill="#fff" stroke="#ccc" stroke-width="0.8"/>  <!-- pupitre hémicycle en bas -->  <rect x="22" y="68" width="36" height="4" rx="2" fill="#8B6914" stroke="#A9843E" stroke-width="1"/>  <rect x="28" y="65" width="4" height="4" fill="#8B6914"/>  <rect x="48" y="65" width="4" height="4" fill="#8B6914"/>  <!-- micro -->  <circle cx="40" cy="65" r="2.5" fill="#555"/>  <line x1="40" y1="67" x2="40" y2="70" stroke="#555" stroke-width="1.5"/> </g> </svg>`,
+  portrait_maire: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- cheveux grisonnants -->  <ellipse cx="40" cy="29" rx="13" ry="10" fill="#8a8a8a" stroke="#16233F" stroke-width="1"/>  <!-- visage -->  <ellipse cx="40" cy="36" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux -->  <ellipse cx="35" cy="33" rx="2" ry="1.5" fill="#16233F"/>  <ellipse cx="45" cy="33" rx="2" ry="1.5" fill="#16233F"/>  <!-- bouche souriante -->  <path d="M36 41 Q40 45 44 41" fill="none" stroke="#16233F" stroke-width="1.5" stroke-linecap="round"/>  <!-- nez -->  <path d="M40 34 Q42 38 40 40" fill="none" stroke="#c8a882" stroke-width="1.4"/>  <!-- cou -->  <rect x="36" y="49" width="8" height="5" fill="#F5DEB3"/>  <!-- costume -->  <path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#16233F" stroke="#16233F" stroke-width="1"/>  <!-- col blanc + cravate -->  <path d="M34 54 L38 60 L42 60 L46 54" fill="#fff" stroke="#ccc" stroke-width="0.8"/>  <rect x="38" y="54" width="4" height="14" fill="#555"/>  <!-- ÉCHARPE TRICOLORE -->  <path d="M54 54 Q58 65 52 76" stroke="#002395" stroke-width="5" fill="none"/>  <path d="M52 54 Q56 65 50 76" stroke="#fff" stroke-width="5" fill="none"/>  <path d="M50 54 Q54 65 48 76" stroke="#ED2939" stroke-width="5" fill="none"/>  <!-- CHAÎNE DE MAIRE (or) -->  <path d="M28 56 Q40 72 52 56" fill="none" stroke="#A9843E" stroke-width="3"/>  <circle cx="40" cy="67" r="4" fill="#A9843E" stroke="#8B6914" stroke-width="1"/>  <text x="38" y="70" font-size="5" fill="#16233F">RF</text> </g> </svg>`,
+  portrait_juge: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>  <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(22,35,63,0.08)" stroke-width="1"/>  <clipPath id="circ"><circle cx="40" cy="40" r="37"/></clipPath>  <g clip-path="url(#circ)">  <!-- cheveux courts gris -->  <ellipse cx="40" cy="29" rx="12" ry="9" fill="#7a7a7a" stroke="#16233F" stroke-width="1"/>  <!-- visage -->  <ellipse cx="40" cy="37" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>  <!-- yeux sévères -->  <ellipse cx="35" cy="33" rx="2.2" ry="1.6" fill="#16233F"/>  <ellipse cx="45" cy="33" rx="2.2" ry="1.6" fill="#16233F"/>  <!-- sourcils froncés -->  <path d="M32 30 L38 31" stroke="#4a3728" stroke-width="1.5" stroke-linecap="round"/>  <path d="M42 31 L48 30" stroke="#4a3728" stroke-width="1.5" stroke-linecap="round"/>  <!-- nez -->  <path d="M40 34 L40 40" stroke="#c8a882" stroke-width="1.4" stroke-linecap="round" fill="none"/>  <!-- bouche ferme -->  <path d="M37 42 L43 42" stroke="#16233F" stroke-width="1.4" stroke-linecap="round"/>  <!-- cou -->  <rect x="36" y="50" width="8" height="5" fill="#F5DEB3"/>  <!-- toge noire -->  <path d="M24 55 Q26 76 56 76 Q58 76 56 55" fill="#111" stroke="#16233F" stroke-width="1"/>  <!-- col blanc hermine -->  <path d="M30 55 L38 62 L42 62 L50 55" fill="#fff" stroke="#ccc" stroke-width="1"/>  <!-- motifs hermine (points noirs) -->  <circle cx="34" cy="57" r="1.2" fill="#111"/>  <circle cx="37" cy="60" r="1.2" fill="#111"/>  <circle cx="43" cy="60" r="1.2" fill="#111"/>  <circle cx="46" cy="57" r="1.2" fill="#111"/>  <!-- cravate/jabot blanc -->  <rect x="38" y="62" width="4" height="10" fill="#fff" stroke="#ccc" stroke-width="0.5"/> </g> </svg>`,
+});
+
 const PORTRAITS_ROUND_SIZE = 6;
 let portraitsRound = [];
 let portraitsPlacements = {};
@@ -2462,6 +2579,31 @@ checkExistingUnlock();
    fin = date d'expiration au format YYYY-MM-DD  (vide = accès illimité 1 an)
 ============================================================ */
 
+
+
+/* ===== CARROUSEL APERÇU ===== */
+let _previewIdx = 0;
+let _previewTimer = null;
+function showPreview(idx){
+  document.querySelectorAll('.preview-slide').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  document.querySelectorAll('.pdot').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  _previewIdx = idx;
+}
+function startPreviewAuto(){
+  _previewTimer = setInterval(()=>{ showPreview((_previewIdx+1)%3); }, 3000);
+}
+function stopPreviewAuto(){
+  if(_previewTimer){ clearInterval(_previewTimer); _previewTimer=null; }
+}
+// Démarrer auto seulement si la landing est visible
+document.addEventListener('DOMContentLoaded', ()=>{
+  const c = document.querySelector('.preview-carousel');
+  if(c){
+    c.addEventListener('mouseenter', stopPreviewAuto);
+    c.addEventListener('mouseleave', startPreviewAuto);
+    startPreviewAuto();
+  }
+});
 
 /* ===== HAMBURGER MENU ===== */
 function toggleMenu(){
