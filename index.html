@@ -967,14 +967,27 @@ html { scroll-behavior:smooth; }
   </section>
 
   <section id="screen-level" class="card" hidden>
-    <button class="btn-link" onclick="renderDashboard();show('screen-dashboard');" style="margin-bottom:14px;">← Tableau de bord</button>
-    <div class="qmeta" style="margin-bottom:14px;">Choisir un niveau</div>
-    <div class="levels" id="level-list"></div>
-    <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer vers l'entraînement</button>
-    <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center;">
-      <button class="btn" id="open-courses" style="background:var(--gold);color:#fff;border:none;width:100%;font-size:16px;padding:15px 22px;">📚 Cours structurés — Accéder</button>
-      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;width:100%;margin-top:10px;font-size:16px;padding:15px 22px;">🖼️ Portraits &amp; Symboles</button>
-      <button class="btn btn-ghost" id="open-dashboard" style="width:100%;margin-top:10px;font-size:14px;">📊 Mon tableau de bord</button>
+    <button class="btn-link" onclick="renderDashboard();show('screen-dashboard');" style="margin-bottom:16px;">← Tableau de bord</button>
+
+    <!-- ENTRAÎNEMENT -->
+    <div style="background:var(--paper);border:2px solid var(--navy);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:10px;">🎯 Entraînement par questions</div>
+      <div class="qmeta" style="margin-bottom:12px;font-size:13px;">Choisir un niveau</div>
+      <div class="levels" id="level-list"></div>
+      <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer</button>
+    </div>
+
+    <!-- COURS -->
+    <div style="background:var(--paper);border:2px solid var(--gold);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">📚 Cours structurés</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">5 thématiques officielles, fiches illustrées et mémorisation facilitée.</div>
+      <button class="btn" id="open-courses" onclick="renderCourseLevelList();show('screen-course-level');return false;" style="background:var(--gold);color:#fff;border:none;width:100%;padding:13px;font-size:15px;justify-content:center;">Accéder aux cours</button>
+    </div>
+
+    <!-- AUTRES -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;">🖼️ Portraits &amp; Symboles</button>
+      <button class="btn btn-ghost" id="open-dashboard" style="font-size:14px;padding:13px;justify-content:center;">📊 Mon tableau de bord</button>
     </div>
   </section>
 
@@ -1086,7 +1099,7 @@ html { scroll-behavior:smooth; }
       <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:12px;">Commencer un exercice</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
         <button class="btn btn-primary" onclick="show('screen-level');" style="justify-content:center;padding:13px;font-size:14px;">🎯 Entraînement</button>
-        <button class="btn" onclick="show('screen-level');" style="background:var(--gold);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;">📚 Cours</button>
+        <button class="btn" onclick="renderCourseLevelList();show('screen-course-level');" style="background:var(--gold);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;">📚 Cours</button>
       </div>
       <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
     </div>
@@ -1387,62 +1400,41 @@ document.getElementById('btn-register').addEventListener('click', tryRegister);
 document.getElementById('btn-send-reset').addEventListener('click', trySendReset);
 
 function checkExistingUnlock(){
-  show('screen-gate');
-  /* Vérifier si Firebase a déjà une session active */
+  /* Afficher un écran de chargement le temps que Firebase vérifie la session */
+  document.getElementById('screen-gate').hidden = true;
+  /* Montrer un indicateur de chargement discret */
+  if(!document.getElementById('auth-loading')){
+    const loader = document.createElement('div');
+    loader.id = 'auth-loading';
+    loader.style.cssText = 'text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;';
+    loader.innerHTML = '<div style="font-size:28px;margin-bottom:10px;">✦</div>Connexion en cours…';
+    document.getElementById('app-platform').prepend(loader);
+  }
+  document.getElementById('auth-loading').style.display = 'block';
+
   window._fbAuthReady = async (user) => {
+    const loader = document.getElementById('auth-loading');
+    if(loader) loader.style.display = 'none';
     if(user){
       await onUserConnected(user);
     } else {
       /* Pas de session Firebase : afficher la connexion */
-      try{ localStorage.removeItem('access_unlocked'); }catch(e){}
+      show('screen-gate');
     }
   };
   /* Si Firebase déjà initialisé et user connu */
   if(window._fbCurrentUser !== undefined){
-    if(window._fbCurrentUser) onUserConnected(window._fbCurrentUser);
+    const loader = document.getElementById('auth-loading');
+    if(loader) loader.style.display = 'none';
+    if(window._fbCurrentUser){
+      onUserConnected(window._fbCurrentUser);
+    } else {
+      show('screen-gate');
+    }
   }
 }
 
-function checkExistingUnlock(){
-  show('screen-gate');
-  try{
-    /* Purge les sessions créées avec les anciens codes fixes (BABOU2025 / COURS2026)
-       qui n'ont pas de code personnel stocké */
-    const code = localStorage.getItem('access_code')||'';
-    const ts   = parseInt(localStorage.getItem('access_ts')||'0');
-    const tooOld = (Date.now() - ts) > 86400000; /* > 24h → re-vérifier */
 
-    if(localStorage.getItem('access_unlocked') !== 'true') return;
-    if(!code){ /* session créée sans code personnalisé → invalide */
-      localStorage.removeItem('access_unlocked');
-      return;
-    }
-
-    /* Vérifie expiration mémorisée sans requête réseau */
-    const fin = localStorage.getItem('access_fin')||'';
-    if(isExpired(fin)){
-      localStorage.removeItem('access_unlocked');
-      setError(MSG.EXPIRED);
-      return;
-    }
-
-    if(tooOld){
-      /* Re-vérifie silencieusement contre le Sheet */
-      fetch(SHEET_CSV,{cache:"no-store"}).then(r=>r.text()).then(text=>{
-        const rows = parseCSV(text);
-        const row = rows.find(r => r[0] && r[0].trim().toUpperCase() === code.toUpperCase());
-        if(!row || isExpired(row[4])){
-          localStorage.removeItem('access_unlocked');
-          localStorage.removeItem('access_code');
-          checkExistingUnlock();
-        } else {
-          localStorage.setItem('access_ts', Date.now().toString());
-        }
-      }).catch(()=>{});
-    }
-    show('screen-level');
-  }catch(e){}
-}
 
 /* ============ AUDIO READING (Web Speech API) ============ */
 let speaking = false;
@@ -2531,10 +2523,9 @@ let courseSelectedLevel = "CSP";
 let courseSelectedTheme = null;
 
 document.getElementById('open-courses').addEventListener('click', () => {
-  let unlocked = false;
-  try{ unlocked = localStorage.getItem('course_unlocked') === 'true'; }catch(e){}
-  if(unlocked){ renderCourseLevelList(); show('screen-course-level'); }
-  else { show('screen-course-gate'); }
+  // Accès direct aux cours sans deuxième code
+  renderCourseLevelList();
+  show('screen-course-level');
 });
 
 document.getElementById('btn-course-gate-back').addEventListener('click', () => {
