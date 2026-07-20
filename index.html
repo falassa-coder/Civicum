@@ -523,6 +523,7 @@ html { scroll-behavior:smooth; }
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
+      <a class="navlink tab-link" href="#" data-tab="public-tab" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
       <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
@@ -533,34 +534,32 @@ html { scroll-behavior:smooth; }
 
 <!-- ===== TAB : ACCUEIL ===== -->
 <div id="tab-accueil" class="tab-content" style="display:block;">
+
+  <!-- HERO -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">Préparation à l'examen civique</div>
         <h1>Réussissez l'examen civique,<br><span class="em">à votre rythme.</span></h1>
-        <p class="lead">La plateforme en ligne pour vous préparer sereinement&nbsp;: des cours clairs et illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
+        <p class="lead">La plateforme en ligne pour vous préparer sereinement : des cours illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion</a>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander mon code</a>
+          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion / Inscription</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
         </div>
         <div class="hero-trust">
-          <span><i class="dot"></i>Un aperçu libre d'accès</span>
+          <span><i class="dot"></i>Inscription gratuite</span>
           <span><i class="dot"></i>Sans installation</span>
-          <span><i class="dot"></i>Sur mobile &amp; ordinateur</span>
+          <span><i class="dot"></i>Mobile &amp; ordinateur</span>
         </div>
       </div>
-<!-- ===== CARROUSEL APERÇU 3 PAGES ===== -->
       <div class="preview-carousel" aria-hidden="true">
-        <!-- Navigation dots -->
         <div class="preview-dots">
           <button class="pdot active" onclick="showPreview(0)"></button>
           <button class="pdot" onclick="showPreview(1)"></button>
           <button class="pdot" onclick="showPreview(2)"></button>
         </div>
-
-        <!-- Page 1 : Question -->
         <div class="preview-slide active" id="prev-0">
-          <div class="preview-label">📝 Question</div>
+          <div class="preview-label">📝 Entraînement</div>
           <div class="qcard">
             <div class="qcard-top"><span class="qcard-meta">Question 3 / 40</span><span class="qcard-timer">42:15</span></div>
             <div class="qcard-q">Quelle est la devise de la République française&nbsp;?</div>
@@ -569,8 +568,6 @@ html { scroll-behavior:smooth; }
             <div class="opt"><span class="k">C</span>Paix, Ordre, Nation</div>
           </div>
         </div>
-
-        <!-- Page 2 : Cours -->
         <div class="preview-slide" id="prev-1">
           <div class="preview-label">📚 Cours structuré</div>
           <div class="qcard" style="padding:20px;">
@@ -583,8 +580,8 @@ html { scroll-behavior:smooth; }
                 <div style="font-size:13px;font-weight:700;color:var(--navy);">La laïcité en France</div>
               </div>
             </div>
-            <p style="font-family:'Source Serif 4',serif;font-size:13px;line-height:1.6;color:#3a3a3a;margin-bottom:10px;">La laïcité est le principe qui sépare l'État des religions. Elle garantit à chacun la liberté de croire ou de ne pas croire.</p>
-            <div style="background:var(--cream);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--navy);font-weight:600;">💡 La loi du 9 décembre <b>1905</b> sépare les Églises de l'État</div>
+            <p style="font-family:'Source Serif 4',serif;font-size:13px;line-height:1.6;color:#3a3a3a;margin-bottom:10px;">La laïcité sépare l'État des religions. Elle garantit à chacun la liberté de croire ou de ne pas croire.</p>
+            <div style="background:var(--cream);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--navy);font-weight:600;">💡 Loi du 9 décembre <b>1905</b> — séparation Églises / État</div>
             <div style="display:flex;justify-content:center;gap:6px;margin-top:12px;">
               <span style="width:7px;height:7px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
               <span style="width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block;"></span>
@@ -592,37 +589,22 @@ html { scroll-behavior:smooth; }
             </div>
           </div>
         </div>
-
-        <!-- Page 3 : Jeu portraits -->
         <div class="preview-slide" id="prev-2">
           <div class="preview-label">🖼️ Portraits &amp; Symboles</div>
           <div class="qcard" style="padding:18px;">
             <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;text-align:center;">Associez le nom au portrait</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
               <div style="border:2px solid var(--gold);border-radius:8px;padding:8px;text-align:center;background:var(--paper);">
-                <svg viewBox="0 0 80 80" width="44" height="44">
-                  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>
-                  <ellipse cx="40" cy="29" rx="13" ry="10" fill="#4a3e2a" stroke="#16233F" stroke-width="1"/>
-                  <ellipse cx="40" cy="36" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>
-                  <rect x="24" y="18" width="32" height="5" rx="2" fill="#4a5e3a"/>
-                  <ellipse cx="40" cy="18" rx="14" ry="5" fill="#4a5e3a" stroke="#16233F" stroke-width="1"/>
-                  <text x="37" y="20" font-size="5" fill="#A9843E">★★</text>
-                  <path d="M26 55 Q30 75 54 75 Q58 75 54 55" fill="#4a5e3a" stroke="#16233F" stroke-width="1.2"/>
-                </svg>
+                <svg viewBox="0 0 80 80" width="44" height="44"><circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/><ellipse cx="40" cy="29" rx="13" ry="10" fill="#4a3e2a" stroke="#16233F" stroke-width="1"/><ellipse cx="40" cy="36" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/><rect x="24" y="18" width="32" height="5" rx="2" fill="#4a5e3a"/><ellipse cx="40" cy="18" rx="14" ry="5" fill="#4a5e3a" stroke="#16233F" stroke-width="1"/><text x="37" y="20" font-size="5" fill="#A9843E">★★</text><path d="M26 55 Q30 75 54 75 Q58 75 54 55" fill="#4a5e3a" stroke="#16233F" stroke-width="1.2"/></svg>
                 <div style="font-size:10px;color:var(--muted);margin-top:4px;">Déposer ici</div>
               </div>
               <div style="border:1.5px dashed var(--line);border-radius:8px;padding:8px;text-align:center;background:#fff;">
-                <svg viewBox="0 0 80 80" width="44" height="44">
-                  <circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/>
-                  <path d="M22 26 L40 18 L58 26 L54 28 L26 28 Z" fill="#16233F"/>
-                  <ellipse cx="40" cy="37" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/>
-                  <path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#888" stroke="#16233F" stroke-width="1.2"/>
-                </svg>
+                <svg viewBox="0 0 80 80" width="44" height="44"><circle cx="40" cy="40" r="38" fill="#FBF8F2" stroke="#A9843E" stroke-width="1.5"/><path d="M22 26 L40 18 L58 26 L54 28 L26 28 Z" fill="#16233F"/><ellipse cx="40" cy="37" rx="12" ry="13" fill="#F5DEB3" stroke="#16233F" stroke-width="1.2"/><path d="M26 54 Q28 76 54 76 Q56 76 54 54" fill="#888" stroke="#16233F" stroke-width="1.2"/></svg>
                 <div style="font-size:10px;color:var(--muted);margin-top:4px;">Déposer ici</div>
               </div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
-              <div style="background:var(--navy);color:var(--cream);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;">Charles de Gaulle</div>
+              <div style="background:var(--navy);color:var(--cream);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;">Charles de Gaulle</div>
               <div style="background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--navy);">Napoléon Bonaparte</div>
             </div>
           </div>
@@ -631,71 +613,155 @@ html { scroll-behavior:smooth; }
     </div>
   </section>
 
-  <section id="public">
+  <!-- POUR QUI (résumé) -->
+  <section style="background:var(--navy);padding:48px 0;">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Pour qui&nbsp;?</div>
-        <h2>Une préparation adaptée à votre démarche</h2>
-        <p>Que vous visiez un titre de séjour ou la nationalité française, choisissez le niveau qui correspond à votre situation.</p>
+      <div style="text-align:center;margin-bottom:28px;">
+        <div class="eyebrow" style="color:var(--gold);">Pour qui ?</div>
+        <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(22px,3vw,30px);margin-bottom:10px;">Qui est concerné par l'examen civique ?</h2>
+        <p style="color:rgba(246,242,233,.75);font-size:15px;max-width:620px;margin:0 auto;">L'examen civique est obligatoire pour les démarches suivantes, sauf exceptions prévues par la loi.</p>
       </div>
-      <div class="grid-3">
-        <article class="card aud">
-          <div class="aud-badge">CSP</div>
-          <h3>Carte de séjour pluriannuelle</h3>
-          <p>Le niveau fondamental&nbsp;: l'essentiel des connaissances et des questions à 3 réponses.</p>
-        </article>
-        <article class="card aud">
-          <div class="aud-badge">CR</div>
-          <h3>Carte de résident</h3>
-          <p>Un niveau intermédiaire, avec des contenus approfondis et des questions à 4 réponses.</p>
-        </article>
-        <article class="card aud">
-          <div class="aud-badge">N</div>
-          <h3>Naturalisation</h3>
-          <p>Le niveau le plus complet, avec des repères historiques et culturels étendus.</p>
-        </article>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px;">
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:22px 24px;">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">CSP · Titre pluriannuel</div>
+          <div style="font-weight:700;color:var(--cream);font-size:15px;margin-bottom:6px;">Première demande de titre pluriannuel</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.7);line-height:1.6;">Pour toute personne sollicitant un premier titre de séjour pluriannuel (sauf bénéficiaires de protection internationale et personnes de plus de 65 ans).</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:22px 24px;">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">CR · Carte de résident</div>
+          <div style="font-weight:700;color:var(--cream);font-size:15px;margin-bottom:6px;">Demande de carte de résident</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.7);line-height:1.6;">Pour toute demande de carte de résident (sauf bénéficiaires de protection internationale et personnes de plus de 65 ans).</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:22px 24px;">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">N · Naturalisation</div>
+          <div style="font-weight:700;color:var(--cream);font-size:15px;margin-bottom:6px;">Demande de naturalisation</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.7);line-height:1.6;">Pour toute demande d'acquisition de la nationalité française (sauf bénéficiaires de protection internationale et personnes de plus de 65 ans).</div>
+        </div>
+      </div>
+      <div style="background:rgba(179,64,47,.15);border:1px solid rgba(179,64,47,.3);border-radius:10px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px;max-width:680px;margin:0 auto;">
+        <span style="font-size:18px;flex:none;">⚠️</span>
+        <div style="font-size:13px;color:rgba(246,242,233,.85);line-height:1.6;"><b style="color:var(--cream);">Exceptions :</b> Les bénéficiaires d'une protection internationale (réfugiés, protection subsidiaire) et les personnes de plus de 65 ans sont dispensés de l'examen civique.</div>
       </div>
     </div>
   </section>
 
-  <section id="atouts">
+  <!-- CE QUE VOUS Y TROUVEZ -->
+  <section id="atouts" style="background:var(--cream);">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">Ce que vous y trouvez</div>
-        <h2>Tout pour réviser efficacement</h2>
+        <div class="eyebrow">La plateforme</div>
+        <h2>Tout ce dont vous avez besoin pour réussir</h2>
+        <p>Quatre outils complémentaires, accessibles depuis un seul compte, sur mobile ou ordinateur.</p>
       </div>
-      <div class="grid-4">
-        <article class="card feat">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M24 13c-4-3-9-3-13-2v25c4-1 9-1 13 2 4-3 9-3 13-2V11c-4-1-9-1-13 2Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><line x1="24" y1="13" x2="24" y2="38" stroke="#16233F" stroke-width="2.2"/></svg></div>
-          <h3>Cours structurés &amp; illustrés</h3>
-          <p>Les 5 thématiques officielles, simplifiées et imagées, en fiches courtes que l'on retient.</p>
-        </article>
-        <article class="card feat">
+
+      <!-- Cours structurés — mis en avant -->
+      <div style="background:#fff;border:2px solid var(--navy);border-radius:16px;padding:28px 32px;margin-bottom:20px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;">
+        <div style="width:64px;height:64px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex:none;">
+          <svg viewBox="0 0 48 48" width="32" height="32"><path d="M24 13c-4-3-9-3-13-2v25c4-1 9-1 13 2 4-3 9-3 13-2V11c-4-1-9-1-13 2Z" fill="none" stroke="#FBF8F2" stroke-width="2.2" stroke-linejoin="round"/><line x1="24" y1="13" x2="24" y2="38" stroke="#FBF8F2" stroke-width="2.2"/></svg>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <h3 style="margin:0;font-size:18px;color:var(--navy);">📚 Cours structurés &amp; illustrés</h3>
+            <span style="background:var(--gold);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.05em;">INCLUS</span>
+          </div>
+          <p style="margin:0;color:#444;font-size:14px;line-height:1.7;">Les <b>5 thématiques officielles</b> du programme civique présentées en fiches courtes, claires et illustrées — Valeurs de la République, Institutions, Histoire, Géographie, Vie en société. Chaque fiche contient l'essentiel à retenir, avec des points clés mis en évidence.</p>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--navy);font-weight:600;">Principes et valeurs de la République</span>
+            <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--navy);font-weight:600;">Système institutionnel et politique</span>
+            <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--navy);font-weight:600;">Droits et devoirs</span>
+            <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--navy);font-weight:600;">Histoire, géographie et culture</span>
+            <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--navy);font-weight:600;">Vivre dans la société française</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grille 3 autres outils -->
+      <div class="grid-3" style="margin-top:0;">
+        <article class="card feat" style="border-top:3px solid var(--brick);">
           <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="30" width="7" height="9" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="20.5" y="23" width="7" height="16" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="31" y="16" width="7" height="23" rx="1" fill="#B3402F" stroke="#B3402F" stroke-width="2.2"/></svg></div>
-          <h3>Questions par niveau</h3>
-          <p>Un entraînement adapté à votre démarche&nbsp;: carte de séjour, carte de résident ou naturalisation.</p>
+          <h3>🎯 Questions par niveau</h3>
+          <p>Entraînez-vous avec des séries de questions adaptées à votre démarche : CSP (3 réponses), Carte de résident et Naturalisation (4 réponses). Par thème ou en mode aléatoire.</p>
         </article>
-        <article class="card feat">
+        <article class="card feat" style="border-top:3px solid var(--navy);">
           <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="13" fill="none" stroke="#16233F" stroke-width="2.2"/><line x1="24" y1="27" x2="24" y2="19" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="24" y1="27" x2="29" y2="30" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><line x1="20" y1="9" x2="28" y2="9" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><line x1="24" y1="9" x2="24" y2="14" stroke="#16233F" stroke-width="2.2"/></svg></div>
-          <h3>Examen blanc chronométré</h3>
-          <p>40 questions en 45 minutes, dans les conditions réelles de l'entretien.</p>
+          <h3>📋 Examen blanc chronométré</h3>
+          <p>40 questions en 45 minutes, dans les conditions réelles de l'entretien. Résultats détaillés à la fin pour identifier vos points à retravailler.</p>
         </article>
-        <article class="card feat">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><path d="M33 15a13 13 0 0 1 0 18" fill="none" stroke="#16233F" stroke-width="2" stroke-linecap="round"/></svg></div>
-          <h3>Lecture audio</h3>
-          <p>Écoutez les questions et les réponses pour mieux mémoriser, même en déplacement.</p>
+        <article class="card feat" style="border-top:3px solid var(--gold);">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+          <h3>🖼️ Portraits &amp; Symboles</h3>
+          <p>Apprenez à reconnaître les personnages et symboles de la République française grâce à un jeu d'association interactif. Idéal pour mémoriser sans effort.</p>
         </article>
+      </div>
+
+      <!-- Tableau de bord -->
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-top:16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <div style="font-size:32px;">📊</div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-weight:700;color:var(--navy);font-size:15px;margin-bottom:4px;">Tableau de bord personnel</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;">Suivez votre progression session après session : scores par thème, historique, meilleur résultat et reprise de là où vous vous étiez arrêté.</div>
+        </div>
+        <a class="btn btn-primary" href="#" onclick="showApp();return false;" style="flex:none;">Commencer</a>
       </div>
     </div>
   </section>
 
+  <!-- CTA FINAL -->
   <section class="final">
     <div class="wrap" style="display:block;text-align:center;padding:60px 22px;">
-      <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,3.6vw,34px);margin-bottom:14px;">Prêt à préparer votre examen&nbsp;?</h2>
-      <p style="color:rgba(246,242,233,.82);font-size:15px;margin-bottom:24px;">Découvrez un aperçu gratuit, puis demandez votre code pour débloquer l'ensemble des cours et des questions.</p>
+      <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,3.6vw,32px);margin-bottom:12px;">Prêt à préparer votre examen ?</h2>
+      <p style="color:rgba(246,242,233,.8);font-size:15px;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;">Créez votre compte gratuitement. L'accès complet est débloqué après confirmation de votre abonnement.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Connexion</a>
-        <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Demander mon code</a>
+        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Créer mon compte</a>
+        <a class="btn btn-ghost" href="#" onclick="switchTab('tarifs');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Voir les tarifs</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : POUR QUI ===== -->
+<div id="tab-public-tab" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:800px;">
+      <div class="eyebrow" style="margin-bottom:12px;">Pour qui ?</div>
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,34px);margin-bottom:8px;color:var(--navy);">Qui doit passer l'examen civique ?</h2>
+      <p style="color:var(--muted);font-size:15px;margin-bottom:32px;">L'examen civique est une condition obligatoire pour certains titres de séjour et pour l'acquisition de la nationalité française. Voici les situations concernées.</p>
+
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
+        <div style="background:#fff;border-left:4px solid var(--brick);border-radius:0 10px 10px 0;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Situation 1</div>
+          <div style="font-weight:700;color:var(--navy);font-size:16px;margin-bottom:6px;">Première demande de titre de séjour pluriannuel (CSP)</div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin:0;">Toute personne sollicitant pour la première fois un titre de séjour pluriannuel est soumise à l'examen civique, dans le cadre du contrat d'intégration républicaine (CIR).</p>
+        </div>
+        <div style="background:#fff;border-left:4px solid var(--navy);border-radius:0 10px 10px 0;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:6px;">Situation 2</div>
+          <div style="font-weight:700;color:var(--navy);font-size:16px;margin-bottom:6px;">Demande de carte de résident (CR)</div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin:0;">La délivrance d'une carte de résident est conditionnée à la réussite de l'examen civique, qui atteste de la connaissance des valeurs et institutions de la République.</p>
+        </div>
+        <div style="background:#fff;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;">Situation 3</div>
+          <div style="font-weight:700;color:var(--navy);font-size:16px;margin-bottom:6px;">Demande de naturalisation (N)</div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin:0;">Pour acquérir la nationalité française par naturalisation ou réintégration, la réussite de l'examen civique est une condition sine qua non du dossier.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:24px;">
+        <div style="font-weight:700;color:var(--navy);font-size:15px;margin-bottom:12px;">⚠️ Personnes dispensées de l'examen civique</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--brick);margin-top:6px;flex:none;"></span>
+            <div style="font-size:14px;color:#444;line-height:1.6;"><b style="color:var(--navy);">Bénéficiaires d'une protection internationale</b> — les réfugiés statutaires et les bénéficiaires de la protection subsidiaire sont dispensés.</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--brick);margin-top:6px;flex:none;"></span>
+            <div style="font-size:14px;color:#444;line-height:1.6;"><b style="color:var(--navy);">Personnes âgées de plus de 65 ans</b> — une dispense est accordée en raison de l'âge.</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);">En cas de doute sur votre situation, rapprochez-vous de votre préfecture ou d'un professionnel du droit des étrangers.</div>
+      </div>
+
+      <div style="margin-top:28px;text-align:center;">
+        <a class="btn btn-primary" href="#" onclick="showApp();return false;">Accéder à la plateforme</a>
       </div>
     </div>
   </section>
@@ -707,20 +773,12 @@ html { scroll-behavior:smooth; }
     <div class="wrap" style="max-width:760px;">
       <div class="eyebrow" style="margin-bottom:12px;">À propos de Civicum</div>
       <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,4vw,36px);margin-bottom:28px;color:var(--navy);">Une réponse pensée pour ceux qui en ont besoin</h2>
-
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
-          Civicum est une plateforme de préparation en ligne à l'examen civique, conçue pour accompagner toute personne engagée dans une démarche d'intégration en France — qu'il s'agisse d'une demande de carte de séjour, de carte de résident ou de naturalisation.
-        </p>
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">
-          Notre objectif : rendre la préparation accessible, autonome et efficace. Des cours structurés par thématique, des séries de questions par niveau, un examen blanc chronométré — tout est pensé pour permettre à chacun de se préparer sérieusement, à son rythme, depuis n'importe quel appareil.
-        </p>
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">
-          Civicum propose des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas anodin — le repassage a un coût, humain et administratif. Nous croyons qu'une bonne préparation ne devrait pas être un luxe.
-        </p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Civicum est une plateforme de préparation en ligne à l'examen civique, conçue pour accompagner toute personne engagée dans une démarche d'intégration en France — qu'il s'agisse d'une demande de carte de séjour, de carte de résident ou de naturalisation.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Notre objectif : rendre la préparation accessible, autonome et efficace. Des cours structurés par thématique, des séries de questions par niveau, un examen blanc chronométré — tout est pensé pour permettre à chacun de se préparer sérieusement, à son rythme, depuis n'importe quel appareil.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">Civicum propose des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas anodin — le repassage a un coût, humain et administratif. Nous croyons qu'une bonne préparation ne devrait pas être un luxe.</p>
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
           <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">3</div>
           <div style="font-size:13px;color:var(--muted);margin-top:6px;">niveaux de préparation<br>(CSP, CR, Naturalisation)</div>
@@ -738,8 +796,6 @@ html { scroll-behavior:smooth; }
           <div style="font-size:13px;color:var(--muted);margin-top:6px;">en ligne, sur mobile<br>et ordinateur</div>
         </div>
       </div>
-
-
     </div>
   </section>
 </div>
@@ -770,20 +826,18 @@ html { scroll-behavior:smooth; }
         <div class="plan">
           <div class="plan-name">Accès illimité (1 an)</div>
           <div class="plan-price">50<small>&nbsp;€</small></div>
-          <div class="plan-sub">Un accès sans limite de durée</div>
+          <div class="plan-sub">Valable 1 an, accès complet</div>
           <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
         </div>
       </div>
       <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
-      <p class="pricing-pay">Paiement par virement bancaire ou Wero. Paiement automatique depuis la plateforme bientôt disponible.</p>
-
-      <div style="max-width:560px;margin:40px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
-        <div class="eyebrow" style="margin-bottom:10px;">Comment ça marche</div>
-        <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2;">
+      <div style="max-width:560px;margin:32px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
+        <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
+        <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2.2;">
+          <li>Créez votre compte sur <b style="color:var(--navy);">civicum.fr</b></li>
           <li>Écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b> en indiquant la formule souhaitée</li>
           <li>Nous vous communiquons les coordonnées de paiement par retour de mail</li>
-          <li>Dès réception du règlement, vous recevez votre code personnel</li>
-          <li>Accédez immédiatement à la plateforme avec votre code</li>
+          <li>Dès réception du règlement, votre accès est activé immédiatement</li>
         </ol>
       </div>
     </div>
@@ -797,7 +851,7 @@ html { scroll-behavior:smooth; }
       <div class="sec-head" style="text-align:left;margin-left:0;">
         <div class="eyebrow">Contact</div>
         <h2>Nous contacter</h2>
-        <p>Pour toute demande de code, question ou renseignement, écrivez-nous ici ou directement par mail.</p>
+        <p>Pour toute demande d'abonnement, question ou renseignement, écrivez-nous ici ou directement par mail.</p>
       </div>
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
         <form id="landing-contact-form" action="https://formspree.io/f/mpqvzboj" method="POST">
@@ -810,6 +864,10 @@ html { scroll-behavior:smooth; }
             <input type="email" name="email" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
           </div>
           <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Téléphone <span style="font-weight:400;color:var(--muted);">(facultatif)</span></label>
+            <input type="tel" name="telephone" placeholder="Ex : 06 12 34 56 78" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:14px;">
             <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Message</label>
             <textarea name="message" rows="4" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;resize:vertical;background:white;"></textarea>
           </div>
@@ -818,7 +876,6 @@ html { scroll-behavior:smooth; }
           <p id="landing-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
         </form>
       </div>
-
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;">
           <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">E-mail</div>
@@ -841,16 +898,14 @@ html { scroll-behavior:smooth; }
     </div>
     <div class="foot-links">
       <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
-      <a href="https://civicum.fr/">civicum.fr</a>
+      <a href="https://civicum.fr">civicum.fr</a>
     </div>
     <div class="foot-legal">
-      Service privé de préparation, indépendant de l'administration. Contenu pédagogique indicatif.
     </div>
   </div>
 </footer>
 
 </div>
-
 
 <!-- ===== APP PLATFORM ===== -->
 <div id="app-wrapper" class="app-wrapper"><div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;">
@@ -1080,7 +1135,7 @@ html { scroll-behavior:smooth; }
   </section>
 
   <footer>
-    © 2026 MFS Services &amp; Conseils. Contenu pédagogique indicatif — vérifiez les informations officielles et les textes de référence avant votre entretien.<br>
+    © 2026 MFS Services &amp; Conseils
     <a id="open-contact" onclick="document.getElementById('screen-contact').hidden=false;return false;" href="#">Nous contacter</a> 
   </footer>
 </div>
@@ -1213,7 +1268,9 @@ async function tryRegister(){
         nom, email, createdAt: window._fbTimestamp(), formule:'', actif:false
       });
     }
-    setGateSuccess('Compte créé ! Votre accès sera activé après confirmation de votre abonnement. Contactez-nous à contact@civicum.fr');
+    setGateSuccess('✅ Compte créé avec succès ! Pour activer votre accès, écrivez-nous à contact@civicum.fr en indiquant la formule souhaitée. Nous vous répondrons rapidement.');
+    // Passer en mode connexion après 3s pour que l'utilisateur puisse se connecter quand activé
+    setTimeout(()=>{ switchAuthTab('login'); document.getElementById('login-email').value = document.getElementById('reg-email').value || ''; }, 4000);
   } catch(e){
     setGateError(fbErrMsg(e.code));
   } finally { btn.disabled=false; btn.textContent='Créer mon compte'; }
