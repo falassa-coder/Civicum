@@ -527,6 +527,7 @@ html { scroll-behavior:smooth; }
       <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
+      <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
@@ -831,13 +832,14 @@ html { scroll-behavior:smooth; }
         </div>
       </div>
       <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">CIVICUM est un service privé de préparation, indépendant de l'administration. Il ne délivre pas l'attestation officielle de l'examen civique, qui est organisé uniquement par l'État.<br>Conformément à la législation sur les services numériques, aucun remboursement n'est accordé une fois l'accès activé.</p>
       <div style="max-width:560px;margin:32px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2.2;">
           <li>Créez votre compte sur <b style="color:var(--navy);">civicum.fr</b></li>
           <li>Écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b> en indiquant la formule souhaitée</li>
           <li>Nous vous communiquons les coordonnées de paiement par retour de mail ou par téléphone au <b style="color:var(--navy);">06 98 22 07 31</b></li>
-          <li>Dès réception du règlement, votre accès est activé immédiatement</li>
+          <li>Votre accès est activé <b>dès réception du règlement</b></li>
         </ol>
       </div>
     </div>
@@ -889,6 +891,74 @@ html { scroll-behavior:smooth; }
           <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:6px;">Site web</div>
           <a href="https://civicum.fr" style="color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;">civicum.fr</a>
         </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : FAQ ===== -->
+<div id="tab-faq-tab" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:720px;">
+      <div class="eyebrow" style="margin-bottom:12px;">Questions fréquentes</div>
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,32px);margin-bottom:28px;color:var(--navy);">Tout ce que vous devez savoir</h2>
+
+      <div style="display:flex;flex-direction:column;gap:2px;">
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            CIVICUM organise-t-il l'examen civique officiel ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Non. CIVICUM est un <b>service privé de préparation</b>. L'examen civique officiel est uniquement organisé par l'État, dans le cadre du Contrat d'Intégration Républicaine (CIR). Nous vous aidons à vous y préparer, mais nous ne l'organisons pas et ne sommes pas mandatés par l'administration.</p>
+        </details>
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            CIVICUM délivre-t-il l'attestation officielle ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Non. Seul l'État peut délivrer l'attestation de réussite à l'examen civique. CIVICUM vous prépare à réussir cet examen, mais l'attestation officielle est remise par l'organisme agréé qui fait passer l'examen.</p>
+        </details>
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            Que débloque l'abonnement ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">L'abonnement donne accès à l'ensemble de la plateforme : les <b>cours structurés</b> par thématique, les <b>séries de questions</b> adaptées à votre niveau (CSP, Carte de résident, Naturalisation), l'<b>examen blanc chronométré</b> de 40 questions en 45 minutes, le jeu <b>Portraits & Symboles</b> et votre <b>tableau de bord</b> personnel.</p>
+        </details>
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            Comment accéder à mon compte après paiement ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Votre accès est activé <b>dès réception de votre paiement</b>. Vous recevrez une confirmation par mail. Il vous suffit alors de vous connecter sur <b>civicum.fr</b> avec l'adresse e-mail et le mot de passe choisis lors de votre inscription.</p>
+        </details>
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            Puis-je être remboursé ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Conformément à la législation sur les services numériques, <b>aucun remboursement n'est accordé une fois l'accès activé</b>. En souscrivant un abonnement, vous acceptez que l'accès au service commence immédiatement et renoncez expressément à votre droit de rétractation. En cas d'erreur technique de notre part, contactez-nous à <b>contact@civicum.fr</b>.</p>
+        </details>
+
+        <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
+          <summary style="font-weight:700;color:var(--navy);font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            Je n'arrive pas à me connecter, que faire ?
+            <span style="font-size:20px;color:var(--gold);">+</span>
+          </summary>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Vérifiez d'abord que votre accès a bien été activé (vous devez avoir reçu une confirmation de notre part). Si oui, utilisez le lien <b>"Mot de passe oublié ?"</b> sur la page de connexion. Si le problème persiste, écrivez-nous à <b>contact@civicum.fr</b> ou appelez le <b>06 98 22 07 31</b> — nous vous aidons rapidement.</p>
+        </details>
+
+      </div>
+
+      <div style="margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 24px;text-align:center;">
+        <div style="font-weight:700;color:var(--navy);margin-bottom:8px;">Vous avez une autre question ?</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:14px;">Notre équipe vous répond rapidement.</div>
+        <a class="btn btn-primary" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
       </div>
     </div>
   </section>
@@ -1293,9 +1363,22 @@ async function tryRegister(){
         nom, email, createdAt: window._fbTimestamp(), formule:'', actif:false
       });
     }
-    setGateSuccess('✅ Compte créé avec succès ! Pour activer votre accès, écrivez-nous à contact@civicum.fr en indiquant la formule souhaitée. Nous vous répondrons rapidement.');
-    // Passer en mode connexion après 3s pour que l'utilisateur puisse se connecter quand activé
-    setTimeout(()=>{ switchAuthTab('login'); document.getElementById('login-email').value = document.getElementById('reg-email').value || ''; }, 4000);
+    // Afficher les instructions de paiement clairement
+    const regEmail = document.getElementById('reg-email').value || '';
+    document.getElementById('gate-error').classList.remove('show');
+    document.getElementById('gate-success').style.display = 'block';
+    document.getElementById('gate-success').innerHTML = `
+      <div style="text-align:left;background:#f0f7f3;border:1.5px solid #2e7d52;border-radius:10px;padding:16px;font-size:13px;line-height:1.8;">
+        <div style="font-weight:700;color:#2e7d52;font-size:15px;margin-bottom:10px;">✅ Compte créé avec succès !</div>
+        <div style="color:#333;margin-bottom:10px;">Pour activer votre accès, suivez ces 3 étapes :</div>
+        <ol style="padding-left:18px;color:#333;margin:0 0 12px;">
+          <li><b>Choisissez votre formule</b> : 1 mois (10€) · 3 mois (20€) · 1 an (50€)</li>
+          <li><b>Payez par Wero</b> au <b style="color:#16233F;">06 98 22 07 31</b> ou par virement (coordonnées sur demande)</li>
+          <li><b>Confirmez par mail</b> à <b style="color:#16233F;">contact@civicum.fr</b> en précisant votre adresse e-mail</li>
+        </ol>
+        <div style="font-size:12px;color:#666;">Votre accès sera activé dans les 24h après réception du paiement.</div>
+      </div>`;
+    setTimeout(()=>{ switchAuthTab('login'); const el = document.getElementById('login-email'); if(el) el.value = regEmail; }, 8000);
   } catch(e){
     setGateError(fbErrMsg(e.code));
   } finally { btn.disabled=false; btn.textContent='Créer mon compte'; }
@@ -2941,5 +3024,14 @@ function getDeviceId(){
 }
 
 </script>
+
+<!-- Bouton aide flottant -->
+<div id="btn-aide-flottant" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+  <a href="mailto:contact@civicum.fr?subject=Besoin d'aide - Civicum"
+     style="display:flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:12px 18px;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);">
+    💬 Besoin d'aide ?
+  </a>
+</div>
+
 </body>
 </html>
