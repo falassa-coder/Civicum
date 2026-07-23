@@ -1183,6 +1183,8 @@ html { scroll-behavior:smooth; }
 
 
   <section id="screen-ms" class="card" hidden>
+    <button class="btn-link" id="btn-ms-back">← Retour</button>
+    <div id="ms-container"></div>
   </section>
 
   <section id="screen-course-gate" class="card" hidden>
@@ -2220,6 +2222,323 @@ document.getElementById('btn-portraits-check').addEventListener('click', () => {
 document.getElementById('btn-portraits-retry').addEventListener('click', startPortraitsRound);
 document.getElementById('btn-portraits-back').addEventListener('click', () => show('screen-level'));
 document.getElementById('open-portraits').addEventListener('click', startPortraitsRound);
+
+/* ============ MODE MISES EN SITUATION ============ */
+/* 14 scénarios / 10 thématiques : cas concrets de la vie quotidienne en France,
+   avec une question à choix multiple et une explication après réponse. */
+const MS_DATA = {
+  "Santé": [
+    {
+      title: "Consulter sans médecin traitant déclaré",
+      situation: "Vous venez de vous installer en France et vous n'avez pas encore déclaré de médecin traitant auprès de votre caisse d'assurance maladie. Vous consultez directement un spécialiste, sans passer par un médecin traitant.",
+      question: "Que risque-t-il de se passer pour votre remboursement ?",
+      options:[
+        "Le remboursement est identique, cela ne change rien",
+        "Vous serez moins bien remboursé (hors parcours de soins coordonnés), sauf pour certains spécialistes en accès direct",
+        "La consultation vous sera automatiquement refusée",
+        "Vous recevrez une amende de la Sécurité sociale"
+      ],
+      correct: 1,
+      explanation: "En France, déclarer un médecin traitant permet de bénéficier du meilleur taux de remboursement dans le cadre du « parcours de soins coordonnés ». Sans médecin traitant déclaré, le remboursement est réduit, sauf pour certains spécialistes consultables en accès direct (gynécologue, ophtalmologue, dentiste...)."
+    },
+    {
+      title: "Demander la Complémentaire Santé Solidaire",
+      situation: "Vos ressources sont modestes et vous avez du mal à payer une mutuelle pour compléter vos remboursements de santé.",
+      question: "Quelle est la bonne démarche à connaître ?",
+      options:[
+        "Il n'existe aucune aide, il faut payer une mutuelle privée",
+        "La Complémentaire Santé Solidaire (CSS) peut être demandée auprès de votre caisse d'assurance maladie (CPAM) ou sur ameli.fr, sous conditions de ressources",
+        "Il faut d'abord payer une année complète puis demander un remboursement",
+        "Seuls les retraités peuvent en bénéficier"
+      ],
+      correct: 1,
+      explanation: "La Complémentaire Santé Solidaire est une aide qui prend en charge tout ou partie des dépenses de santé non remboursées par la Sécurité sociale, selon les ressources du foyer. La demande se fait auprès de la CPAM (guichet, courrier) ou en ligne sur ameli.fr."
+    }
+  ],
+  "Logement": [
+    {
+      title: "Le propriétaire ne fait pas les réparations",
+      situation: "Un robinet fuit depuis plusieurs semaines dans votre logement. Vous avez prévenu votre propriétaire à l'oral, mais rien n'a été fait.",
+      question: "Quelle démarche est la plus adaptée ?",
+      options:[
+        "Cesser de payer le loyer jusqu'à la réparation",
+        "Réparer vous-même puis déduire librement le montant du loyer sans en informer le propriétaire",
+        "Adresser une demande écrite (idéalement une lettre recommandée), puis, en l'absence de réponse, saisir la commission départementale de conciliation ou le juge",
+        "Ne rien faire, l'entretien du logement revient toujours au locataire"
+      ],
+      correct: 2,
+      explanation: "Le bailleur doit assurer les réparations qui ne sont pas liées à l'entretien courant du locataire. Il faut d'abord réclamer par écrit, puis, si besoin, saisir la commission de conciliation ou le tribunal. Cesser de payer le loyer de sa propre initiative est risqué et peut mener à une procédure d'expulsion."
+    },
+    {
+      title: "Faire une demande de logement social",
+      situation: "Vous souhaitez déposer une demande de logement social (HLM) mais vous ne savez pas où vous adresser.",
+      question: "Où pouvez-vous déposer votre demande ?",
+      options:[
+        "Uniquement auprès d'un propriétaire privé",
+        "Avec un formulaire unique, déposé en mairie, auprès d'un bailleur social, ou en ligne (numéro unique départemental)",
+        "Uniquement à la préfecture",
+        "Uniquement auprès de la Caisse d'Allocations Familiales"
+      ],
+      correct: 1,
+      explanation: "La demande de logement social se fait avec un formulaire national unique (Cerfa), déposable en mairie, auprès d'un organisme HLM, ou en ligne. Elle donne lieu à un numéro unique départemental, valable un an et renouvelable."
+    }
+  ],
+  "Travail": [
+    {
+      title: "Refus d'embauche lié à l'origine",
+      situation: "Vous postulez à un emploi pour lequel vous avez les compétences requises. L'employeur vous fait comprendre, à demi-mot, que votre origine ou votre nom pose problème pour le poste.",
+      question: "Que pouvez-vous faire ?",
+      options:[
+        "Rien, l'employeur est libre de choisir qui il veut",
+        "Saisir le Défenseur des droits (démarche gratuite) et/ou porter l'affaire devant le conseil de prud'hommes",
+        "Porter plainte uniquement au pénal, aucune autre démarche n'existe",
+        "Changer de nom pour éviter le problème"
+      ],
+      correct: 1,
+      explanation: "La discrimination à l'embauche fondée sur l'origine, réelle ou supposée, est interdite par la loi française. Il est possible de saisir le Défenseur des droits, qui peut instruire gratuitement ce type de dossier, ou d'agir devant le conseil de prud'hommes."
+    },
+    {
+      title: "Travail non déclaré (« au black »)",
+      situation: "Un employeur vous propose d'être payé en espèces, sans contrat ni déclaration à la Sécurité sociale.",
+      question: "Quelle est la bonne attitude à adopter ?",
+      options:[
+        "Accepter, c'est plus simple et plus rapide",
+        "Refuser : le travail dissimulé est illégal et prive le salarié de droits (chômage, retraite, assurance maladie, accident du travail)",
+        "Accepter, mais uniquement si le salaire proposé est plus élevé",
+        "Accepter, seul l'employeur risque une sanction en cas de contrôle"
+      ],
+      correct: 1,
+      explanation: "Le travail dissimulé est une infraction. Il prive le salarié de la protection sociale (retraite, chômage, maladie, accident du travail) et peut exposer les deux parties à des sanctions en cas de contrôle."
+    }
+  ],
+  "Laïcité au travail": [
+    {
+      title: "Refus de contact avec une femme",
+      situation: "Dans une entreprise privée, un salarié refuse de serrer la main d'une collègue ou d'être encadré par elle, en invoquant ses convictions religieuses.",
+      question: "Que prévoit le droit dans ce cas ?",
+      options:[
+        "La liberté religieuse s'impose toujours à l'employeur, qui doit s'adapter",
+        "Dans le cadre professionnel privé, le règlement intérieur peut encadrer ce type de comportement au nom de l'égalité entre salariés, et l'employeur peut sanctionner un refus discriminatoire",
+        "Seule la collègue concernée doit changer de poste",
+        "Ce comportement est toléré partout, y compris dans les services publics"
+      ],
+      correct: 1,
+      explanation: "En entreprise privée, la liberté de conviction peut être encadrée par le règlement intérieur pour garantir le bon fonctionnement du service et l'égalité de traitement entre salariés, notamment entre femmes et hommes. Un refus discriminatoire de contact avec une collègue peut donner lieu à une sanction disciplinaire."
+    }
+  ],
+  "Laïcité au service public": [
+    {
+      title: "Demande de ségrégation sexuelle",
+      situation: "À la mairie, à l'hôpital ou dans une autre administration, un usager demande à être reçu uniquement par un agent de son sexe.",
+      question: "Comment ce type de demande est-il traité ?",
+      options:[
+        "L'administration doit toujours accepter cette demande",
+        "Le principe de neutralité et d'égal accès au service public s'applique : un agent public exerce sa mission sans distinction, et la demande peut être refusée (hors cas médicaux très encadrés)",
+        "Cela dépend uniquement du bon vouloir de l'agent présent",
+        "C'est à l'usager de changer d'administration s'il n'est pas satisfait"
+      ],
+      correct: 1,
+      explanation: "Dans le service public, la neutralité et l'égalité de traitement entre usagers priment. On ne peut pas exiger d'être reçu par un agent d'un sexe déterminé ; les seules exceptions concernent certains actes médicaux très encadrés, à la demande du patient et selon l'organisation du service."
+    }
+  ],
+  "Égalité homme/femme — Couple": [
+    {
+      title: "Contrôle financier au sein du couple",
+      situation: "Dans un couple, l'un des conjoints garde tous les revenus du ménage et empêche l'autre d'avoir accès à un compte bancaire ou à de l'argent personnel.",
+      question: "Comment qualifier et traiter cette situation ?",
+      options:[
+        "C'est une organisation normale et privée du couple",
+        "Il s'agit d'une forme de violence conjugale (violence économique) : on peut en parler à une association d'aide aux victimes, un travailleur social, ou porter plainte",
+        "Il suffit de demander poliment plus d'argent de poche",
+        "Cela ne regarde que le couple, aucune démarche n'est possible"
+      ],
+      correct: 1,
+      explanation: "Priver son conjoint de ressources ou de tout accès à l'argent du ménage est reconnu comme une forme de violence conjugale (violence économique). Des associations spécialisées, des travailleurs sociaux ou les services de police/gendarmerie peuvent apporter de l'aide."
+    },
+    {
+      title: "Interdiction de travailler ou d'apprendre le français",
+      situation: "Un conjoint interdit à l'autre d'apprendre le français ou d'exercer un emploi.",
+      question: "Que dit le droit sur ce point ?",
+      options:[
+        "Le conjoint peut décider librement pour l'ensemble du foyer",
+        "Chacun a le droit de travailler, se former et d'être autonome ; ce type de contrôle peut relever de l'emprise ou des violences conjugales et être signalé",
+        "Il faut obéir pour préserver l'équilibre du couple",
+        "Seules les femmes ont besoin d'une autorisation pour travailler"
+      ],
+      correct: 1,
+      explanation: "En France, chaque personne majeure est libre de travailler, de se former, d'ouvrir un compte bancaire, indépendamment de la volonté de son conjoint. Empêcher cela par la contrainte peut relever de l'emprise ou des violences conjugales, situation qui peut être signalée à des associations ou aux forces de l'ordre."
+    }
+  ],
+  "Égalité homme/femme — Parentalité": [
+    {
+      title: "Congé paternité refusé",
+      situation: "À la naissance de son enfant, un salarié demande son congé de paternité et d'accueil de l'enfant. Son employeur le lui refuse, invoquant les besoins du service.",
+      question: "Que peut faire le salarié ?",
+      options:[
+        "Accepter le refus si l'activité de l'entreprise est jugée essentielle",
+        "Faire valoir son droit : le congé paternité ne peut pas être refusé par l'employeur, qui ne peut pas non plus sanctionner le salarié qui le prend ; un recours est possible (inspection du travail, prud'hommes)",
+        "Choisir entre garder son emploi et prendre le congé",
+        "Ce congé n'existe que pour les mères"
+      ],
+      correct: 1,
+      explanation: "Le congé de paternité et d'accueil de l'enfant est un droit du salarié : l'employeur ne peut ni s'y opposer, ni sanctionner ou pénaliser un salarié qui en fait usage. En cas de refus, le salarié peut alerter l'inspection du travail ou saisir le conseil de prud'hommes."
+    }
+  ],
+  "Éducation": [
+    {
+      title: "Obligation d'instruction d'un enfant",
+      situation: "Une famille avec un enfant de 8 ans envisage de ne pas le scolariser du tout, sans faire de déclaration d'instruction en famille.",
+      question: "Que prévoit la loi française ?",
+      options:[
+        "Aucune obligation n'existe avant l'entrée au collège",
+        "L'instruction est obligatoire de 3 à 16 ans : à l'école, ou en instruction en famille, mais celle-ci doit être déclarée et fait l'objet de contrôles ; l'absence de scolarisation ou de déclaration expose à des sanctions",
+        "Il suffit d'informer les voisins de ce choix",
+        "L'obligation ne concerne que les enfants de nationalité française"
+      ],
+      correct: 1,
+      explanation: "En France, l'instruction est obligatoire pour tout enfant de 3 à 16 ans, qu'elle soit dispensée à l'école ou, à titre dérogatoire, en famille. L'instruction en famille doit être déclarée à l'administration et fait l'objet de contrôles réguliers. L'absence de scolarisation et de déclaration peut entraîner des sanctions."
+    }
+  ],
+  "Impôts": [
+    {
+      title: "Contester un avis d'imposition",
+      situation: "Vous recevez votre avis d'imposition et constatez une erreur (montant, situation familiale non prise en compte...).",
+      question: "Quelle démarche pouvez-vous engager ?",
+      options:[
+        "Payer sans discuter, un avis d'imposition ne peut jamais être contesté",
+        "Faire une réclamation auprès du centre des finances publiques, en ligne sur impots.gouv.fr ou par courrier, dans les délais prévus",
+        "Consulter obligatoirement un avocat avant toute démarche",
+        "Attendre l'année suivante pour signaler l'erreur"
+      ],
+      correct: 1,
+      explanation: "Toute erreur sur un avis d'imposition peut faire l'objet d'une réclamation auprès du centre des finances publiques dont vous dépendez, via l'espace particulier sur impots.gouv.fr ou par courrier, dans les délais légaux indiqués sur l'avis."
+    }
+  ],
+  "Voisinage": [
+    {
+      title: "Tapage nocturne répété",
+      situation: "Un voisin fait du bruit tard le soir de façon répétée (musique forte, cris), ce qui vous empêche de dormir.",
+      question: "Quelle est la démarche la plus appropriée ?",
+      options:[
+        "Aller frapper à sa porte en pleine nuit et régler la situation par la force",
+        "Essayer d'abord le dialogue ; si cela persiste, alerter le syndic ou le bailleur, et en cas de nuisance sonore nocturne, contacter la police municipale ou nationale (le tapage nocturne est une infraction)",
+        "Ne rien faire, le bruit nocturne est toujours toléré",
+        "Déménager immédiatement, c'est la seule solution"
+      ],
+      correct: 1,
+      explanation: "Le tapage nocturne (bruit répété ou intense la nuit portant atteinte à la tranquillité du voisinage) est une infraction. Il est conseillé d'essayer le dialogue en premier lieu, puis de solliciter le syndic ou le bailleur, et si nécessaire de faire intervenir la police municipale ou nationale, qui peut constater l'infraction."
+    }
+  ]
+};
+
+let msTheme = null;
+let msIndex = 0;
+let msAnswered = false;
+
+function openMiseEnSituation(){
+  msTheme = null;
+  renderMsThemes();
+  show('screen-ms');
+}
+
+function renderMsThemes(){
+  const keys = Object.keys(MS_DATA);
+  const rows = keys.map((t,i)=>{
+    const n = MS_DATA[t].length;
+    return `<button class="theme-option" onclick="openMsTheme(${i})">
+      <div class="t-left"><span class="t-num">${i+1}</span><span class="t-name">${t}</span></div>
+      <span class="t-count">${n} situation${n>1?'s':''}</span>
+    </button>`;
+  }).join('');
+  const c = document.getElementById('ms-container');
+  c.innerHTML = `
+    <div class="eyebrow" style="margin-bottom:6px;">🎭 Mises en situation</div>
+    <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:22px;color:var(--navy);margin:6px 0 8px;">Comment réagir au quotidien ?</h2>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:20px;">14 situations concrètes réparties en 10 thématiques — droits, démarches et réflexes citoyens en France.</p>
+    <div class="themes">${rows}</div>
+  `;
+  document.getElementById('btn-ms-back').onclick = () => show('screen-level');
+}
+
+function openMsTheme(i){
+  const keys = Object.keys(MS_DATA);
+  msTheme = keys[i];
+  msIndex = 0;
+  if(MS_DATA[msTheme].length === 1){
+    renderMsDetail();
+  } else {
+    renderMsList();
+  }
+}
+
+function renderMsList(){
+  const items = MS_DATA[msTheme].map((s,i)=>`
+    <button class="theme-option" onclick="openMsDetail(${i})">
+      <div class="t-left"><span class="t-num">${i+1}</span><span class="t-name">${s.title}</span></div>
+    </button>`).join('');
+  const c = document.getElementById('ms-container');
+  c.innerHTML = `
+    <div class="qmeta" style="margin-bottom:14px;">${msTheme}</div>
+    <div class="themes">${items}</div>
+  `;
+  document.getElementById('btn-ms-back').onclick = renderMsThemes;
+}
+
+function openMsDetail(i){
+  msIndex = i;
+  renderMsDetail();
+}
+
+function renderMsDetail(){
+  const s = MS_DATA[msTheme][msIndex];
+  const list = MS_DATA[msTheme];
+  msAnswered = false;
+  const optsHtml = s.options.map((opt,i)=>`
+    <button class="opt" data-i="${i}" onclick="answerMs(${i})">
+      <span class="letter">${String.fromCharCode(65+i)}</span><span>${opt}</span>
+    </button>`).join('');
+  const c = document.getElementById('ms-container');
+  c.innerHTML = `
+    <div class="qmeta" style="margin-bottom:10px;">${msTheme}</div>
+    <div class="qcard" style="margin-bottom:18px;">
+      <div class="qcard-q" style="margin-bottom:0;">${s.situation}</div>
+    </div>
+    <p class="qtext" style="font-size:16px;margin-bottom:14px;">${s.question}</p>
+    <div class="options" id="ms-options">${optsHtml}</div>
+    <div class="feedback" id="ms-feedback"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" id="btn-ms-next" disabled onclick="msNext()">${list.length>1 ? 'Situation suivante' : 'Retour aux thématiques'}</button>
+    </div>
+  `;
+  document.getElementById('btn-ms-back').onclick = () => (list.length>1 ? renderMsList() : renderMsThemes());
+}
+
+function answerMs(i){
+  if(msAnswered) return;
+  msAnswered = true;
+  const s = MS_DATA[msTheme][msIndex];
+  document.querySelectorAll('#ms-options .opt').forEach((el,idx)=>{
+    el.classList.add('disabled');
+    if(idx === s.correct) el.classList.add('correct');
+    else if(idx === i) el.classList.add('wrong');
+  });
+  const correct = (i === s.correct);
+  if(correct) sessionPoints += POINTS_BASE;
+  const fb = document.getElementById('ms-feedback');
+  fb.classList.add('show', correct ? 'ok' : 'ko');
+  fb.textContent = (correct ? '✓ ' : '✗ ') + s.explanation;
+  document.getElementById('btn-ms-next').disabled = false;
+}
+
+function msNext(){
+  const list = MS_DATA[msTheme];
+  if(msIndex < list.length - 1){
+    msIndex++;
+    renderMsDetail();
+  } else {
+    renderMsThemes();
+  }
+}
 
 /* Each theme = intro + up to 5 illustrated pages.
    essentiel:true  -> montré au niveau CSP (l'essentiel).
