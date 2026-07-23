@@ -1062,7 +1062,7 @@ html { scroll-behavior:smooth; }
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;">🖼️ Portraits &amp; Symboles</button>
       <button class="btn btn-ghost" id="open-dashboard" style="font-size:14px;padding:13px;justify-content:center;">📊 Mon tableau de bord</button>
-      <button class="btn" onclick="initMsStates();msFilter='Tous';msCurrentIdx=0;renderMiseEnSituation();show('screen-ms');" style="background:var(--brick);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;grid-column:1/-1;margin-top:2px;">🎭 Mises en situation</button>
+      <button class="btn" onclick="openMiseEnSituation();" style="background:var(--brick);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;grid-column:1/-1;margin-top:2px;">🎭 Mises en situation</button>
     </div>
   </section>
 
@@ -1175,7 +1175,7 @@ html { scroll-behavior:smooth; }
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
         <button class="btn btn-primary" onclick="show('screen-level');" style="justify-content:center;padding:13px;font-size:14px;">🎯 Entraînement</button>
         <button class="btn" onclick="renderCourseLevelList();show('screen-course-level');" style="background:var(--gold);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;">📚 Cours</button>
-        <button class="btn" onclick="initMsStates();msFilter='Tous';msCurrentIdx=0;renderMiseEnSituation();show('screen-ms');" style="background:var(--brick);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;grid-column:1/-1;">🎭 Mises en situation</button>
+        <button class="btn" onclick="openMiseEnSituation();" style="background:var(--brick);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;grid-column:1/-1;">🎭 Mises en situation</button>
       </div>
       <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
     </div>
