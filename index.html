@@ -548,7 +548,6 @@ html { scroll-behavior:smooth; }
           <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
         </div>
         <div class="hero-trust">
-          <span><i class="dot"></i>Inscription gratuite</span>
           <span><i class="dot"></i>Sans installation</span>
           <span><i class="dot"></i>Mobile &amp; ordinateur</span>
         </div>
@@ -1180,7 +1179,11 @@ html { scroll-behavior:smooth; }
     </div>
   </section>
 
-  <section id="screen-course-gate" class="card" hidden>
+
+  <section id="screen-ms" class="card" hidden>
+  </section>
+
+  <section id="screen-course-gate" class="card" hidden:
     <div class="gate-icon">📚</div>
     <div class="gate-label">Entrez le code d'accès aux cours structurés</div>
     <input type="text" id="course-gate-code" placeholder="CODE D'ACCÈS COURS" autocomplete="off">
@@ -2004,14 +2007,17 @@ function renderResults(timeExpired){
   if(!window._scoreSaved){
     window._scoreSaved = true;
     try{
-      const _dur = (examMode && typeof timeRemaining !== 'undefined') ? Math.round((EXAM_DURATION_SECONDS - timeRemaining)) : null;
-      const _total = userAnswers.length > 0 ? userAnswers.length : (pool ? pool.length : score);
+      // Recalculer le score depuis userAnswers pour être sûr
+      const _score = userAnswers.filter(a => a.correct).length;
+      // Total = nombre de questions jouées (pas forcément toutes si on sort tôt)
+      const _total = userAnswers.length > 0 ? userAnswers.length : (pool ? pool.length : 1);
+      const _dur = examMode ? Math.round(EXAM_DURATION_SECONDS - (timeRemaining||0)) : null;
       const _theme = selectedTheme==='ALL' ? 'Tous les thèmes' : selectedTheme;
-      if(_total > 0){
-        saveScore(selectedLevel, _theme, score, _total, _dur, examMode);
+      if(_total > 0 && selectedLevel){
+        saveScore(selectedLevel, _theme, _score, _total, _dur, examMode);
         saveLastSession(selectedLevel, _theme);
       }
-    }catch(e){ console.error('saveScore error', e); }
+    }catch(e){ console.error('[Civicum] saveScore error:', e); }
   }
   show('screen-results');
 }
@@ -2020,7 +2026,7 @@ function renderResults(timeExpired){
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits','screen-dashboard'].forEach(s => {
+   'screen-portraits','screen-dashboard','screen-ms'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -2889,17 +2895,22 @@ const LAST_SESSION_KEY = 'civicum_last_session';
 const MAX_SCORES = 20;
 
 function saveScore(level, theme, score, total, durationSec, isExam){
+  if(!level || !theme || total <= 0) return; // sécurité
+  const pct = total > 0 ? Math.round(score/total*100) : 0;
+  if(isNaN(pct)) return; // éviter les NaN
   let scores = [];
   try{ scores = JSON.parse(localStorage.getItem(SCORES_KEY)||'[]'); }catch(e){}
   scores.unshift({
     date: new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
-    level, theme, score, total,
-    pct: Math.round(score/total*100),
-    duration: durationSec ? Math.round(durationSec/60)+'min' : null,
+    level, theme, score, total, pct,
+    duration: durationSec && durationSec > 0 ? Math.round(durationSec/60)+'min' : null,
     isExam: !!isExam
   });
   if(scores.length > MAX_SCORES) scores = scores.slice(0, MAX_SCORES);
-  try{ localStorage.setItem(SCORES_KEY, JSON.stringify(scores)); }catch(e){}
+  try{
+    localStorage.setItem(SCORES_KEY, JSON.stringify(scores));
+    console.log('[Civicum] Score sauvegardé:', level, theme, score+'/'+total, pct+'%');
+  }catch(e){ console.error('[Civicum] Erreur sauvegarde:', e); }
 }
 
 function saveLastSession(level, theme){
