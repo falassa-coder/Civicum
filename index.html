@@ -1183,7 +1183,7 @@ html { scroll-behavior:smooth; }
   <section id="screen-ms" class="card" hidden>
   </section>
 
-  <section id="screen-course-gate" class="card" hidden:
+  <section id="screen-course-gate" class="card" hidden>
     <div class="gate-icon">📚</div>
     <div class="gate-label">Entrez le code d'accès aux cours structurés</div>
     <input type="text" id="course-gate-code" placeholder="CODE D'ACCÈS COURS" autocomplete="off">
@@ -2617,7 +2617,6 @@ let courseSelectedLevel = "CSP";
 let courseSelectedTheme = null;
 
 document.getElementById('open-courses').addEventListener('click', () => {
-  // Accès direct aux cours sans deuxième code
   renderCourseLevelList();
   show('screen-course-level');
 });
