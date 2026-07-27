@@ -1367,6 +1367,7 @@ async function tryRegister(){
   btn.disabled=true; btn.textContent='Création…';
   try{
     const cred = await window._fbCreateUser(window._fbAuth, email, pwd);
+    window._justRegistered = true;
     /* Enregistrer le profil dans Firestore */
     if(window._fbDb){
       await window._fbSetDoc(window._fbDoc(window._fbDb,'users',cred.user.uid),{
@@ -1530,6 +1531,12 @@ function checkExistingUnlock(){
   window._fbAuthReady = async (user) => {
     const loader = document.getElementById('auth-loading');
     if(loader) loader.style.display = 'none';
+    if(window._justRegistered){
+      // On vient de créer un compte : on laisse les boutons de paiement affichés,
+      // on ne relance pas la vérification automatique qui écraserait ce message.
+      window._justRegistered = false;
+      return;
+    }
     if(user){
       await onUserConnected(user);
     } else {
