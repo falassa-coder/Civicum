@@ -1373,22 +1373,21 @@ async function tryRegister(){
         nom, email, createdAt: window._fbTimestamp(), formule:'', actif:false
       });
     }
-    // Afficher les instructions de paiement clairement
-    const regEmail = document.getElementById('reg-email').value || '';
+    // S'assurer que payer() peut utiliser l'utilisateur tout de suite, sans attendre l'écouteur onAuthStateChanged
+    window._fbCurrentUser = cred.user;
+    // Afficher directement les boutons de paiement Stripe
     document.getElementById('gate-error').classList.remove('show');
     document.getElementById('gate-success').style.display = 'block';
     document.getElementById('gate-success').innerHTML = `
       <div style="text-align:left;background:#f0f7f3;border:1.5px solid #2e7d52;border-radius:10px;padding:16px;font-size:13px;line-height:1.8;">
         <div style="font-weight:700;color:#2e7d52;font-size:15px;margin-bottom:10px;">✅ Compte créé avec succès !</div>
-        <div style="color:#333;margin-bottom:10px;">Pour activer votre accès, suivez ces 3 étapes :</div>
-        <ol style="padding-left:18px;color:#333;margin:0 0 12px;">
-          <li><b>Choisissez votre formule</b> : 1 mois (10€) · 3 mois (20€) · 1 an (50€)</li>
-          <li><b>Payez par Wero</b> au <b style="color:#16233F;">06 98 22 07 31</b> ou par virement (coordonnées sur demande)</li>
-          <li><b>Confirmez par mail</b> à <b style="color:#16233F;">contact@civicum.fr</b> en précisant votre adresse e-mail</li>
-        </ol>
-        <div style="font-size:12px;color:#666;">Votre accès sera activé dans les 24h après réception du paiement.</div>
+        <div style="color:#333;margin-bottom:14px;">Choisissez votre formule pour activer votre accès (paiement sécurisé par carte) :</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx')">1 mois — 9,99&nbsp;€</button>
+          <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy')">3 mois — 19,99&nbsp;€</button>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
+        </div>
       </div>`;
-    setTimeout(()=>{ switchAuthTab('login'); const el = document.getElementById('login-email'); if(el) el.value = regEmail; }, 8000);
   } catch(e){
     setGateError(fbErrMsg(e.code));
   } finally { btn.disabled=false; btn.textContent='Créer mon compte'; }
