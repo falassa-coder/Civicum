@@ -476,6 +476,7 @@ html { scroll-behavior:smooth; }
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-functions.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBQjD8NPUtoUSSVQ0A1Lju7kQ6YtBNr7rM",
@@ -489,6 +490,7 @@ html { scroll-behavior:smooth; }
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const functionsInstance = getFunctions(app);
 
   // Exposer globalement pour le JS principal
   window._fbAuth = auth;
@@ -504,6 +506,8 @@ html { scroll-behavior:smooth; }
   window._fbUpdateDoc = updateDoc;
   window._fbTimestamp = serverTimestamp;
   window._fbOnSnapshot = onSnapshot;
+  window._fbFunctions = functionsInstance;
+  window._fbHttpsCallable = httpsCallable;
 
   // Surveiller l'état d'auth au chargement
   onAuthStateChanged(auth, (user) => {
@@ -812,22 +816,22 @@ html { scroll-behavior:smooth; }
       <div class="pricing">
         <div class="plan">
           <div class="plan-name">1 mois</div>
-          <div class="plan-price">10<small>&nbsp;€</small></div>
+          <div class="plan-price">9<small>,99&nbsp;€</small></div>
           <div class="plan-sub">Pour une révision intensive</div>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
+          <a class="btn btn-ghost" href="#" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx');return false;">S'abonner</a>
         </div>
         <div class="plan pop">
           <div class="plan-tag">Le plus choisi</div>
           <div class="plan-name">3 mois</div>
-          <div class="plan-price">20<small>&nbsp;€</small></div>
+          <div class="plan-price">19<small>,99&nbsp;€</small></div>
           <div class="plan-sub">Le temps de tout maîtriser</div>
-          <a class="btn btn-gold" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
+          <a class="btn btn-gold" href="#" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy');return false;">S'abonner</a>
         </div>
         <div class="plan">
           <div class="plan-name">Accès illimité (1 an)</div>
-          <div class="plan-price">50<small>&nbsp;€</small></div>
+          <div class="plan-price">49<small>,99&nbsp;€</small></div>
           <div class="plan-sub">Valable 1 an, accès complet</div>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Demander par mail</a>
+          <a class="btn btn-ghost" href="#" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS');return false;">S'abonner</a>
         </div>
       </div>
       <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
@@ -836,9 +840,8 @@ html { scroll-behavior:smooth; }
         <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2.2;">
           <li>Créez votre compte sur <b style="color:var(--navy);">civicum.fr</b></li>
-          <li>Écrivez-nous à <b style="color:var(--navy);">contact@civicum.fr</b> en indiquant la formule souhaitée</li>
-          <li>Nous vous communiquons les coordonnées de paiement par retour de mail ou par téléphone au <b style="color:var(--navy);">06 98 22 07 31</b></li>
-          <li>Votre accès est activé <b>dès réception du règlement</b></li>
+          <li>Choisissez votre formule et payez en ligne, en toute sécurité, via <b style="color:var(--navy);">Stripe</b></li>
+          <li>Votre accès est activé <b>immédiatement</b> après confirmation du paiement</li>
         </ol>
       </div>
     </div>
@@ -1405,6 +1408,24 @@ async function trySendReset(){
   } catch(e){
     setGateError(fbErrMsg(e.code));
   } finally { btn.disabled=false; btn.textContent='Envoyer le lien'; }
+}
+
+/* ============ PAIEMENT STRIPE ============ */
+async function payer(priceId){
+  const user = window._fbCurrentUser;
+  if(!user){
+    alert("Connecte-toi ou crée ton compte d'abord pour t'abonner.");
+    showApp();
+    return;
+  }
+  try{
+    const createSession = window._fbHttpsCallable(window._fbFunctions, "createCheckoutSession");
+    const result = await createSession({ priceId: priceId, email: user.email });
+    window.location.href = result.data.url;
+  } catch(err){
+    console.error(err);
+    alert("Erreur lors du paiement, réessaie.");
+  }
 }
 
 /* ============ SESSION ANTI-PARTAGE ============ */
