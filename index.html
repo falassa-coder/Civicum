@@ -1412,9 +1412,7 @@ async function trySendReset(){
 
 /* ============ PAIEMENT STRIPE ============ */
 async function payer(priceId){
-  // Toujours prendre l'utilisateur depuis Firebase Auth directement (plus fiable)
-  const user = (window._fbAuth && window._fbAuth.currentUser)
-               || window._fbCurrentUser;
+  const user = (window._fbAuth && window._fbAuth.currentUser) || window._fbCurrentUser;
   if(!user){
     setGateError("Veuillez d'abord créer votre compte ou vous connecter.");
     return;
@@ -1432,7 +1430,7 @@ async function payer(priceId){
   } catch(err){
     console.error('[Civicum] Erreur paiement:', err);
     setGateError("Erreur lors du paiement. Réessayez ou contactez contact@civicum.fr");
-    if(btn){ btn.disabled=false; btn.textContent=btn.getAttribute('data-label')||'Payer'; }
+    if(btn){ btn.disabled=false; btn.textContent='Payer'; }
   }
 }
 
