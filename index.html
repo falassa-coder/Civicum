@@ -1366,8 +1366,8 @@ async function tryRegister(){
   const btn = document.getElementById('btn-register');
   btn.disabled=true; btn.textContent='Création…';
   try{
+    window._justRegistered = true; // AVANT la création pour bloquer onAuthStateChanged
     const cred = await window._fbCreateUser(window._fbAuth, email, pwd);
-    window._justRegistered = true;
     /* Enregistrer le profil dans Firestore */
     if(window._fbDb){
       await window._fbSetDoc(window._fbDoc(window._fbDb,'users',cred.user.uid),{
