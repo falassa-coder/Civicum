@@ -1554,9 +1554,9 @@ function checkExistingUnlock(){
   if(window._fbCurrentUser !== undefined){
     const loader = document.getElementById('auth-loading');
     if(loader) loader.style.display = 'none';
-    if(window._fbCurrentUser){
+    if(window._fbCurrentUser && !window._justRegistered){
       onUserConnected(window._fbCurrentUser);
-    } else {
+    } else if(!window._fbCurrentUser) {
       show('screen-gate');
     }
   }
