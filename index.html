@@ -561,6 +561,7 @@ html { scroll-behavior:smooth; }
           <button class="pdot active" onclick="showPreview(0)"></button>
           <button class="pdot" onclick="showPreview(1)"></button>
           <button class="pdot" onclick="showPreview(2)"></button>
+          <button class="pdot" onclick="showPreview(3)"></button>
         </div>
         <div class="preview-slide active" id="prev-0">
           <div class="preview-label">📝 Entraînement</div>
@@ -613,6 +614,24 @@ html { scroll-behavior:smooth; }
             </div>
           </div>
         </div>
+
+        <!-- Slide 4 : Menu principal -->
+        <div class="preview-slide" id="prev-3">
+          <div class="preview-label">🏠 Menu principal</div>
+          <div class="qcard" style="padding:18px;">
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;text-align:center;">Votre espace personnel</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:var(--paper);border:1.5px solid var(--navy);border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--navy);">🎯 Entraînement par questions</div>
+              <div style="background:var(--paper);border:1.5px solid var(--gold);border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;color:#8B6914;">📚 Cours structurés</div>
+              <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--brick);">🎭 Mises en situation</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;font-weight:600;color:var(--navy);">🖼️ Portraits</div>
+                <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;font-weight:600;color:var(--navy);">📊 Tableau de bord</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -695,6 +714,11 @@ html { scroll-behavior:smooth; }
           <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/></svg></div>
           <h3>🖼️ Portraits &amp; Symboles</h3>
           <p>Apprenez à reconnaître les personnages et symboles de la République française grâce à un jeu d'association interactif. Idéal pour mémoriser sans effort.</p>
+        </article>
+        <article class="card feat" style="border-top:3px solid var(--brick);">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="12" width="28" height="24" rx="3" fill="none" stroke="#16233F" stroke-width="2.2"/><path d="M18 20h12M18 26h8" stroke="#B3402F" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="34" r="8" fill="#B3402F"/><path d="M33 34l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>🎭 Mises en situation</h3>
+          <p>Des scénarios concrets de la vie quotidienne : santé, logement, travail, laïcité, égalité, éducation… Entraînez-vous à répondre comme à l'oral de l'examen.</p>
         </article>
       </div>
 
@@ -835,6 +859,12 @@ html { scroll-behavior:smooth; }
         </div>
       </div>
       <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
+      <div style="text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:var(--muted);">Paiement accepté :</span>
+        <span style="background:#000;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;">Apple Pay</span>
+        <span style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:#333;">Google Pay</span>
+        <span style="background:#635BFF;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;">Carte bancaire</span>
+      </div>
       <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">CIVICUM est un service privé de préparation, indépendant de l'administration. Il ne délivre pas l'attestation officielle de l'examen civique, qui est organisé uniquement par l'État.<br>Conformément à la législation sur les services numériques, aucun remboursement n'est accordé une fois l'accès activé.</p>
       <div style="max-width:560px;margin:32px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
@@ -936,7 +966,7 @@ html { scroll-behavior:smooth; }
             Comment accéder à mon compte après paiement ?
             <span style="font-size:20px;color:var(--gold);">+</span>
           </summary>
-          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Votre accès est activé <b>dès réception de votre paiement</b>. Vous recevrez une confirmation par mail. Il vous suffit alors de vous connecter sur <b>civicum.fr</b> avec l'adresse e-mail et le mot de passe choisis lors de votre inscription.</p>
+          <p style="margin:12px 0 0;font-size:14px;color:#444;line-height:1.7;">Votre accès est activé <b>immédiatement et automatiquement</b> après confirmation de votre paiement par Stripe. Pas besoin de nous contacter — retournez sur <b>civicum.fr</b>, connectez-vous avec votre e-mail et mot de passe, et vous accédez directement à la plateforme.</p>
         </details>
 
         <details style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;cursor:pointer;margin-top:8px;">
@@ -2476,6 +2506,133 @@ const MS_DATA = {
       correct: 1,
       explanation: "Le tapage nocturne (bruit répété ou intense la nuit portant atteinte à la tranquillité du voisinage) est une infraction. Il est conseillé d'essayer le dialogue en premier lieu, puis de solliciter le syndic ou le bailleur, et si nécessaire de faire intervenir la police municipale ou nationale, qui peut constater l'infraction."
     }
+  ],
+
+  "Sécurité sociale": [
+    {
+      title: "Déclarer un médecin traitant",
+      situation: "Vous venez d'arriver en France et vous êtes maintenant affilié à la Sécurité sociale. Vous ne savez pas encore ce qu'est un médecin traitant.",
+      question: "Pourquoi est-il important de déclarer un médecin traitant ?",
+      options:["C'est obligatoire uniquement pour les fonctionnaires","Cela permet d'être mieux remboursé et de bénéficier du parcours de soins coordonnés","Cela n'a aucune incidence sur les remboursements","C'est uniquement utile pour les personnes âgées"],
+      correct: 1,
+      explanation: "Déclarer un médecin traitant est vivement recommandé car cela permet de bénéficier du meilleur taux de remboursement dans le cadre du parcours de soins. Sans médecin traitant, les remboursements sont réduits."
+    },
+    {
+      title: "Arrêt maladie et obligations",
+      situation: "Votre médecin vous prescrit un arrêt de travail de 5 jours. Vous ne savez pas quelles sont vos obligations.",
+      question: "Que devez-vous faire dans les 48h qui suivent ?",
+      options:["Rien, l'arrêt est automatiquement transmis","Envoyer le volet 3 à votre employeur et les volets 1 et 2 à votre caisse d'assurance maladie","Prévenir uniquement votre employeur","Prévenir uniquement votre médecin traitant"],
+      correct: 1,
+      explanation: "En cas d'arrêt maladie, vous devez envoyer le volet 3 (feuille d'arrêt) à votre employeur et les volets 1 et 2 à votre CPAM dans les 48h, sous peine de réduction des indemnités journalières."
+    }
+  ],
+  "Droits civiques": [
+    {
+      title: "S'inscrire sur les listes électorales",
+      situation: "Vous venez d'acquérir la nationalité française. Vous souhaitez voter à la prochaine élection.",
+      question: "Quelle est la démarche pour vous inscrire sur les listes électorales ?",
+      options:["L'inscription est automatique dès la naturalisation","Vous devez faire une démarche d'inscription en mairie, sur service-public.fr ou via l'application MaProcuration","Il faut attendre 5 ans après la naturalisation","Seuls les ressortissants nés en France peuvent voter"],
+      correct: 1,
+      explanation: "L'inscription sur les listes électorales n'est pas automatique après la naturalisation. Il faut en faire la demande en mairie ou en ligne sur service-public.fr. Une fois inscrit, vous pouvez voter à toutes les élections françaises."
+    },
+    {
+      title: "Carte nationale d'identité",
+      situation: "Votre carte nationale d'identité a expiré il y a 2 ans. Vous souhaitez voyager en Europe.",
+      question: "Pouvez-vous voyager en Europe avec une carte d'identité expirée ?",
+      options:["Oui, une carte d'identité française reste valable pour voyager en Europe même expirée","Non, une carte d'identité expirée n'est jamais acceptée à l'étranger","Cela dépend du pays de destination — certains pays acceptent les cartes expirées depuis moins de 5 ans","Oui, mais uniquement pour les moins de 18 ans"],
+      correct: 2,
+      explanation: "Certains pays européens acceptent les cartes d'identité françaises expirées depuis moins de 5 ans, mais pas tous. Il est conseillé de vérifier la règle du pays de destination avant de partir, et de préférence de voyager avec un document valide."
+    }
+  ],
+  "Justice": [
+    {
+      title: "Victime d'une infraction",
+      situation: "Vous avez été victime d'un vol à l'arraché dans la rue. Vous hésitez à porter plainte.",
+      question: "Quelles sont vos options ?",
+      options:["Vous ne pouvez rien faire si vous n'avez pas de témoins","Vous pouvez porter plainte au commissariat ou en gendarmerie, ou en ligne pour certaines infractions — c'est gratuit et votre droit","Porter plainte est inutile car la police ne traite pas les petits délits","Il faut payer un avocat pour porter plainte"],
+      correct: 1,
+      explanation: "Toute victime d'une infraction peut porter plainte gratuitement au commissariat de police, en brigade de gendarmerie, ou par courrier au procureur de la République. Certaines plaintes peuvent aussi être déposées en ligne. Porter plainte est un droit fondamental."
+    },
+    {
+      title: "Aide juridictionnelle",
+      situation: "Vous devez faire appel à un avocat pour défendre vos droits, mais vous n'avez pas les moyens financiers de le payer.",
+      question: "Quelle aide existe en France ?",
+      options:["Aucune aide, il faut payer l'avocat soi-même","L'aide juridictionnelle permet, sous conditions de ressources, de bénéficier d'un avocat pris en charge totalement ou partiellement par l'État","Seuls les ressortissants français peuvent bénéficier d'une aide","Il faut d'abord gagner son procès pour être remboursé"],
+      correct: 1,
+      explanation: "L'aide juridictionnelle permet aux personnes aux revenus modestes de bénéficier de la prise en charge totale ou partielle des honoraires d'avocat et des frais de justice par l'État. Elle est accessible sous conditions de ressources à toute personne résidant régulièrement en France."
+    }
+  ],
+  "Famille": [
+    {
+      title: "Violence au sein du couple",
+      situation: "Une femme subit des violences physiques et psychologiques de la part de son conjoint. Elle a peur de partir.",
+      question: "Quelles ressources et démarches existent ?",
+      options:["Il vaut mieux rester pour préserver la famille","Elle peut appeler le 3919 (numéro national violences femmes info, gratuit et anonyme), se rendre au commissariat, à l'hôpital ou contacter une association spécialisée","Il n'existe aucune aide officielle","Elle doit attendre que les enfants soient majeurs"],
+      correct: 1,
+      explanation: "Le 3919 est le numéro national d'écoute des femmes victimes de violences, disponible 7j/7, gratuit et anonyme. D'autres ressources existent : police, gendarmerie, hôpital (qui peut délivrer un certificat médical), associations d'aide aux victimes. Des solutions d'hébergement d'urgence existent aussi."
+    },
+    {
+      title: "Mariage forcé",
+      situation: "Une jeune femme est contrainte par sa famille de se marier sans son consentement.",
+      question: "Que prévoit la loi française ?",
+      options:["Le mariage forcé est autorisé si la famille y consent","Le mariage forcé est interdit et pénalement sanctionné en France ; des structures d'aide existent (associations, 3919, services sociaux)","Ce n'est pas considéré comme une infraction si la personne a plus de 18 ans","Il suffit de divorcer après le mariage"],
+      correct: 1,
+      explanation: "Le mariage forcé est un délit en France, qu'il soit commis en France ou à l'étranger. Des associations spécialisées, le 3919 et les services sociaux peuvent accompagner les victimes. Il existe aussi des dispositifs d'aide aux mineurs menacés de mariage forcé à l'étranger."
+    }
+  ],
+  "Intégration": [
+    {
+      title: "Contrat d'intégration républicaine (CIR)",
+      situation: "Vous venez d'obtenir votre premier titre de séjour. Un agent de l'OFII vous contacte pour un entretien.",
+      question: "En quoi consiste le Contrat d'intégration républicaine ?",
+      options:["C'est un contrat de travail proposé par l'État","C'est un engagement signé entre l'État et l'étranger primo-arrivant, comprenant une formation civique, une formation linguistique si nécessaire, et un accompagnement vers l'emploi","C'est uniquement une formation linguistique obligatoire","C'est un document à signer pour renouveler son titre de séjour"],
+      correct: 1,
+      explanation: "Le CIR est signé avec l'OFII lors de la primo-arrivée en France. Il comprend une formation civique (valeurs de la République), une formation linguistique si le niveau de français est insuffisant, et un accompagnement vers l'insertion professionnelle. Le respect de ce contrat est pris en compte lors du renouvellement du titre de séjour."
+    },
+    {
+      title: "Renouvellement de titre de séjour",
+      situation: "Votre titre de séjour expire dans 2 mois. Vous ne savez pas quand commencer les démarches.",
+      question: "Quand devez-vous déposer votre demande de renouvellement ?",
+      options:["Le jour de l'expiration du titre","Le lendemain de l'expiration","Au moins 2 mois avant l'expiration (délai recommandé, certaines préfectures exigent davantage)","N'importe quand, car la préfecture est toujours disponible"],
+      correct: 2,
+      explanation: "Il est conseillé de déposer la demande de renouvellement au moins 2 mois avant l'expiration du titre de séjour. Certaines préfectures recommandent jusqu'à 3-4 mois. Un dépôt dans les délais permet de bénéficier d'un récépissé qui prolonge le droit de séjour pendant l'instruction."
+    }
+  ],
+  "Vie pratique": [
+    {
+      title: "Ouvrir un compte bancaire",
+      situation: "Une banque refuse de vous ouvrir un compte bancaire sans vous donner de raison valable.",
+      question: "Que pouvez-vous faire ?",
+      options:["Rien, les banques sont libres de refuser","Exercer votre droit au compte : toute personne résidant en France a le droit d'avoir un compte bancaire ; en cas de refus, la Banque de France peut désigner d'office un établissement","Accepter le refus et chercher une autre banque indéfiniment","Seuls les citoyens français ont le droit à un compte bancaire"],
+      correct: 1,
+      explanation: "Le droit au compte est garanti par la loi en France. En cas de refus d'ouverture d'un compte bancaire, vous pouvez saisir la Banque de France, qui désignera d'office un établissement bancaire tenu de vous ouvrir un compte avec des services bancaires de base gratuits."
+    },
+    {
+      title: "Conduire en France avec un permis étranger",
+      situation: "Vous venez d'arriver en France avec un permis de conduire délivré par un pays hors Union européenne.",
+      question: "Pendant combien de temps pouvez-vous conduire avec votre permis étranger ?",
+      options:["Indéfiniment, un permis étranger est toujours valable en France","Pendant 1 an à partir de l'obtention du titre de séjour, puis vous devez l'échanger contre un permis français (si échange possible) ou repasser le permis","Jamais, il faut repasser le permis dès l'arrivée","Seulement pendant 3 mois"],
+      correct: 1,
+      explanation: "Avec un permis délivré hors UE, vous pouvez conduire en France pendant 1 an à compter de la date d'obtention de votre titre de séjour. Après ce délai, selon le pays d'origine, il peut être possible d'échanger votre permis contre un permis français, sinon il faut repasser les épreuves."
+    }
+  ],
+  "Environnement et citoyenneté": [
+    {
+      title: "Tri sélectif des déchets",
+      situation: "Vous emménagez dans un appartement et ne savez pas comment trier vos déchets.",
+      question: "Que devez-vous faire ?",
+      options:["Jeter tous les déchets dans la même poubelle, c'est plus pratique","Vous renseigner auprès de votre mairie ou bailleur sur les consignes de tri locales (bacs, conteneurs, déchetteries) et les respecter — le tri est une obligation civique","Le tri est facultatif en France","Seules les entreprises ont l'obligation de trier leurs déchets"],
+      correct: 1,
+      explanation: "Le tri sélectif des déchets est une obligation en France. Les règles varient selon les communes. Il convient de se renseigner auprès de sa mairie ou de son bailleur pour connaître les consignes de tri locales. Des amendes peuvent être appliquées en cas de non-respect."
+    },
+    {
+      title: "Pétition citoyenne",
+      situation: "Des habitants de votre quartier souhaitent s'opposer à un projet de construction qu'ils estiment nuisible. Ils veulent agir légalement.",
+      question: "Quelles démarches citoyennes sont possibles ?",
+      options:["Bloquer physiquement le chantier","Signer une pétition, participer à une enquête publique, contacter les élus locaux, créer une association ou saisir le tribunal administratif si un droit est violé","Ne rien faire, les décisions administratives sont irrévocables","Appeler directement le Président de la République"],
+      correct: 1,
+      explanation: "En France, les citoyens disposent de plusieurs voies légales pour s'exprimer et agir : pétition, enquête publique (obligatoire pour certains projets), recours au tribunal administratif, contact des élus. Ces démarches sont des expressions de la démocratie participative."
+    }
   ]
 };
 
@@ -3169,8 +3326,9 @@ function showPreview(idx){
   document.querySelectorAll('.pdot').forEach((el,i)=>el.classList.toggle('active',i===idx));
   _previewIdx = idx;
 }
+
 function startPreviewAuto(){
-  _previewTimer = setInterval(()=>{ showPreview((_previewIdx+1)%3); }, 3000);
+  _previewTimer = setInterval(()=>{ showPreview((_previewIdx+1)%4); }, 3000);
 }
 function stopPreviewAuto(){
   if(_previewTimer){ clearInterval(_previewTimer); _previewTimer=null; }
@@ -3405,7 +3563,7 @@ function getDeviceId(){
 </script>
 
 <!-- Bouton aide flottant -->
-<div id="btn-aide-flottant" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+<div id="btn-aide-flottant" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:none;">
   <a href="mailto:contact@civicum.fr?subject=Besoin d'aide - Civicum"
      style="display:flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:12px 18px;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);">
     💬 Besoin d'aide ?
