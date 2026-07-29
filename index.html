@@ -811,7 +811,7 @@ html { scroll-behavior:smooth; }
       <div class="sec-head">
         <div class="eyebrow">Tarifs</div>
         <h2>Un abonnement simple, sans engagement</h2>
-        <p>Des tarifs accessibles à tous. L'abonnement se fait sur demande par mail — nous vous communiquerons les coordonnées de paiement après votre prise de contact.</p>
+        <p>Des tarifs accessibles à tous. Paiement en ligne sécurisé par carte bancaire via Stripe — accès activé immédiatement après confirmation du paiement.</p>
       </div>
       <div class="pricing">
         <div class="plan">
@@ -840,8 +840,8 @@ html { scroll-behavior:smooth; }
         <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2.2;">
           <li>Créez votre compte sur <b style="color:var(--navy);">civicum.fr</b></li>
-          <li>Choisissez votre formule et payez en ligne, en toute sécurité, via <b style="color:var(--navy);">Stripe</b></li>
-          <li>Votre accès est activé <b>immédiatement</b> après confirmation du paiement</li>
+          <li>Choisissez votre formule et payez en ligne par carte bancaire via <b style="color:var(--navy);">Stripe</b> (paiement 100% sécurisé)</li>
+          <li>Votre accès est activé <b>immédiatement et automatiquement</b> après confirmation du paiement</li>
         </ol>
       </div>
     </div>
@@ -1457,8 +1457,23 @@ async function onUserConnected(user){
     } catch(e){ /* Firestore indispo : accès refusé */ }
   }
   if(!actif){
-    setGateError("Votre accès n'est pas encore activé. Contactez contact@civicum.fr après votre paiement.");
-    await window._fbSignOut(window._fbAuth).catch(()=>{});
+    // Compte créé mais pas encore payé → afficher les boutons de paiement
+    window._fbCurrentUser = user;
+    clearGateError();
+    document.getElementById('gate-success').style.display = 'block';
+    document.getElementById('gate-success').innerHTML = `
+      <div style="text-align:left;background:#f0f7f3;border:1.5px solid #2e7d52;border-radius:10px;padding:16px;font-size:13px;line-height:1.8;">
+        <div style="font-weight:700;color:#2e7d52;font-size:15px;margin-bottom:10px;">👋 Bienvenue ${nom || ''} !</div>
+        <div style="color:#333;margin-bottom:14px;">Votre compte est créé. Choisissez votre formule pour activer votre accès immédiatement :</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx')">1 mois — 9,99&nbsp;€</button>
+          <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy')">3 mois — 19,99&nbsp;€ ⭐</button>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#666;">Paiement sécurisé par Stripe. Accès activé immédiatement après paiement.</div>
+      </div>`;
+    show('screen-gate');
+    switchAuthTab('login');
     return;
   }
 
