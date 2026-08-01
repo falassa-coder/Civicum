@@ -3567,6 +3567,137 @@ function getDeviceId(){
   return id;
 }
 
+/* ============ ESSAI GRATUIT ============ */
+const ESSAI_QUESTIONS = [
+  {
+    q: "Quelle est la devise de la République française ?",
+    options: ["Liberté, Égalité, Fraternité", "Travail, Famille, Patrie", "Unité, Paix, Justice"],
+    correct: 0,
+    theme: "Principes et valeurs de la République",
+    expl: "La devise \"Liberté, Égalité, Fraternité\" est inscrite dans la Constitution depuis 1958. Elle symbolise les valeurs fondamentales de la République."
+  },
+  {
+    q: "Quel est le principe qui sépare l'État des religions en France ?",
+    options: ["La citoyenneté", "La laïcité", "La démocratie"],
+    correct: 1,
+    theme: "Principes et valeurs de la République",
+    expl: "La laïcité, instaurée par la loi du 9 décembre 1905, garantit la séparation des Églises et de l'État, ainsi que la liberté de conscience pour tous."
+  },
+  {
+    q: "Combien de chambres compose le Parlement français ?",
+    options: ["Une seule : l'Assemblée nationale", "Deux : l'Assemblée nationale et le Sénat", "Trois : l'Assemblée, le Sénat et le Conseil d'État"],
+    correct: 1,
+    theme: "Système institutionnel et politique",
+    expl: "Le Parlement est bicaméral : l'Assemblée nationale (577 députés) et le Sénat (348 sénateurs). L'Assemblée nationale a le dernier mot en cas de désaccord."
+  },
+  {
+    q: "Qui est le chef de l'État en France ?",
+    options: ["Le Premier ministre", "Le Président de la République", "Le Président du Sénat"],
+    correct: 1,
+    theme: "Système institutionnel et politique",
+    expl: "Le Président de la République est le chef de l'État. Il est élu au suffrage universel direct pour un mandat de 5 ans, renouvelable une fois."
+  },
+  {
+    q: "En quelle année la Révolution française a-t-elle commencé ?",
+    options: ["1769", "1789", "1799"],
+    correct: 1,
+    theme: "Histoire, géographie et culture",
+    expl: "La Révolution française débute en 1789. La prise de la Bastille le 14 juillet 1789 est devenue la fête nationale française."
+  }
+];
+
+let essaiIdx = 0;
+let essaiScore = 0;
+
+function startEssaiGratuit(){
+  essaiIdx = 0;
+  essaiScore = 0;
+  // Masquer landing, afficher app-wrapper
+  const landing = document.getElementById('screen-landing');
+  const appW = document.getElementById('app-wrapper');
+  if(landing) landing.classList.add('hidden');
+  if(appW){ appW.style.display='block'; appW.classList.add('visible'); }
+  // Cacher tous les screens, montrer screen-essai
+  ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
+   'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
+   'screen-portraits','screen-dashboard','screen-ms'].forEach(s=>{
+    const el=document.getElementById(s);
+    if(el) el.hidden=true;
+  });
+  const essaiEl = document.getElementById('screen-essai');
+  if(essaiEl) essaiEl.hidden=false;
+  renderEssaiQuestion();
+}
+
+function renderEssaiQuestion(){
+  const el = document.getElementById('essai-content');
+  if(!el) return;
+  if(essaiIdx >= ESSAI_QUESTIONS.length){ renderEssaiFin(); return; }
+  const q = ESSAI_QUESTIONS[essaiIdx];
+  const pct = Math.round(essaiIdx/ESSAI_QUESTIONS.length*100);
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <a href="#" onclick="document.getElementById('screen-landing').classList.remove('hidden');document.getElementById('app-wrapper').style.display='none';return false;" style="font-size:13px;color:var(--muted);text-decoration:none;">← Retour</a>
+      <div style="flex:1;background:var(--line);border-radius:4px;height:4px;">
+        <div style="width:${pct}%;background:var(--gold);height:4px;border-radius:4px;transition:width .3s;"></div>
+      </div>
+      <span style="font-size:12px;color:var(--muted);">${essaiIdx+1} / ${ESSAI_QUESTIONS.length}</span>
+    </div>
+    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">🎓 Essai gratuit · ${q.theme}</div>
+    <div style="background:var(--paper);border:1.5px solid var(--navy);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <p style="font-size:15px;font-weight:600;color:var(--navy);line-height:1.6;margin:0;">${q.q}</p>
+    </div>
+    <div id="essai-opts" style="display:flex;flex-direction:column;gap:8px;">
+      ${q.options.map((opt,i)=>`<div onclick="essaiAnswer(${i})" style="padding:13px 16px;border-radius:8px;background:#fff;border:1.5px solid var(--line);color:var(--navy);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:12px;"><span style="width:26px;height:26px;border-radius:50%;background:var(--cream);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none;">${String.fromCharCode(65+i)}</span>${opt}</div>`).join('')}
+    </div>`;
+}
+
+function essaiAnswer(chosen){
+  const q = ESSAI_QUESTIONS[essaiIdx];
+  const correct = chosen===q.correct;
+  if(correct) essaiScore++;
+  document.querySelectorAll('#essai-opts > div').forEach((el,i)=>{
+    el.onclick=null; el.style.cursor='default';
+    if(i===q.correct){ el.style.background='#f0f7f3'; el.style.borderColor='#2e7d52'; el.style.color='#2e7d52'; }
+    else if(i===chosen&&!correct){ el.style.background='#fdf3f2'; el.style.borderColor='var(--brick)'; el.style.color='var(--brick)'; }
+  });
+  const fb=document.createElement('div');
+  fb.innerHTML=`
+    <div style="margin-top:12px;padding:12px 16px;border-radius:8px;background:${correct?'#f0f7f3':'#fff8e6'};border:1px solid ${correct?'#2e7d52':'#e6a817'};margin-bottom:10px;">
+      <div style="font-weight:700;font-size:13px;color:${correct?'#2e7d52':'#7a5000'};margin-bottom:4px;">${correct?'✅ Bonne réponse !':'⚠️ Pas tout à fait…'}</div>
+      <p style="font-size:13px;color:#444;line-height:1.6;margin:0;">${q.expl}</p>
+    </div>
+    <button onclick="essaiNext()" class="btn btn-primary" style="width:100%;justify-content:center;">${essaiIdx<ESSAI_QUESTIONS.length-1?'Question suivante →':'Voir mes résultats'}</button>`;
+  document.getElementById('essai-content').appendChild(fb);
+}
+
+function essaiNext(){ essaiIdx++; renderEssaiQuestion(); }
+
+function renderEssaiFin(){
+  const pct=Math.round(essaiScore/ESSAI_QUESTIONS.length*100);
+  const color=pct>=80?'#2e7d52':pct>=60?'var(--gold)':'var(--brick)';
+  const msg=pct>=80?'Excellent ! Vous êtes bien parti.':pct>=60?'Bon début ! Continuez à vous entraîner.':'Il reste du travail — Civicum va vous aider à progresser.';
+  document.getElementById('essai-content').innerHTML=`
+    <div style="text-align:center;padding:10px 0 20px;">
+      <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px;">🎓 Résultat de votre essai</div>
+      <div style="width:90px;height:90px;border-radius:50%;background:var(--paper);border:4px solid ${color};display:flex;align-items:center;justify-content:center;margin:0 auto 16px;flex-direction:column;">
+        <div style="font-family:'Libre Caslon Display',serif;font-size:30px;color:${color};line-height:1;">${essaiScore}/${ESSAI_QUESTIONS.length}</div>
+        <div style="font-size:12px;color:var(--muted);">${pct}%</div>
+      </div>
+      <p style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px;">${msg}</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Ceci n'était qu'un aperçu de 5 questions sur 3 thématiques.</p>
+      <div style="background:var(--navy);border-radius:14px;padding:24px;text-align:left;margin-bottom:16px;">
+        <div style="font-family:'Libre Caslon Display',serif;font-size:18px;color:var(--cream);margin-bottom:12px;">Avec Civicum, accédez à :</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+          ${['📚 Cours structurés — 5 thématiques officielles','🎯 Des centaines de questions par niveau','📋 Examen blanc 40 questions / 45 min','🎭 30 mises en situation','🖼️ Portraits & Symboles','📊 Tableau de bord personnel'].map(f=>`<div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream);"><span style="color:var(--gold);">✓</span>${f}</div>`).join('')}
+        </div>
+        <button onclick="showApp();setTimeout(()=>switchAuthTab('register'),200);" class="btn" style="width:100%;justify-content:center;background:var(--gold);color:#fff;border:none;font-size:15px;padding:14px;">Créer mon compte — Accès dès 9,99 €</button>
+        <div style="text-align:center;margin-top:10px;"><a href="#" onclick="showApp();return false;" style="font-size:12px;color:rgba(246,242,233,.6);text-decoration:none;">J'ai déjà un compte → Se connecter</a></div>
+      </div>
+      <button onclick="document.getElementById('screen-landing').classList.remove('hidden');document.getElementById('app-wrapper').style.display='none';" class="btn btn-ghost" style="width:100%;font-size:13px;">← Retour à l'accueil</button>
+    </div>`;
+}
+
 </script>
 
 <!-- Bouton aide flottant -->
