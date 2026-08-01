@@ -549,11 +549,12 @@ html { scroll-behavior:smooth; }
         <p class="lead">La plateforme en ligne pour vous préparer sereinement : des cours illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion / Inscription</a>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
+          <a class="btn btn-ghost" href="#" onclick="startEssaiGratuit();return false;" style="border-color:var(--gold);color:var(--gold);">🎓 Essai gratuit</a>
         </div>
         <div class="hero-trust">
           <span><i class="dot"></i>Sans installation</span>
           <span><i class="dot"></i>Mobile &amp; ordinateur</span>
+          <span><i class="dot"></i>Essai gratuit sans inscription</span>
         </div>
       </div>
       <div class="preview-carousel" aria-hidden="true">
@@ -1214,6 +1215,12 @@ html { scroll-behavior:smooth; }
     </div>
   </section>
 
+
+
+  <!-- ===== ÉCRAN ESSAI GRATUIT ===== -->
+  <section id="screen-essai" class="card" hidden>
+    <div id="essai-content"></div>
+  </section>
 
   <section id="screen-ms" class="card" hidden>
     <button class="btn-link" id="btn-ms-back">← Retour</button>
@@ -2108,7 +2115,7 @@ function renderResults(timeExpired){
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits','screen-dashboard','screen-ms'].forEach(s => {
+   'screen-portraits','screen-dashboard','screen-ms','screen-essai'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
