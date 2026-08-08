@@ -532,6 +532,7 @@ html { scroll-behavior:smooth; }
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
+      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;" style="color:var(--brick);font-weight:700;">🏫 Formation</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
@@ -549,12 +550,11 @@ html { scroll-behavior:smooth; }
         <p class="lead">La plateforme en ligne pour vous préparer sereinement : des cours illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion / Inscription</a>
-          <a class="btn btn-ghost" href="#" onclick="startEssaiGratuit();return false;" style="border-color:var(--gold);color:var(--gold);">🎓 Essai gratuit</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
         </div>
         <div class="hero-trust">
           <span><i class="dot"></i>Sans installation</span>
           <span><i class="dot"></i>Mobile &amp; ordinateur</span>
-          <span><i class="dot"></i>Essai gratuit sans inscription</span>
         </div>
       </div>
       <div class="preview-carousel" aria-hidden="true">
@@ -997,6 +997,124 @@ html { scroll-behavior:smooth; }
   </section>
 </div>
 
+<!-- ===== TAB : FORMATION PRÉSENTIELLE ===== -->
+<div id="tab-formation-tab" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:760px;">
+      <div class="eyebrow" style="margin-bottom:12px;">Formation présentielle</div>
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,34px);margin-bottom:8px;color:var(--navy);">Préparez-vous en groupe, à Paris</h2>
+      <p style="color:var(--muted);font-size:15px;margin-bottom:28px;">Une journée intensive de préparation à l'examen civique en petits groupes, animée par un formateur expérimenté.</p>
+
+      <!-- Infos clés -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+        <div style="background:var(--navy);border-radius:12px;padding:20px;color:var(--cream);text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">📍</div>
+          <div style="font-weight:700;font-size:15px;margin-bottom:4px;">Paris</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.7);">Lieu communiqué à l'inscription</div>
+        </div>
+        <div style="background:var(--navy);border-radius:12px;padding:20px;color:var(--cream);text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">🕘</div>
+          <div style="font-weight:700;font-size:15px;margin-bottom:4px;">9h00 – 17h00</div>
+          <div style="font-size:13px;color:rgba(246,242,233,.7);">7h de formation (1h de pause)</div>
+        </div>
+        <div style="background:var(--gold);border-radius:12px;padding:20px;color:var(--navy);text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">💶</div>
+          <div style="font-weight:700;font-size:22px;margin-bottom:2px;">80 €</div>
+          <div style="font-size:13px;">la journée · soit 11 €/h</div>
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">👥</div>
+          <div style="font-weight:700;font-size:15px;color:var(--navy);margin-bottom:4px;">4 à 10 personnes</div>
+          <div style="font-size:13px;color:var(--muted);">Petits groupes pour un suivi personnalisé</div>
+        </div>
+      </div>
+
+      <!-- Programme -->
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:24px;">
+        <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:16px;">Programme de la journée</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--navy);color:var(--cream);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">9h00</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Accueil & tour de table</div><div style="font-size:13px;color:var(--muted);">Présentation des participants, évaluation du niveau de départ</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--navy);color:var(--cream);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">9h30</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Les 5 thématiques officielles</div><div style="font-size:13px;color:var(--muted);">Valeurs, Institutions, Histoire, Géographie, Vie en société</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--navy);color:var(--cream);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">12h00</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Pause déjeuner</div><div style="font-size:13px;color:var(--muted);">1 heure de pause</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--navy);color:var(--cream);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">13h00</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Entraînement & mises en situation</div><div style="font-size:13px;color:var(--muted);">Questions type examen, jeux de rôle, cas pratiques</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--navy);color:var(--cream);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">15h30</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Examen blanc complet</div><div style="font-size:13px;color:var(--muted);">Simulation dans les conditions réelles + correction collective</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="background:var(--gold);color:var(--navy);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;flex:none;margin-top:2px;">17h00</div>
+            <div><div style="font-weight:600;color:var(--navy);font-size:14px;">Bilan & questions</div><div style="font-size:13px;color:var(--muted);">Points à retravailler, conseils personnalisés</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formule combo -->
+      <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3055 100%);border-radius:14px;padding:24px;margin-bottom:24px;border:1px solid var(--gold);">
+        <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">⭐ Offre combinée recommandée</div>
+        <div style="font-size:16px;font-weight:700;color:var(--cream);margin-bottom:8px;">Formation présentielle + 3 mois Civicum <span style="background:var(--gold);color:var(--navy);border-radius:4px;padding:2px 8px;font-size:12px;margin-left:4px;">OFFERTS</span></div>
+        <div style="font-size:13px;color:rgba(246,242,233,.75);margin-bottom:16px;">Préparez-vous en amont avec la plateforme pendant 3 mois, puis consolidez en journée avec le formateur. Un accompagnement complet inclus dans le prix de la formation.</div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+          <div style="font-family:'Libre Caslon Display',serif;font-size:36px;color:var(--gold);">80 €</div>
+          <div style="display:flex;flex-direction:column;">
+            <div style="font-size:13px;color:rgba(246,242,233,.9);font-weight:600;">Formation journée complète</div>
+            <div style="font-size:12px;color:var(--gold);">+ Accès Civicum 3 mois offerts (valeur 19,99 €)</div>
+          </div>
+        </div>
+        <div style="background:rgba(169,132,62,.2);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(246,242,233,.85);">✨ Économisez 19,99 € par rapport à une souscription séparée</div>
+      </div>
+
+      <!-- Formulaire prise de contact -->
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;">
+        <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:14px;">S'inscrire — Prise de contact</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Renseignez vos coordonnées. Nous vous rappelons pour confirmer la date et le lieu de la session.</p>
+        <form id="formation-form" action="https://formspree.io/f/mpqvzboj" method="POST">
+          <input type="hidden" name="_subject" value="Inscription formation présentielle - Civicum">
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Nom et prénom</label>
+            <input type="text" name="nom_prenom" required placeholder="Ex : Marie Dupont" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">E-mail</label>
+            <input type="email" name="email" required style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Téléphone</label>
+            <input type="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Niveau visé</label>
+            <select name="niveau" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:white;">
+              <option value="">-- Choisir --</option>
+              <option>Carte de séjour pluriannuelle (CSP)</option>
+              <option>Carte de résident (CR)</option>
+              <option>Naturalisation</option>
+              <option>Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Message (optionnel)</label>
+            <textarea name="message" rows="3" placeholder="Disponibilités, questions..." style="width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font-size:14px;resize:vertical;background:white;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Envoyer ma demande d'inscription</button>
+          <p id="formation-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
 <footer>
   <div class="wrap foot">
     <div class="foot-b">
@@ -1215,12 +1333,6 @@ html { scroll-behavior:smooth; }
     </div>
   </section>
 
-
-
-  <!-- ===== ÉCRAN ESSAI GRATUIT ===== -->
-  <section id="screen-essai" class="card" hidden>
-    <div id="essai-content"></div>
-  </section>
 
   <section id="screen-ms" class="card" hidden>
     <button class="btn-link" id="btn-ms-back">← Retour</button>
@@ -2115,7 +2227,7 @@ function renderResults(timeExpired){
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits','screen-dashboard','screen-ms','screen-essai'].forEach(s => {
+   'screen-portraits','screen-dashboard','screen-ms'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -3565,137 +3677,6 @@ function getDeviceId(){
     try{ localStorage.setItem('civicum_device', id); }catch(e){}
   }
   return id;
-}
-
-/* ============ ESSAI GRATUIT ============ */
-const ESSAI_QUESTIONS = [
-  {
-    q: "Quelle est la devise de la République française ?",
-    options: ["Liberté, Égalité, Fraternité", "Travail, Famille, Patrie", "Unité, Paix, Justice"],
-    correct: 0,
-    theme: "Principes et valeurs de la République",
-    expl: "La devise \"Liberté, Égalité, Fraternité\" est inscrite dans la Constitution depuis 1958. Elle symbolise les valeurs fondamentales de la République."
-  },
-  {
-    q: "Quel est le principe qui sépare l'État des religions en France ?",
-    options: ["La citoyenneté", "La laïcité", "La démocratie"],
-    correct: 1,
-    theme: "Principes et valeurs de la République",
-    expl: "La laïcité, instaurée par la loi du 9 décembre 1905, garantit la séparation des Églises et de l'État, ainsi que la liberté de conscience pour tous."
-  },
-  {
-    q: "Combien de chambres compose le Parlement français ?",
-    options: ["Une seule : l'Assemblée nationale", "Deux : l'Assemblée nationale et le Sénat", "Trois : l'Assemblée, le Sénat et le Conseil d'État"],
-    correct: 1,
-    theme: "Système institutionnel et politique",
-    expl: "Le Parlement est bicaméral : l'Assemblée nationale (577 députés) et le Sénat (348 sénateurs). L'Assemblée nationale a le dernier mot en cas de désaccord."
-  },
-  {
-    q: "Qui est le chef de l'État en France ?",
-    options: ["Le Premier ministre", "Le Président de la République", "Le Président du Sénat"],
-    correct: 1,
-    theme: "Système institutionnel et politique",
-    expl: "Le Président de la République est le chef de l'État. Il est élu au suffrage universel direct pour un mandat de 5 ans, renouvelable une fois."
-  },
-  {
-    q: "En quelle année la Révolution française a-t-elle commencé ?",
-    options: ["1769", "1789", "1799"],
-    correct: 1,
-    theme: "Histoire, géographie et culture",
-    expl: "La Révolution française débute en 1789. La prise de la Bastille le 14 juillet 1789 est devenue la fête nationale française."
-  }
-];
-
-let essaiIdx = 0;
-let essaiScore = 0;
-
-function startEssaiGratuit(){
-  essaiIdx = 0;
-  essaiScore = 0;
-  // Masquer landing, afficher app-wrapper
-  const landing = document.getElementById('screen-landing');
-  const appW = document.getElementById('app-wrapper');
-  if(landing) landing.classList.add('hidden');
-  if(appW){ appW.style.display='block'; appW.classList.add('visible'); }
-  // Cacher tous les screens, montrer screen-essai
-  ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
-   'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits','screen-dashboard','screen-ms'].forEach(s=>{
-    const el=document.getElementById(s);
-    if(el) el.hidden=true;
-  });
-  const essaiEl = document.getElementById('screen-essai');
-  if(essaiEl) essaiEl.hidden=false;
-  renderEssaiQuestion();
-}
-
-function renderEssaiQuestion(){
-  const el = document.getElementById('essai-content');
-  if(!el) return;
-  if(essaiIdx >= ESSAI_QUESTIONS.length){ renderEssaiFin(); return; }
-  const q = ESSAI_QUESTIONS[essaiIdx];
-  const pct = Math.round(essaiIdx/ESSAI_QUESTIONS.length*100);
-  el.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-      <a href="#" onclick="document.getElementById('screen-landing').classList.remove('hidden');document.getElementById('app-wrapper').style.display='none';return false;" style="font-size:13px;color:var(--muted);text-decoration:none;">← Retour</a>
-      <div style="flex:1;background:var(--line);border-radius:4px;height:4px;">
-        <div style="width:${pct}%;background:var(--gold);height:4px;border-radius:4px;transition:width .3s;"></div>
-      </div>
-      <span style="font-size:12px;color:var(--muted);">${essaiIdx+1} / ${ESSAI_QUESTIONS.length}</span>
-    </div>
-    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">🎓 Essai gratuit · ${q.theme}</div>
-    <div style="background:var(--paper);border:1.5px solid var(--navy);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
-      <p style="font-size:15px;font-weight:600;color:var(--navy);line-height:1.6;margin:0;">${q.q}</p>
-    </div>
-    <div id="essai-opts" style="display:flex;flex-direction:column;gap:8px;">
-      ${q.options.map((opt,i)=>`<div onclick="essaiAnswer(${i})" style="padding:13px 16px;border-radius:8px;background:#fff;border:1.5px solid var(--line);color:var(--navy);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:12px;"><span style="width:26px;height:26px;border-radius:50%;background:var(--cream);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none;">${String.fromCharCode(65+i)}</span>${opt}</div>`).join('')}
-    </div>`;
-}
-
-function essaiAnswer(chosen){
-  const q = ESSAI_QUESTIONS[essaiIdx];
-  const correct = chosen===q.correct;
-  if(correct) essaiScore++;
-  document.querySelectorAll('#essai-opts > div').forEach((el,i)=>{
-    el.onclick=null; el.style.cursor='default';
-    if(i===q.correct){ el.style.background='#f0f7f3'; el.style.borderColor='#2e7d52'; el.style.color='#2e7d52'; }
-    else if(i===chosen&&!correct){ el.style.background='#fdf3f2'; el.style.borderColor='var(--brick)'; el.style.color='var(--brick)'; }
-  });
-  const fb=document.createElement('div');
-  fb.innerHTML=`
-    <div style="margin-top:12px;padding:12px 16px;border-radius:8px;background:${correct?'#f0f7f3':'#fff8e6'};border:1px solid ${correct?'#2e7d52':'#e6a817'};margin-bottom:10px;">
-      <div style="font-weight:700;font-size:13px;color:${correct?'#2e7d52':'#7a5000'};margin-bottom:4px;">${correct?'✅ Bonne réponse !':'⚠️ Pas tout à fait…'}</div>
-      <p style="font-size:13px;color:#444;line-height:1.6;margin:0;">${q.expl}</p>
-    </div>
-    <button onclick="essaiNext()" class="btn btn-primary" style="width:100%;justify-content:center;">${essaiIdx<ESSAI_QUESTIONS.length-1?'Question suivante →':'Voir mes résultats'}</button>`;
-  document.getElementById('essai-content').appendChild(fb);
-}
-
-function essaiNext(){ essaiIdx++; renderEssaiQuestion(); }
-
-function renderEssaiFin(){
-  const pct=Math.round(essaiScore/ESSAI_QUESTIONS.length*100);
-  const color=pct>=80?'#2e7d52':pct>=60?'var(--gold)':'var(--brick)';
-  const msg=pct>=80?'Excellent ! Vous êtes bien parti.':pct>=60?'Bon début ! Continuez à vous entraîner.':'Il reste du travail — Civicum va vous aider à progresser.';
-  document.getElementById('essai-content').innerHTML=`
-    <div style="text-align:center;padding:10px 0 20px;">
-      <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px;">🎓 Résultat de votre essai</div>
-      <div style="width:90px;height:90px;border-radius:50%;background:var(--paper);border:4px solid ${color};display:flex;align-items:center;justify-content:center;margin:0 auto 16px;flex-direction:column;">
-        <div style="font-family:'Libre Caslon Display',serif;font-size:30px;color:${color};line-height:1;">${essaiScore}/${ESSAI_QUESTIONS.length}</div>
-        <div style="font-size:12px;color:var(--muted);">${pct}%</div>
-      </div>
-      <p style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px;">${msg}</p>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Ceci n'était qu'un aperçu de 5 questions sur 3 thématiques.</p>
-      <div style="background:var(--navy);border-radius:14px;padding:24px;text-align:left;margin-bottom:16px;">
-        <div style="font-family:'Libre Caslon Display',serif;font-size:18px;color:var(--cream);margin-bottom:12px;">Avec Civicum, accédez à :</div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
-          ${['📚 Cours structurés — 5 thématiques officielles','🎯 Des centaines de questions par niveau','📋 Examen blanc 40 questions / 45 min','🎭 30 mises en situation','🖼️ Portraits & Symboles','📊 Tableau de bord personnel'].map(f=>`<div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream);"><span style="color:var(--gold);">✓</span>${f}</div>`).join('')}
-        </div>
-        <button onclick="showApp();setTimeout(()=>switchAuthTab('register'),200);" class="btn" style="width:100%;justify-content:center;background:var(--gold);color:#fff;border:none;font-size:15px;padding:14px;">Créer mon compte — Accès dès 9,99 €</button>
-        <div style="text-align:center;margin-top:10px;"><a href="#" onclick="showApp();return false;" style="font-size:12px;color:rgba(246,242,233,.6);text-decoration:none;">J'ai déjà un compte → Se connecter</a></div>
-      </div>
-      <button onclick="document.getElementById('screen-landing').classList.remove('hidden');document.getElementById('app-wrapper').style.display='none';" class="btn btn-ghost" style="width:100%;font-size:13px;">← Retour à l'accueil</button>
-    </div>`;
 }
 
 </script>
