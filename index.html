@@ -1686,6 +1686,9 @@ document.getElementById('btn-register').addEventListener('click', tryRegister);
 document.getElementById('btn-send-reset').addEventListener('click', trySendReset);
 
 function checkExistingUnlock(){
+  /* S'assurer que app-wrapper est visible (showApp ne l'affiche plus) */
+  const appW = document.getElementById('app-wrapper');
+  if(appW){ appW.style.display='block'; appW.classList.add('visible'); }
   /* Afficher un écran de chargement le temps que Firebase vérifie la session */
   document.getElementById('screen-gate').hidden = true;
   /* Montrer un indicateur de chargement discret */
@@ -3427,7 +3430,15 @@ checkExistingUnlock();
 function goHome(){
   // Arrêter le quiz/timer en cours si besoin
   if(typeof timerInterval !== 'undefined') clearInterval(timerInterval);
-  // Revenir à screen-level (vue d'ensemble connectée)
+  // Vérifier que l'utilisateur est bien connecté avant d'afficher screen-level
+  const user = (window._fbAuth && window._fbAuth.currentUser) || window._fbCurrentUser;
+  if(!user){
+    // Non connecté → retour à la landing
+    document.getElementById('screen-landing').classList.remove('hidden');
+    const appW = document.getElementById('app-wrapper');
+    if(appW){ appW.classList.remove('visible'); appW.style.display='none'; }
+    return;
+  }
   show('screen-level');
 }
 
@@ -3504,8 +3515,9 @@ function switchTab(id){
 
 /* ===== LANDING ↔ APP SWITCH ===== */
 function showApp(){
+  // NE PAS afficher app-wrapper avant vérification Firebase
+  // Juste cacher la landing et laisser checkExistingUnlock gérer l'affichage
   document.getElementById('screen-landing').classList.add('hidden');
-  document.getElementById('app-wrapper').classList.add('visible');
   window.scrollTo({top:0,behavior:'smooth'});
   checkExistingUnlock();
 }
