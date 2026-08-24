@@ -45,7 +45,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Libre+Caslon+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
    CIVICUM PREMIUM — Design System v2
@@ -53,6 +53,17 @@
 
 /* ── Tokens ─────────────────────────────────── */
 :root{
+  /* Variables legacy (compatibilité JS inline) */
+  --cream:     #F7F4EE;
+  --paper:     #FDFCF9;
+  --brick:     #B33A2A;
+  --brick-bg:  #FDF0EE;
+  --green:     #2C5F3E;
+  --green-bg:  #EBF4EE;
+  --line:      rgba(15,27,48,.12);
+  --muted:     #6B6860;
+  --navy2:     #1A2D4A;
+
   /* Palette raffinée */
   --navy:      #0F1B30;
   --navy2:     #1A2D4A;
@@ -655,6 +666,76 @@ footer{
   content:'';display:block;height:2px;
   background:var(--gold);border-radius:1px;margin-top:2px;
 }
+
+
+/* ── Compatibilité contenu intérieur ───────── */
+/* qmeta utilisé dans les titres d'écrans */
+.qmeta{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:6px;
+}
+/* Écrans app */
+#screen-level .card,
+#screen-setup .card,
+#screen-quiz .card,
+#screen-results .card,
+#screen-course-gate .card,
+#screen-course-level .card,
+#screen-course-list .card,
+#screen-course-lesson .card,
+#screen-portraits .card,
+#screen-dashboard .card,
+#screen-ms .card,
+#screen-essai .card,
+#screen-tcf .card,
+#screen-gate .card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:28px 24px;
+  box-shadow:var(--shadow);
+  max-width:560px;
+  margin:20px auto;
+}
+/* Résultats review */
+.review-item{
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:8px;background:#fff;
+}
+.review-item.correct-item{border-color:var(--green);background:var(--green-bg);}
+.review-item.wrong-item{border-color:var(--brick);background:var(--brick-bg);}
+/* Points/streak */
+.streak-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--gold);color:#fff;border-radius:20px;
+  padding:3px 10px;font-size:12px;font-weight:700;
+}
+/* Cours level list */
+.course-level-item{
+  display:flex;align-items:center;gap:14px;
+  border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;cursor:pointer;background:var(--paper);
+  margin-bottom:8px;transition:all .18s;
+}
+.course-level-item:hover{border-color:var(--gold);}
+/* Lesson pagination */
+.lesson-dots{display:flex;gap:6px;justify-content:center;margin-top:16px;}
+.lesson-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--beige);border:none;cursor:pointer;padding:0;
+  transition:background .15s;
+}
+.lesson-dot.active{background:var(--navy);}
+/* Tags de nom portrait */
+.name-tag{
+  background:var(--navy);color:var(--cream);
+  border-radius:20px;padding:6px 12px;
+  font-size:13px;font-weight:600;cursor:grab;
+  display:inline-block;margin:4px;
+  transition:transform .15s, box-shadow .15s;
+}
+.name-tag:hover{transform:scale(1.04);box-shadow:var(--shadow-sm);}
+.name-tag.used{background:var(--beige);color:var(--muted);cursor:default;}
 
 /* Reduce motion */
 @media(prefers-reduced-motion:reduce){
