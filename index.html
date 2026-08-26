@@ -676,26 +676,25 @@ footer{
 }
 /* Écrans app */
 #screen-level .card,
-#screen-setup .card,
-#screen-quiz .card,
-#screen-results .card,
-#screen-course-gate .card,
-#screen-course-level .card,
-#screen-course-list .card,
-#screen-course-lesson .card,
-#screen-portraits .card,
-#screen-dashboard .card,
-#screen-ms .card,
-#screen-essai .card,
-#screen-tcf .card,
-#screen-gate .card{
+#screen-gate, #screen-level, #screen-setup,
+#screen-quiz, #screen-results, #screen-portraits,
+#screen-dashboard, #screen-ms, #screen-essai, #screen-tcf,
+#screen-course-gate, #screen-course-level,
+#screen-course-list, #screen-course-lesson,
+#screen-contact,
+#screen-gate .card, #screen-level .card, #screen-setup .card,
+#screen-quiz .card, #screen-results .card,
+#screen-portraits .card, #screen-dashboard .card,
+#screen-ms .card, #screen-essai .card, #screen-tcf .card,
+#screen-course-gate .card, #screen-course-level .card,
+#screen-course-list .card, #screen-course-lesson .card{
   background:var(--paper);
   border:1px solid var(--line);
   border-radius:var(--radius-lg);
-  padding:28px 24px;
+  padding:24px 20px;
   box-shadow:var(--shadow);
-  max-width:560px;
-  margin:20px auto;
+  max-width:580px;
+  margin:16px auto;
 }
 /* Résultats review */
 .review-item{
@@ -803,7 +802,7 @@ footer{
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
-      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;" style="color:var(--brick);font-weight:700;">🏫 Formation</a>
+      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;" style="color:var(--brick);font-weight:700;">🏫 Formations</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
@@ -1347,6 +1346,69 @@ footer{
       </div>
 
       <!-- Formulaire prise de contact -->
+      <!-- Formation linguistique -->
+      <div style="background:var(--navy);border-radius:var(--radius-xl);padding:32px;margin-bottom:24px;border:1px solid rgba(201,151,58,.3);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="background:var(--gold);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);">Nouveau</div>
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,151,58,.8);font-weight:700;">Formation Linguistique</div>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);margin-bottom:10px;font-weight:600;">Formation Français Langue Étrangère</h3>
+        <p style="font-size:15px;color:rgba(247,244,238,.75);margin-bottom:24px;line-height:1.65;">Acquérir le niveau de français exigé par l'administration française et réussir les tests officiels TCF et TEF — de A1 à B2, en petits groupes.</p>
+
+        <!-- Niveaux -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;">
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.5);line-height:1;">A1</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Communication élémentaire</div>
+          </div>
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.65);line-height:1;">A2</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Échanges du quotidien</div>
+          </div>
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.8);line-height:1;">B1</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Autonomie sociale</div>
+          </div>
+          <div style="border:1.5px solid var(--gold);border-radius:10px;padding:14px 10px;text-align:center;background:rgba(201,151,58,.1);">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1;">B2</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.65);margin-top:4px;">Insertion durable</div>
+          </div>
+        </div>
+
+        <!-- Infos clés -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;">
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">🎯</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">TCF / TEF</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Tests officiels</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">⏱️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">6h / semaine</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Rythme soutenu</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">👥</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">5 à 10 pers.</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Petits groupes</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <button onclick="document.getElementById('form-linguistique').scrollIntoView({behavior:'smooth'});"
+          class="btn" style="width:100%;justify-content:center;background:var(--gold);color:var(--navy);border:none;font-size:15px;padding:15px;font-weight:700;">
+          Réserver ma place →
+        </button>
+        <p style="text-align:center;font-size:12px;color:rgba(247,244,238,.45);margin-top:10px;">Nous vous rappelons pour situer votre niveau et vous orienter vers le groupe adapté.</p>
+      </div>
+
+      <!-- Séparateur -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Formation à l'examen civique</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;">
         <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:14px;">S'inscrire — Prise de contact</div>
         <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Renseignez vos coordonnées. Nous vous rappelons pour confirmer la date et le lieu de la session.</p>
@@ -1382,6 +1444,60 @@ footer{
           <p id="formation-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
         </form>
       </div>
+
+      <!-- Formulaire Formation Linguistique -->
+      <div id="form-linguistique" style="background:var(--paper);border:1.5px solid var(--gold);border-radius:14px;padding:28px;margin-top:24px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);"></div>
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">Inscription — Formation linguistique FLE</div>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Laissez vos coordonnées. Nous vous rappelons pour un entretien de positionnement gratuit et vous orienter vers le groupe adapté à votre niveau.</p>
+        <form id="linguistique-form" action="https://formspree.io/f/mpqvzboj" method="POST">
+          <input type="hidden" name="_subject" value="Inscription Formation Linguistique FLE - MFS Services">
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Nom et prénom</label>
+            <input type="text" name="nom_prenom" required placeholder="Ex : Marie Dupont">
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">E-mail</label>
+            <input type="email" name="email" required>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Téléphone</label>
+            <input type="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Niveau estimé</label>
+            <select name="niveau_fle">
+              <option value="">-- Je ne sais pas encore --</option>
+              <option>A1 — Débutant complet</option>
+              <option>A2 — Notions de base</option>
+              <option>B1 — Niveau intermédiaire</option>
+              <option>B2 — Niveau avancé</option>
+            </select>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Objectif</label>
+            <select name="objectif_fle">
+              <option value="">-- Choisir --</option>
+              <option>Réussir le TCF</option>
+              <option>Réussir le TEF</option>
+              <option>Améliorer mon français au quotidien</option>
+              <option>Intégration professionnelle</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Message (optionnel)</label>
+            <textarea name="message" rows="3" placeholder="Questions, disponibilités..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;font-size:15px;padding:14px;">
+            Réserver mon entretien de positionnement
+          </button>
+          <p id="linguistique-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
+        </form>
+      </div>
+
     </div>
   </section>
 </div>
