@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Civicum — Préparez votre examen civique en ligne | CSP, Carte de résident, Naturalisation</title>
-<meta name="description" content="Civicum : préparez l'examen civique en ligne. Cours structurés, questions par niveau (CSP, carte de résident, naturalisation) et examen blanc chronométré. Accessible partout, à votre rythme.">
+<title>Civicum — Examen civique &amp; Français (FLE) | Intégration en France</title>
+<meta name="description" content="Civicum accompagne votre intégration en France : préparation en ligne à l'examen civique (CSP, carte de résident, naturalisation) et formation de français langue étrangère (FLE), en ligne ou en petit groupe.">
 
 <!-- SEO -->
-<meta name="keywords" content="examen civique, préparation examen civique, test civique France, naturalisation française, carte de séjour, carte de résident, cours civique, quiz civique, intégration France, valeurs République">
+<meta name="keywords" content="examen civique, préparation examen civique, naturalisation française, carte de séjour, carte de résident, cours civique, formation FLE, français langue étrangère, TCF, TEF, intégration France, valeurs République">
 <meta name="author" content="Civicum - MFS Services et Conseils">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://civicum.fr/">
@@ -15,16 +15,16 @@
 <!-- Open Graph (partage WhatsApp, Facebook, LinkedIn) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://civicum.fr/">
-<meta property="og:title" content="Civicum — Préparez votre examen civique en ligne">
-<meta property="og:description" content="Cours illustrés, questions par niveau et examen blanc chronométré. La plateforme de référence pour réussir l'examen civique français.">
+<meta property="og:title" content="Civicum — Examen civique &amp; Français (FLE)">
+<meta property="og:description" content="Deux parcours pour réussir votre intégration : préparation à l'examen civique en ligne et formation de français langue étrangère, en ligne ou en petit groupe.">
 <meta property="og:image" content="https://civicum.fr/og-image.png">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Civicum">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Civicum — Préparez votre examen civique">
-<meta name="twitter:description" content="Cours structurés, quiz par niveau et examen blanc. Réussissez votre examen civique à votre rythme.">
+<meta name="twitter:title" content="Civicum — Examen civique &amp; Français (FLE)">
+<meta name="twitter:description" content="Préparation à l'examen civique et formation de français (FLE), en ligne ou en petit groupe.">
 
 <!-- Données structurées JSON-LD -->
 <script type="application/ld+json">
@@ -32,714 +32,879 @@
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "name": "Civicum",
-  "description": "Plateforme de préparation en ligne à l'examen civique français",
+  "description": "Plateforme d'accompagnement à l'intégration en France : préparation à l'examen civique et formation de français langue étrangère (FLE)",
   "url": "https://civicum.fr",
   "email": "contact@civicum.fr",
   "inLanguage": "fr",
-  "offers": {
-    "@type": "Offer",
-    "category": "Formation civique",
-    "description": "Préparation à l'examen civique : CSP, Carte de résident, Naturalisation"
-  }
+  "offers": [
+    {
+      "@type": "Offer",
+      "category": "Formation civique",
+      "description": "Préparation à l'examen civique : CSP, Carte de résident, Naturalisation"
+    },
+    {
+      "@type": "Offer",
+      "category": "Formation linguistique",
+      "description": "Formation de français langue étrangère (FLE), de A1 à B2, préparation TCF/TEF"
+    }
+  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Libre+Caslon+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Libre+Caslon+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════
-   CIVICUM PREMIUM — Design System v2
-   ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   CIVICUM — Design System Pro
+   Palette : Encre (#0F1B2D) · Or (#B8962E) · Blanc cassé (#FAF9F6)
+   Typo : DM Serif Display + Inter
+   ═══════════════════════════════════════════════════ */
 
-/* ── Tokens ─────────────────────────────────── */
-:root{
-  /* Variables legacy (compatibilité JS inline) */
-  --cream:     #F7F4EE;
-  --paper:     #FDFCF9;
-  --brick:     #B33A2A;
-  --brick-bg:  #FDF0EE;
-  --green:     #2C5F3E;
-  --green-bg:  #EBF4EE;
-  --line:      rgba(15,27,48,.12);
-  --muted:     #6B6860;
-  --navy2:     #1A2D4A;
+/* ── TOKENS ────────────────────────────────────────── */
+:root {
+  /* Couleurs principales */
+  --ink:        #0F1B2D;
+  --ink-80:     #1E2D42;
+  --ink-60:     #3D4F63;
+  --gold:       #B8962E;
+  --gold-lt:    #D4B04A;
+  --gold-bg:    #FBF6EA;
+  --white:      #FAF9F6;
+  --surface:    #FFFFFF;
+  --surface-2:  #F4F3F0;
+  --border:     rgba(15,27,45,.1);
+  --border-md:  rgba(15,27,45,.18);
+  --success:    #1E6B45;
+  --success-bg: #EAF5EF;
+  --danger:     #A82D1E;
+  --danger-bg:  #FDF0EE;
+  --blue-fr:    #002395;
+  --red-fr:     #ED2939;
 
-  /* Palette raffinée */
-  --navy:      #0F1B30;
-  --navy2:     #1A2D4A;
-  --navy3:     #243B61;
-  --gold:      #C9973A;
-  --gold-light:#E8C06A;
-  --cream:     #F7F4EE;
-  --paper:     #FDFCF9;
-  --beige:     #EDE8DE;
-  --ink:       #1A1A1A;
-  --muted:     #6B6860;
-  --line:      rgba(15,27,48,.12);
-  --green:     #2C5F3E;
-  --green-bg:  #EBF4EE;
-  --brick:     #B33A2A;
-  --brick-bg:  #FDF0EE;
-  --blue-fr:   #002395;
-  --red-fr:    #ED2939;
+  /* Legacy aliases (JS inline styles) */
+  --navy:       #0F1B2D;
+  --navy2:      #1E2D42;
+  --navy3:      #2A3F58;
+  --cream:      #FAF9F6;
+  --paper:      #FFFFFF;
+  --beige:      #F4F3F0;
+  --brick:      #A82D1E;
+  --ok:         #4B6B45;  /* vert sauge assourdi, harmonisé avec la palette (remplace le vert générique) */
+  --ok-lt:      #A9C7A0;  /* variante claire pour fonds sombres */
+  --brick-bg:   #FDF0EE;
+  --green:      #1E6B45;
+  --green-bg:   #EAF5EF;
+  --line:       rgba(15,27,45,.1);
+  --muted:      #6B6459;
 
-  /* Typographie */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'Inter', -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  /* Typo */
+  --serif:      'DM Serif Display', 'Playfair Display', Georgia, serif;
+  --sans:       'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:       'JetBrains Mono', 'Courier New', monospace;
 
-  /* Espace */
-  --radius:    10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --shadow-sm: 0 1px 3px rgba(15,27,48,.08), 0 1px 2px rgba(15,27,48,.04);
-  --shadow:    0 4px 16px rgba(15,27,48,.10), 0 1px 4px rgba(15,27,48,.06);
-  --shadow-lg: 0 16px 48px rgba(15,27,48,.14), 0 4px 12px rgba(15,27,48,.08);
-  --shadow-gold: 0 0 0 3px rgba(201,151,58,.25);
+  /* Espace & effets */
+  --r-sm:   6px;
+  --r:      10px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --sh-sm:  0 1px 3px rgba(15,27,45,.06), 0 1px 2px rgba(15,27,45,.04);
+  --sh:     0 4px 12px rgba(15,27,45,.08), 0 1px 3px rgba(15,27,45,.05);
+  --sh-lg:  0 12px 40px rgba(15,27,45,.12), 0 3px 8px rgba(15,27,45,.07);
+  --ease:   cubic-bezier(.25,.46,.45,.94);
 
-  /* Transitions */
-  --ease: cubic-bezier(.25,.46,.45,.94);
-}
-
-/* ── Reset ───────────────────────────────────── */
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{
-  font-family:var(--font-body);color:var(--ink);
-  background:var(--cream);line-height:1.6;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-}
-a{color:inherit;text-decoration:none;}
-img{max-width:100%;display:block;}
-button{font-family:var(--font-body);}
-
-/* ── Layout ──────────────────────────────────── */
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
-
-/* ── Typography ──────────────────────────────── */
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:500;color:var(--navy);line-height:1.15;}
-h1{font-size:clamp(36px,5.5vw,58px);letter-spacing:-.02em;}
-h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.015em;}
-h3{font-size:clamp(18px,2.5vw,22px);}
-.eyebrow{
-  font-family:var(--font-body);font-size:11px;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);font-weight:700;
-}
-.sec-head{text-align:center;max-width:620px;margin:0 auto 48px;}
-.sec-head h2{margin:10px 0 12px;}
-.sec-head p{color:var(--muted);font-size:16px;}
-section{padding:80px 0;}
-
-/* ── Barre tricolore (signature) ─────────────── */
-.tricolore-bar{
-  height:3px;width:100%;
-  background:linear-gradient(90deg, var(--blue-fr) 0 33.3%, #fff 33.3% 66.6%, var(--red-fr) 66.6%);
-  position:fixed;top:0;left:0;z-index:200;
-}
-.tricolore-progress{
-  height:3px;
-  background:linear-gradient(90deg, var(--blue-fr) 0 33.3%, #fff 33.3% 66.6%, var(--red-fr) 66.6%);
-  width:0%;transition:width 1s var(--ease);
-  position:absolute;top:0;left:0;
+  /* Aliases */
+  --radius: var(--r);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+  --shadow-sm: var(--sh-sm);
+  --shadow: var(--sh);
+  --shadow-lg: var(--sh-lg);
+  --shadow-gold: 0 0 0 3px rgba(184,150,46,.2);
 }
 
-/* ── Boutons ─────────────────────────────────── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  font-family:var(--font-body);font-weight:600;font-size:15px;
-  border-radius:var(--radius);padding:13px 24px;cursor:pointer;
-  text-decoration:none;border:1.5px solid transparent;
-  transition:all .18s var(--ease);position:relative;overflow:hidden;
+/* ── RESET ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.btn::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(255,255,255,0);transition:background .18s;
-}
-.btn:hover::after{background:rgba(255,255,255,.08);}
-.btn:active{transform:translateY(1px);}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font-family: var(--sans); }
 
-.btn-primary{background:var(--navy);color:var(--cream);border-color:var(--navy);}
-.btn-primary:hover{background:var(--navy2);border-color:var(--navy2);}
-.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold);}
-.btn-gold:hover{background:#b8862e;border-color:#b8862e;}
-.btn-ghost{
-  background:transparent;color:var(--navy);
-  border-color:rgba(15,27,48,.2);
-}
-.btn-ghost:hover{border-color:var(--navy);background:rgba(15,27,48,.04);}
-.btn-link{
-  background:none;border:none;cursor:pointer;
-  color:var(--muted);font-size:14px;font-weight:500;
-  display:inline-flex;align-items:center;gap:6px;
-  padding:4px 0;transition:color .15s;
-}
-.btn-link:hover{color:var(--navy);}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;}
+/* ── LAYOUT ─────────────────────────────────────── */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
 
-/* ── Navigation ──────────────────────────────── */
-.nav{
-  position:sticky;top:3px;z-index:100;
-  background:rgba(247,244,238,.92);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;}
-.brand{display:flex;align-items:center;gap:10px;}
-.mono{
-  width:34px;height:34px;background:var(--navy);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  color:var(--cream);font-family:var(--font-display);font-size:18px;font-weight:700;
-  box-shadow:0 0 0 2px rgba(201,151,58,.3);
-}
-.brand-name{
-  font-family:var(--font-display);font-size:18px;
-  letter-spacing:.08em;color:var(--navy);font-weight:600;
-}
-.nav-links{display:flex;align-items:center;gap:24px;}
-.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .15s;}
-.nav-links a.navlink:hover,.nav-links a.tab-link.active{color:var(--navy);}
-.nav-links a.tab-link.active{font-weight:700;}
-.nav-cta{padding:9px 18px;font-size:14px;}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:6px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .25s;}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-
-/* ── Hero ────────────────────────────────────── */
-.hero{padding:72px 0 56px;}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
-.hero h1{margin:10px 0 18px;}
-.hero h1 .em{color:var(--gold);font-style:italic;}
-.hero .lead{font-size:17px;line-height:1.7;color:var(--muted);max-width:32em;}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
-.hero-trust{
-  margin-top:20px;font-size:13px;color:var(--muted);
-  display:flex;gap:18px;flex-wrap:wrap;
-}
-.hero-trust span{display:inline-flex;align-items:center;gap:6px;}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;flex:none;}
-
-/* ── Carrousel preview ───────────────────────── */
-.preview-carousel{position:relative;}
-.preview-dots{display:flex;gap:7px;justify-content:center;margin-bottom:12px;}
-.pdot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--beige);border:none;cursor:pointer;padding:0;
-  transition:background .2s, transform .2s;
-}
-.pdot.active{background:var(--navy);transform:scale(1.3);}
-.preview-slide{display:none;animation:slideIn .25s var(--ease);}
-.preview-slide.active{display:block;}
-.preview-label{
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--gold);font-weight:700;margin-bottom:8px;text-align:center;
-}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-
-/* ── Carte quiz premium ──────────────────────── */
-.qcard{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--radius-lg);padding:24px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden;
-}
-.qcard::before{
-  content:'';position:absolute;left:0;right:0;top:0;height:3px;
-  background:linear-gradient(90deg,var(--blue-fr) 0 33%,#fff 33% 66%,var(--red-fr) 66%);
-}
-.qcard-top{display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px;}
-.qcard-meta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
-.qcard-timer{
-  font-family:var(--font-mono);font-size:12px;font-weight:600;
-  color:var(--navy);background:var(--beige);
-  border-radius:6px;padding:4px 10px;
-}
-.qcard-q{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:16px;line-height:1.4;}
-.opt{
-  display:flex;align-items:center;gap:12px;
-  border:1.5px solid var(--line);background:#fff;
-  border-radius:8px;padding:12px 14px;margin-bottom:8px;
-  font-size:14px;cursor:pointer;transition:all .15s var(--ease);
-}
-.opt:hover{border-color:var(--navy);background:var(--cream);}
-.opt .k{
-  width:26px;height:26px;flex:none;border-radius:6px;
-  border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:var(--navy);background:var(--cream);
-}
-.opt.good{border-color:var(--green);background:var(--green-bg);}
-.opt.good .k{background:var(--green);color:#fff;border-color:var(--green);}
-.opt.good .tick{margin-left:auto;color:var(--green);font-weight:700;font-size:16px;}
-.opt.wrong{border-color:var(--brick);background:var(--brick-bg);}
-.opt.wrong .k{background:var(--brick);color:#fff;border-color:var(--brick);}
-.opt.disabled{cursor:default;}
-
-/* ── Cards génériques ────────────────────────── */
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-.card{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--radius-lg);padding:26px;
-  transition:box-shadow .2s, transform .2s;
-}
-.card:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
-.card h3{font-size:17px;margin-bottom:8px;}
-.card p{font-size:14px;color:var(--muted);line-height:1.6;}
-.feat-ic{
-  width:48px;height:48px;background:var(--navy);
-  border-radius:10px;padding:10px;margin-bottom:16px;
-}
-.feat-ic svg{width:100%;height:100%;display:block;}
-.aud-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:38px;height:26px;padding:0 10px;
-  border-radius:6px;background:var(--navy);color:var(--cream);
-  font-weight:700;font-size:13px;margin-bottom:12px;
-  letter-spacing:.04em;
+/* ── BARRE TRICOLORE ────────────────────────────── */
+.tricolore-bar {
+  height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--blue-fr) 33.3%, #fff 33.3% 66.6%, var(--red-fr) 66.6%);
+  position: fixed; top: 0; left: 0; z-index: 300;
 }
 
-/* ── Niveaux sélection ───────────────────────── */
-.levels{display:flex;flex-direction:column;gap:10px;}
-.level-item{
-  display:flex;align-items:center;gap:14px;
-  border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:14px 16px;cursor:pointer;background:var(--paper);
-  transition:all .18s var(--ease);
+/* ── TYPOGRAPHIE ────────────────────────────────── */
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; color: var(--ink); line-height: 1.15; }
+h1 { font-size: clamp(34px, 5.5vw, 56px); letter-spacing: -.02em; }
+h2 { font-size: clamp(24px, 3.8vw, 36px); letter-spacing: -.015em; }
+h3 { font-size: clamp(17px, 2.5vw, 21px); }
+.eyebrow {
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; font-family: var(--sans);
 }
-.level-item:hover{border-color:var(--gold);box-shadow:var(--shadow-gold);}
-.level-item.active{border-color:var(--navy);background:var(--navy);color:var(--cream);}
-.level-item.active .level-badge{background:var(--gold);color:var(--navy);}
-.level-badge{
-  width:36px;height:36px;border-radius:8px;background:var(--beige);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:13px;color:var(--navy);flex:none;
-}
-.level-text{flex:1;}
-.level-name{font-weight:600;font-size:15px;color:inherit;}
-.level-sub{font-size:12px;color:var(--muted);margin-top:2px;}
-.level-item.active .level-sub{color:rgba(247,244,238,.7);}
+.sec-head { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.sec-head h2 { margin: 10px 0 12px; }
+.sec-head p { color: var(--muted); font-size: 16px; line-height: 1.65; }
 
-/* ── Thèmes ──────────────────────────────────── */
-.theme-grid{display:flex;flex-direction:column;gap:8px;}
-.theme-item{
-  display:flex;align-items:center;gap:12px;
-  border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:12px 14px;cursor:pointer;background:var(--paper);
-  transition:all .15s;
+/* ── BOUTONS ────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--sans); font-weight: 600; font-size: 15px;
+  border-radius: var(--r); padding: 13px 24px; cursor: pointer;
+  text-decoration: none; border: 1.5px solid transparent;
+  transition: background .16s var(--ease), border-color .16s, transform .1s, box-shadow .16s;
 }
-.theme-item:hover{border-color:var(--gold);}
-.theme-item.active{border-color:var(--navy);background:var(--navy);color:var(--cream);}
-.theme-dot{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--gold);flex:none;
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-80); border-color: var(--ink-80); }
+.btn-gold { background: var(--gold); color: #fff; border-color: var(--gold); }
+.btn-gold:hover { background: #a07820; border-color: #a07820; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--border-md); }
+.btn-ghost:hover { border-color: var(--ink); background: var(--surface-2); }
+.btn-link {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 14px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 0; transition: color .15s; font-family: var(--sans);
 }
+.btn-link:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 
-/* ── Quiz screen ─────────────────────────────── */
-#screen-quiz .card{max-width:680px;margin:0 auto;}
-.quiz-progress{
-  background:var(--beige);border-radius:999px;height:5px;
-  margin-bottom:20px;overflow:hidden;
+/* ── NAVIGATION ─────────────────────────────────── */
+.nav {
+  position: sticky; top: 3px; z-index: 100;
+  background: rgba(250,249,246,.94); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
 }
-.quiz-progress-fill{
-  height:100%;border-radius:999px;
-  background:linear-gradient(90deg,var(--navy),var(--gold));
-  transition:width .4s var(--ease);
+.nav-in { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.mono {
+  width: 32px; height: 32px; background: var(--ink);
+  border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-family: var(--serif); font-size: 17px;
 }
-.quiz-timer-bar{
-  display:flex;align-items:center;gap:10px;
-  font-family:var(--font-mono);font-size:20px;font-weight:600;
-  color:var(--navy);margin-bottom:16px;
-}
-.quiz-timer-bar.warning{color:var(--brick);}
+.brand-name { font-family: var(--serif); font-size: 17px; letter-spacing: .06em; color: var(--ink); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
+.nav-links a.navlink:hover, .nav-links a.tab-link.active { color: var(--ink); font-weight: 600; }
+.nav-cta { padding: 9px 18px; font-size: 14px; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: all .25s; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,4.5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-4.5px); }
 
-/* ── Résultats ───────────────────────────────── */
-.result-circle{
-  width:100px;height:100px;border-radius:50%;
-  background:conic-gradient(var(--navy) 0%, var(--beige) 0%);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 20px;position:relative;
-}
-.result-circle-inner{
-  width:82px;height:82px;border-radius:50%;background:var(--paper);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
-.result-pct{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--navy);line-height:1;}
-.result-label{font-size:11px;color:var(--muted);}
+/* ── HERO ───────────────────────────────────────── */
+.hero { padding: 72px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.hero h1 { margin: 10px 0 18px; }
+.hero h1 .em { color: var(--gold); font-style: italic; }
+.hero .lead { font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 32em; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-trust { margin-top: 20px; font-size: 13px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; }
+.hero-trust span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); display: inline-block; flex: none; }
 
-/* ── Tableau de bord ─────────────────────────── */
-.dash-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-.dash-stat{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--radius);padding:16px;text-align:center;
-}
-.dash-stat-val{
-  font-family:var(--font-display);font-size:30px;font-weight:600;
-  color:var(--navy);line-height:1;margin-bottom:4px;
-}
-.dash-stat-lbl{font-size:11px;color:var(--muted);}
+/* ── CARROUSEL ──────────────────────────────────── */
+.preview-carousel { position: relative; }
+.preview-dots { display: flex; gap: 7px; justify-content: center; margin-bottom: 12px; }
+.pdot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-md); border: none; cursor: pointer; padding: 0; transition: all .2s; }
+.pdot.active { background: var(--ink); transform: scale(1.35); }
+.preview-slide { display: none; }
+.preview-slide.active { display: block; animation: fadeUp .22s var(--ease); }
+.preview-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; text-align: center; }
 
-/* ── Cours ───────────────────────────────────── */
-.course-card{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--radius-lg);padding:20px;cursor:pointer;
-  transition:all .18s var(--ease);
+/* ── QCARD ──────────────────────────────────────── */
+.qcard {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 22px; box-shadow: var(--sh); position: relative;
 }
-.course-card:hover{border-color:var(--gold);box-shadow:var(--shadow);}
-.course-icon{
-  width:44px;height:44px;background:var(--navy);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
-  margin-bottom:12px;
+.qcard::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(90deg, var(--blue-fr) 33%, #fff 33% 66%, var(--red-fr) 66%);
 }
-.lesson-page{
-  background:var(--paper);border-radius:var(--radius-lg);
-  padding:28px;border:1px solid var(--line);
-}
-.lesson-page h3{font-size:20px;margin-bottom:14px;}
-.lesson-page p{font-size:15px;line-height:1.75;color:#3a3a3a;margin-bottom:14px;}
-.lesson-highlight{
-  background:var(--beige);border-left:3px solid var(--gold);
-  border-radius:0 var(--radius) var(--radius) 0;
-  padding:12px 16px;font-size:14px;font-weight:600;color:var(--navy);
-}
+.qcard-top { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 14px; }
+.qcard-meta { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.qcard-timer { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: var(--surface-2); border-radius: 5px; padding: 3px 9px; }
+.qcard-q { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.45; }
 
-/* ── Portrait jeu ────────────────────────────── */
-.portraits-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-  gap:14px;margin-bottom:10px;
+/* ── OPTIONS RÉPONSES ───────────────────────────── */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  border: 1.5px solid var(--border); background: var(--surface);
+  border-radius: var(--r); padding: 12px 14px; margin-bottom: 8px;
+  font-size: 14px; cursor: pointer; transition: all .15s var(--ease);
 }
-.portrait-slot{
-  border:2px solid var(--line);border-radius:var(--radius-lg);
-  padding:14px 10px;text-align:center;background:#fff;
-  transition:all .18s var(--ease);
+.opt:hover { border-color: var(--gold); background: var(--gold-bg); }
+.opt .k {
+  width: 24px; height: 24px; flex: none; border-radius: var(--r-sm);
+  border: 1.5px solid var(--border-md); display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--ink); background: var(--surface-2);
 }
-.portrait-slot:hover{border-color:var(--gold);}
-.portrait-slot.correct{border-color:var(--green);background:var(--green-bg);}
-.portrait-slot.wrong{border-color:var(--brick);background:var(--brick-bg);}
-.portrait-slot .icon-wrap{display:flex;justify-content:center;margin-bottom:10px;}
-.portrait-slot .icon-wrap svg{width:72px;height:72px;display:block;}
-.portrait-slot .drop-target{
-  font-size:12px;color:var(--muted);min-height:36px;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px dashed var(--line);border-radius:6px;padding:6px;
-  cursor:pointer;transition:all .15s;
-}
-.portrait-slot .drop-target.filled{
-  border-style:solid;border-color:var(--navy);
-  color:var(--navy);font-weight:600;font-size:11px;background:var(--cream);
-}
+.opt.good { border-color: var(--success); background: var(--success-bg); }
+.opt.good .k { background: var(--success); color: #fff; border-color: var(--success); }
+.opt.good .tick { margin-left: auto; color: var(--success); font-size: 15px; }
+.opt.wrong { border-color: var(--danger); background: var(--danger-bg); }
+.opt.wrong .k { background: var(--danger); color: #fff; border-color: var(--danger); }
+.opt.disabled { cursor: default; }
+@keyframes correct-flash { 0%{box-shadow:0 0 0 0 rgba(30,107,69,.35);} 70%{box-shadow:0 0 0 8px rgba(30,107,69,0);} 100%{box-shadow:0 0 0 0 rgba(30,107,69,0);} }
+@keyframes wrong-flash { 0%{box-shadow:0 0 0 0 rgba(168,45,30,.35);} 70%{box-shadow:0 0 0 8px rgba(168,45,30,0);} 100%{box-shadow:0 0 0 0 rgba(168,45,30,0);} }
+.opt.good { animation: correct-flash .5s ease; }
+.opt.wrong { animation: wrong-flash .5s ease; }
 
-/* ── Nav du screen app (sticky bar haut) ─────── */
-#app-wrapper .app-topbar{
-  background:var(--paper);padding:10px 16px;
-  border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:90;
+/* ── CARDS ──────────────────────────────────────── */
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
+  transition: box-shadow .2s, transform .2s;
 }
-/* Bottom nav mobile ─────────────────────────── */
-.bottom-nav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:90;
-  background:var(--paper);border-top:1px solid var(--line);
-  padding:8px 0 env(safe-area-inset-bottom,8px);
-  box-shadow:0 -4px 20px rgba(15,27,48,.08);
-}
-.bottom-nav-inner{display:flex;justify-content:space-around;align-items:center;}
-.bn-item{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  background:none;border:none;cursor:pointer;padding:6px 12px;
-  color:var(--muted);font-size:10px;font-weight:600;
-  transition:color .15s;letter-spacing:.04em;text-transform:uppercase;
-  min-width:56px;
-}
-.bn-item.active{color:var(--navy);}
-.bn-item svg{width:22px;height:22px;stroke-width:1.8;}
+.card:hover { box-shadow: var(--sh); transform: translateY(-2px); }
+.card h3 { font-size: 16px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.feat-ic { width: 44px; height: 44px; background: var(--ink); border-radius: var(--r); padding: 9px; margin-bottom: 14px; }
+.feat-ic svg { width: 100%; height: 100%; display: block; }
+.aud-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 24px; padding: 0 9px; border-radius: var(--r-sm); background: var(--ink); color: var(--white); font-weight: 700; font-size: 12px; margin-bottom: 10px; letter-spacing: .04em; }
 
-/* ── Pricing ─────────────────────────────────── */
-.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
-.plan{
-  background:var(--paper);border:1.5px solid var(--line);
-  border-radius:var(--radius-xl);padding:28px 24px;text-align:center;
-  transition:all .2s var(--ease);
-}
-.plan:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
-.plan.pop{
-  border-color:var(--gold);background:var(--navy);color:var(--cream);
-  transform:scale(1.03);box-shadow:var(--shadow-lg);
-}
-.plan-tag{
-  display:inline-block;background:var(--gold);color:var(--navy);
-  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  padding:3px 10px;border-radius:20px;margin-bottom:14px;
-}
-.plan-name{font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7;margin-bottom:10px;}
-.plan.pop .plan-name{opacity:.85;color:var(--cream);}
-.plan-price{
-  font-family:var(--font-display);font-size:44px;font-weight:700;
-  color:var(--navy);line-height:1;margin-bottom:6px;
-}
-.plan.pop .plan-price{color:var(--gold);}
-.plan-price small{font-size:18px;font-weight:400;opacity:.6;}
-.plan-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
-.plan.pop .plan-sub{color:rgba(247,244,238,.65);}
-.pricing-note{text-align:center;font-size:13px;color:var(--muted);margin-bottom:8px;}
-.pricing-pay{text-align:center;font-size:13px;color:var(--muted);}
-
-/* ── Formulaires ─────────────────────────────── */
-.gate-icon{
-  text-align:center;font-size:28px;color:var(--gold);
-  margin-bottom:16px;letter-spacing:.1em;
-}
-.gate-label{
-  text-align:center;font-size:15px;font-weight:600;
-  color:var(--navy);margin-bottom:18px;
-}
-.gate-error{
-  background:var(--brick-bg);border:1px solid rgba(179,58,42,.2);
-  border-radius:8px;padding:10px 14px;font-size:13px;
-  color:var(--brick);margin-top:10px;display:none;
-}
-.gate-error.show{display:block;}
-.gate-hint{font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5;}
-input,textarea,select{
-  font-family:var(--font-body);font-size:15px;
-  border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:12px 14px;width:100%;background:#fff;
-  transition:border-color .15s, box-shadow .15s;color:var(--ink);
-}
-input:focus,textarea:focus,select:focus{
-  outline:none;border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(201,151,58,.15);
+/* ── ÉCRANS APP INTÉRIEURS ──────────────────────── */
+.app-screen {
+  background: var(--white);
+  min-height: 100vh;
+  padding-bottom: 100px;
 }
 
-/* ── FAQ accordion ───────────────────────────── */
-details{
-  background:#fff;border:1px solid var(--line);
-  border-radius:var(--radius);padding:18px 20px;
-  cursor:pointer;transition:box-shadow .15s;
-  margin-bottom:8px;
-}
-details:hover{box-shadow:var(--shadow-sm);}
-details[open]{border-color:var(--gold);}
-details summary{
-  font-weight:700;color:var(--navy);font-size:15px;
-  list-style:none;display:flex;justify-content:space-between;align-items:center;
-  gap:12px;
-}
-details summary::-webkit-details-marker{display:none;}
-details summary::after{
-  content:'+';font-size:22px;color:var(--gold);
-  flex:none;line-height:1;transition:transform .2s;
-}
-details[open] summary::after{transform:rotate(45deg);}
-
-/* ── Tab landing ─────────────────────────────── */
-.tab-link.active{color:var(--navy)!important;font-weight:700!important;}
-.tab-content{animation:fadeUp .22s var(--ease);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-
-/* ── How section ─────────────────────────────── */
-.how{background:linear-gradient(180deg,var(--beige) 0%,var(--cream) 100%);}
-.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.step-n{
-  flex:none;width:44px;height:44px;border-radius:50%;
-  background:var(--navy);color:var(--cream);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-size:18px;font-weight:700;
-  margin-bottom:14px;
-}
-
-/* ── Footer ──────────────────────────────────── */
-footer{
-  background:var(--navy);color:rgba(247,244,238,.7);
-  padding:40px 0;font-size:13px;
-}
-.foot{display:flex;gap:32px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;}
-.foot-b{font-size:13px;color:rgba(247,244,238,.6);line-height:1.7;}
-.foot-b b{color:var(--cream);}
-.foot-links{display:flex;flex-direction:column;gap:8px;}
-.foot-links a{color:rgba(247,244,238,.6);transition:color .15s;}
-.foot-links a:hover{color:var(--cream);}
-.foot-legal{font-size:11.5px;color:rgba(247,244,238,.4);max-width:320px;line-height:1.6;}
-
-/* ── App wrapper ─────────────────────────────── */
-.app-wrapper{display:none;}
-.app-wrapper.visible{display:block;}
-#screen-landing{display:block;}
-#screen-landing.hidden{display:none;}
-
-/* ── Modal contact ───────────────────────────── */
-.modal-backdrop{
-  position:fixed;inset:0;background:rgba(15,27,48,.5);
-  backdrop-filter:blur(4px);z-index:200;
-  display:none;align-items:center;justify-content:center;padding:16px;
-}
-.modal-backdrop.open{display:flex;}
-.modal{
-  background:var(--paper);border-radius:var(--radius-xl);
-  padding:32px;max-width:480px;width:100%;
-  box-shadow:var(--shadow-lg);animation:fadeUp .25s var(--ease);
-}
-.modal-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px;}
-.modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
-
-/* ── Responsive ──────────────────────────────── */
-@media(max-width:860px){
-  .hero-grid{grid-template-columns:1fr;gap:32px;}
-  .grid-4{grid-template-columns:1fr 1fr;}
-  .grid-3,.steps,.pricing{grid-template-columns:1fr;}
-  .nav-links{
-    display:none;flex-direction:column;
-    position:fixed;top:65px;left:0;right:0;
-    background:var(--paper);z-index:999;
-    padding:20px 24px 24px;
-    border-bottom:1px solid var(--line);
-    gap:0;box-shadow:var(--shadow-lg);
-  }
-  .nav-links.open{display:flex;}
-  .nav-links a{padding:13px 0;border-bottom:1px solid var(--line);font-size:16px;width:100%;}
-  .nav-links a:last-child{border-bottom:none;margin-top:8px;}
-  .nav-links .nav-cta{width:100%;text-align:center;border-radius:8px;margin-top:4px;}
-  .hamburger{display:flex;}
-  .plan.pop{transform:none;}
-  .dash-stat-grid{grid-template-columns:1fr 1fr 1fr;}
-}
-@media(max-width:600px){
-  h1{font-size:32px;}
-  h2{font-size:24px;}
-  .hero{padding:48px 0 32px;}
-  section{padding:56px 0;}
-  .hero-cta{flex-direction:column;}
-  .hero-cta .btn{width:100%;}
-  .grid-4{grid-template-columns:1fr;}
-  .dash-stat-grid{grid-template-columns:1fr 1fr;}
-  /* Bottom nav visible sur mobile */
-  .bottom-nav{display:block;}
-  /* Padding bas pour compenser bottom nav */
-  #app-wrapper{padding-bottom:72px;}
-}
-
-/* ── Animations micro-interactions ───────────── */
-@keyframes correct-flash{
-  0%{box-shadow:0 0 0 0 rgba(44,95,62,.4);}
-  70%{box-shadow:0 0 0 10px rgba(44,95,62,0);}
-  100%{box-shadow:0 0 0 0 rgba(44,95,62,0);}
-}
-@keyframes wrong-flash{
-  0%{box-shadow:0 0 0 0 rgba(179,58,42,.4);}
-  70%{box-shadow:0 0 0 10px rgba(179,58,42,0);}
-  100%{box-shadow:0 0 0 0 rgba(179,58,42,0);}
-}
-.opt.good{animation:correct-flash .5s ease;}
-.opt.wrong{animation:wrong-flash .5s ease;}
-
-/* ── Confetti (réponse correcte) ─────────────── */
-.confetti-particle{
-  position:fixed;width:8px;height:8px;border-radius:2px;
-  animation:confetti-fall 1s ease forwards;
-  pointer-events:none;z-index:9999;
-}
-@keyframes confetti-fall{
-  0%{opacity:1;transform:translateY(0) rotate(0deg);}
-  100%{opacity:0;transform:translateY(120px) rotate(360deg);}
-}
-
-/* ── Auth tabs ───────────────────────────────── */
-.auth-tab{
-  flex:1;padding:11px;font-size:14px;font-weight:600;
-  border:none;cursor:pointer;transition:all .18s;
-}
-
-/* ── Scores/progress bar ─────────────────────── */
-.score-bar{
-  background:var(--beige);border-radius:999px;height:7px;
-  overflow:hidden;margin:6px 0;
-}
-.score-bar-fill{height:100%;border-radius:999px;transition:width .8s var(--ease);}
-
-/* ── Badges niveaux ──────────────────────────── */
-.badge-csp{background:#1565a7;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.06em;}
-.badge-cr{background:#2C5F3E;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.06em;}
-.badge-n{background:#7a1a8a;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.06em;}
-
-/* ── Tabs navigation ─────────────────────────── */
-.tab-link.active::after{
-  content:'';display:block;height:2px;
-  background:var(--gold);border-radius:1px;margin-top:2px;
-}
-
-
-/* ── Compatibilité contenu intérieur ───────── */
-/* qmeta utilisé dans les titres d'écrans */
-.qmeta{
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);font-weight:700;margin-bottom:6px;
-}
-/* Écrans app */
-#screen-level .card,
+/* Card conteneur des écrans */
 #screen-gate, #screen-level, #screen-setup,
 #screen-quiz, #screen-results, #screen-portraits,
 #screen-dashboard, #screen-ms, #screen-essai, #screen-tcf,
 #screen-course-gate, #screen-course-level,
-#screen-course-list, #screen-course-lesson,
-#screen-contact,
-#screen-gate .card, #screen-level .card, #screen-setup .card,
-#screen-quiz .card, #screen-results .card,
-#screen-portraits .card, #screen-dashboard .card,
-#screen-ms .card, #screen-essai .card, #screen-tcf .card,
-#screen-course-gate .card, #screen-course-level .card,
-#screen-course-list .card, #screen-course-lesson .card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--radius-lg);
-  padding:24px 20px;
-  box-shadow:var(--shadow);
-  max-width:580px;
-  margin:16px auto;
+#screen-course-list, #screen-course-lesson {
+  background: var(--white);
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 28px 24px;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--sh);
 }
-/* Résultats review */
-.review-item{
-  border:1px solid var(--line);border-radius:var(--radius);
-  padding:14px 16px;margin-bottom:8px;background:#fff;
-}
-.review-item.correct-item{border-color:var(--green);background:var(--green-bg);}
-.review-item.wrong-item{border-color:var(--brick);background:var(--brick-bg);}
-/* Points/streak */
-.streak-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  background:var(--gold);color:#fff;border-radius:20px;
-  padding:3px 10px;font-size:12px;font-weight:700;
-}
-/* Cours level list */
-.course-level-item{
-  display:flex;align-items:center;gap:14px;
-  border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:14px 16px;cursor:pointer;background:var(--paper);
-  margin-bottom:8px;transition:all .18s;
-}
-.course-level-item:hover{border-color:var(--gold);}
-/* Lesson pagination */
-.lesson-dots{display:flex;gap:6px;justify-content:center;margin-top:16px;}
-.lesson-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--beige);border:none;cursor:pointer;padding:0;
-  transition:background .15s;
-}
-.lesson-dot.active{background:var(--navy);}
-/* Tags de nom portrait */
-.name-tag{
-  background:var(--navy);color:var(--cream);
-  border-radius:20px;padding:6px 12px;
-  font-size:13px;font-weight:600;cursor:grab;
-  display:inline-block;margin:4px;
-  transition:transform .15s, box-shadow .15s;
-}
-.name-tag:hover{transform:scale(1.04);box-shadow:var(--shadow-sm);}
-.name-tag.used{background:var(--beige);color:var(--muted);cursor:default;}
 
-/* Reduce motion */
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+/* ── NIVEAUX ────────────────────────────────────── */
+.levels { display: flex; flex-direction: column; gap: 10px; }
+.level-item {
+  display: flex; align-items: center; gap: 14px;
+  border: 1.5px solid var(--border); border-radius: var(--r);
+  padding: 14px 16px; cursor: pointer; background: var(--surface);
+  transition: all .18s var(--ease);
 }
+.level-item:hover { border-color: var(--gold); box-shadow: var(--shadow-gold); }
+.level-item.active { border-color: var(--ink); background: var(--ink); color: var(--white); }
+.level-item.active .level-badge { background: var(--gold); color: var(--ink); }
+.level-badge { width: 36px; height: 36px; border-radius: var(--r-sm); background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: var(--ink); flex: none; }
+.level-text { flex: 1; }
+.level-name { font-weight: 600; font-size: 15px; color: inherit; }
+.level-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.level-item.active .level-sub { color: rgba(250,249,246,.65); }
+
+/* ── THÈMES ─────────────────────────────────────── */
+.theme-grid { display: flex; flex-direction: column; gap: 8px; }
+.theme-item {
+  display: flex; align-items: center; gap: 12px;
+  border: 1.5px solid var(--border); border-radius: var(--r);
+  padding: 12px 14px; cursor: pointer; background: var(--surface); transition: all .15s;
+}
+.theme-item:hover { border-color: var(--gold); }
+.theme-item.active { border-color: var(--ink); background: var(--ink); color: var(--white); }
+.theme-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex: none; }
+
+/* ── QUIZ ───────────────────────────────────────── */
+.quiz-progress { background: var(--surface-2); border-radius: 999px; height: 4px; margin-bottom: 18px; overflow: hidden; }
+.quiz-progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--ink), var(--gold)); transition: width .4s var(--ease); }
+.quiz-timer-bar { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+.quiz-timer-bar.warning { color: var(--danger); }
+
+/* ── RÉSULTATS ──────────────────────────────────── */
+.review-item { border: 1px solid var(--border); border-radius: var(--r); padding: 12px 14px; margin-bottom: 8px; background: var(--surface); }
+.review-item.correct-item { border-color: var(--success); background: var(--success-bg); }
+.review-item.wrong-item { border-color: var(--danger); background: var(--danger-bg); }
+
+/* ── TABLEAU DE BORD ────────────────────────────── */
+.dash-stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+.dash-stat { background: var(--surface-2); border-radius: var(--r); padding: 16px; text-align: center; }
+.dash-stat-val { font-family: var(--serif); font-size: 28px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+.dash-stat-lbl { font-size: 11px; color: var(--muted); }
+.score-bar { background: var(--surface-2); border-radius: 999px; height: 6px; overflow: hidden; margin: 4px 0; }
+.score-bar-fill { height: 100%; border-radius: 999px; transition: width .8s var(--ease); }
+
+/* ── COURS ──────────────────────────────────────── */
+.course-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px; cursor: pointer; transition: all .18s var(--ease); margin-bottom: 10px; }
+.course-card:hover { border-color: var(--gold); box-shadow: var(--sh-sm); }
+.course-level-item { display: flex; align-items: center; gap: 14px; border: 1.5px solid var(--border); border-radius: var(--r); padding: 14px 16px; cursor: pointer; background: var(--surface); margin-bottom: 8px; transition: all .18s; }
+.course-level-item:hover { border-color: var(--gold); }
+.lesson-page { background: var(--surface); border-radius: var(--r-lg); padding: 24px; border: 1px solid var(--border); }
+.lesson-page h3 { font-size: 19px; margin-bottom: 12px; }
+.lesson-page p { font-size: 15px; line-height: 1.75; color: #3a3a3a; margin-bottom: 12px; }
+.lesson-highlight { background: var(--gold-bg); border-left: 3px solid var(--gold); border-radius: 0 var(--r) var(--r) 0; padding: 11px 14px; font-size: 14px; font-weight: 600; color: var(--ink); margin: 12px 0; }
+.lesson-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+.lesson-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--surface-2); border: none; cursor: pointer; padding: 0; transition: background .15s; }
+.lesson-dot.active { background: var(--ink); }
+
+/* ── PORTRAITS ──────────────────────────────────── */
+.portraits-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(120px,1fr)); gap: 12px; margin-bottom: 10px; }
+.portrait-slot { border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 12px 8px; text-align: center; background: var(--surface); transition: all .18s; }
+.portrait-slot:hover { border-color: var(--gold); }
+.portrait-slot.correct { border-color: var(--success); background: var(--success-bg); }
+.portrait-slot.wrong { border-color: var(--danger); background: var(--danger-bg); }
+.portrait-slot .icon-wrap { display: flex; justify-content: center; margin-bottom: 8px; }
+.portrait-slot .icon-wrap svg { width: 68px; height: 68px; display: block; }
+.portrait-slot .drop-target { font-size: 11px; color: var(--muted); min-height: 32px; display: flex; align-items: center; justify-content: center; border: 1.5px dashed var(--border-md); border-radius: var(--r-sm); padding: 5px; cursor: pointer; transition: all .15s; }
+.portrait-slot .drop-target.filled { border-style: solid; border-color: var(--ink); color: var(--ink); font-weight: 600; font-size: 11px; background: var(--surface-2); }
+.name-tag { background: var(--ink); color: var(--white); border-radius: 20px; padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: grab; display: inline-block; margin: 4px; transition: transform .15s, box-shadow .15s; }
+.name-tag:hover { transform: scale(1.03); box-shadow: var(--sh-sm); }
+.name-tag.used { background: var(--surface-2); color: var(--muted); cursor: default; }
+.streak-badge { display: inline-flex; align-items: center; gap: 4px; background: var(--gold); color: #fff; border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 700; }
+
+/* ── TOPBAR APP ─────────────────────────────────── */
+.app-topbar {
+  background: var(--white); padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 3px; z-index: 90;
+}
+
+/* ── BOTTOM NAV MOBILE ──────────────────────────── */
+.bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--surface); border-top: 1px solid var(--border); padding: 8px 0 env(safe-area-inset-bottom,8px); box-shadow: 0 -2px 16px rgba(15,27,45,.07); }
+.bottom-nav-inner { display: flex; justify-content: space-around; align-items: center; }
+.bn-item { display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; padding: 5px 10px; color: var(--muted); font-size: 10px; font-weight: 600; transition: color .15s; letter-spacing: .04em; text-transform: uppercase; min-width: 56px; font-family: var(--sans); }
+.bn-item.active { color: var(--ink); }
+.bn-item svg { width: 20px; height: 20px; stroke-width: 1.8; }
+
+/* ── QMETA ──────────────────────────────────────── */
+.qmeta { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; font-family: var(--sans); }
+
+/* ── FORMULAIRES ────────────────────────────────── */
+.gate-icon { text-align: center; font-size: 24px; color: var(--gold); margin-bottom: 14px; }
+.gate-label { text-align: center; font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 16px; }
+.gate-error { background: var(--danger-bg); border: 1px solid rgba(168,45,30,.2); border-radius: var(--r); padding: 10px 14px; font-size: 13px; color: var(--danger); margin-top: 10px; display: none; }
+.gate-error.show { display: block; }
+.gate-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.5; }
+input, textarea, select { font-family: var(--sans); font-size: 15px; border: 1.5px solid var(--border-md); border-radius: var(--r); padding: 11px 14px; width: 100%; background: var(--surface); transition: border-color .15s, box-shadow .15s; color: var(--ink); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,.12); }
+.auth-tab { flex: 1; padding: 11px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: all .18s; font-family: var(--sans); }
+
+/* ── FORM GROUPS & CHAMPS AVANCÉS (profil FLE) ──── */
+.form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.form-group .form-hint { font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+.form-legend { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.form-legend .req { color: var(--gold); font-weight: 700; }
+
+/* Chips radio / checkbox réutilisables */
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-opt { position: relative; }
+.chip-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip-opt label {
+  display: block; text-align: center; padding: 10px 14px; min-width: 96px;
+  border: 1.5px solid var(--border-md); border-radius: var(--r); background: var(--surface);
+  font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer;
+  transition: all .15s var(--ease); user-select: none;
+}
+.chip-opt label:hover { border-color: var(--gold); }
+.chip-opt input:checked + label { border-color: var(--gold); background: var(--gold-bg); box-shadow: inset 0 0 0 1px var(--gold); }
+.chip-opt input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+.chip-group.days .chip-opt label { min-width: 44px; padding: 9px 6px; font-size: 12px; }
+
+/* Variante sur fond sombre (formation linguistique) */
+#form-linguistique input, #form-linguistique select, #form-linguistique textarea { background: rgba(255,255,255,.94); }
+.cond-field { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .28s var(--ease), opacity .2s var(--ease), margin-bottom .28s var(--ease); margin-bottom: 0; }
+.cond-field.is-visible { max-height: 260px; opacity: 1; margin-bottom: 14px; }
+
+/* Grilles de vignettes réutilisables (remplace les grid-template-columns inline) */
+.tiles-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tiles-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.tiles-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media(max-width:640px){
+  .tiles-3 { grid-template-columns: 1fr 1fr; }
+  .tiles-4 { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:420px){
+  .tiles-2 { grid-template-columns: 1fr; }
+}
+
+/* Sélecteur à deux formations (bien distinctes) */
+.formation-switch { display: flex; gap: 6px; margin: 22px 0 32px; border-bottom: 2px solid var(--border-md); }
+.fswitch-btn {
+  flex: 1; background: none; border: none; padding: 14px 12px; font-size: 14px; font-weight: 700;
+  color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px;
+  transition: color .15s var(--ease), border-color .15s var(--ease); font-family: var(--sans);
+}
+.fswitch-btn:hover { color: var(--navy); }
+.fswitch-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+@media(max-width:480px){ .fswitch-btn { font-size: 12.5px; padding: 12px 6px; } }
+
+/* ── FINITIONS VISUELLES ─────────────────────────── */
+.eyebrow { position: relative; padding-left: 20px; }
+.eyebrow::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 13px; height: 1.5px; background: var(--gold); }
+.sec-divider { height: 1px; max-width: 1080px; margin: 0 auto; background: linear-gradient(90deg, transparent, var(--border-md) 20%, var(--border-md) 80%, transparent); }
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: ''; position: absolute; top: -120px; right: -160px; width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(184,150,46,.10) 0%, rgba(184,150,46,0) 70%);
+  pointer-events: none;
+}
+.final { position: relative; overflow: hidden; }
+.final::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(184,150,46,.14) 0%, rgba(184,150,46,0) 60%);
+  pointer-events: none;
+}
+
+/* ── PRICING ────────────────────────────────────── */
+.pricing { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+.plan { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--r-xl); padding: 28px 22px; text-align: center; transition: all .2s; }
+.plan:hover { box-shadow: var(--sh); transform: translateY(-2px); }
+.plan.pop { border-color: var(--gold); background: var(--ink); color: var(--white); }
+.plan-tag { display: inline-block; background: var(--gold); color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+.plan-name { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .65; margin-bottom: 10px; }
+.plan.pop .plan-name { opacity: .8; color: var(--white); }
+.plan-price { font-family: var(--serif); font-size: 42px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+.plan.pop .plan-price { color: var(--gold-lt); }
+.plan-price small { font-size: 17px; opacity: .55; }
+.plan-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.plan.pop .plan-sub { color: rgba(250,249,246,.55); }
+.pricing-note, .pricing-pay { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+
+/* ── LANDING SECTIONS ───────────────────────────── */
+.hero { background: var(--white); }
+.how { background: var(--surface-2); }
+.final { background: var(--ink); }
+.final h2, .final p { color: var(--white); }
+
+/* ── ONGLETS LANDING ────────────────────────────── */
+.tab-content { animation: fadeUp .22s var(--ease); }
+.tab-link.active { color: var(--ink) !important; font-weight: 700 !important; }
+
+/* ── FAQ ────────────────────────────────────────── */
+details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 18px; cursor: pointer; transition: box-shadow .15s; margin-bottom: 8px; }
+details:hover { box-shadow: var(--sh-sm); }
+details[open] { border-color: var(--gold); }
+details summary { font-weight: 600; color: var(--ink); font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: '+'; font-size: 20px; color: var(--gold); flex: none; line-height: 1; transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+
+/* ── FOOTER ─────────────────────────────────────── */
+footer { background: var(--ink); color: rgba(250,249,246,.6); padding: 40px 0; font-size: 13px; }
+.foot { display: flex; gap: 32px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+.foot-b { font-size: 13px; color: rgba(250,249,246,.55); line-height: 1.7; }
+.foot-b b { color: var(--white); }
+.foot-links { display: flex; flex-direction: column; gap: 8px; }
+.foot-links a { color: rgba(250,249,246,.55); transition: color .15s; }
+.foot-links a:hover { color: var(--white); }
+.foot-legal { font-size: 11px; color: rgba(250,249,246,.35); max-width: 300px; line-height: 1.6; }
+
+/* ── WRAPPER APP ────────────────────────────────── */
+.app-wrapper { display: none; background: var(--white); min-height: 100vh; }
+.app-wrapper.visible { display: block; }
+#screen-landing { display: block; }
+#screen-landing.hidden { display: none; }
+
+/* ── MODAL ──────────────────────────────────────── */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(15,27,45,.45); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px; }
+.modal-backdrop.open { display: flex; }
+.modal { background: var(--surface); border-radius: var(--r-xl); padding: 30px; max-width: 480px; width: 100%; box-shadow: var(--sh-lg); animation: fadeUp .25s var(--ease); }
+.modal-title { font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+
+/* ── STEPS ──────────────────────────────────────── */
+.steps { list-style: none; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.step-n { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 18px; margin-bottom: 12px; }
+
+/* ── CONFETTI ───────────────────────────────────── */
+.confetti-particle { position: fixed; width: 7px; height: 7px; border-radius: 2px; animation: confetti-fall 1s ease forwards; pointer-events: none; z-index: 9999; }
+@keyframes confetti-fall { 0%{opacity:1;transform:translateY(0) rotate(0deg);} 100%{opacity:0;transform:translateY(100px) rotate(360deg);} }
+
+/* ── BADGES NIVEAUX ─────────────────────────────── */
+.badge-csp { background: #1A4F8A; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+.badge-cr  { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+.badge-n   { background: #6B1A7A; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+
+/* ── ANIMATIONS ─────────────────────────────────── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(7px);} to{opacity:1;transform:none;} }
+@keyframes slideIn { from{opacity:0;transform:translateX(8px);} to{opacity:1;transform:none;} }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:860px){
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-3, .steps, .pricing { grid-template-columns: 1fr; }
+  .plan.pop { transform: none; }
+  .nav-links { display: none; flex-direction: column; position: fixed; top: 63px; left: 0; right: 0; background: var(--white); z-index: 999; padding: 20px 24px 24px; border-bottom: 1px solid var(--border); gap: 0; box-shadow: var(--sh-lg); }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 16px; width: 100%; }
+  .nav-links a:last-child { border-bottom: none; margin-top: 8px; }
+  .nav-links .nav-cta { width: 100%; text-align: center; border-radius: var(--r); margin-top: 6px; }
+  .hamburger { display: flex; }
+}
+@media(max-width:600px){
+  section { padding: 56px 0; }
+  .hero { padding: 48px 0 32px; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; }
+  .grid-4 { grid-template-columns: 1fr; }
+  .dash-stat-grid { grid-template-columns: 1fr 1fr; }
+  .bottom-nav { display: block; }
+  #app-wrapper { padding-bottom: 72px; }
+  #screen-gate, #screen-level, #screen-setup, #screen-quiz, #screen-results, #screen-portraits, #screen-dashboard, #screen-ms, #screen-essai, #screen-tcf, #screen-course-gate, #screen-course-level, #screen-course-list, #screen-course-lesson { margin: 12px; padding: 20px 16px; }
+}
+@media(prefers-reduced-motion:reduce){ *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* ═══ FIXES INTÉRIEURS PRO ═══════════════════════════ */
+
+/* Fond global cohérent */
+body { background: #F4F3F0; }
+.app-wrapper.visible { background: #F4F3F0; min-height: 100vh; }
+
+/* Topbar propre */
+.app-topbar {
+  background: #fff;
+  border-bottom: 1px solid rgba(15,27,45,.09);
+  padding: 0 20px;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 90;
+  box-shadow: 0 1px 4px rgba(15,27,45,.06);
+}
+.app-topbar .brand-name { font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+
+/* Écrans intérieurs */
+#screen-gate, #screen-level, #screen-setup,
+#screen-quiz, #screen-results, #screen-portraits,
+#screen-dashboard, #screen-ms, #screen-essai,
+#screen-course-gate, #screen-course-level,
+#screen-course-list, #screen-course-lesson,
+#screen-contact {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px 22px;
+  max-width: 560px;
+  margin: 20px auto;
+  box-shadow: 0 2px 12px rgba(15,27,45,.07);
+  border: 1px solid rgba(15,27,45,.08);
+}
+
+/* Titres écrans */
+.screen-title {
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(15,27,45,.08);
+}
+.qmeta {
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 8px;
+}
+
+/* Niveaux */
+.levels { display: flex; flex-direction: column; gap: 8px; }
+.level-item {
+  display: flex; align-items: center; gap: 14px;
+  border: 1.5px solid rgba(15,27,45,.1);
+  border-radius: 10px; padding: 14px 16px;
+  cursor: pointer; background: #fff;
+  transition: all .18s; font-weight: 500;
+}
+.level-item:hover { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,.12); }
+.level-item.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+.level-badge {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: #F4F3F0; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 13px;
+  color: var(--ink); flex: none;
+}
+.level-item.active .level-badge { background: var(--gold); color: var(--ink); }
+.level-sub { font-size: 12px; opacity: .6; margin-top: 2px; }
+
+/* Thèmes */
+.theme-grid { display: flex; flex-direction: column; gap: 8px; }
+.theme-item {
+  display: flex; align-items: center; gap: 12px;
+  border: 1.5px solid rgba(15,27,45,.1); border-radius: 10px;
+  padding: 13px 14px; cursor: pointer; background: #fff;
+  font-size: 14px; font-weight: 500; transition: all .15s;
+}
+.theme-item:hover { border-color: var(--gold); }
+.theme-item.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+.theme-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex: none; }
+
+/* Quiz */
+.quiz-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.quiz-prog {
+  background: #F0EFEc; border-radius: 999px; height: 4px;
+  overflow: hidden; flex: 1; margin: 0 14px;
+}
+.quiz-prog-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--ink), var(--gold));
+  transition: width .4s ease;
+}
+.quiz-question {
+  font-size: 17px; font-weight: 600; color: var(--ink);
+  line-height: 1.5; margin-bottom: 18px;
+  padding: 18px 20px; background: #FAFAFA;
+  border-radius: 10px; border: 1px solid rgba(15,27,45,.07);
+}
+
+/* Options quiz */
+.opt {
+  display: flex; align-items: flex-start; gap: 12px;
+  border: 1.5px solid rgba(15,27,45,.1); background: #fff;
+  border-radius: 10px; padding: 13px 15px; margin-bottom: 8px;
+  font-size: 14px; cursor: pointer; transition: all .15s;
+}
+.opt:hover { border-color: var(--gold); background: #FDFBF4; }
+.opt .k {
+  width: 28px; height: 28px; flex: none; border-radius: 7px;
+  border: 1.5px solid rgba(15,27,45,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--ink);
+  background: #F4F3F0; margin-top: 1px;
+}
+.opt.good { border-color: #1E6B45; background: #EAF5EF; }
+.opt.good .k { background: #1E6B45; color: #fff; border-color: #1E6B45; }
+.opt.good .tick { margin-left: auto; color: #1E6B45; font-size: 16px; font-weight: 700; }
+.opt.wrong { border-color: #A82D1E; background: #FDF0EE; }
+.opt.wrong .k { background: #A82D1E; color: #fff; border-color: #A82D1E; }
+.opt.disabled { cursor: default; pointer-events: none; }
+
+/* Cours */
+.course-card {
+  background: #fff; border: 1.5px solid rgba(15,27,45,.09);
+  border-radius: 12px; padding: 18px 20px; cursor: pointer;
+  transition: all .18s; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 14px;
+}
+.course-card:hover { border-color: var(--gold); box-shadow: 0 4px 14px rgba(15,27,45,.08); }
+.course-icon {
+  width: 42px; height: 42px; background: var(--ink);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; flex: none;
+}
+.lesson-page {
+  background: #fff; border-radius: 12px; padding: 24px;
+  border: 1px solid rgba(15,27,45,.08);
+}
+.lesson-page h3 { font-size: 19px; margin-bottom: 14px; font-weight: 700; }
+.lesson-page p { font-size: 15px; line-height: 1.75; color: #3a3a3a; margin-bottom: 14px; }
+.lesson-highlight {
+  background: #FDFBF0; border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0; padding: 12px 16px;
+  font-size: 14px; font-weight: 600; color: var(--ink); margin: 14px 0;
+}
+.lesson-dots { display: flex; gap: 6px; justify-content: center; margin-top: 18px; }
+.lesson-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #DDD; border: none; cursor: pointer; padding: 0; transition: background .15s;
+}
+.lesson-dot.active { background: var(--ink); }
+
+/* Portraits */
+.portraits-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px; margin-bottom: 12px;
+}
+.portrait-slot {
+  border: 2px solid rgba(15,27,45,.1); border-radius: 12px;
+  padding: 14px 10px; text-align: center; background: #fff;
+  transition: all .18s;
+}
+.portrait-slot:hover { border-color: var(--gold); }
+.portrait-slot.correct { border-color: #1E6B45; background: #EAF5EF; }
+.portrait-slot.wrong { border-color: #A82D1E; background: #FDF0EE; }
+.portrait-slot .icon-wrap { display: flex; justify-content: center; margin-bottom: 8px; }
+.portrait-slot .icon-wrap svg { width: 68px; height: 68px; display: block; }
+.portrait-slot .drop-target {
+  font-size: 11px; color: #999; min-height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px dashed rgba(15,27,45,.15); border-radius: 6px;
+  padding: 5px; cursor: pointer; transition: all .15s;
+}
+.portrait-slot .drop-target.filled {
+  border-style: solid; border-color: var(--ink);
+  color: var(--ink); font-weight: 600; font-size: 11px;
+  background: #F4F3F0;
+}
+.name-tag {
+  background: var(--ink); color: #fff; border-radius: 20px;
+  padding: 6px 13px; font-size: 13px; font-weight: 600;
+  cursor: grab; display: inline-block; margin: 4px;
+  transition: transform .15s, box-shadow .15s;
+}
+.name-tag:hover { transform: scale(1.04); box-shadow: 0 4px 12px rgba(15,27,45,.2); }
+.name-tag.used { background: #E5E4E0; color: #999; cursor: default; transform: none; }
+
+/* Dashboard */
+.dash-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+.dash-stat {
+  background: #F4F3F0; border-radius: 10px; padding: 16px;
+  text-align: center; border: 1px solid rgba(15,27,45,.07);
+}
+.dash-stat-val { font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+.dash-stat-lbl { font-size: 11px; color: #888; }
+.score-bar { background: #EEE; border-radius: 999px; height: 6px; overflow: hidden; margin: 5px 0; }
+.score-bar-fill { height: 100%; border-radius: 999px; transition: width .8s ease; }
+
+/* Mises en situation */
+.ms-theme-card {
+  border: 1.5px solid rgba(15,27,45,.09); border-radius: 12px;
+  padding: 16px 18px; cursor: pointer; background: #fff;
+  margin-bottom: 8px; transition: all .18s;
+  display: flex; align-items: center; gap: 12px;
+}
+.ms-theme-card:hover { border-color: var(--gold); box-shadow: 0 4px 12px rgba(15,27,45,.07); }
+
+/* Résultats */
+.result-score-circle {
+  width: 96px; height: 96px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin: 0 auto 20px; border: 4px solid currentColor;
+  background: #fff;
+}
+.review-item {
+  border: 1px solid rgba(15,27,45,.09); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 8px; background: #fff;
+}
+.review-item.correct-item { border-color: #1E6B45; background: #EAF5EF; }
+.review-item.wrong-item { border-color: #A82D1E; background: #FDF0EE; }
+
+/* Formulaires */
+input, textarea, select {
+  font-family: var(--body); font-size: 15px;
+  border: 1.5px solid rgba(15,27,45,.15); border-radius: 8px;
+  padding: 12px 14px; width: 100%; background: #fff;
+  transition: border-color .15s, box-shadow .15s; color: var(--ink);
+  appearance: none;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,150,46,.12);
+}
+
+/* Bottom nav mobile */
+.bottom-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+  background: #fff; border-top: 1px solid rgba(15,27,45,.09);
+  padding: 8px 0; box-shadow: 0 -2px 12px rgba(15,27,45,.07);
+}
+.bottom-nav-inner { display: flex; justify-content: space-around; }
+.bn-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  background: none; border: none; cursor: pointer; padding: 6px 12px;
+  color: #999; font-size: 10px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; min-width: 56px; transition: color .15s;
+}
+.bn-item.active { color: var(--ink); }
+.bn-item svg { width: 21px; height: 21px; stroke-width: 1.8; }
+
+/* Auth gate */
+.auth-tab {
+  flex: 1; padding: 11px; font-size: 14px; font-weight: 600;
+  border: none; cursor: pointer; transition: all .18s;
+}
+.gate-error {
+  background: #FDF0EE; border: 1px solid rgba(168,45,30,.2);
+  border-radius: 8px; padding: 10px 14px; font-size: 13px;
+  color: #A82D1E; margin-top: 10px; display: none;
+}
+.gate-error.show { display: block; }
+.gate-hint { font-size: 12px; color: #888; text-align: center; margin-top: 12px; line-height: 1.5; }
+.gate-label { text-align: center; font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 18px; }
+.gate-icon { text-align: center; font-size: 26px; color: var(--gold); margin-bottom: 14px; }
+
+/* Streak badge */
+.streak-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gold); color: #fff; border-radius: 20px;
+  padding: 3px 10px; font-size: 12px; font-weight: 700;
+}
+
+/* FAQ */
+details {
+  background: #fff; border: 1px solid rgba(15,27,45,.09);
+  border-radius: 10px; padding: 16px 18px;
+  cursor: pointer; margin-bottom: 8px; transition: box-shadow .15s;
+}
+details:hover { box-shadow: 0 2px 8px rgba(15,27,45,.07); }
+details[open] { border-color: var(--gold); }
+details summary {
+  font-weight: 700; color: var(--ink); font-size: 15px;
+  list-style: none; display: flex; justify-content: space-between;
+  align-items: center; gap: 12px;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: '+'; font-size: 22px; color: var(--gold); flex: none; line-height: 1; transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+
+/* TCF niveaux */
+.tcf-level-card {
+  border-radius: 12px; padding: 18px 20px; cursor: pointer;
+  margin-bottom: 10px; color: #fff; transition: opacity .15s;
+}
+.tcf-level-card:hover { opacity: .9; }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .nav-links {
+    display: none; flex-direction: column;
+    position: fixed; top: 59px; left: 0; right: 0;
+    background: #fff; z-index: 999;
+    padding: 18px 22px 22px;
+    border-bottom: 1px solid rgba(15,27,45,.1);
+    box-shadow: 0 8px 24px rgba(15,27,45,.12);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(15,27,45,.08); font-size: 16px; width: 100%; }
+  .nav-links a:last-child { border-bottom: none; }
+  .nav-links .nav-cta { width: 100%; text-align: center; margin-top: 6px; }
+  .hamburger { display: flex; }
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .grid-3, .grid-4, .pricing, .steps { grid-template-columns: 1fr; }
+  #screen-gate, #screen-level, #screen-setup,
+  #screen-quiz, #screen-results, #screen-portraits,
+  #screen-dashboard, #screen-ms, #screen-essai,
+  #screen-course-gate, #screen-course-level,
+  #screen-course-list, #screen-course-lesson { margin: 12px 12px 80px; }
+}
+@media (max-width: 600px) {
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; }
+  .dash-stat-grid { grid-template-columns: 1fr 1fr; }
+  .bottom-nav { display: block; }
+  #app-wrapper { padding-bottom: 70px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
 </style>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -797,12 +962,12 @@ footer{
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
+      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;">Nos formations</a>
       <a class="navlink tab-link" href="#" data-tab="public-tab" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
       <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
-      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;" style="color:var(--brick);font-weight:700;">🏫 Formations</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
@@ -815,16 +980,16 @@ footer{
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Préparation à l'examen civique</div>
-        <h1>Réussissez l'examen civique,<br><span class="em">à votre rythme.</span></h1>
-        <p class="lead">La plateforme en ligne pour vous préparer sereinement : des cours illustrés, des questions par niveau et un examen blanc chronométré — accessibles partout, quand vous voulez.</p>
+        <div class="eyebrow">Intégration en France</div>
+        <h1>Réussissez votre intégration,<br><span class="em">à votre rythme.</span></h1>
+        <p class="lead">Civicum, c'est <b>deux parcours complémentaires</b> pour votre intégration en France : la préparation à l'<b>examen civique</b> et l'apprentissage du <b>français (FLE)</b>.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" onclick="showApp();return false;">Connexion / Inscription</a>
-          <a class="btn btn-ghost" href="#" onclick="switchTab('contact-tab');return false;">Nous contacter</a>
+          <a class="btn btn-primary" href="#" onclick="document.getElementById('apercu-formations').scrollIntoView({behavior:'smooth'});return false;">Découvrir les deux parcours ↓</a>
         </div>
         <div class="hero-trust">
           <span><i class="dot"></i>Sans installation</span>
           <span><i class="dot"></i>Mobile &amp; ordinateur</span>
+          <span><i class="dot"></i>En ligne ou en présentiel</span>
         </div>
       </div>
       <div class="preview-carousel" aria-hidden="true">
@@ -833,6 +998,7 @@ footer{
           <button class="pdot" onclick="showPreview(1)"></button>
           <button class="pdot" onclick="showPreview(2)"></button>
           <button class="pdot" onclick="showPreview(3)"></button>
+          <button class="pdot" onclick="showPreview(4)"></button>
         </div>
         <div class="preview-slide active" id="prev-0">
           <div class="preview-label">📝 Entraînement</div>
@@ -903,6 +1069,61 @@ footer{
           </div>
         </div>
 
+        <!-- Slide 5 : Formation FLE -->
+        <div class="preview-slide" id="prev-4">
+          <div class="preview-label">🗣️ Français (FLE)</div>
+          <div class="qcard" style="padding:20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex:none;font-size:16px;">🇫🇷</div>
+              <div>
+                <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;">Niveau · A2 → B1</div>
+                <div style="font-size:13px;font-weight:700;color:var(--navy);">Se présenter chez le médecin</div>
+              </div>
+            </div>
+            <p style="font-family:'Source Serif 4',serif;font-size:13px;line-height:1.6;color:#3a3a3a;margin-bottom:10px;">Mise en situation orale : décrire un symptôme, comprendre les consignes du médecin traitant.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--navy);font-weight:600;">🗣️ Oral</span>
+              <span style="background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--navy);font-weight:600;">✍️ Écrit</span>
+              <span style="background:var(--gold-bg);border:1px solid var(--gold);border-radius:20px;padding:4px 10px;font-size:11px;color:#8B6914;font-weight:700;">TCF / TEF</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOS FORMATIONS (aperçu général) -->
+  <section id="apercu-formations" style="background:var(--cream);padding:56px 0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Deux portes d'entrée</div>
+        <h2>Deux parcours complémentaires, deux portes d'entrée</h2>
+        <p>Civicum ne se limite pas à l'examen civique : choisissez la porte qui correspond à votre besoin, ou suivez les deux parcours.</p>
+      </div>
+      <div class="tiles-2" style="gap:24px;">
+        <div class="form-card" style="border:2px solid var(--navy);display:flex;flex-direction:column;">
+          <div style="width:52px;height:52px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;">🇫🇷</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:21px;color:var(--navy);margin-bottom:8px;font-weight:600;">Examen civique</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Préparation en ligne pour la carte de séjour pluriannuelle, la carte de résident ou la naturalisation : cours illustrés, questions par niveau et examen blanc chronométré.</p>
+          <ul style="font-size:13px;color:var(--ink);line-height:2;margin:0 0 20px;padding-left:18px;">
+            <li>Niveaux CSP · CR · Naturalisation</li>
+            <li>En ligne, à votre rythme</li>
+            <li>Formation en présentiel disponible à Paris</li>
+          </ul>
+          <button class="btn btn-primary" style="margin-top:auto;justify-content:center;" onclick="showApp();return false;">Commencer l'entraînement</button>
+        </div>
+        <div class="form-card" style="border:2px solid var(--gold);display:flex;flex-direction:column;">
+          <div style="width:52px;height:52px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;">🗣️</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:21px;color:var(--navy);margin-bottom:8px;font-weight:600;">Français langue étrangère (FLE)</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Formation en petit groupe, de A1 à B2, pour acquérir le niveau de français exigé par l'administration et réussir les tests officiels TCF et TEF.</p>
+          <ul style="font-size:13px;color:var(--ink);line-height:2;margin:0 0 20px;padding-left:18px;">
+            <li>Groupes de 5 à 10 personnes</li>
+            <li>Présentiel (Paris / IDF) ou distanciel</li>
+            <li>Entretien de positionnement offert</li>
+          </ul>
+          <button class="btn btn-gold" style="margin-top:auto;justify-content:center;" onclick="switchTab('formation-tab');switchFormationSubtab('fle');return false;">Découvrir la formation</button>
+        </div>
       </div>
     </div>
   </section>
@@ -911,7 +1132,7 @@ footer{
   <section style="background:var(--navy);padding:48px 0;">
     <div class="wrap">
       <div style="text-align:center;margin-bottom:28px;">
-        <div class="eyebrow" style="color:var(--gold);">Pour qui ?</div>
+        <div class="eyebrow" style="color:var(--gold);">Pour qui ? (examen civique)</div>
         <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(22px,3vw,30px);margin-bottom:10px;">Qui est concerné par l'examen civique ?</h2>
         <p style="color:rgba(246,242,233,.75);font-size:15px;max-width:620px;margin:0 auto;">L'examen civique est obligatoire pour les démarches suivantes, sauf exceptions prévues par la loi.</p>
       </div>
@@ -943,8 +1164,8 @@ footer{
   <section id="atouts" style="background:var(--cream);">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">La plateforme</div>
-        <h2>Tout ce dont vous avez besoin pour réussir</h2>
+        <div class="eyebrow">La plateforme d'examen civique</div>
+        <h2>Tout ce dont vous avez besoin pour réussir l'examen</h2>
         <p>Quatre outils complémentaires, accessibles depuis un seul compte, sur mobile ou ordinateur.</p>
       </div>
 
@@ -972,22 +1193,22 @@ footer{
       <!-- Grille 3 autres outils -->
       <div class="grid-3" style="margin-top:0;">
         <article class="card feat" style="border-top:3px solid var(--brick);">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="30" width="7" height="9" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="20.5" y="23" width="7" height="16" rx="1" fill="none" stroke="#16233F" stroke-width="2.2"/><rect x="31" y="16" width="7" height="23" rx="1" fill="#B3402F" stroke="#B3402F" stroke-width="2.2"/></svg></div>
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="30" width="7" height="9" rx="1" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><rect x="20.5" y="23" width="7" height="16" rx="1" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><rect x="31" y="16" width="7" height="23" rx="1" fill="#D4B04A" stroke="#D4B04A" stroke-width="2.2"/></svg></div>
           <h3>🎯 Questions par niveau</h3>
           <p>Entraînez-vous avec des séries de questions adaptées à votre démarche : CSP (3 réponses), Carte de résident et Naturalisation (4 réponses). Par thème ou en mode aléatoire.</p>
         </article>
         <article class="card feat" style="border-top:3px solid var(--navy);">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="13" fill="none" stroke="#16233F" stroke-width="2.2"/><line x1="24" y1="27" x2="24" y2="19" stroke="#16233F" stroke-width="2.2" stroke-linecap="round"/><line x1="24" y1="27" x2="29" y2="30" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/><line x1="20" y1="9" x2="28" y2="9" stroke="#16233F" stroke-width="2.4" stroke-linecap="round"/><line x1="24" y1="9" x2="24" y2="14" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="13" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><line x1="24" y1="27" x2="24" y2="19" stroke="#FBF8F1" stroke-width="2.2" stroke-linecap="round"/><line x1="24" y1="27" x2="29" y2="30" stroke="#D4B04A" stroke-width="2.2" stroke-linecap="round"/><line x1="20" y1="9" x2="28" y2="9" stroke="#FBF8F1" stroke-width="2.4" stroke-linecap="round"/><line x1="24" y1="9" x2="24" y2="14" stroke="#FBF8F1" stroke-width="2.2"/></svg></div>
           <h3>📋 Examen blanc chronométré</h3>
           <p>40 questions en 45 minutes, dans les conditions réelles de l'entretien. Résultats détaillés à la fin pour identifier vos points à retravailler.</p>
         </article>
         <article class="card feat" style="border-top:3px solid var(--gold);">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#16233F" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#B3402F" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M12 20v8h5l7 6V14l-7 6Z" fill="none" stroke="#FBF8F1" stroke-width="2.2" stroke-linejoin="round"/><path d="M29 19a8 8 0 0 1 0 10" fill="none" stroke="#D4B04A" stroke-width="2.2" stroke-linecap="round"/></svg></div>
           <h3>🖼️ Portraits &amp; Symboles</h3>
           <p>Apprenez à reconnaître les personnages et symboles de la République française grâce à un jeu d'association interactif. Idéal pour mémoriser sans effort.</p>
         </article>
         <article class="card feat" style="border-top:3px solid var(--brick);">
-          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="12" width="28" height="24" rx="3" fill="none" stroke="#16233F" stroke-width="2.2"/><path d="M18 20h12M18 26h8" stroke="#B3402F" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="34" r="8" fill="#B3402F"/><path d="M33 34l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="10" y="12" width="28" height="24" rx="3" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><path d="M18 20h12M18 26h8" stroke="#D4B04A" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="34" r="8" fill="#D4B04A"/><path d="M33 34l2 2 4-4" stroke="#16233F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>🎭 Mises en situation</h3>
           <p>Des scénarios concrets de la vie quotidienne : santé, logement, travail, laïcité, égalité, éducation… Pour mieux répondre aux questions sous forme de mises en situation, également prévues à l'examen civique.</p>
         </article>
@@ -1073,14 +1294,14 @@ footer{
       <div class="eyebrow" style="margin-bottom:12px;">À propos de Civicum</div>
       <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(26px,4vw,36px);margin-bottom:28px;color:var(--navy);">Une réponse pensée pour ceux qui en ont besoin</h2>
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;">
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Civicum est une plateforme de préparation en ligne à l'examen civique, conçue pour accompagner toute personne engagée dans une démarche d'intégration en France, que ce soit pour une demande de carte de séjour, de carte de résident ou de naturalisation.</p>
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Notre objectif est de rendre la préparation accessible, autonome et efficace. Des cours structurés par thématique, des séries de questions par niveau, un examen blanc chronométré : tout est pensé pour permettre à chacun de se préparer sérieusement, à son rythme, depuis n'importe quel appareil.</p>
-        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">Civicum propose des tarifs accessibles à tous, parce qu'un échec à l'examen n'est pas anodin. Le repassage a un coût, humain et administratif. Nous croyons qu'une bonne préparation ne devrait pas être un luxe.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Civicum est une plateforme d'accompagnement à l'intégration en France, conçue pour toute personne engagée dans une démarche de titre de séjour, de carte de résident ou de naturalisation.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;margin-bottom:20px;">Elle réunit deux volets complémentaires : une préparation en ligne à l'<b>examen civique</b> (cours structurés par thématique, questions par niveau, examen blanc chronométré) et une formation de <b>français langue étrangère (FLE)</b> en petit groupe, de A1 à B2, pour réussir les tests officiels TCF et TEF.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.72;color:#3a3a3a;">Notre objectif est de rendre cette préparation accessible, autonome et efficace, parce qu'un échec — à l'examen comme au test de langue — a un coût humain et administratif. Nous croyons qu'une bonne préparation ne devrait pas être un luxe.</p>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="tiles-2">
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
-          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">3</div>
-          <div style="font-size:13px;color:var(--muted);margin-top:6px;">niveaux de préparation<br>(CSP, CR, Naturalisation)</div>
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">2</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">parcours complémentaires<br>examen civique &amp; français (FLE)</div>
         </div>
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
           <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">5</div>
@@ -1091,8 +1312,8 @@ footer{
           <div style="font-size:13px;color:var(--muted);margin-top:6px;">questions en examen blanc<br>chronométré 45 min</div>
         </div>
         <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;">
-          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">100%</div>
-          <div style="font-size:13px;color:var(--muted);margin-top:6px;">en ligne, sur mobile<br>et ordinateur</div>
+          <div style="font-family:'Libre Caslon Display',serif;font-size:40px;color:var(--brick);line-height:1;">A1→B2</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">niveaux couverts<br>en formation FLE</div>
         </div>
       </div>
     </div>
@@ -1104,9 +1325,9 @@ footer{
   <section>
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">Tarifs</div>
+        <div class="eyebrow">Tarifs — Examen civique</div>
         <h2>Un abonnement simple, sans engagement</h2>
-        <p>Des tarifs accessibles à tous. Paiement en ligne sécurisé par carte bancaire via Stripe — accès activé immédiatement après confirmation du paiement.</p>
+        <p>Des tarifs accessibles à tous pour la plateforme d'examen civique. Paiement en ligne sécurisé par carte bancaire via Stripe — accès activé immédiatement après confirmation du paiement. <a href="#" onclick="switchTab('formation-tab');switchFormationSubtab('fle');return false;" style="color:var(--gold);font-weight:600;">Tarifs de la formation FLE →</a></p>
       </div>
       <div class="pricing">
         <div class="plan">
@@ -1144,6 +1365,19 @@ footer{
           <li>Choisissez votre formule et payez en ligne par carte bancaire via <b style="color:var(--navy);">Stripe</b> (paiement 100% sécurisé)</li>
           <li>Votre accès est activé <b>immédiatement et automatiquement</b> après confirmation du paiement</li>
         </ol>
+      </div>
+
+      <!-- Séparateur vers la tarification FLE (bien distincte) -->
+      <div style="display:flex;align-items:center;gap:12px;max-width:560px;margin:40px auto 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Autre parcours</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="max-width:560px;margin:0 auto;background:var(--navy);border:1px solid var(--gold);border-radius:14px;padding:28px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">Tarifs — Formation FLE (français)</div>
+        <div style="font-size:20px;font-weight:700;color:var(--cream);margin-bottom:10px;font-family:'Playfair Display',serif;">Devis personnalisé, communiqué après inscription</div>
+        <p style="font-size:14px;color:rgba(246,242,233,.75);line-height:1.65;margin-bottom:18px;">Contrairement à la plateforme d'examen civique, la formation FLE n'a pas de tarif fixe affiché : le prix dépend du <b style="color:var(--cream);">niveau de départ</b> et du <b style="color:var(--cream);">volume d'heures</b> nécessaire. Il vous est communiqué à l'issue d'un entretien de positionnement gratuit.</p>
+        <button class="btn btn-gold" style="justify-content:center;" onclick="switchTab('formation-tab');switchFormationSubtab('fle');return false;">Demander mon devis FLE →</button>
       </div>
     </div>
   </section>
@@ -1268,15 +1502,27 @@ footer{
 </div>
 
 <!-- ===== TAB : FORMATION PRÉSENTIELLE ===== -->
+
+<!-- ===== TAB : NOS FORMATIONS ===== -->
 <div id="tab-formation-tab" class="tab-content" style="display:none;">
   <section>
-    <div class="wrap" style="max-width:760px;">
-      <div class="eyebrow" style="margin-bottom:12px;">Formation présentielle</div>
-      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,34px);margin-bottom:8px;color:var(--navy);">Préparez-vous en groupe, à Paris</h2>
-      <p style="color:var(--muted);font-size:15px;margin-bottom:28px;">Une journée intensive de préparation à l'examen civique en petits groupes, animée par un formateur expérimenté.</p>
+    <div class="wrap" style="max-width:800px;">
+      <div class="eyebrow" style="margin-bottom:12px;">Nos formations</div>
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,34px);margin-bottom:8px;color:var(--navy);">Deux parcours complémentaires pour votre intégration</h2>
+      <p style="color:var(--muted);font-size:15px;margin-bottom:8px;">Civicum propose deux formations distinctes. Choisissez celle qui correspond à votre besoin — ou suivez les deux.</p>
+
+      <div class="formation-switch" role="tablist" aria-label="Choisir une formation">
+        <button type="button" class="fswitch-btn active" id="fswitch-civique" onclick="switchFormationSubtab('civique')" role="tab" aria-selected="true">🇫🇷 Examen civique (présentiel)</button>
+        <button type="button" class="fswitch-btn" id="fswitch-fle" onclick="switchFormationSubtab('fle')" role="tab" aria-selected="false">🗣️ Français (FLE)</button>
+      </div>
+
+      <!-- ===== SOUS-ONGLET : EXAMEN CIVIQUE (PRÉSENTIEL) ===== -->
+      <div id="subtab-civique" class="formation-subtab">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:600;font-size:20px;margin-bottom:6px;color:var(--navy);">Préparez-vous en groupe, à Paris</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:24px;">Une journée intensive de préparation à l'examen civique en petits groupes, animée par un formateur expérimenté.</p>
 
       <!-- Infos clés -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+      <div class="tiles-2" style="margin-bottom:28px;">
         <div style="background:var(--navy);border-radius:12px;padding:20px;color:var(--cream);text-align:center;">
           <div style="font-size:28px;margin-bottom:6px;">📍</div>
           <div style="font-weight:700;font-size:15px;margin-bottom:4px;">Paris</div>
@@ -1344,71 +1590,6 @@ footer{
         </div>
         <div style="background:rgba(169,132,62,.2);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(246,242,233,.85);">✨ Économisez 19,99 € par rapport à une souscription séparée</div>
       </div>
-
-      <!-- Formulaire prise de contact -->
-      <!-- Formation linguistique -->
-      <div style="background:var(--navy);border-radius:var(--radius-xl);padding:32px;margin-bottom:24px;border:1px solid rgba(201,151,58,.3);">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-          <div style="background:var(--gold);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);">Nouveau</div>
-          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,151,58,.8);font-weight:700;">Formation Linguistique</div>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);margin-bottom:10px;font-weight:600;">Formation Français Langue Étrangère</h3>
-        <p style="font-size:15px;color:rgba(247,244,238,.75);margin-bottom:24px;line-height:1.65;">Acquérir le niveau de français exigé par l'administration française et réussir les tests officiels TCF et TEF — de A1 à B2, en petits groupes.</p>
-
-        <!-- Niveaux -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;">
-          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.5);line-height:1;">A1</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Communication élémentaire</div>
-          </div>
-          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.65);line-height:1;">A2</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Échanges du quotidien</div>
-          </div>
-          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.8);line-height:1;">B1</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Autonomie sociale</div>
-          </div>
-          <div style="border:1.5px solid var(--gold);border-radius:10px;padding:14px 10px;text-align:center;background:rgba(201,151,58,.1);">
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1;">B2</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.65);margin-top:4px;">Insertion durable</div>
-          </div>
-        </div>
-
-        <!-- Infos clés -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;">
-          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:20px;margin-bottom:4px;">🎯</div>
-            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">TCF / TEF</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);">Tests officiels</div>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:20px;margin-bottom:4px;">⏱️</div>
-            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">6h / semaine</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);">Rythme soutenu</div>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:20px;margin-bottom:4px;">👥</div>
-            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">5 à 10 pers.</div>
-            <div style="font-size:11px;color:rgba(247,244,238,.5);">Petits groupes</div>
-          </div>
-        </div>
-
-        <!-- CTA -->
-        <button onclick="document.getElementById('form-linguistique').scrollIntoView({behavior:'smooth'});"
-          class="btn" style="width:100%;justify-content:center;background:var(--gold);color:var(--navy);border:none;font-size:15px;padding:15px;font-weight:700;">
-          Réserver ma place →
-        </button>
-        <p style="text-align:center;font-size:12px;color:rgba(247,244,238,.45);margin-top:10px;">Nous vous rappelons pour situer votre niveau et vous orienter vers le groupe adapté.</p>
-      </div>
-
-      <!-- Séparateur -->
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Formation à l'examen civique</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;">
         <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:14px;">S'inscrire — Prise de contact</div>
         <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Renseignez vos coordonnées. Nous vous rappelons pour confirmer la date et le lieu de la session.</p>
@@ -1445,29 +1626,127 @@ footer{
         </form>
       </div>
 
-      <!-- Formulaire Formation Linguistique -->
+      </div>
+
+      <!-- ===== SOUS-ONGLET : FRANÇAIS (FLE) ===== -->
+      <div id="subtab-fle" class="formation-subtab" style="display:none;">
+
+      <!-- Formation linguistique -->
+      <div style="background:var(--navy);border-radius:var(--radius-xl);padding:32px;margin-bottom:24px;border:1px solid rgba(201,151,58,.3);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="background:var(--gold);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);">Nouveau</div>
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,151,58,.8);font-weight:700;">Formation Linguistique</div>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);margin-bottom:10px;font-weight:600;">Formation Français Langue Étrangère</h3>
+        <p style="font-size:15px;color:rgba(247,244,238,.75);margin-bottom:24px;line-height:1.65;">Acquérir le niveau de français exigé par l'administration française et réussir les tests officiels TCF et TEF — de A1 à B2, en petits groupes.</p>
+
+        <!-- Niveaux -->
+        <div class="tiles-4" style="margin-bottom:24px;">
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.5);line-height:1;">A1</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Communication élémentaire</div>
+          </div>
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.65);line-height:1;">A2</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Échanges du quotidien</div>
+          </div>
+          <div style="border:1px solid rgba(247,244,238,.15);border-radius:10px;padding:14px 10px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:rgba(247,244,238,.8);line-height:1;">B1</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);margin-top:4px;">Autonomie sociale</div>
+          </div>
+          <div style="border:1.5px solid var(--gold);border-radius:10px;padding:14px 10px;text-align:center;background:rgba(201,151,58,.1);">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1;">B2</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.65);margin-top:4px;">Insertion durable</div>
+          </div>
+        </div>
+
+        <!-- Infos clés -->
+        <div class="tiles-4" style="margin-bottom:24px;">
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">🎯</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">TCF / TEF</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Tests officiels</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">⏱️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">6h / semaine</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Rythme soutenu</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">👥</div>
+            <div style="font-size:12px;font-weight:700;color:var(--cream);margin-bottom:2px;">5 à 10 pers.</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.5);">Petits groupes</div>
+          </div>
+          <div style="background:rgba(201,151,58,.14);border:1px solid var(--gold);border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:4px;">💶</div>
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px;">Devis personnalisé</div>
+            <div style="font-size:11px;color:rgba(247,244,238,.6);">Communiqué après inscription, selon niveau</div>
+          </div>
+        </div>
+        <p style="font-size:12.5px;color:rgba(247,244,238,.55);margin:-14px 0 20px;line-height:1.6;">💡 Le tarif dépend du niveau de départ et du nombre d'heures nécessaires : il vous est communiqué après l'entretien de positionnement gratuit, et non affiché à l'avance comme pour la plateforme d'examen civique.</p>
+
+        <!-- CTA -->
+        <button onclick="document.getElementById('form-linguistique').scrollIntoView({behavior:'smooth'});"
+          class="btn" style="width:100%;justify-content:center;background:var(--gold);color:var(--navy);border:none;font-size:15px;padding:15px;font-weight:700;">
+          Réserver mon entretien de positionnement →
+        </button>
+        <p style="text-align:center;font-size:12px;color:rgba(247,244,238,.45);margin-top:10px;">Nous vous rappelons pour situer votre niveau, vous communiquer le devis et vous orienter vers le groupe adapté.</p>
+      </div>
       <div id="form-linguistique" style="background:var(--paper);border:1.5px solid var(--gold);border-radius:14px;padding:28px;margin-top:24px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
           <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);"></div>
           <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">Inscription — Formation linguistique FLE</div>
         </div>
-        <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Laissez vos coordonnées. Nous vous rappelons pour un entretien de positionnement gratuit et vous orienter vers le groupe adapté à votre niveau.</p>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:18px;">Laissez vos coordonnées. Nous vous rappelons pour un entretien de positionnement gratuit, vous communiquer un <b>devis personnalisé selon votre niveau</b> et vous orienter vers le groupe adapté.</p>
         <form id="linguistique-form" action="https://formspree.io/f/mpqvzboj" method="POST">
           <input type="hidden" name="_subject" value="Inscription Formation Linguistique FLE - MFS Services">
-          <div style="margin-bottom:12px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Nom et prénom</label>
+
+          <div class="form-group">
+            <label>Nom et prénom</label>
             <input type="text" name="nom_prenom" required placeholder="Ex : Marie Dupont">
           </div>
-          <div style="margin-bottom:12px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">E-mail</label>
+          <div class="form-group">
+            <label>E-mail</label>
             <input type="email" name="email" required>
           </div>
-          <div style="margin-bottom:12px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Téléphone</label>
+          <div class="form-group">
+            <label>Téléphone</label>
             <input type="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
           </div>
-          <div style="margin-bottom:12px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Niveau estimé</label>
+
+          <!-- Scolarisation antérieure -->
+          <div class="form-group">
+            <div class="form-legend">Avez-vous déjà été scolarisé(e) ?</div>
+            <div class="chip-group" role="radiogroup" aria-label="Scolarisation antérieure">
+              <div class="chip-opt">
+                <input type="radio" name="scolarise" id="scolarise-oui" value="Oui" onchange="toggleNiveauScolaire(true)">
+                <label for="scolarise-oui">Oui</label>
+              </div>
+              <div class="chip-opt">
+                <input type="radio" name="scolarise" id="scolarise-non" value="Non" onchange="toggleNiveauScolaire(false)">
+                <label for="scolarise-non">Non / peu</label>
+              </div>
+            </div>
+            <div class="form-hint">Nous aide à savoir si un apprentissage de la lecture/écriture doit être intégré au parcours.</div>
+          </div>
+
+          <!-- Niveau d'étude, affiché si scolarisé -->
+          <div class="cond-field" id="bloc-niveau-scolaire">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Dernier niveau d'étude atteint</label>
+              <select name="niveau_etude">
+                <option value="">-- Choisir --</option>
+                <option>Primaire</option>
+                <option>Collège</option>
+                <option>Lycée</option>
+                <option>Études supérieures</option>
+                <option>Formation professionnelle</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Niveau de français estimé</label>
             <select name="niveau_fle">
               <option value="">-- Je ne sais pas encore --</option>
               <option>A1 — Débutant complet</option>
@@ -1476,8 +1755,65 @@ footer{
               <option>B2 — Niveau avancé</option>
             </select>
           </div>
-          <div style="margin-bottom:12px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Objectif</label>
+
+          <!-- Priorité oral / écrit -->
+          <div class="form-group">
+            <div class="form-legend">Ce que vous souhaitez travailler en priorité</div>
+            <div class="chip-group" role="radiogroup" aria-label="Priorité d'apprentissage">
+              <div class="chip-opt">
+                <input type="radio" name="priorite" id="prio-oral" value="Oral (parler, comprendre)">
+                <label for="prio-oral">🗣️ Oral</label>
+              </div>
+              <div class="chip-opt">
+                <input type="radio" name="priorite" id="prio-ecrit" value="Écrit (lire, écrire)">
+                <label for="prio-ecrit">✍️ Écrit</label>
+              </div>
+              <div class="chip-opt">
+                <input type="radio" name="priorite" id="prio-both" value="Les deux à égalité" checked>
+                <label for="prio-both">⚖️ Les deux</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Format souhaité -->
+          <div class="form-group">
+            <div class="form-legend">Format souhaité</div>
+            <div class="chip-group" role="radiogroup" aria-label="Format de formation">
+              <div class="chip-opt">
+                <input type="radio" name="format" id="format-presentiel" value="Présentiel (Paris / région parisienne)" checked>
+                <label for="format-presentiel">🏫 Présentiel</label>
+              </div>
+              <div class="chip-opt">
+                <input type="radio" name="format" id="format-distanciel" value="Distanciel (visioconférence)">
+                <label for="format-distanciel">💻 Distanciel</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disponibilités -->
+          <div class="form-group">
+            <div class="form-legend">Jours disponibles</div>
+            <div class="chip-group days" role="group" aria-label="Jours disponibles">
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-lun" value="Lundi"><label for="jr-lun">Lun</label></div>
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-mar" value="Mardi"><label for="jr-mar">Mar</label></div>
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-mer" value="Mercredi"><label for="jr-mer">Mer</label></div>
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-jeu" value="Jeudi"><label for="jr-jeu">Jeu</label></div>
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-ven" value="Vendredi"><label for="jr-ven">Ven</label></div>
+              <div class="chip-opt"><input type="checkbox" name="jours" id="jr-sam" value="Samedi"><label for="jr-sam">Sam</label></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-legend">Créneaux préférés</div>
+            <div class="chip-group" role="group" aria-label="Créneaux horaires disponibles">
+              <div class="chip-opt"><input type="checkbox" name="creneaux" id="cr-matin" value="Matin (9h-12h)"><label for="cr-matin">🌅 Matin</label></div>
+              <div class="chip-opt"><input type="checkbox" name="creneaux" id="cr-am" value="Après-midi (14h-17h)"><label for="cr-am">☀️ Après-midi</label></div>
+              <div class="chip-opt"><input type="checkbox" name="creneaux" id="cr-soir" value="Soir (18h-20h)"><label for="cr-soir">🌙 Soir</label></div>
+            </div>
+            <div class="form-hint">Sélectionnez tout ce qui vous convient — nous affinerons ensemble lors de l'entretien de positionnement.</div>
+          </div>
+
+          <div class="form-group">
+            <label>Objectif</label>
             <select name="objectif_fle">
               <option value="">-- Choisir --</option>
               <option>Réussir le TCF</option>
@@ -1487,15 +1823,17 @@ footer{
               <option>Autre</option>
             </select>
           </div>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">Message (optionnel)</label>
-            <textarea name="message" rows="3" placeholder="Questions, disponibilités..."></textarea>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label>Message (optionnel)</label>
+            <textarea name="message" rows="3" placeholder="Précisions utiles, contraintes particulières..."></textarea>
           </div>
           <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;font-size:15px;padding:14px;">
             Réserver mon entretien de positionnement
           </button>
           <p id="linguistique-form-msg" style="margin-top:10px;font-size:14px;display:none;text-align:center;"></p>
         </form>
+      </div>
+
       </div>
 
     </div>
@@ -1801,35 +2139,11 @@ footer{
     </div>
   </section>
 
-  <footer>
-    © 2026 MFS Services &amp; Conseils
-    <a id="open-contact" onclick="document.getElementById('screen-contact').hidden=false;return false;" href="#">Nous contacter</a> 
+  <footer style="background:var(--navy);color:rgba(250,249,246,.6);padding:20px 24px;font-size:12px;text-align:center;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+    <span>© 2026 MFS Services &amp; Conseils</span>
+    <a href="mailto:contact@civicum.fr" style="color:var(--gold);text-decoration:none;font-weight:600;">contact@civicum.fr</a>
+    <button onclick="doLogout();" style="background:none;border:none;cursor:pointer;color:rgba(250,249,246,.5);font-size:12px;">Déconnexion</button>
   </footer>
-</div>
-
-
-
-
-<div class="modal-overlay" id="contact-overlay">
-  <div class="modal">
-    <h2>Nous contacter</h2>
-    <p class="modal-sub">MFS Services &amp; Conseils — votre message est envoyé automatiquement, sans passer par votre messagerie.</p>
-    <form id="contact-form" name="contact" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact">
-      <p hidden><label>Ne pas remplir : <input name="bot-field"></label></p>
-      <div class="field"><label for="c-nom">Nom</label><input type="text" id="c-nom" name="nom" required></div>
-      <div class="field"><label for="c-prenom">Prénom</label><input type="text" id="c-prenom" name="prenom" required></div>
-      <div class="field"><label for="c-email">Adresse e-mail</label><input type="email" id="c-email" name="email" required></div>
-      <div class="field"><label for="c-tel">Téléphone</label><input type="tel" id="c-tel" name="telephone"></div>
-      <div class="field"><label for="c-objet">Objet</label><input type="text" id="c-objet" name="objet" required></div>
-      <div class="field"><label for="c-message">Message</label><textarea id="c-message" name="message" required></textarea></div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="btn-cancel-contact">Annuler</button>
-        <button type="submit" class="btn btn-primary" id="btn-send-contact">Envoyer</button>
-      </div>
-      <div class="modal-status" id="contact-status"></div>
-    </form>
-  </div>
 </div>
 
 
@@ -3919,12 +4233,70 @@ function switchTab(id){
     var msg = document.getElementById('landing-form-msg');
     try {
       var res = await fetch(lf.action, {method:'POST', body:new FormData(lf), headers:{'Accept':'application/json'}});
-      if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons rapidement."; msg.style.color='green'; lf.reset(); }
+      if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons rapidement."; msg.style.color='var(--ok)'; lf.reset(); }
       else { msg.textContent="Erreur. Écrivez-nous directement à contact@civicum.fr"; msg.style.color='var(--brick)'; }
     } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
     msg.style.display='block';
   });
 })();
+
+/* Formulaire formation présentielle (examen civique) */
+(function(){
+  var f = document.getElementById('formation-form');
+  if(!f) return;
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var msg = document.getElementById('formation-form-msg');
+    try {
+      var res = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}});
+      if(res.ok){ msg.textContent="Demande envoyée ! Nous vous recontactons rapidement."; msg.style.color='var(--ok)'; f.reset(); }
+      else { msg.textContent="Erreur d'envoi. Écrivez-nous à contact@civicum.fr"; msg.style.color='var(--brick)'; }
+    } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
+    msg.style.display='block';
+  });
+})();
+
+/* Formulaire inscription FLE (formation linguistique) */
+(function(){
+  var f = document.getElementById('linguistique-form');
+  if(!f) return;
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var msg = document.getElementById('linguistique-form-msg');
+    try {
+      var res = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}});
+      if(res.ok){ msg.textContent="Demande envoyée ! Nous vous recontactons pour votre entretien de positionnement."; msg.style.color='var(--ok)'; f.reset(); toggleNiveauScolaire(false); }
+      else { msg.textContent="Erreur d'envoi. Écrivez-nous à contact@civicum.fr"; msg.style.color='var(--brick)'; }
+    } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
+    msg.style.display='block';
+  });
+})();
+
+/* Affiche/masque le niveau d'étude scolaire selon la réponse de scolarisation (profil FLE) */
+function toggleNiveauScolaire(afficher){
+  var bloc = document.getElementById('bloc-niveau-scolaire');
+  if(!bloc) return;
+  if(afficher){ bloc.classList.add('is-visible'); }
+  else {
+    bloc.classList.remove('is-visible');
+    var sel = bloc.querySelector('select[name="niveau_etude"]');
+    if(sel) sel.value = '';
+  }
+}
+
+/* Bascule entre les deux formations (bien distinctes) dans l'onglet "Nos formations" */
+function switchFormationSubtab(which){
+  document.querySelectorAll('.formation-subtab').forEach(function(el){ el.style.display = 'none'; });
+  var target = document.getElementById('subtab-' + which);
+  if(target) target.style.display = 'block';
+  document.querySelectorAll('.fswitch-btn').forEach(function(b){
+    b.classList.remove('active');
+    b.setAttribute('aria-selected','false');
+  });
+  var btn = document.getElementById('fswitch-' + which);
+  if(btn){ btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
+  if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 /* ===== LANDING ↔ APP SWITCH ===== */
 function showApp(){
@@ -3943,7 +4315,7 @@ function showApp(){
     var msg = document.getElementById('form-msg');
     try {
       var res = await fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}});
-      if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons sous 48h."; msg.style.color='green'; f.reset(); }
+      if(res.ok){ msg.textContent="Message envoyé ! Nous vous répondrons sous 48h."; msg.style.color='var(--ok)'; f.reset(); }
       else { msg.textContent="Erreur d'envoi. Écrivez-nous à contact@civicum.fr"; msg.style.color='var(--brick)'; }
     } catch(err){ msg.textContent="Problème réseau. Réessayez."; msg.style.color='var(--brick)'; }
     msg.style.display='block';
@@ -4107,12 +4479,7 @@ function getDeviceId(){
 </script>
 
 <!-- Bouton aide flottant -->
-<div id="btn-aide-flottant" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:none;">
-  <a href="mailto:contact@civicum.fr?subject=Besoin d'aide - Civicum"
-     style="display:flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:12px 18px;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);">
-    💬 Besoin d'aide ?
-  </a>
-</div>
+
 
 </body>
 </html>
