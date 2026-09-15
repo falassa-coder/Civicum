@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Civicum — Examen civique &amp; Français (FLE) | Intégration en France</title>
-<meta name="description" content="Civicum accompagne votre intégration en France : préparation en ligne à l'examen civique (CSP, carte de résident, naturalisation) et formation de français langue étrangère (FLE), en ligne ou en petit groupe.">
+<title>Examen civique 2026 et français FLE — préparation en ligne | Civicum</title>
+<meta name="description" content="Préparez l'examen civique 2026 (CSP, carte de résident, naturalisation) et votre niveau de français A1 à B2. Test gratuit de 40 questions, sans inscription.">
 
 <!-- SEO -->
-<meta name="keywords" content="examen civique, préparation examen civique, naturalisation française, carte de séjour, carte de résident, cours civique, formation FLE, français langue étrangère, TCF, TEF, intégration France, valeurs République">
 <meta name="author" content="Civicum - MFS Services et Conseils">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://civicum.fr/">
@@ -30,22 +29,94 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "Civicum",
-  "description": "Plateforme d'accompagnement à l'intégration en France : préparation à l'examen civique et formation de français langue étrangère (FLE)",
-  "url": "https://civicum.fr",
-  "email": "contact@civicum.fr",
-  "inLanguage": "fr",
-  "offers": [
+  "@graph": [
     {
-      "@type": "Offer",
-      "category": "Formation civique",
-      "description": "Préparation à l'examen civique : CSP, Carte de résident, Naturalisation"
+      "@type": "EducationalOrganization",
+      "@id": "https://civicum.fr/#organisation",
+      "name": "Civicum",
+      "legalName": "MFS Services et Conseils",
+      "description": "Plateforme d'accompagnement à l'intégration en France : préparation à l'examen civique et formation de français langue étrangère (FLE)",
+      "url": "https://civicum.fr",
+      "email": "contact@civicum.fr",
+      "areaServed": "FR",
+      "inLanguage": "fr"
     },
     {
-      "@type": "Offer",
-      "category": "Formation linguistique",
-      "description": "Formation de français langue étrangère (FLE), de A1 à B2, préparation TCF/TEF"
+      "@type": "WebSite",
+      "@id": "https://civicum.fr/#site",
+      "url": "https://civicum.fr",
+      "name": "Civicum",
+      "inLanguage": "fr",
+      "publisher": { "@id": "https://civicum.fr/#organisation" }
+    },
+    {
+      "@type": "Course",
+      "name": "Préparation à l'examen civique français",
+      "description": "Cours structurés par thématique, séries de questions par niveau (CSP, carte de résident, naturalisation) et examen blanc chronométré de 40 questions en 45 minutes.",
+      "provider": { "@id": "https://civicum.fr/#organisation" },
+      "inLanguage": "fr",
+      "offers": [
+        { "@type": "Offer", "name": "Accès 1 mois", "price": "9.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
+        { "@type": "Offer", "name": "Accès 3 mois", "price": "19.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
+        { "@type": "Offer", "name": "Accès 1 an", "price": "49.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" }
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT10H"
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "Formation de français langue étrangère (FLE) A1 à B2",
+      "description": "Formation de français langue étrangère de A1 à B2, en ligne ou en petit groupe, avec entretien de positionnement et devis personnalisé.",
+      "provider": { "@id": "https://civicum.fr/#organisation" },
+      "inLanguage": "fr",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": ["online", "onsite"]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://civicum.fr/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Civicum organise-t-il l'examen civique officiel ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Non. Civicum est un service privé de préparation. L'examen civique officiel est uniquement organisé par l'État, dans le cadre du Contrat d'Intégration Républicaine. Civicum aide à s'y préparer mais ne l'organise pas et n'est pas mandaté par l'administration." }
+        },
+        {
+          "@type": "Question",
+          "name": "Civicum délivre-t-il l'attestation de réussite ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Non. Seul l'État peut délivrer l'attestation de réussite à l'examen civique. Civicum prépare à l'examen ; l'attestation officielle est remise par l'organisme agréé qui fait passer l'épreuve." }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel niveau de français faut-il selon la démarche ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depuis le 1er janvier 2026 : niveau A2 pour une première carte de séjour pluriannuelle, B1 pour une première carte de résident, et B2 pour la naturalisation. Ces exigences sont cumulatives avec la réussite de l'examen civique." }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment se déroule l'examen civique ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "L'examen civique est un QCM de 40 questions à passer en 45 minutes, sur support numérique, dans un centre agréé. Le seuil de réussite est de 80 %, soit 32 bonnes réponses sur 40. En cas d'échec, l'épreuve peut être repassée." }
+        },
+        {
+          "@type": "Question",
+          "name": "Que contient l'abonnement Civicum ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "L'abonnement donne accès aux cours structurés par thématique, aux séries de questions adaptées au niveau visé (CSP, carte de résident, naturalisation), à l'examen blanc chronométré de 40 questions en 45 minutes, au jeu Portraits et Symboles, et au tableau de bord de progression." }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je m'entraîner gratuitement avant de m'abonner ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Un test gratuit de 40 questions est accessible sans inscription, dans les conditions de l'examen officiel, avec le score affiché immédiatement et le détail des réponses par thématique." }
+        },
+        {
+          "@type": "Question",
+          "name": "Quand mon accès est-il activé après paiement ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "L'accès est activé immédiatement et automatiquement après confirmation du paiement par Stripe. Il suffit de se reconnecter sur civicum.fr avec son e-mail et son mot de passe." }
+        }
+      ]
     }
   ]
 }
@@ -1007,6 +1078,7 @@ details[open] summary::after { transform: rotate(45deg); }
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
+      <a class="navlink" href="/test-gratuit.html" style="color:var(--gold);font-weight:600;">Test gratuit</a>
       <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
     </nav>
   </div>
@@ -1020,10 +1092,11 @@ details[open] summary::after { transform: rotate(45deg); }
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">Intégration en France</div>
-        <h1>Réussissez votre intégration,<br><span class="em">à votre rythme.</span></h1>
-        <p class="lead">Civicum, c'est <b>deux parcours complémentaires</b> pour votre intégration en France : la préparation à l'<b>examen civique</b> et l'apprentissage du <b>français (FLE)</b>.</p>
+        <h1>Préparation à l'examen civique et au français<br><span class="em">CSP · Carte de résident · Naturalisation</span></h1>
+        <p class="lead">Réussissez votre intégration à votre rythme. Civicum, c'est <b>deux parcours complémentaires</b> pour votre intégration en France : la préparation à l'<b>examen civique</b> et l'apprentissage du <b>français (FLE)</b>.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" onclick="document.getElementById('apercu-formations').scrollIntoView({behavior:'smooth'});return false;">Découvrir les deux parcours ↓</a>
+          <a class="btn btn-primary" href="/test-gratuit.html" style="background:var(--gold);border-color:var(--gold);">Test gratuit — 40 questions</a>
+          <a class="btn" href="#" onclick="document.getElementById('apercu-formations').scrollIntoView({behavior:'smooth'});return false;">Découvrir les deux parcours ↓</a>
         </div>
         <div class="hero-trust">
           <span><i class="dot"></i>Sans installation</span>
