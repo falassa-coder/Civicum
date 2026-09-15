@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /fle/
+
 Sitemap: https://civicum.fr/sitemap.xml
