@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test examen civique gratuit — 40 questions sans inscription | Civicum</title>
+<meta name="description" content="Testez-vous gratuitement sur 40 questions de l'examen civique, dans les conditions officielles : 45 minutes, seuil de réussite à 80 %. Sans inscription, résultat immédiat par thématique.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://civicum.fr/test-gratuit.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://civicum.fr/test-gratuit.html">
+<meta property="og:title" content="Test examen civique gratuit — 40 questions">
+<meta property="og:description" content="40 questions, 45 minutes, résultat immédiat. Sans inscription.">
+<meta property="og:image" content="https://civicum.fr/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Civicum">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Quiz",
+      "name": "Test gratuit de préparation à l'examen civique",
+      "about": { "@type": "Thing", "name": "Examen civique français" },
+      "educationalLevel": "Examen civique 2026",
+      "inLanguage": "fr",
+      "provider": { "@type": "EducationalOrganization", "name": "Civicum", "url": "https://civicum.fr" },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Civicum", "item": "https://civicum.fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Test gratuit", "item": "https://civicum.fr/test-gratuit.html" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Ce test est-il vraiment gratuit ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui, et sans inscription. Les 40 questions, le chronomètre et le résultat détaillé par thématique sont accessibles immédiatement, sans compte et sans adresse e-mail." } },
+        { "@type": "Question", "name": "Ce test remplace-t-il l'examen officiel ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Non. C'est un entraînement. L'examen civique officiel se passe uniquement dans un centre agréé et seul l'État délivre l'attestation de réussite." } },
+        { "@type": "Question", "name": "Quel score faut-il obtenir ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Le seuil officiel est de 80 %, soit 32 bonnes réponses sur 40. Ce test applique le même barème et la même répartition par thématique que l'épreuve réelle." } }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B2D; --ink-60:#3D4F63; --gold:#B8962E; --gold-lt:#D4B04A; --gold-bg:#FBF6EA;
+  --white:#FAF9F6; --surface:#FFF; --surface-2:#F4F3F0; --line:rgba(15,27,45,.1); --line-md:rgba(15,27,45,.2);
+  --ok:#1E6B45; --ok-bg:#EAF5EF; --warn:#A8651E; --warn-bg:#FBF1E6; --muted:#6B6459;
+  --serif:'DM Serif Display',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r:10px; --r-lg:16px;
+  --sh:0 4px 12px rgba(15,27,45,.08),0 1px 3px rgba(15,27,45,.05);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:var(--gold)}
+
+/* barre du haut */
+.top{background:var(--ink);color:var(--white);padding:14px 0;position:sticky;top:0;z-index:30}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}
+.brand span{width:28px;height:28px;border:1.5px solid var(--gold);color:var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-size:16px;letter-spacing:0}
+.top a.retour{color:rgba(250,249,246,.7);text-decoration:none;font-size:14px}
+.top a.retour:hover{color:var(--gold)}
+
+/* intro */
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:clamp(28px,5.5vw,42px);line-height:1.15;margin:0 0 14px;font-weight:400}
+h2{font-family:var(--serif);font-size:26px;font-weight:400;margin:0 0 12px}
+.lead{font-size:18px;color:var(--ink-60);margin:0 0 26px}
+section{padding:40px 0}
+.faits{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:28px}
+.fait{background:var(--surface);padding:18px 14px;text-align:center}
+.fait b{display:block;font-family:var(--serif);font-size:26px;color:var(--gold)}
+.fait small{font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+.niveaux{display:grid;gap:12px;margin-bottom:22px}
+.niv{display:flex;align-items:center;gap:16px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:18px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,transform .1s}
+.niv:hover{border-color:var(--gold)}
+.niv:active{transform:scale(.995)}
+.niv .code{flex:none;width:52px;height:52px;border-radius:12px;background:var(--gold-bg);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:19px}
+.niv .t{flex:1}
+.niv .t b{display:block;font-size:17px;margin-bottom:2px}
+.niv .t small{color:var(--muted);font-size:14px}
+.niv .fl{color:var(--gold);font-size:20px}
+
+.avert{background:var(--warn-bg);border-left:3px solid var(--warn);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;font-size:14.5px;color:#6B4715;margin-bottom:24px}
+
+/* quiz */
+.barre{position:sticky;top:56px;z-index:20;background:var(--white);border-bottom:1px solid var(--line);padding:12px 0}
+.barre .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.compte{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chrono{font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums}
+.chrono.urgent{color:#A82D1E}
+.jauge{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:10px}
+.jauge i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+
+.theme{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.enonce{font-family:var(--serif);font-size:clamp(20px,3.6vw,26px);line-height:1.35;margin:0 0 22px;font-weight:400}
+.reps{display:grid;gap:10px;margin-bottom:26px}
+.rep{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:15px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,background .15s}
+.rep:hover{border-color:var(--line-md)}
+.rep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.rep .l{flex:none;width:28px;height:28px;border-radius:7px;background:var(--surface-2);display:grid;place-items:center;font-size:14px;font-weight:600;color:var(--ink-60)}
+.rep.choisie{border-color:var(--gold);background:var(--gold-bg)}
+.rep.choisie .l{background:var(--gold);color:#fff}
+
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:var(--r);padding:15px 26px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.9}
+.btn-or{background:var(--gold);color:#fff}
+.btn-ink{background:var(--ink);color:var(--white)}
+.btn-vide{background:transparent;border:1.5px solid var(--line-md);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* résultat */
+.score{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:34px 24px;text-align:center;margin-bottom:24px}
+.score .n{font-family:var(--serif);font-size:58px;line-height:1;color:var(--gold-lt)}
+.score .pc{font-size:15px;opacity:.8;margin-top:6px}
+.score .verdict{margin-top:18px;padding-top:18px;border-top:1px solid rgba(250,249,246,.18);font-size:17px}
+.score .verdict b{color:var(--gold-lt)}
+.themes{display:grid;gap:8px;margin-bottom:28px}
+.tl{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:13px 16px}
+.tl .nom{flex:1;font-size:15px}
+.tl .bar{flex:none;width:90px;height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.tl .bar i{display:block;height:100%;border-radius:3px}
+.tl .chf{flex:none;width:44px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+.corrige{margin-bottom:28px}
+.q{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:10px;background:var(--surface)}
+.q.faux{border-left:3px solid #A82D1E}
+.q.juste{border-left:3px solid var(--ok)}
+.q .en{font-weight:600;margin-bottom:10px;font-size:15.5px}
+.q .li{font-size:14.5px;padding:7px 11px;border-radius:6px;margin-bottom:5px;color:var(--muted)}
+.q .li.bonne{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.q .li.mienne{background:#FDF0EE;color:#A82D1E;font-weight:600}
+
+.offre{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:28px;text-align:center;box-shadow:var(--sh)}
+.offre h2{margin-bottom:8px}
+.offre p{color:var(--ink-60);margin:0 auto 20px;max-width:440px}
+.offre ul{list-style:none;padding:0;margin:0 auto 22px;max-width:380px;text-align:left}
+.offre li{padding:7px 0 7px 26px;position:relative;font-size:15px}
+.offre li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+
+footer{background:var(--ink);color:rgba(250,249,246,.65);padding:34px 0;font-size:13.5px;margin-top:50px}
+footer a{color:var(--gold-lt)}
+.masque{display:none!important}
+@media (max-width:560px){.faits{grid-template-columns:1fr;} .actions{flex-direction:column} .btn{width:100%}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a class="brand" href="/"><span>C</span>CIVICUM</a>
+  <a class="retour" href="/">Retour au site</a>
+</div></div>
+
+<!-- ÉCRAN 1 : INTRO -->
+<div id="ecran-intro">
+  <section><div class="wrap">
+    <div class="eyebrow">Test gratuit · sans inscription</div>
+    <h1>Testez-vous sur 40 questions de l'examen civique</h1>
+    <p class="lead">Mêmes conditions que l'épreuve officielle : 40 questions, 45 minutes, 80 % pour réussir. Résultat immédiat et détail par thématique. Aucun compte, aucune adresse e-mail demandée.</p>
+
+    <div class="faits">
+      <div class="fait"><b>40</b><small>QUESTIONS</small></div>
+      <div class="fait"><b>45</b><small>MINUTES</small></div>
+      <div class="fait"><b>80 %</b><small>POUR RÉUSSIR</small></div>
+    </div>
+
+    <h2>Quelle démarche préparez-vous ?</h2>
+    <div class="niveaux">
+      <button class="niv" onclick="demarrer('CSP')">
+        <span class="code">CSP</span>
+        <span class="t"><b>Carte de séjour pluriannuelle</b><small>Première demande · niveau de français A2 exigé</small></span>
+        <span class="fl">→</span>
+      </button>
+      <button class="niv" onclick="demarrer('CR')">
+        <span class="code">CR</span>
+        <span class="t"><b>Carte de résident (10 ans)</b><small>Première demande · niveau de français B1 exigé</small></span>
+        <span class="fl">→</span>
+      </button>
+      <button class="niv" onclick="demarrer('N')">
+        <span class="code">NAT</span>
+        <span class="t"><b>Naturalisation</b><small>Par décret ou par mariage · niveau de français B2 exigé</small></span>
+        <span class="fl">→</span>
+      </button>
+    </div>
+
+    <div class="avert">
+      Civicum est un service privé de préparation. L'examen civique officiel est organisé uniquement par l'État, dans des centres agréés, et seul l'État délivre l'attestation de réussite.
+    </div>
+
+    <h2>Ce que mesure l'examen civique</h2>
+    <p>Depuis le 1<sup>er</sup> janvier 2026, la réussite de l'examen civique est exigée pour une première carte de séjour pluriannuelle, une première carte de résident et toute demande de naturalisation. L'épreuve porte sur cinq thématiques : les principes et valeurs de la République, le système institutionnel et politique, les droits et devoirs, l'histoire, la géographie et la culture, et la vie dans la société française.</p>
+    <p>Cette condition est <b>cumulative</b> avec le niveau de français : A2 pour la carte pluriannuelle, B1 pour la carte de résident, B2 pour la naturalisation. Réussir l'examen civique ne dispense pas de justifier son niveau de langue, et inversement.</p>
+  </div></section>
+</div>
+
+<!-- ÉCRAN 2 : QUIZ -->
+<div id="ecran-quiz" class="masque">
+  <div class="barre"><div class="wrap">
+    <div style="flex:1">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="compte" id="compte">Question 1 sur 40</span>
+        <span class="chrono" id="chrono">45:00</span>
+      </div>
+      <div class="jauge"><i id="jauge"></i></div>
+    </div>
+  </div></div>
+  <section style="padding-top:28px"><div class="wrap">
+    <div class="theme" id="q-theme"></div>
+    <p class="enonce" id="q-enonce"></p>
+    <div class="reps" id="q-reps"></div>
+    <div class="actions">
+      <button class="btn btn-vide" id="btn-prec" onclick="allerA(pos-1)">Précédente</button>
+      <button class="btn btn-or" id="btn-suiv" onclick="suivante()">Suivante</button>
+    </div>
+  </div></section>
+</div>
+
+<!-- ÉCRAN 3 : RÉSULTAT -->
+<div id="ecran-fin" class="masque">
+  <section><div class="wrap">
+    <div class="eyebrow" id="fin-niveau"></div>
+    <h1 style="margin-bottom:22px">Votre résultat</h1>
+    <div class="score">
+      <div class="n" id="fin-score">0/40</div>
+      <div class="pc" id="fin-pc"></div>
+      <div class="verdict" id="fin-verdict"></div>
+    </div>
+
+    <h2>Par thématique</h2>
+    <div class="themes" id="fin-themes"></div>
+
+    <h2>Le corrigé</h2>
+    <p style="color:var(--muted);font-size:15px;margin-top:-6px">Vos erreurs d'abord. Relisez-les avant de refaire un test.</p>
+    <div class="corrige" id="fin-corrige"></div>
+
+    <div class="offre">
+      <div class="eyebrow">Aller plus loin</div>
+      <h2>657 questions, des cours et un examen blanc</h2>
+      <p>Ce test couvre 40 questions. La plateforme Civicum en contient 657, réparties par niveau et par thématique, avec le suivi de votre progression.</p>
+      <ul>
+        <li>Cours structurés sur les cinq thématiques officielles</li>
+        <li>Séries de questions adaptées à votre niveau</li>
+        <li>Examen blanc chronométré, autant de fois que nécessaire</li>
+        <li>Tableau de bord : vos points faibles, thématique par thématique</li>
+        <li>Formation de français (FLE) de A1 à B2, en ligne ou en petit groupe</li>
+      </ul>
+      <div class="actions" style="justify-content:center">
+        <a class="btn btn-or" href="/">Découvrir la plateforme</a>
+        <button class="btn btn-vide" onclick="recommencer()">Refaire un test</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin:18px 0 0">À partir de 9,99 € par mois. Sans engagement.</p>
+    </div>
+  </div></section>
+</div>
+
+<footer><div class="wrap">
+  <b style="color:var(--white)">Civicum</b> — préparation à l'examen civique et formation de français (FLE).<br>
+  Service privé de préparation, indépendant de l'administration. L'examen civique officiel est organisé par l'État.<br>
+  <a href="/">civicum.fr</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+</div></footer>
+
+<script>
+const BANQUE = {"CSP":[{"q":"Le régime de la France est :","o":{"A":"Un empire","B":"Une République démocratique","C":"Une monarchie parlementaire"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Quel est l'un des symboles de la République française ?","o":{"A":"La tour Eiffel","B":"Le Mont-Blanc","C":"Le drapeau tricolore"},"c":"C","t":"Principes et valeurs de la République"},{"q":"Quel symbole de la République française est tricolore ?","o":{"A":"Le drapeau français","B":"Marianne","C":"Le coq"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Quel est l'un des rôles des associations ?","o":{"A":"Voter les lois","B":"Défendre une cause ou aider des personnes","C":"Rendre la justice"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Quel animal est un symbole de la France ?","o":{"A":"L'aigle","B":"Le coq","C":"Le lion"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Lequel de ces symboles représente officiellement la République française ?","o":{"A":"Le lion","B":"Marianne","C":"La Statue de la Liberté"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Quelle proposition est correcte ? La liberté d'expression :","o":{"A":"N'existe pas en France","B":"Est totale et sans aucune limite","C":"Est un droit fondamental, mais elle a des limites fixées par la loi"},"c":"C","t":"Principes et valeurs de la République"},{"q":"\"Liberté, égalité, fraternité\", c'est :","o":{"A":"Le drapeau national","B":"La devise de la République française","C":"L'hymne national"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Quelle est la place de la langue française dans la République ?","o":{"A":"Elle est une langue parmi d'autres, sans statut particulier","B":"Elle n'est utilisée qu'à l'école","C":"Elle est la langue officielle, inscrite dans la Constitution"},"c":"C","t":"Principes et valeurs de la République"},{"q":"En quelle année la loi de séparation des Églises et de l'État a-t-elle été votée ?","o":{"A":"1905","B":"1958","C":"1789"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Qu'est-ce que la laïcité ?","o":{"A":"La séparation des Églises et de l'État et la neutralité religieuse de l'État","B":"L'obligation d'aller à l'église","C":"La religion officielle de la France"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Qui doit respecter la loi ?","o":{"A":"Tous les citoyens, y compris les dirigeants","B":"Seulement les citoyens étrangers","C":"Seulement les fonctionnaires"},"c":"A","t":"Système institutionnel et politique"},{"q":"Quel est le régime politique de la France aujourd'hui ?","o":{"A":"Une monarchie constitutionnelle","B":"Un régime présidentiel sans Parlement","C":"Une République démocratique (la Ve République)"},"c":"C","t":"Système institutionnel et politique"},{"q":"Qui sanctionne l'auteur d'un vol ?","o":{"A":"Un député","B":"Un juge","C":"Le maire"},"c":"B","t":"Système institutionnel et politique"},{"q":"Qu'est-ce que le pouvoir exécutif ? Le pouvoir :","o":{"A":"Qui vote les lois","B":"Qui applique les lois","C":"Qui juge les infractions à la loi"},"c":"B","t":"Système institutionnel et politique"},{"q":"Le Parlement est composé :","o":{"A":"Du gouvernement et du Président","B":"De l'Assemblée nationale et du Sénat","C":"Des maires et des préfets"},"c":"B","t":"Système institutionnel et politique"},{"q":"Quand célèbre-t-on la journée de l'Europe ?","o":{"A":"Le 1er mai","B":"Le 9 mai","C":"Le 14 juillet"},"c":"B","t":"Système institutionnel et politique"},{"q":"Qu'est-ce que la liberté d'expression ?","o":{"A":"Le droit de dire, écrire ou publier ses opinions, dans le respect de la loi","B":"Le droit de dire n'importe quoi sans aucune conséquence","C":"Un droit réservé aux journalistes"},"c":"A","t":"Droits et devoirs"},{"q":"Quel droit permet à une personne de se défendre devant la justice ?","o":{"A":"Le droit à un procès équitable et à être assisté d'un avocat","B":"Le droit de refuser d'être jugé","C":"Le droit de choisir son juge"},"c":"A","t":"Droits et devoirs"},{"q":"Faut-il réduire ses déchets ?","o":{"A":"Non, ce n'est pas nécessaire","B":"Non, c'est le rôle unique de l'État","C":"Oui, c'est important pour protéger l'environnement"},"c":"C","t":"Droits et devoirs"},{"q":"Que doit faire une personne en cas d'accident ?","o":{"A":"Attendre qu'un passant s'en occupe","B":"S'éloigner rapidement","C":"Porter secours et alerter les services d'urgence"},"c":"C","t":"Droits et devoirs"},{"q":"Comment s'appelle la Constitution actuelle de la France ?","o":{"A":"La Constitution de la Ve République","B":"La Charte de 1814","C":"La Constitution de la IVe République"},"c":"A","t":"Droits et devoirs"},{"q":"Jeter une bouteille dans la rue est :","o":{"A":"Autorisé s'il n'y a personne autour","B":"Sans conséquence","C":"Interdit et puni par la loi"},"c":"C","t":"Droits et devoirs"},{"q":"Quelle est l'infraction la plus grave ?","o":{"A":"La contravention","B":"Le crime","C":"Le délit"},"c":"B","t":"Droits et devoirs"},{"q":"Quel est le rôle de la gendarmerie ?","o":{"A":"Rendre les jugements en tribunal","B":"Assurer la sécurité publique, notamment en zones rurales et périurbaines","C":"Voter les lois"},"c":"B","t":"Droits et devoirs"},{"q":"Que permet la citoyenneté française ?","o":{"A":"De voter, d'être élu et de bénéficier de la protection de l'État","B":"D'être exempté d'impôts","C":"De ne plus respecter les lois françaises"},"c":"A","t":"Droits et devoirs"},{"q":"Qu'est-ce qu'une infraction ?","o":{"A":"Un acte interdit par la loi, puni par la justice","B":"Une coutume locale","C":"Une opinion personnelle"},"c":"A","t":"Droits et devoirs"},{"q":"La peine de mort est :","o":{"A":"Décidée par un vote populaire","B":"Appliquée pour les crimes les plus graves","C":"Abolie en France"},"c":"C","t":"Droits et devoirs"},{"q":"Combien y a-t-il eu de républiques en France ?","o":{"A":"7","B":"3","C":"5"},"c":"C","t":"Histoire, géographie et culture"},{"q":"Quelle ville est un grand port maritime ?","o":{"A":"Grenoble","B":"Marseille","C":"Clermont-Ferrand"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Qui était Albert Camus ?","o":{"A":"Un général de la Révolution","B":"Un peintre cubiste","C":"Un écrivain et philosophe français, prix Nobel de littérature"},"c":"C","t":"Histoire, géographie et culture"},{"q":"Que célèbre-t-on le 14 juillet ?","o":{"A":"L'abolition de l'esclavage","B":"La prise de la Bastille et la fête de la Fédération","C":"L'armistice de 1918"},"c":"B","t":"Histoire, géographie et culture"},{"q":"En quelle année a débuté la Révolution française ?","o":{"A":"1799","B":"1789","C":"1804"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Le 11 novembre est un jour férié. À quoi correspond cette date ?","o":{"A":"La fin de la Seconde Guerre mondiale","B":"La prise de la Bastille","C":"L'armistice de 1918, fin de la Première Guerre mondiale"},"c":"C","t":"Histoire, géographie et culture"},{"q":"Combien y a-t-il de régions en France métropolitaine ?","o":{"A":"13","B":"22","C":"18"},"c":"A","t":"Histoire, géographie et culture"},{"q":"Quelle ville est française ?","o":{"A":"Lyon","B":"Bruxelles","C":"Genève"},"c":"A","t":"Histoire, géographie et culture"},{"q":"Quelle est la première démarche à réaliser pour chercher un emploi ?","o":{"A":"S'inscrire à France Travail","B":"S'inscrire à la mairie","C":"Demander une carte Vitale"},"c":"A","t":"Vivre dans la société française"},{"q":"Quand faut-il déclarer son enfant au service d'état civil de la mairie ?","o":{"A":"Dans les 5 jours suivant la naissance","B":"Avant l'âge d'un an","C":"Il n'y a pas de délai obligatoire"},"c":"A","t":"Vivre dans la société française"},{"q":"Que doit faire un employeur pour fixer un salaire ?","o":{"A":"Fixer librement un salaire, sans limite","B":"Respecter au minimum le SMIC","C":"Demander l'accord du maire"},"c":"B","t":"Vivre dans la société française"},{"q":"Les enfants qui ne parlent pas français :","o":{"A":"Sont dispensés de l'obligation scolaire","B":"Peuvent bénéficier de dispositifs d'accompagnement pour apprendre le français","C":"Ne peuvent pas être inscrits à l'école"},"c":"B","t":"Vivre dans la société française"}],"CR":[{"q":"Une des valeurs de la devise républicaine est l'égalité. Qu'est-ce que cela signifie ?","o":{"A":"Seuls les hommes ont les mêmes droits","B":"L'égalité ne concerne que le droit de vote","C":"Tous les citoyens ont les mêmes droits et devoirs, quelles que soient leurs origines","D":"Tout le monde doit gagner le même salaire"},"c":"C","t":"Principes et valeurs de la République"},{"q":"Complétez les paroles de la Marseillaise : \"Allons enfants de la patrie […]\"","o":{"A":"le jour de gloire est arrivé","B":"la victoire nous attend","C":"la liberté nous a quittés","D":"le temps est enfin venu"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Complétez ces paroles de la Marseillaise : \"Aux armes […] ! Formez vos bataillons\"","o":{"A":"soldats","B":"citoyens","C":"frères","D":"Français"},"c":"B","t":"Principes et valeurs de la République"},{"q":"A-t-on le droit d'insulter publiquement quelqu'un parce qu'il est différent (handicap, apparence physique, sexe…) ?","o":{"A":"Oui, si la différence est visible","B":"Non, c'est interdit et puni par la loi","C":"Oui, en dehors des lieux publics","D":"Oui, si c'est présenté comme une blague"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Qu'est ce qui est interdit par la Charte de la laïcité à l'école ?","o":{"A":"L'enseignement des faits religieux en histoire","B":"La présence d'élèves de toutes religions","C":"Les cours de philosophie","D":"Le port de signes ou tenues religieux ostensibles par les élèves"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Quelle est la place de la langue française dans la République ?","o":{"A":"Elle est la langue officielle, inscrite dans la Constitution","B":"Elle n'a pas de statut légal","C":"Elle n'est utilisée qu'à l'école","D":"Elle est une langue parmi d'autres, sans statut particulier"},"c":"A","t":"Principes et valeurs de la République"},{"q":"La laïcité impose-t-elle aux agents publics d'être neutres vis-à-vis des usagers ?","o":{"A":"Non, ils peuvent favoriser leur propre religion","B":"Oui, ils doivent traiter tous les usagers de la même façon, sans distinction religieuse","C":"Non, cela ne concerne que les enseignants","D":"Non, cela dépend de chaque mairie"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Qu'est-ce que la liberté d'association ?","o":{"A":"Le droit de vote au sein des associations uniquement","B":"L'obligation d'adhérer à un syndicat","C":"Le droit de se marier librement","D":"Le droit de créer ou d'adhérer librement à une association"},"c":"D","t":"Principes et valeurs de la République"},{"q":"À quoi sert un titre de séjour ?","o":{"A":"À travailler sans déclaration","B":"À voter aux élections municipales","C":"À autoriser un étranger à résider légalement en France","D":"À obtenir automatiquement la nationalité française"},"c":"C","t":"Principes et valeurs de la République"},{"q":"Quels sont des symboles officiels de la République française ?","o":{"A":"Le coq, la Joconde et le Panthéon","B":"Le drapeau tricolore, Marianne et la Marseillaise","C":"Marianne, le Mont-Blanc et la Marseillaise","D":"Le drapeau, la tour Eiffel et le coq"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Que fait l'État pour lutter contre les discriminations ?","o":{"A":"Il laisse les entreprises s'organiser librement sur ce sujet","B":"Il n'intervient pas dans ce domaine","C":"Il délègue cette mission uniquement aux associations","D":"Il adopte des lois qui interdisent et sanctionnent les discriminations"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Quel est le rôle principal des communes ?","o":{"A":"Gérer les écoles primaires, l'état civil et les services de proximité","B":"Gérer l'armée","C":"Nommer les députés","D":"Voter le budget de l'État"},"c":"A","t":"Système institutionnel et politique"},{"q":"À la fin de son mandat, le président de la République peut-il décider de rester au pouvoir ?","o":{"A":"Non, il doit quitter ses fonctions et une nouvelle élection a lieu","B":"Oui, s'il n'y a pas de candidat","C":"Oui, pendant une durée exceptionnelle","D":"Oui, s'il obtient l'accord du Parlement"},"c":"A","t":"Système institutionnel et politique"},{"q":"Quel est le régime politique de la France aujourd'hui ?","o":{"A":"Une monarchie constitutionnelle","B":"Un régime présidentiel sans Parlement","C":"Une République fédérale","D":"Une République démocratique, la Ve République"},"c":"D","t":"Système institutionnel et politique"},{"q":"Une personne peut-elle voter à la place d'une autre ?","o":{"A":"Oui, si c'est un membre de sa famille","B":"Oui, le jour du vote uniquement","C":"Non, c'est une fraude électorale punie par la loi","D":"Oui, avec une procuration verbale"},"c":"C","t":"Système institutionnel et politique"},{"q":"Combien de communes environ existe-t-il en France ?","o":{"A":"Environ 100 000","B":"Environ 5 000","C":"Environ 35 000","D":"Environ 10 000"},"c":"C","t":"Système institutionnel et politique"},{"q":"Pour combien de temps sont élus les sénateurs ?","o":{"A":"5 ans","B":"9 ans","C":"6 ans","D":"4 ans"},"c":"C","t":"Système institutionnel et politique"},{"q":"Quelle proposition constitue une obligation ?","o":{"A":"Voter aux élections","B":"Adhérer à une association","C":"Scolariser ses enfants","D":"Posséder une voiture"},"c":"C","t":"Droits et devoirs"},{"q":"Qui veille au maintien de l'ordre public ?","o":{"A":"Les maires uniquement","B":"La police et la gendarmerie","C":"Les préfets uniquement","D":"Les juges"},"c":"B","t":"Droits et devoirs"},{"q":"Que signifie PMA ?","o":{"A":"Protection maternelle et adulte","B":"Procréation médicalement assistée","C":"Politique de maternité anticipée","D":"Programme médical d'assistance"},"c":"B","t":"Droits et devoirs"},{"q":"La peine de mort est :","o":{"A":"Décidée par un vote populaire","B":"Appliquée pour les crimes les plus graves","C":"Réservée aux cas de terrorisme","D":"Abolie en France"},"c":"D","t":"Droits et devoirs"},{"q":"Concernant le droit de se marier, quelle proposition est correcte ?","o":{"A":"Le mariage est réservé aux personnes de nationalité française","B":"Le mariage nécessite l'accord des deux familles","C":"Seuls un homme et une femme peuvent se marier","D":"Deux personnes majeures et consentantes, de même sexe ou de sexe différent, peuvent se marier"},"c":"D","t":"Droits et devoirs"},{"q":"Quelle liberté permet à une personne de croire en la religion de son choix ?","o":{"A":"La liberté de conscience et de religion","B":"La liberté de la presse","C":"La liberté de circulation","D":"La liberté d'entreprendre"},"c":"A","t":"Droits et devoirs"},{"q":"Une femme majeure de nationalité française a-t-elle le droit de voter aux élections ?","o":{"A":"Non, uniquement aux élections locales","B":"Oui, comme tout citoyen majeur","C":"Non, sauf autorisation spéciale","D":"Oui, mais seulement après 25 ans"},"c":"B","t":"Droits et devoirs"},{"q":"Quelle obligation concerne toutes les personnes résidant en France quelle que soit leur nationalité ?","o":{"A":"Respecter les lois françaises","B":"Effectuer le service militaire","C":"Adhérer à un parti politique","D":"Voter aux élections nationales"},"c":"A","t":"Droits et devoirs"},{"q":"Que doit-on faire face aux ordres des policiers ou gendarmes ?","o":{"A":"Ne les respecter que s'ils sont en uniforme complet","B":"Y répondre uniquement par écrit","C":"Les ignorer si l'on n'est pas d'accord","D":"Les respecter, car ils agissent dans le cadre de la loi"},"c":"D","t":"Droits et devoirs"},{"q":"Que contient la Constitution ?","o":{"A":"Les règles de circulation routière","B":"Les règles d'organisation des pouvoirs publics et les droits fondamentaux des citoyens","C":"La liste des impôts","D":"Uniquement le code pénal"},"c":"B","t":"Droits et devoirs"},{"q":"Quel est un exemple d'assistance à personne en danger ?","o":{"A":"S'éloigner pour ne pas être impliqué","B":"Prendre une photo de la scène sans agir","C":"Attendre qu'un professionnel passe par hasard","D":"Appeler les secours pour une personne blessée"},"c":"D","t":"Droits et devoirs"},{"q":"Quel pays a été colonisé par la France ?","o":{"A":"L'Algérie","B":"La Suisse","C":"Le Portugal","D":"L'Italie"},"c":"A","t":"Histoire, géographie et culture"},{"q":"Qu'est ce que la France d'outre-mer ?","o":{"A":"Des territoires appartenant à l'Union européenne mais pas à la France","B":"Les territoires français situés hors d'Europe, comme la Guadeloupe, la Martinique ou la Réunion","C":"Les anciennes colonies françaises aujourd'hui indépendantes","D":"Les régions frontalières de la France métropolitaine"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Où a eu lieu le débarquement en 1944 ?","o":{"A":"À Paris","B":"En Normandie","C":"En Bretagne","D":"En Provence uniquement"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Lequel de ces pays partage des frontières terrestres avec la France ?","o":{"A":"Le Portugal","B":"La Belgique","C":"Le Royaume-Uni","D":"Le Maroc"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Quel peintre est français ?","o":{"A":"Rembrandt","B":"Pablo Picasso","C":"Leonardo da Vinci","D":"Claude Monet"},"c":"D","t":"Histoire, géographie et culture"},{"q":"Quelle mer se situe entre la France et l'Angleterre ?","o":{"A":"La mer du Nord","B":"La Manche","C":"La mer Baltique","D":"La mer Méditerranée"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Quel régime politique a été mis en place pendant la Révolution française en 1792 ?","o":{"A":"La Première République","B":"La monarchie constitutionnelle","C":"L'Empire","D":"La Restauration"},"c":"A","t":"Histoire, géographie et culture"},{"q":"Quel est le classement de la langue française parmi les langues les plus parlées dans le monde ?","o":{"A":"10e langue la plus parlée dans le monde","B":"5e langue la plus parlée dans le monde","C":"20e langue la plus parlée dans le monde","D":"1re langue la plus parlée dans le monde"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Comment s'appelle le diplôme passé par les élèves à la fin du collège ?","o":{"A":"Le CAP","B":"Le brevet des collèges (DNB)","C":"Le certificat d'études","D":"Le baccalauréat"},"c":"B","t":"Vivre dans la société française"},{"q":"Qui peut demander un congé parental d'éducation ?","o":{"A":"Uniquement si l'entreprise a moins de 10 salariés","B":"Uniquement les fonctionnaires","C":"Uniquement la mère","D":"Tout parent salarié, homme ou femme, après la naissance ou l'adoption d'un enfant"},"c":"D","t":"Vivre dans la société française"},{"q":"Quelle est la mission de France Travail ?","o":{"A":"Fixer le montant des salaires","B":"Délivrer les titres de séjour","C":"Gérer les impôts","D":"Accompagner les personnes dans leur recherche d'emploi"},"c":"D","t":"Vivre dans la société française"},{"q":"Où faut-il déclarer la naissance d'un enfant ?","o":{"A":"À la préfecture","B":"À la mairie du lieu de naissance","C":"À la Sécurité sociale","D":"Au tribunal"},"c":"B","t":"Vivre dans la société française"}],"N":[{"q":"Peut-on brûler publiquement un drapeau français ?","o":{"A":"Oui, avec une autorisation préalable","B":"Oui, librement","C":"Oui, en dehors des jours fériés","D":"Non, c'est une infraction punie par la loi"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Qui doit respecter et veiller à la neutralité religieuse dans les services publics ?","o":{"A":"Seuls les ministres","B":"Les usagers uniquement","C":"Personne, ce principe ne s'applique pas aux services publics","D":"Les agents publics (fonctionnaires)"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Quel symbole de la République peut-on voir sur les maillots de l'équipe de France de football ?","o":{"A":"La fleur de lys","B":"L'aigle","C":"Le coq","D":"Marianne"},"c":"C","t":"Principes et valeurs de la République"},{"q":"Selon le principe de laïcité, que signifie la neutralité de l'État ?","o":{"A":"L'État interdit toute pratique religieuse","B":"L'État finance uniquement la religion majoritaire","C":"L'État impose une religion unique","D":"L'État ne favorise ni ne défavorise aucune religion"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Quel terme désigne précisément la haine ou les préjugés contre les Juifs ?","o":{"A":"L'antisémitisme","B":"La xénophobie","C":"Le racisme","D":"L'islamophobie"},"c":"A","t":"Principes et valeurs de la République"},{"q":"En quelle année la loi de séparation des Églises et de l'État a-t-elle été votée ?","o":{"A":"1905","B":"1882","C":"1789","D":"1958"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Qu'est-ce que la liberté d'association ?","o":{"A":"Le droit de vote au sein des associations uniquement","B":"Le droit de fonder ou de rejoindre librement une association, sans autorisation préalable","C":"Le droit de se marier librement","D":"L'obligation d'adhérer à un syndicat"},"c":"B","t":"Principes et valeurs de la République"},{"q":"À l'école, la charte de la laïcité permet de :","o":{"A":"Imposer une religion aux élèves","B":"Interdire l'enseignement des faits religieux","C":"Autoriser le prosélytisme religieux en classe","D":"Rappeler les principes de neutralité, de respect et de liberté de conscience à tous les membres de la communauté éducative"},"c":"D","t":"Principes et valeurs de la République"},{"q":"Une des valeurs de la devise républicaine est l'Égalité. Qu'est-ce que cela signifie ?","o":{"A":"L'égalité ne concerne que le droit de vote","B":"Tout le monde doit gagner le même salaire","C":"Tous les citoyens ont les mêmes droits et devoirs, quelles que soient leurs origines","D":"Seuls les hommes ont les mêmes droits"},"c":"C","t":"Principes et valeurs de la République"},{"q":"Que peut faire un usager du service public dans une mairie ?","o":{"A":"Il doit cacher toute conviction religieuse comme les agents publics","B":"Exprimer librement ses convictions religieuses, dans le respect de l'ordre public","C":"Il doit changer de religion pour être reçu","D":"Il ne peut pas être reçu s'il porte un signe religieux"},"c":"B","t":"Principes et valeurs de la République"},{"q":"Quelle institution française doit rester neutre en matière de religion ?","o":{"A":"L'école publique, et plus largement les services publics","B":"Les partis politiques","C":"Les associations religieuses","D":"Les entreprises privées"},"c":"A","t":"Principes et valeurs de la République"},{"q":"Qui vote les lois ?","o":{"A":"Le gouvernement","B":"Les préfets","C":"Le Parlement","D":"Le Conseil constitutionnel"},"c":"C","t":"Système institutionnel et politique"},{"q":"Où est le siège de la Commission européenne ?","o":{"A":"À Strasbourg","B":"À Francfort","C":"À Bruxelles","D":"À Luxembourg"},"c":"C","t":"Système institutionnel et politique"},{"q":"Quelle est la durée du mandat des députés ?","o":{"A":"6 ans","B":"4 ans","C":"3 ans","D":"5 ans"},"c":"D","t":"Système institutionnel et politique"},{"q":"Quel est l'hymne de l'Union Européenne ?","o":{"A":"La Marseillaise","B":"God Save the King","C":"L'Internationale","D":"L'Ode à la joie (Beethoven)"},"c":"D","t":"Système institutionnel et politique"},{"q":"Où est le siège du Parlement européen ?","o":{"A":"À Paris","B":"À Strasbourg","C":"À Luxembourg","D":"À Bruxelles"},"c":"B","t":"Système institutionnel et politique"},{"q":"Qui est élu lors des élections municipales ?","o":{"A":"Les conseillers municipaux","B":"Les sénateurs","C":"Les préfets","D":"Les députés"},"c":"A","t":"Système institutionnel et politique"},{"q":"Suite à une interpellation par la police, il est possible de :","o":{"A":"Quitter les lieux librement","B":"Refuser de décliner son identité","C":"Refuser tout contact avec la police","D":"Demander à être assisté par un avocat"},"c":"D","t":"Droits et devoirs"},{"q":"Laquelle de ces citations est inscrite dans la Déclaration des Droits de l'Homme et du Citoyen de 1789 ?","o":{"A":"Liberté, Égalité, Fraternité ou la mort.","B":"Les hommes naissent et demeurent libres et égaux en droits.","C":"Le pouvoir appartient au peuple, par le peuple et pour le peuple.","D":"La loi, c'est moi."},"c":"B","t":"Droits et devoirs"},{"q":"Est-ce légal d'être marié à plusieurs personnes en même temps ?","o":{"A":"Non, la polygamie est interdite","B":"Oui, si les conjoints sont d'accord","C":"Oui, avec une autorisation du maire","D":"Oui, sans limite de nombre"},"c":"A","t":"Droits et devoirs"},{"q":"Le non-respect du code de la route est :","o":{"A":"Toléré pour les résidents étrangers","B":"Uniquement sanctionné à Paris","C":"Une infraction, sanctionnée selon sa gravité","D":"Sans conséquence si personne n'est blessé"},"c":"C","t":"Droits et devoirs"},{"q":"Dans lequel de ces endroits est-on autorisé à fumer ?","o":{"A":"Dans une école","B":"Dans un hôpital","C":"Dans un restaurant","D":"Dans la rue, en dehors des zones interdites"},"c":"D","t":"Droits et devoirs"},{"q":"Qu'est-ce que le devoir de mémoire ?","o":{"A":"L'obligation morale de se souvenir des événements historiques tragiques pour éviter qu'ils se reproduisent","B":"Un devoir réservé aux historiens","C":"L'obligation de connaître par cœur la Constitution","D":"L'obligation de visiter un musée chaque année"},"c":"A","t":"Droits et devoirs"},{"q":"Que permet la liberté de circulation ?","o":{"A":"Franchir toutes les frontières sans aucun contrôle","B":"Résider où l'on veut sans en informer l'administration","C":"Se déplacer et choisir librement son lieu de résidence, dans le respect des lois","D":"Voyager sans aucun titre d'identité"},"c":"C","t":"Droits et devoirs"},{"q":"En France, la conduite sans permis d'une moto est :","o":{"A":"Autorisée si le trajet est court","B":"Autorisée avant 21 ans","C":"Tolérée en zone rurale","D":"Interdite et punie par la loi"},"c":"D","t":"Droits et devoirs"},{"q":"Est-il obligatoire de porter secours à une personne en danger ?","o":{"A":"Oui, uniquement si l'on est médecin","B":"Oui, la non-assistance à personne en danger est punie par la loi","C":"Non, sauf si on est témoin direct","D":"Non, c'est facultatif"},"c":"B","t":"Droits et devoirs"},{"q":"Quel est le texte fondateur établissant les droits et les devoirs de chaque citoyen ?","o":{"A":"La Déclaration des droits de l'homme et du citoyen de 1789","B":"La loi de 1905","C":"Le Code du travail","D":"La Charte de l'environnement"},"c":"A","t":"Droits et devoirs"},{"q":"Que doit faire un citoyen s'il est appelé à être juré dans un procès d'assises ?","o":{"A":"Il doit répondre à la convocation, sauf motif légitime d'exemption","B":"Il doit obligatoirement accepter, sans aucune exemption possible","C":"Il peut refuser sans justification","D":"Il doit payer une amende pour être dispensé"},"c":"A","t":"Droits et devoirs"},{"q":"Quelle île est française ?","o":{"A":"Malte","B":"La Corse","C":"La Sicile","D":"La Sardaigne"},"c":"B","t":"Histoire, géographie et culture"},{"q":"Qui était George Sand ?","o":{"A":"Une reine de France","B":"Une résistante de la Seconde Guerre mondiale","C":"Une écrivaine française du XIXe siècle","D":"Une scientifique"},"c":"C","t":"Histoire, géographie et culture"},{"q":"Quel musée est situé à Paris ?","o":{"A":"Le Prado","B":"Les Offices","C":"Le British Museum","D":"Le Louvre"},"c":"D","t":"Histoire, géographie et culture"},{"q":"Sous quel président a été abolie la peine de mort en France ?","o":{"A":"Jacques Chirac","B":"Charles de Gaulle","C":"François Mitterrand","D":"Valéry Giscard d'Estaing"},"c":"C","t":"Histoire, géographie et culture"},{"q":"Quel était le principal port français impliqué dans la traite négrière au XVIIIe siècle ?","o":{"A":"Bordeaux","B":"Marseille","C":"Le Havre","D":"Nantes"},"c":"D","t":"Histoire, géographie et culture"},{"q":"Quand a eu lieu la Première guerre mondiale ?","o":{"A":"1914-1918","B":"1904-1908","C":"1939-1945","D":"1870-1871"},"c":"A","t":"Histoire, géographie et culture"},{"q":"En quelle année l'euro est-il devenu la monnaie officielle de la France ?","o":{"A":"1992","B":"1999","C":"1958","D":"2002"},"c":"D","t":"Histoire, géographie et culture"},{"q":"Qu'est-ce que la France d'outre-mer ?","o":{"A":"Les territoires français situés hors d'Europe, comme la Guadeloupe, la Martinique ou la Réunion","B":"Des territoires appartenant à l'Union européenne mais pas à la France","C":"Les anciennes colonies françaises aujourd'hui indépendantes","D":"Les régions frontalières de la France métropolitaine"},"c":"A","t":"Histoire, géographie et culture"},{"q":"Quelle est la définition de l'autorité parentale ?","o":{"A":"Le droit exclusif de la mère sur l'enfant","B":"Une autorité qui s'arrête à la naissance de l'enfant","C":"L'ensemble des droits et devoirs des parents envers leur enfant mineur, comme sa protection et son éducation","D":"Le droit de choisir le métier futur de l'enfant"},"c":"C","t":"Vivre dans la société française"},{"q":"À quoi sert la carte Vitale ?","o":{"A":"À voter aux élections","B":"À se faire rembourser ses frais de santé par l'Assurance Maladie","C":"À prouver son identité","D":"À payer ses impôts"},"c":"B","t":"Vivre dans la société française"},{"q":"À quel âge commence l'instruction obligatoire des enfants ?","o":{"A":"3 ans","B":"4 ans","C":"6 ans","D":"5 ans"},"c":"A","t":"Vivre dans la société française"},{"q":"Une femme peut-elle créer son entreprise ?","o":{"A":"Seulement avec l'accord de son mari","B":"Seulement dans certains secteurs","C":"Oui, sans condition liée au sexe","D":"Non, ce n'est pas autorisé"},"c":"C","t":"Vivre dans la société française"}]};
+const LIB = {CSP:"Carte de séjour pluriannuelle", CR:"Carte de résident (10 ans)", N:"Naturalisation"};
+let jeu = [], pos = 0, reponses = [], reste = 45*60, tick = null, niveau = "";
+
+function melanger(t){ const a=t.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const $ = id => document.getElementById(id);
+function voir(e){ ["ecran-intro","ecran-quiz","ecran-fin"].forEach(x=>$(x).classList.toggle("masque",x!==e)); window.scrollTo(0,0); }
+
+function demarrer(n){
+  niveau = n;
+  jeu = melanger(BANQUE[n]).map(q => {
+    const cles = melanger(Object.keys(q.o));
+    return {enonce:q.q, theme:q.t, ordre:cles, options:q.o, bonne:q.c};
+  });
+  reponses = new Array(jeu.length).fill(null);
+  pos = 0; reste = 45*60;
+  voir("ecran-quiz");
+  afficher();
+  clearInterval(tick);
+  tick = setInterval(() => {
+    reste--;
+    const m = Math.floor(reste/60), s = reste%60;
+    $("chrono").textContent = m + ":" + String(s).padStart(2,"0");
+    $("chrono").classList.toggle("urgent", reste <= 300);
+    if(reste <= 0) terminer();
+  }, 1000);
+}
+
+function afficher(){
+  const q = jeu[pos];
+  $("compte").textContent = "Question " + (pos+1) + " sur " + jeu.length;
+  $("jauge").style.width = ((pos+1)/jeu.length*100) + "%";
+  $("q-theme").textContent = q.theme;
+  $("q-enonce").textContent = q.enonce;
+  $("q-reps").innerHTML = q.ordre.map((cle,i) =>
+    '<button class="rep' + (reponses[pos]===cle ? ' choisie' : '') + '" onclick="choisir(\''+cle+'\')">' +
+    '<span class="l">' + "ABCD"[i] + '</span><span>' + q.options[cle] + '</span></button>').join("");
+  $("btn-prec").disabled = pos === 0;
+  $("btn-suiv").textContent = pos === jeu.length-1 ? "Voir mon résultat" : "Suivante";
+}
+function choisir(cle){ reponses[pos] = cle; afficher(); if(pos < jeu.length-1) setTimeout(()=>allerA(pos+1), 180); }
+function allerA(i){ if(i>=0 && i<jeu.length){ pos=i; afficher(); window.scrollTo(0,0);} }
+function suivante(){ if(pos === jeu.length-1) terminer(); else allerA(pos+1); }
+function recommencer(){ voir("ecran-intro"); }
+
+function terminer(){
+  clearInterval(tick);
+  let bonnes = 0;
+  const parTheme = {};
+  jeu.forEach((q,i) => {
+    const ok = reponses[i] === q.bonne;
+    if(ok) bonnes++;
+    parTheme[q.theme] = parTheme[q.theme] || {ok:0, tot:0};
+    parTheme[q.theme].tot++; if(ok) parTheme[q.theme].ok++;
+  });
+  const pc = Math.round(bonnes/jeu.length*100);
+  $("fin-niveau").textContent = "Test " + LIB[niveau];
+  $("fin-score").textContent = bonnes + "/" + jeu.length;
+  $("fin-pc").textContent = pc + "% — seuil officiel : 80 % (32/40)";
+  $("fin-verdict").innerHTML = pc >= 80
+    ? "Vous êtes <b>au-dessus du seuil</b>. Confirmez en refaisant plusieurs tests : l'examen officiel tire ses questions dans une banque bien plus large."
+    : "Il vous manque <b>" + (32-bonnes) + " bonne" + (32-bonnes>1?"s":"") + " réponse" + (32-bonnes>1?"s":"") + "</b> pour atteindre le seuil. Regardez ci-dessous quelles thématiques travailler en priorité.";
+
+  $("fin-themes").innerHTML = Object.entries(parTheme)
+    .sort((a,b) => a[1].ok/a[1].tot - b[1].ok/b[1].tot)
+    .map(([nom,v]) => {
+      const p = Math.round(v.ok/v.tot*100);
+      const c = p >= 80 ? "var(--ok)" : (p >= 50 ? "var(--gold)" : "#A82D1E");
+      return '<div class="tl"><span class="nom">'+nom+'</span>' +
+             '<span class="bar"><i style="width:'+p+'%;background:'+c+'"></i></span>' +
+             '<span class="chf">'+v.ok+'/'+v.tot+'</span></div>';
+    }).join("");
+
+  const items = jeu.map((q,i) => ({q, r:reponses[i], ok:reponses[i]===q.bonne, i}));
+  items.sort((a,b) => a.ok - b.ok);
+  $("fin-corrige").innerHTML = items.map(({q,r,ok}) =>
+    '<div class="q ' + (ok ? "juste" : "faux") + '">' +
+    '<div class="en">' + q.enonce + '</div>' +
+    q.ordre.map(cle => {
+      let cl = "li";
+      if(cle === q.bonne) cl += " bonne";
+      else if(cle === r) cl += " mienne";
+      return '<div class="' + cl + '">' + q.options[cle] +
+             (cle === q.bonne ? "  ✓ bonne réponse" : (cle === r ? "  ✗ votre réponse" : "")) + '</div>';
+    }).join("") + '</div>').join("");
+
+  voir("ecran-fin");
+}
+</script>
+</body>
+</html>
