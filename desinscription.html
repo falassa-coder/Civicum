@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Désinscription — Civicum</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1B2D;--gold:#B8962E;--white:#FAF9F6;--surface:#FFF;
+      --line:rgba(15,27,45,.12);--muted:#6B6459;--ok:#1E6B45;--ok-bg:#EAF5EF;
+      --warn:#A8651E;--warn-bg:#FBF1E6;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--white);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+     line-height:1.6;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
+.carte{background:var(--surface);border:1px solid var(--line);border-radius:16px;
+       padding:38px 32px;max-width:460px;width:100%;text-align:center;
+       box-shadow:0 4px 16px rgba(15,27,45,.07)}
+.marque{font-size:12px;letter-spacing:.18em;color:var(--gold);font-weight:700;margin-bottom:22px}
+h1{font-family:'DM Serif Display',Georgia,serif;font-size:25px;font-weight:400;line-height:1.25;margin-bottom:12px}
+p{color:var(--muted);font-size:15.5px;margin-bottom:22px}
+button{background:var(--ink);color:var(--white);border:none;border-radius:10px;
+       padding:14px 26px;font:inherit;font-weight:600;cursor:pointer;width:100%}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.secondaire{background:transparent;color:var(--ink);border:1.5px solid var(--line);margin-top:10px}
+.etat{border-radius:10px;padding:16px;font-size:15px;margin-bottom:18px;text-align:left}
+.etat.ok{background:var(--ok-bg);color:var(--ok)}
+.etat.ko{background:var(--warn-bg);color:var(--warn)}
+.pied{font-size:13px;color:var(--muted);margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.pied a{color:var(--gold)}
+.masque{display:none}
+</style>
+</head>
+<body>
+<div class="carte">
+  <div class="marque">CIVICUM</div>
+
+  <div id="demande">
+    <h1>Ne plus recevoir nos e-mails ?</h1>
+    <p>Vous ne recevrez plus de rappel d'activation ni de préavis avant l'échéance de votre accès. Votre compte et votre progression ne sont pas supprimés.</p>
+    <button id="confirmer">Confirmer la désinscription</button>
+    <button class="secondaire" onclick="location.href='/'">Annuler</button>
+  </div>
+
+  <div id="resultat" class="masque"></div>
+
+  <div class="pied">
+    Une question ? <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+  </div>
+</div>
+
+<script>
+/* Remplacez par l'URL réelle de la fonction, visible dans
+   Console Firebase → Functions, une fois "desinscrire" déployée. */
+const URL_FONCTION = "https://desinscrire-qsnykdqtqq-uc.a.run.app";
+
+const uid = new URLSearchParams(location.search).get("u");
+const demande  = document.getElementById("demande");
+const resultat = document.getElementById("resultat");
+
+function afficher(classe, titre, texte){
+  demande.classList.add("masque");
+  resultat.classList.remove("masque");
+  resultat.innerHTML =
+    '<div class="etat ' + classe + '"><b>' + titre + '</b><br>' + texte + '</div>' +
+    '<button class="secondaire" onclick="location.href=\'/\'">Retour au site</button>';
+}
+
+if(!uid){
+  afficher("ko", "Lien incomplet",
+    "Utilisez le lien figurant en bas de l'e-mail que vous avez reçu.");
+}
+
+document.getElementById("confirmer").addEventListener("click", async (e) => {
+  const btn = e.currentTarget;
+  btn.disabled = true;
+  btn.textContent = "Enregistrement…";
+  try{
+    const rep = await fetch(URL_FONCTION + "?u=" + encodeURIComponent(uid));
+    const data = await rep.json();
+    if(data.ok){
+      afficher("ok", "C'est fait.",
+        "Vous ne recevrez plus d'e-mails de notre part. Vous pouvez continuer à utiliser votre compte normalement.");
+    } else {
+      afficher("ko", "Désinscription impossible",
+        (data.message || "Réessayez plus tard.") + " Écrivez-nous à contact@civicum.fr, nous le ferons manuellement.");
+    }
+  } catch(err){
+    afficher("ko", "Connexion impossible",
+      "Vérifiez votre connexion internet et réessayez, ou écrivez-nous à contact@civicum.fr.");
+  }
+});
+</script>
+</body>
+</html>
