@@ -1106,6 +1106,65 @@ details[open] summary::after { transform: rotate(45deg); }
   .nc-desc { font-size: 12.5px; }
   .nc-fl { display: none; }
 }
+
+/* ===== Tableau de bord ===== */
+.db-entete { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.db-profil { background: var(--navy); border-radius: 12px; padding: 18px; color: var(--cream);
+             margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+.db-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--gold); color: #fff;
+             display: flex; align-items: center; justify-content: center; font-size: 20px;
+             font-weight: 700; flex: none; }
+.db-ident { min-width: 0; }
+.db-nom { font-weight: 700; font-size: 16px; line-height: 1.3; word-break: break-word; }
+.db-statut { font-size: 12.5px; color: rgba(246,242,233,.72); margin-top: 3px; }
+.db-statut .pastille { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+                       background: var(--ok-lt,#A9C7A0); margin-right: 6px; vertical-align: middle; }
+.db-statut.bientot .pastille { background: var(--gold-lt); }
+
+.db-vide { background: var(--paper); border: 1.5px dashed var(--line); border-radius: 12px;
+           padding: 28px 22px; text-align: center; margin-bottom: 20px; }
+.db-vide-titre { font-weight: 700; color: var(--navy); font-size: 16.5px; margin-bottom: 8px; }
+.db-vide p { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 380px;
+             margin: 0 auto 18px; }
+
+.db-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 18px; }
+.db-stat { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+           padding: 15px 10px; text-align: center; }
+.db-stat b { display: block; font-size: 25px; font-weight: 700; color: var(--navy); line-height: 1.1; }
+.db-stat small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+.db-reprise { background: var(--paper); border: 1.5px solid var(--gold); border-radius: 10px;
+              padding: 14px 16px; margin-bottom: 18px; display: flex; justify-content: space-between;
+              align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.db-bloc { margin-bottom: 20px; }
+.db-section { padding-top: 18px; border-top: 1px solid var(--line); margin-top: 18px; }
+.db-titre { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+
+.db-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.db-actions .btn { justify-content: center; padding: 14px; font-size: 14.5px; }
+.db-actions .db-large { grid-column: 1 / -1; }
+
+.db-avis { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+           padding: 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.db-avis-txt { flex: 1; min-width: 190px; }
+.db-avis-nom { font-weight: 600; color: var(--navy); font-size: 14.5px; margin-bottom: 3px; }
+.db-avis-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.db-avis .btn { flex: none; }
+
+.db-pied { margin-top: 26px; text-align: center; }
+.db-effacer { background: none; border: none; font: inherit; font-size: 13px; color: var(--muted);
+              cursor: pointer; padding: 8px; text-decoration: underline;
+              text-underline-offset: 3px; text-decoration-color: var(--line); }
+.db-effacer:hover { color: var(--brick); text-decoration-color: currentColor; }
+
+@media(max-width:420px){
+  .db-stats { gap: 8px; }
+  .db-stat { padding: 13px 6px; }
+  .db-stat b { font-size: 22px; }
+  .db-stat small { font-size: 10.5px; }
+}
 </style>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -2302,61 +2361,67 @@ details[open] summary::after { transform: rotate(45deg); }
 
 
   <section id="screen-dashboard" class="card" hidden>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <button class="btn-link" id="btn-dashboard-back" style="margin:0;">🎯 Accéder aux exercices</button>
-      <div style="font-weight:700;color:var(--navy);font-size:16px;">📊 Mon tableau de bord</div>
-      <button class="btn btn-ghost" onclick="doLogout()" style="font-size:12px;padding:7px 12px;color:var(--muted);">Déconnexion</button>
+    <div class="db-entete">
+      <button class="btn-link" id="btn-dashboard-back" style="margin:0;">← Accéder aux exercices</button>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="color:var(--muted);">Déconnexion</button>
     </div>
 
     <!-- Profil -->
-    <div id="dash-profil" style="background:var(--navy);border-radius:10px;padding:16px 18px;color:var(--cream);margin-bottom:16px;display:flex;align-items:center;gap:14px;">
-      <div style="width:42px;height:42px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Libre Caslon Display',serif;font-size:20px;flex:none;" id="dash-avatar">?</div>
-      <div>
-        <div style="font-weight:700;font-size:15px;" id="dash-username">—</div>
-        <div style="font-size:12px;color:rgba(246,242,233,.7);" id="dash-formule">Chargement…</div>
+    <div class="db-profil">
+      <div class="db-avatar" id="dash-avatar">?</div>
+      <div class="db-ident">
+        <div class="db-nom" id="dash-username">—</div>
+        <div class="db-statut" id="dash-formule">Chargement…</div>
       </div>
     </div>
 
-    <!-- Stats globales -->
-    <div id="dash-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;"></div>
-
-    <!-- Reprendre -->
-    <div id="dash-reprise" style="display:none;background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <!-- Premier passage : invitation plutôt qu'une série de zéros -->
+    <div id="dash-vide" class="db-vide" style="display:none;">
+      <div class="db-vide-titre">Votre préparation commence ici</div>
+      <p>Vos scores, votre progression par thématique et votre historique s'afficheront sur cette page dès votre premier entraînement.</p>
+      <button class="btn btn-primary" onclick="exigerAcces(()=>show('screen-level'));">Commencer un entraînement</button>
     </div>
 
-    <!-- Progression par thème -->
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Progression par thématique</div>
-      <div id="dash-themes"></div>
-    </div>
+    <!-- Suivi (masqué tant qu'aucune session n'existe) -->
+    <div id="dash-contenu" style="display:none;">
+      <div id="dash-stats" class="db-stats"></div>
+      <div id="dash-reprise" class="db-reprise" style="display:none;"></div>
 
-    <!-- Historique sessions -->
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Historique des sessions</div>
-      <div id="dash-history"></div>
-    </div>
-
-    <!-- Exercices rapides dans le tableau de bord -->
-    <div style="padding-top:16px;border-top:1px solid var(--line);margin-top:4px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:12px;">Commencer un exercice</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-        <button class="btn btn-primary" onclick="show('screen-level');" style="justify-content:center;padding:13px;font-size:14px;">🎯 Entraînement</button>
-        <button class="btn" onclick="renderCourseLevelList();show('screen-course-level');" style="background:var(--gold);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;">📚 Cours</button>
-        <button class="btn" onclick="openMiseEnSituation();" style="background:var(--brick);color:#fff;border:none;justify-content:center;padding:13px;font-size:14px;grid-column:1/-1;">🎭 Mises en situation</button>
+      <div class="db-bloc">
+        <div class="db-titre">Progression par thématique</div>
+        <div id="dash-themes"></div>
       </div>
-      <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
+
+      <div class="db-bloc">
+        <div class="db-titre">Historique des sessions</div>
+        <div id="dash-history"></div>
+      </div>
+    </div>
+
+    <!-- Exercices -->
+    <div class="db-section">
+      <div class="db-titre">Commencer un exercice</div>
+      <div class="db-actions">
+        <button class="btn btn-primary" onclick="exigerAcces(()=>show('screen-level'));">Entraînement</button>
+        <button class="btn btn-gold" onclick="exigerAcces(()=>{renderCourseLevelList();show('screen-course-level');});">Cours</button>
+        <button class="btn btn-ghost db-large" onclick="exigerAcces(()=>openMiseEnSituation());">Mises en situation</button>
+      </div>
     </div>
 
     <!-- Avis -->
-    <div style="padding-top:16px;border-top:1px solid var(--line);margin-top:16px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Votre avis</div>
-      <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:190px;">
-          <div style="font-weight:600;color:var(--navy);font-size:14.5px;margin-bottom:3px;">Partagez votre expérience</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.5;">Votre retour est publié sur le site après relecture et aide les personnes qui préparent la même démarche.</div>
+    <div class="db-section">
+      <div class="db-titre">Votre avis</div>
+      <div class="db-avis">
+        <div class="db-avis-txt">
+          <div class="db-avis-nom">Partagez votre expérience</div>
+          <div class="db-avis-desc">Votre retour est publié sur le site après relecture. Il aide les personnes qui préparent la même démarche que vous.</div>
         </div>
-        <button class="btn btn-gold" onclick="ouvrirAvis()" style="flex:none;">Donner mon avis</button>
+        <button class="btn btn-gold" onclick="ouvrirAvis()">Donner mon avis</button>
       </div>
+    </div>
+
+    <div class="db-pied">
+      <button class="db-effacer" id="btn-clear-scores">Effacer mon historique</button>
     </div>
   </section>
 
@@ -4990,82 +5055,120 @@ function getLastSession(){
 }
 
 function renderDashboard(){
-  /* Profil Firebase */
   const user = window._fbCurrentUser;
-  const nom = (user && user.displayName) || (typeof localStorage !== 'undefined' && localStorage.getItem('access_nom')) || '—';
+
+  /* ---- Identité : on privilégie le nom, jamais l'adresse e-mail brute ---- */
+  let brut = (user && user.displayName) || '';
+  if(!brut){ try{ brut = localStorage.getItem('access_nom') || ''; }catch(e){} }
+  if(!brut && user) brut = user.email || '';
+  /* Si on ne dispose que de l'adresse, on n'affiche que ce qui précède l'arobase */
+  const nom = brut.includes('@') ? brut.split('@')[0] : brut;
+  const affiche = (nom || 'Bienvenue').trim();
+
   const avatar = document.getElementById('dash-avatar');
   const usernameEl = document.getElementById('dash-username');
   const formuleEl = document.getElementById('dash-formule');
-  if(avatar) avatar.textContent = nom.charAt(0).toUpperCase();
-  if(usernameEl) usernameEl.textContent = nom;
-  /* Charger formule depuis Firestore si dispo */
+  if(avatar) avatar.textContent = affiche.charAt(0).toUpperCase();
+  if(usernameEl) usernameEl.textContent = affiche;
+
+  /* ---- Statut d'abonnement, avec l'échéance ---- */
   if(window._fbDb && user){
     window._fbGetDoc(window._fbDoc(window._fbDb,'users',user.uid)).then(snap=>{
-      if(snap.exists() && formuleEl){
-        const d = snap.data();
-        formuleEl.textContent = d.formule ? 'Formule : '+d.formule : 'Abonnement actif';
+      if(!snap.exists() || !formuleEl) return;
+      const d = snap.data();
+      if(d.nom && usernameEl){
+        const n = String(d.nom).trim();
+        if(n){ usernameEl.textContent = n; if(avatar) avatar.textContent = n.charAt(0).toUpperCase(); }
       }
+      let texte = 'Abonnement actif';
+      let bientot = false;
+      if(d.expireLe){
+        const reste = Math.ceil((d.expireLe - Date.now()) / 86400000);
+        const fin = new Date(d.expireLe).toLocaleDateString('fr-FR',
+                      { day:'numeric', month:'long', year:'numeric' });
+        if(reste <= 7){
+          bientot = true;
+          texte = reste <= 1 ? 'Votre accès se termine aujourd\'hui'
+                             : 'Votre accès se termine dans ' + reste + ' jours — le ' + fin;
+        } else {
+          texte = 'Abonnement actif jusqu\'au ' + fin;
+        }
+      } else if(d.formule){
+        texte = 'Formule : ' + d.formule;
+      }
+      formuleEl.innerHTML = '<span class="pastille"></span>' + texte;
+      formuleEl.classList.toggle('bientot', bientot);
     }).catch(()=>{});
-  } else if(formuleEl){ formuleEl.textContent = 'Accès actif'; }
+  } else if(formuleEl){
+    formuleEl.innerHTML = '<span class="pastille"></span>Accès actif';
+  }
 
-  /* Stats */
+  /* ---- Historique local ---- */
   let scores = [];
   try{ scores = JSON.parse(localStorage.getItem(SCORES_KEY)||'[]'); }catch(e){}
 
-  const statsEl = document.getElementById('dash-stats');
-  const avg = scores.length ? Math.round(scores.reduce((s,r)=>s+r.pct,0)/scores.length) : 0;
-  const best = scores.length ? Math.max(...scores.map(r=>r.pct)) : 0;
-  statsEl.innerHTML = [
-    [scores.length,'sessions'],
-    [avg+'%','moyenne'],
-    [best+'%','meilleur score']
-  ].map(([v,l])=>`<div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Libre Caslon Display',serif;font-size:28px;color:var(--brick);">${v}</div><div style="font-size:11px;color:var(--muted);">${l}</div></div>`).join('');
+  const vide = document.getElementById('dash-vide');
+  const contenu = document.getElementById('dash-contenu');
+  const pied = document.querySelector('.db-pied');
+  const aucune = scores.length === 0;
+  if(vide) vide.style.display = aucune ? 'block' : 'none';
+  if(contenu) contenu.style.display = aucune ? 'none' : 'block';
+  if(pied) pied.style.display = aucune ? 'none' : 'block';
+  if(aucune) return;    /* rien d'autre à dessiner au premier passage */
 
-  /* Reprendre */
+  /* ---- Chiffres clés ---- */
+  const avg  = Math.round(scores.reduce((s,r)=>s+r.pct,0)/scores.length);
+  const best = Math.max(...scores.map(r=>r.pct));
+  document.getElementById('dash-stats').innerHTML = [
+    [scores.length, scores.length > 1 ? 'sessions' : 'session'],
+    [avg + '%',  'moyenne'],
+    [best + '%', 'meilleur score']
+  ].map(([v,l]) => `<div class="db-stat"><b>${v}</b><small>${l}</small></div>`).join('');
+
+  /* ---- Reprendre ---- */
   const last = getLastSession();
   const repriseEl = document.getElementById('dash-reprise');
   if(last && repriseEl){
     repriseEl.style.display='flex';
-    repriseEl.innerHTML=`<div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px;">Reprendre où vous en étiez</div><div style="font-weight:700;color:var(--navy);font-size:15px;">${last.level} — ${last.theme}</div></div><button class="btn btn-primary" style="font-size:13px;padding:10px 16px;" onclick="resumeLastSession()">▶ Reprendre</button>`;
+    repriseEl.innerHTML =
+      '<div><div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px;">Reprendre où vous en étiez</div>' +
+      '<div style="font-weight:700;color:var(--navy);font-size:15px;">' + last.level + ' — ' + last.theme + '</div></div>' +
+      '<button class="btn btn-primary btn-sm" onclick="resumeLastSession()">Reprendre</button>';
   } else if(repriseEl){ repriseEl.style.display='none'; }
 
-  /* Progression par thème */
+  /* ---- Progression par thématique ---- */
   const themes = {};
   scores.forEach(s=>{
     if(!themes[s.theme]) themes[s.theme]={total:0,sum:0,count:0};
     themes[s.theme].sum+=s.pct; themes[s.theme].count++;
     themes[s.theme].total=Math.max(themes[s.theme].total,s.total||0);
   });
-  const themesEl = document.getElementById('dash-themes');
-  if(Object.keys(themes).length===0){
-    themesEl.innerHTML='<p style="font-size:13px;color:var(--muted);padding:10px 0;">Aucune donnée pour le moment.</p>';
-  } else {
-    themesEl.innerHTML = Object.entries(themes).map(([name,d])=>{
-      const avg2=Math.round(d.sum/d.count);
-      const color=avg2>=75?'var(--green)':avg2>=50?'var(--gold)':'var(--brick)';
-      return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);">
-        <div style="flex:1;font-size:13px;font-weight:600;color:var(--navy);">${name}</div>
-        <div style="background:var(--line);border-radius:4px;height:6px;width:80px;overflow:hidden;"><div style="height:100%;width:${avg2}%;background:${color};border-radius:4px;"></div></div>
-        <div style="font-size:13px;font-weight:700;color:${color};min-width:36px;text-align:right;">${avg2}%</div>
-      </div>`;
-    }).join('');
-  }
+  document.getElementById('dash-themes').innerHTML =
+    Object.entries(themes)
+      .sort((a,b) => (a[1].sum/a[1].count) - (b[1].sum/b[1].count))
+      .map(([name,d])=>{
+        const avg2 = Math.round(d.sum/d.count);
+        const color = avg2>=75 ? 'var(--green)' : avg2>=50 ? 'var(--gold)' : 'var(--brick)';
+        return `<div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);">
+          <div style="flex:1;font-size:13.5px;font-weight:600;color:var(--navy);">${name}</div>
+          <div style="background:var(--line);border-radius:4px;height:6px;width:76px;overflow:hidden;flex:none;"><div style="height:100%;width:${avg2}%;background:${color};border-radius:4px;"></div></div>
+          <div style="font-size:13px;font-weight:700;color:${color};min-width:38px;text-align:right;">${avg2}%</div>
+        </div>`;
+      }).join('');
 
-  /* Historique */
-  const histEl = document.getElementById('dash-history');
-  if(scores.length===0){
-    histEl.innerHTML='<p style="font-size:13px;color:var(--muted);padding:10px 0;">Aucune session enregistrée.</p>';
-  } else {
-    histEl.innerHTML='<div style="display:flex;flex-direction:column;gap:8px;">'+scores.slice(0,10).map(s=>{
-      const color=s.pct>=75?'var(--green)':s.pct>=50?'var(--gold)':'var(--brick)';
-      return `<div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-        <div><div style="font-weight:600;font-size:13px;color:var(--navy);">${s.isExam?'📋 Examen':'🎯 Entraînement'} · ${s.level}</div>
-        <div style="font-size:12px;color:var(--muted);">${s.theme} · ${s.date}</div></div>
-        <div style="font-family:'Libre Caslon Display',serif;font-size:22px;color:${color};">${s.pct}%</div>
+  /* ---- Historique ---- */
+  document.getElementById('dash-history').innerHTML =
+    '<div style="display:flex;flex-direction:column;gap:8px;">' +
+    scores.slice(0,10).map(s=>{
+      const color = s.pct>=75 ? 'var(--green)' : s.pct>=50 ? 'var(--gold)' : 'var(--brick)';
+      return `<div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="min-width:0;">
+          <div style="font-weight:600;font-size:13.5px;color:var(--navy);">${s.isExam ? 'Examen blanc' : 'Entraînement'} · ${s.level}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">${s.theme} · ${s.date}</div>
+        </div>
+        <div style="font-size:19px;font-weight:700;color:${color};flex:none;">${s.pct}%</div>
       </div>`;
-    }).join('')+'</div>';
-  }
-
+    }).join('') + '</div>';
 }
 
 function resumeLastSession(){
