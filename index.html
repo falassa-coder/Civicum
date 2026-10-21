@@ -1165,6 +1165,26 @@ details[open] summary::after { transform: rotate(45deg); }
   .db-stat b { font-size: 22px; }
   .db-stat small { font-size: 10.5px; }
 }
+
+/* ===== Mention de transparence sur les avis ===== */
+details.avis-note { background: var(--beige); border-radius: var(--r); padding: 0; margin-bottom: 26px; }
+details.avis-note summary { cursor: pointer; list-style: none; padding: 13px 16px;
+  font-size: 13.5px; color: var(--muted); line-height: 1.55; display: flex; gap: 9px; align-items: flex-start; }
+details.avis-note summary::-webkit-details-marker { display: none; }
+details.avis-note summary::before { content: "✓"; color: var(--gold); font-weight: 700; flex: none; }
+details.avis-note summary::after { content: "En savoir plus"; margin-left: auto; flex: none;
+  color: var(--gold); font-weight: 600; font-size: 12.5px; text-decoration: underline;
+  text-underline-offset: 3px; white-space: nowrap; }
+details.avis-note[open] summary::after { content: "Réduire"; }
+details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: var(--r); }
+.avis-note-detail { padding: 0 16px 16px 40px; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+.avis-note-detail p { margin: 0 0 9px; }
+.avis-note-detail p:last-child { margin-bottom: 0; }
+@media(max-width:560px){
+  details.avis-note summary { flex-wrap: wrap; }
+  details.avis-note summary::after { margin-left: 26px; }
+  .avis-note-detail { padding-left: 16px; }
+}
 </style>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1539,19 +1559,24 @@ details[open] summary::after { transform: rotate(45deg); }
       <div class="sec-head" style="text-align:left;margin-left:0;">
         <div class="eyebrow">Avis</div>
         <h2>Ce que disent les utilisateurs de Civicum</h2>
-        <p>Les avis publiés ci-dessous proviennent de personnes qui disposent ou ont disposé d'un abonnement à la plateforme.</p>
+        <p>Les avis ci-dessous proviennent de personnes qui disposent ou ont disposé d'un abonnement à la plateforme.</p>
       </div>
 
-      <div class="avis-note" style="margin-bottom:26px;">
-        <b>Comment ces avis sont recueillis.</b> Seules les personnes ayant souscrit un abonnement peuvent en déposer un, depuis leur espace personnel. Chaque avis est relu avant publication pour vérifier qu'il ne contient pas de données personnelles ou de propos contraires à la loi, <b>sans filtrage sur la note attribuée</b> : les avis critiques sont publiés comme les autres. Aucun avis n'est rédigé ni commandé par Civicum.
-      </div>
+      <details class="avis-note">
+        <summary>Avis vérifiés — déposés par des abonnés, relus avant publication, jamais filtrés sur la note.</summary>
+        <div class="avis-note-detail">
+          <p>Seules les personnes disposant ou ayant disposé d'un abonnement peuvent déposer un avis, depuis leur espace personnel. Un avis par compte.</p>
+          <p>Chaque avis est relu avant publication, uniquement pour écarter les données personnelles et les propos contraires à la loi. Le contenu n'est jamais modifié et les avis critiques sont publiés comme les autres.</p>
+          <p>Aucun avis n'est rédigé, commandé ni rémunéré par Civicum.</p>
+        </div>
+      </details>
 
       <div class="avis-grid" id="avis-liste"></div>
 
       <div style="margin-top:34px;padding:26px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-align:center;">
-        <div class="eyebrow" style="margin-bottom:8px;">Vous êtes abonné ?</div>
-        <p style="color:var(--muted);font-size:15px;margin-bottom:18px;">Votre retour aide les personnes qui préparent la même démarche que vous.</p>
-        <a class="btn btn-gold" href="#" onclick="showApp('login');return false;">Donner mon avis</a>
+        <div class="eyebrow" style="margin-bottom:8px;">Vous êtes ou avez été abonné ?</div>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:18px;">Même si votre accès est arrivé à échéance, vous pouvez déposer un avis. Votre retour aide les personnes qui préparent la même démarche que vous.</p>
+        <a class="btn btn-gold" href="#" onclick="showApp('login');return false;">Connectez-vous pour donner votre avis</a>
       </div>
     </div>
   </section>
@@ -2763,7 +2788,7 @@ async function onUserConnected(user){
           <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
         </div>
         <div style="margin-top:12px;font-size:12px;color:#666;">Paiement sécurisé par Stripe. Accès activé immédiatement après paiement.</div>
-        ${abonnementExpire ? '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(46,125,82,.2);font-size:13px;"><a href="#" onclick="ouvrirAvis();return false;" style="color:#2e7d52;font-weight:600;">Donner mon avis sur Civicum →</a></div>' : ''}
+        ${abonnementExpire ? '<div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(46,125,82,.2);"><div style="font-size:12.5px;color:#555;margin-bottom:8px;">Vous ne souhaitez pas renouveler ? Votre retour nous est utile.</div><button class="btn btn-ghost" onclick="ouvrirAvis()" style="width:100%;justify-content:center;font-size:13.5px;padding:11px;">Donner mon avis sur Civicum</button></div>' : ''}
       </div>`;
     ouvrirAcces(false);
     show('screen-gate');
