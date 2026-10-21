@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Examen civique 2026 et français FLE — préparation en ligne | Civicum</title>
-<meta name="description" content="Préparez l'examen civique 2026 (CSP, carte de résident, naturalisation) et votre niveau de français A1 à B2. Test gratuit de 40 questions, sans inscription.">
+<meta name="description" content="Préparez l'examen civique 2026 (CSP, carte de résident, naturalisation) et votre niveau de français A1 à B2. Test gratuit de 40 questions en conditions réelles.">
 
 <!-- SEO -->
 <meta name="author" content="Civicum - MFS Services et Conseils">
@@ -109,7 +109,7 @@
         {
           "@type": "Question",
           "name": "Puis-je m'entraîner gratuitement avant de m'abonner ?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Un test gratuit de 40 questions est accessible sans inscription, dans les conditions de l'examen officiel, avec le score affiché immédiatement et le détail des réponses par thématique." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Un test gratuit de 40 questions est accessible sans créer de compte, dans les conditions de l'examen officiel. Le résultat détaillé par thématique est envoyé à la fin du test." }
         },
         {
           "@type": "Question",
@@ -1015,11 +1015,66 @@ details[open] summary::after { transform: rotate(45deg); }
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
+
+/* ===== Navigation : logo cliquable + accès permanent ===== */
+.brand { text-decoration: none; cursor: pointer; transition: opacity .15s; }
+.brand:hover { opacity: .72; }
+.brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: var(--r-sm); }
+.nav-links { gap: 15px; }
+.navlink-gold { color: var(--gold); font-weight: 600; }
+.nav-auth { display: flex; align-items: center; gap: 8px; flex: none; }
+.nav-auth-mobile { display: none; }
+.btn-sm { padding: 8px 15px; font-size: 13.5px; }
+.btn-lg { padding: 15px 28px; font-size: 16px; }
+.btn-gold { background: var(--gold); color: #fff; border-color: var(--gold); }
+.btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+.hero-free { margin-top: 16px; font-size: 14.5px; color: var(--muted); }
+.hero-free a { color: var(--gold); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(184,150,46,.35); }
+.hero-free a:hover { border-bottom-color: var(--gold); }
+
+/* ===== Avis ===== */
+.avis-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 14px; }
+.avis-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
+             padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.avis-card .etoiles { color: var(--gold); font-size: 15px; letter-spacing: 2px; }
+.avis-card .txt { font-size: 15px; line-height: 1.6; flex: 1; }
+.avis-card .sig { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.avis-card .sig b { color: var(--navy); font-weight: 600; }
+.avis-vide { text-align: center; color: var(--muted); padding: 34px 20px; font-size: 15px;
+             border: 1px dashed var(--line); border-radius: var(--r-lg); }
+.avis-note { font-size: 13px; color: var(--muted); background: var(--beige);
+             border-radius: var(--r); padding: 13px 16px; line-height: 1.6; }
+.etoiles-saisie { display: flex; gap: 6px; }
+.etoiles-saisie button { background: none; border: none; cursor: pointer; font-size: 30px;
+                         line-height: 1; color: var(--line-md,#C9C4B8); padding: 2px; transition: color .12s, transform .12s; }
+.etoiles-saisie button:hover { transform: scale(1.12); }
+.etoiles-saisie button.on { color: var(--gold); }
+.etoiles-saisie button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+
+/* ===== Topbar application ===== */
+.app-brand { display: flex; align-items: center; gap: 8px; background: none; border: none;
+             cursor: pointer; padding: 2px 4px; border-radius: var(--r-sm); transition: opacity .15s; font: inherit; }
+.app-brand:hover { opacity: .72; }
+.app-brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+@media(max-width:860px){
+  .nav-auth .nav-auth-login { display: none; }
+  .nav-auth .btn-sm { padding: 8px 13px; font-size: 13px; }
+  .nav-auth-mobile { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px; }
+  .nav-auth-mobile .btn { width: 100%; }
+  .nav-links a.navlink-gold { color: var(--gold); }
+  .btn-lg { padding: 14px 22px; font-size: 15px; }
+  .hero-cta .btn { flex: 1 1 100%; }
+}
+@media(max-width:400px){
+  .nav-auth .btn-sm { padding: 8px 11px; font-size: 12.5px; }
+  .brand-name { display: none; }
+}
 </style>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, collection, query, where, getDocs, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
   import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-functions.js";
 
   const firebaseConfig = {
@@ -1050,6 +1105,11 @@ details[open] summary::after { transform: rotate(45deg); }
   window._fbUpdateDoc = updateDoc;
   window._fbTimestamp = serverTimestamp;
   window._fbOnSnapshot = onSnapshot;
+  window._fbCollection = collection;
+  window._fbQuery = query;
+  window._fbWhere = where;
+  window._fbGetDocs = getDocs;
+  window._fbLimit = limit;
   window._fbFunctions = functionsInstance;
   window._fbHttpsCallable = httpsCallable;
 
@@ -1068,19 +1128,29 @@ details[open] summary::after { transform: rotate(45deg); }
 
 <header class="nav">
   <div class="wrap nav-in">
-    <div class="brand"><div class="mono">C</div><div class="brand-name">CIVICUM</div></div>
-    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <a class="brand" href="#" onclick="switchTab('accueil');return false;" aria-label="Civicum — retour à l'accueil" title="Retour à l'accueil">
+      <div class="mono">C</div><div class="brand-name">CIVICUM</div>
+    </a>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
       <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;">Nos formations</a>
       <a class="navlink tab-link" href="#" data-tab="public-tab" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
-      <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
-      <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
+      <a class="navlink tab-link" href="#" data-tab="avis" onclick="switchTab('avis');return false;">Avis</a>
       <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
-      <a class="navlink" href="/test-gratuit.html" style="color:var(--gold);font-weight:600;">Test gratuit</a>
-      <a class="btn nav-cta" href="#" onclick="showApp();return false;" style="background:var(--gold);color:#fff;border:none;">Connexion</a>
+      <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
+      <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
+      <a class="navlink navlink-gold" href="/test-gratuit.html">Test gratuit</a>
+      <span class="nav-auth-mobile">
+        <a class="btn btn-ghost" href="#" onclick="showApp('login');return false;">Se connecter</a>
+        <a class="btn nav-cta" href="#" onclick="showApp('register');return false;">Créer un compte</a>
+      </span>
     </nav>
+    <div class="nav-auth">
+      <a class="btn btn-ghost btn-sm nav-auth-login" href="#" onclick="showApp('login');return false;">Connexion</a>
+      <a class="btn btn-gold btn-sm" href="#" onclick="showApp('register');return false;">Créer un compte</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -1095,13 +1165,16 @@ details[open] summary::after { transform: rotate(45deg); }
         <h1>Préparation à l'examen civique et au français<br><span class="em">CSP · Carte de résident · Naturalisation</span></h1>
         <p class="lead">Réussissez votre intégration à votre rythme. Civicum, c'est <b>deux parcours complémentaires</b> pour votre intégration en France : la préparation à l'<b>examen civique</b> et l'apprentissage du <b>français (FLE)</b>.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="/test-gratuit.html" style="background:var(--gold);border-color:var(--gold);">Test gratuit — 40 questions</a>
-          <a class="btn" href="#" onclick="document.getElementById('apercu-formations').scrollIntoView({behavior:'smooth'});return false;">Découvrir les deux parcours ↓</a>
+          <a class="btn btn-gold btn-lg" href="#" onclick="showApp('register');return false;">Créer mon compte</a>
+          <a class="btn btn-ghost btn-lg" href="#" onclick="showApp('login');return false;">J'ai déjà un compte</a>
         </div>
+        <p class="hero-free">
+          Vous hésitez ? <a href="/test-gratuit.html">Faites le test gratuit — 40 questions en conditions réelles →</a>
+        </p>
         <div class="hero-trust">
-          <span><i class="dot"></i>Sans installation</span>
+          <span><i class="dot"></i>Accès immédiat après paiement</span>
           <span><i class="dot"></i>Mobile &amp; ordinateur</span>
-          <span><i class="dot"></i>En ligne ou en présentiel</span>
+          <span><i class="dot"></i>Sans engagement</span>
         </div>
       </div>
       <div class="preview-carousel" aria-hidden="true">
@@ -1339,13 +1412,51 @@ details[open] summary::after { transform: rotate(45deg); }
   </section>
 
   <!-- CTA FINAL -->
+  <section id="avis-accueil" style="display:none;">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Avis</div>
+        <h2>Ce que disent les utilisateurs</h2>
+      </div>
+      <div class="avis-grid" id="avis-apercu"></div>
+      <div style="text-align:center;margin-top:22px;">
+        <a class="btn btn-ghost" href="#" onclick="switchTab('avis');return false;">Lire tous les avis</a>
+      </div>
+    </div>
+  </section>
+
   <section class="final">
     <div class="wrap" style="display:block;text-align:center;padding:60px 22px;">
       <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,3.6vw,32px);margin-bottom:12px;">Prêt à préparer votre examen ?</h2>
       <p style="color:rgba(246,242,233,.8);font-size:15px;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;">Créez votre compte gratuitement. L'accès complet est débloqué après confirmation de votre abonnement.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a class="btn" href="#" onclick="showApp();return false;" style="background:var(--cream);color:var(--navy);">Créer mon compte</a>
+        <a class="btn" href="#" onclick="showApp('register');return false;" style="background:var(--cream);color:var(--navy);">Créer mon compte</a>
         <a class="btn btn-ghost" href="#" onclick="switchTab('tarifs');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Voir les tarifs</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : AVIS ===== -->
+<div id="tab-avis" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap" style="max-width:860px;">
+      <div class="sec-head" style="text-align:left;margin-left:0;">
+        <div class="eyebrow">Avis</div>
+        <h2>Ce que disent les utilisateurs de Civicum</h2>
+        <p>Les avis publiés ci-dessous proviennent de personnes qui disposent ou ont disposé d'un abonnement à la plateforme.</p>
+      </div>
+
+      <div class="avis-note" style="margin-bottom:26px;">
+        <b>Comment ces avis sont recueillis.</b> Seules les personnes ayant souscrit un abonnement peuvent en déposer un, depuis leur espace personnel. Chaque avis est relu avant publication pour vérifier qu'il ne contient pas de données personnelles ou de propos contraires à la loi, <b>sans filtrage sur la note attribuée</b> : les avis critiques sont publiés comme les autres. Aucun avis n'est rédigé ni commandé par Civicum.
+      </div>
+
+      <div class="avis-grid" id="avis-liste"></div>
+
+      <div style="margin-top:34px;padding:26px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-align:center;">
+        <div class="eyebrow" style="margin-bottom:8px;">Vous êtes abonné ?</div>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:18px;">Votre retour aide les personnes qui préparent la même démarche que vous.</p>
+        <a class="btn btn-gold" href="#" onclick="showApp('login');return false;">Donner mon avis</a>
       </div>
     </div>
   </section>
@@ -1993,14 +2104,19 @@ details[open] summary::after { transform: rotate(45deg); }
     </button>
   </div>
 </nav><div class="app-topbar">
-  <div style="display:flex;align-items:center;gap:8px;">
-    <div style="width:28px;height:28px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:var(--font-display);font-size:14px;font-weight:700;">C</div>
+  <button class="app-brand" onclick="retourAccueilApp()" title="Retour à l'accueil" aria-label="Retour à l'accueil">
+    <span style="width:28px;height:28px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:var(--font-display);font-size:14px;font-weight:700;">C</span>
     <span style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--navy);letter-spacing:.06em;">CIVICUM</span>
-  </div>
+  </button>
   <span id="topbar-label" style="font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;"></span>
+  <span style="display:flex;align-items:center;gap:2px;">
+  <button onclick="retourSiteVitrine()" style="font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;font-weight:500;" title="Revenir au site">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+  </button>
   <button onclick="doLogout()" style="font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;font-weight:500;" title="Déconnexion">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
   </button>
+  </span>
 </div>
 <div id="app-platform">
 
@@ -2194,8 +2310,64 @@ details[open] summary::after { transform: rotate(45deg); }
       </div>
       <button class="btn btn-ghost" id="btn-clear-scores" style="width:100%;font-size:13px;color:var(--muted);">Effacer l'historique</button>
     </div>
+
+    <!-- Avis -->
+    <div style="padding-top:16px;border-top:1px solid var(--line);margin-top:16px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:10px;">Votre avis</div>
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:190px;">
+          <div style="font-weight:600;color:var(--navy);font-size:14.5px;margin-bottom:3px;">Partagez votre expérience</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.5;">Votre retour est publié sur le site après relecture et aide les personnes qui préparent la même démarche.</div>
+        </div>
+        <button class="btn btn-gold" onclick="ouvrirAvis()" style="flex:none;">Donner mon avis</button>
+      </div>
+    </div>
   </section>
 
+
+  <section id="screen-avis" class="card" hidden>
+    <button class="btn-link" onclick="retourAccueilApp()">← Retour</button>
+    <div style="text-align:center;margin:10px 0 22px;">
+      <div class="gate-icon">★</div>
+      <div style="font-weight:700;color:var(--navy);font-size:18px;margin-bottom:6px;">Donner mon avis</div>
+      <p style="color:var(--muted);font-size:14.5px;max-width:430px;margin:0 auto;">Votre retour est publié sur le site après relecture. Nous ne modifions jamais le contenu d'un avis et nous publions aussi les avis critiques.</p>
+    </div>
+
+    <div id="avis-form">
+      <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;">Votre note</label>
+      <div class="etoiles-saisie" id="avis-etoiles" role="group" aria-label="Note sur 5">
+        <button type="button" onclick="noterAvis(1)" aria-label="1 étoile sur 5">★</button>
+        <button type="button" onclick="noterAvis(2)" aria-label="2 étoiles sur 5">★</button>
+        <button type="button" onclick="noterAvis(3)" aria-label="3 étoiles sur 5">★</button>
+        <button type="button" onclick="noterAvis(4)" aria-label="4 étoiles sur 5">★</button>
+        <button type="button" onclick="noterAvis(5)" aria-label="5 étoiles sur 5">★</button>
+      </div>
+      <div id="avis-note-txt" style="font-size:13px;color:var(--muted);margin:8px 0 20px;min-height:18px;"></div>
+
+      <label for="avis-prenom" style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Prénom affiché</label>
+      <input type="text" id="avis-prenom" maxlength="30" placeholder="Prénom ou initiales" style="width:100%;margin-bottom:6px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:18px;">Seul ce prénom apparaîtra publiquement. Votre e-mail n'est jamais affiché.</div>
+
+      <label for="avis-demarche" style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Votre démarche</label>
+      <select id="avis-demarche" style="width:100%;margin-bottom:18px;padding:12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;">
+        <option value="">— Préciser (facultatif) —</option>
+        <option value="Carte de séjour pluriannuelle">Carte de séjour pluriannuelle</option>
+        <option value="Carte de résident (10 ans)">Carte de résident (10 ans)</option>
+        <option value="Naturalisation">Naturalisation</option>
+        <option value="Formation de français (FLE)">Formation de français (FLE)</option>
+      </select>
+
+      <label for="avis-texte" style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Votre avis</label>
+      <textarea id="avis-texte" rows="6" maxlength="600" placeholder="Ce qui vous a aidé, ce qui pourrait être amélioré…" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;font:inherit;resize:vertical;"></textarea>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:6px 0 20px;">
+        <span>N'indiquez ni numéro de dossier, ni adresse, ni données personnelles.</span>
+        <span id="avis-compteur">0 / 600</span>
+      </div>
+
+      <button class="btn btn-primary" id="btn-envoyer-avis" onclick="envoyerAvis()" style="width:100%;justify-content:center;">Envoyer mon avis</button>
+      <div id="avis-msg" style="display:none;margin-top:14px;font-size:14px;border-radius:8px;padding:13px 15px;"></div>
+    </div>
+  </section>
 
   <section id="screen-ms" class="card" hidden>
     <button class="btn-link" id="btn-ms-back">← Retour</button>
@@ -2490,6 +2662,7 @@ async function onUserConnected(user){
           <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
         </div>
         <div style="margin-top:12px;font-size:12px;color:#666;">Paiement sécurisé par Stripe. Accès activé immédiatement après paiement.</div>
+        ${abonnementExpire ? '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(46,125,82,.2);font-size:13px;"><a href="#" onclick="ouvrirAvis();return false;" style="color:#2e7d52;font-weight:600;">Donner mon avis sur Civicum →</a></div>' : ''}
       </div>`;
     show('screen-gate');
     switchAuthTab('login');
@@ -2572,21 +2745,28 @@ document.getElementById('login-pwd').addEventListener('keydown', e=>{ if(e.key==
 document.getElementById('btn-register').addEventListener('click', tryRegister);
 document.getElementById('btn-send-reset').addEventListener('click', trySendReset);
 
-function checkExistingUnlock(){
-  /* S'assurer que app-wrapper est visible (showApp ne l'affiche plus) */
+function ouvrirCoquilleApp(){
   const appW = document.getElementById('app-wrapper');
   if(appW){ appW.style.display='block'; appW.classList.add('visible'); }
+}
+
+function checkExistingUnlock(silencieux){
+  /* silencieux = restauration de session au chargement : on n'ouvre l'espace
+     que si une session existe, sinon le visiteur reste sur le site vitrine
+     (sans quoi la barre de navigation de l'app s'affiche par-dessus sur mobile). */
+  if(!silencieux) ouvrirCoquilleApp();
   /* Afficher un écran de chargement le temps que Firebase vérifie la session */
   document.getElementById('screen-gate').hidden = true;
   /* Montrer un indicateur de chargement discret */
-  if(!document.getElementById('auth-loading')){
+  if(!silencieux && !document.getElementById('auth-loading')){
     const loader = document.createElement('div');
     loader.id = 'auth-loading';
     loader.style.cssText = 'text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;';
     loader.innerHTML = '<div style="font-size:28px;margin-bottom:10px;">✦</div>Connexion en cours…';
     document.getElementById('app-platform').prepend(loader);
   }
-  document.getElementById('auth-loading').style.display = 'block';
+  const _ld = document.getElementById('auth-loading');
+  if(_ld) _ld.style.display = silencieux ? 'none' : 'block';
 
   window._fbAuthReady = async (user) => {
     const loader = document.getElementById('auth-loading');
@@ -2598,10 +2778,15 @@ function checkExistingUnlock(){
       return;
     }
     if(user){
+      ouvrirCoquilleApp();
       await onUserConnected(user);
+    } else if(silencieux){
+      /* Visiteur non connecté arrivé sur le site : on ne touche à rien */
+      document.getElementById('screen-landing').classList.remove('hidden');
     } else {
       /* Pas de session Firebase : afficher la connexion */
       show('screen-gate');
+      switchAuthTab(window._gateTab || 'login');
     }
   };
   /* Si Firebase déjà initialisé et user connu */
@@ -2609,9 +2794,11 @@ function checkExistingUnlock(){
     const loader = document.getElementById('auth-loading');
     if(loader) loader.style.display = 'none';
     if(window._fbCurrentUser && !window._justRegistered){
+      ouvrirCoquilleApp();
       onUserConnected(window._fbCurrentUser);
-    } else if(!window._fbCurrentUser) {
+    } else if(!window._fbCurrentUser && !silencieux) {
       show('screen-gate');
+      switchAuthTab(window._gateTab || 'login');
     }
   }
 }
@@ -3111,7 +3298,7 @@ function renderResults(timeExpired){
 function show(id){
   ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
-   'screen-portraits','screen-dashboard','screen-ms'].forEach(s => {
+   'screen-portraits','screen-dashboard','screen-ms','screen-avis'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -4294,7 +4481,15 @@ document.getElementById('btn-lesson-to-quiz').addEventListener('click', () => {
 });
 
 
-checkExistingUnlock();
+checkExistingUnlock(true);   /* restauration silencieuse : ne pas ouvrir l'app au chargement */
+
+/* Arrivée depuis un lien direct : civicum.fr/#inscription ou /#connexion */
+(function(){
+  const cible = (location.hash || '').toLowerCase();
+  if(cible === '#inscription') setTimeout(() => showApp('register'), 350);
+  else if(cible === '#connexion') setTimeout(() => showApp('login'), 350);
+  else if(cible === '#avis') setTimeout(() => switchTab('avis'), 250);
+})();
 
 
 
@@ -4460,8 +4655,195 @@ function switchFormationSubtab(which){
 }
 
 /* ===== LANDING ↔ APP SWITCH ===== */
-function showApp(){
+
+/* ============================================================
+   NAVIGATION — logo et retour
+   ============================================================ */
+function retourAccueilApp(){
+  /* Dans l'application, le logo ramène à l'accueil de l'espace */
+  const connecte = !!(window._fbCurrentUser);
+  if(connecte && document.getElementById('screen-dashboard')){
+    try{ renderDashboard(); }catch(e){}
+    show('screen-dashboard');
+  } else {
+    show('screen-level');
+  }
+}
+
+function retourSiteVitrine(){
+  const appW = document.getElementById('app-wrapper');
+  if(appW){ appW.style.display='none'; appW.classList.remove('visible'); }
+  document.getElementById('screen-landing').classList.remove('hidden');
+  switchTab('accueil');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================================================
+   AVIS — lecture publique et dépôt par les abonnés
+   ============================================================ */
+const AVIS_MAX = 600;
+
+function echapper(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function etoilesTexte(n){
+  const k = Math.max(1, Math.min(5, parseInt(n,10) || 0));
+  return '★'.repeat(k) + '☆'.repeat(5-k);
+}
+
+function carteAvis(a){
+  const quand = a.date && a.date.toDate
+    ? a.date.toDate().toLocaleDateString('fr-FR',{month:'long',year:'numeric'})
+    : '';
+  const sig = [echapper(a.prenom || 'Anonyme'), echapper(a.demarche || ''), quand]
+    .filter(Boolean);
+  return '<article class="avis-card">' +
+    '<div class="etoiles" aria-label="' + (a.note||0) + ' sur 5">' + etoilesTexte(a.note) + '</div>' +
+    '<p class="txt">' + echapper(a.texte) + '</p>' +
+    '<div class="sig"><b>' + sig[0] + '</b>' + (sig.length>1 ? ' · ' + sig.slice(1).join(' · ') : '') + '</div>' +
+    '</article>';
+}
+
+async function chargerAvisPublics(){
+  const liste  = document.getElementById('avis-liste');
+  const apercu = document.getElementById('avis-apercu');
+  const bandeau = document.getElementById('avis-accueil');
+  if(!liste && !apercu) return;
+  if(!window._fbDb || !window._fbGetDocs){ return; }
+
+  try{
+    const q = window._fbQuery(
+      window._fbCollection(window._fbDb, 'avis'),
+      window._fbWhere('publie', '==', true),
+      window._fbLimit(60)
+    );
+    const snap = await window._fbGetDocs(q);
+    const avis = [];
+    snap.forEach(d => avis.push(d.data()));
+    /* tri décroissant côté navigateur : évite un index composite Firestore */
+    avis.sort((a,b) => {
+      const ta = a.date && a.date.toMillis ? a.date.toMillis() : 0;
+      const tb = b.date && b.date.toMillis ? b.date.toMillis() : 0;
+      return tb - ta;
+    });
+
+    if(liste){
+      liste.innerHTML = avis.length
+        ? avis.map(carteAvis).join('')
+        : '<div class="avis-vide">Aucun avis publié pour le moment. Les premiers retours apparaîtront ici.</div>';
+    }
+    if(apercu && avis.length >= 2){
+      apercu.innerHTML = avis.slice(0,3).map(carteAvis).join('');
+      if(bandeau) bandeau.style.display = 'block';
+    }
+  } catch(e){
+    if(liste) liste.innerHTML = '<div class="avis-vide">Les avis ne peuvent pas être affichés pour le moment.</div>';
+  }
+}
+
+/* --- Dépôt d'un avis (espace abonné) --- */
+let _avisNote = 0;
+
+function ouvrirAvis(){
+  _avisNote = 0;
+  const msg = document.getElementById('avis-msg');
+  if(msg){ msg.style.display='none'; }
+  const form = document.getElementById('avis-form');
+  if(form) form.style.display = 'block';
+  majEtoiles();
+  /* Pré-remplir le prénom connu */
+  const champ = document.getElementById('avis-prenom');
+  if(champ && !champ.value){
+    let nom = '';
+    try{ nom = localStorage.getItem('access_nom') || ''; }catch(e){}
+    champ.value = (nom || '').trim().split(' ')[0] || '';
+  }
+  show('screen-avis');
+}
+
+function noterAvis(n){ _avisNote = n; majEtoiles(); }
+
+function majEtoiles(){
+  const zone = document.getElementById('avis-etoiles');
+  if(!zone) return;
+  [...zone.children].forEach((b,i) => b.classList.toggle('on', i < _avisNote));
+  const libelles = ['', 'Très insatisfait', 'Insatisfait', 'Correct', 'Satisfait', 'Très satisfait'];
+  const t = document.getElementById('avis-note-txt');
+  if(t) t.textContent = _avisNote ? libelles[_avisNote] : '';
+}
+
+function retourAvis(classe, texte){
+  const msg = document.getElementById('avis-msg');
+  if(!msg) return;
+  const ok = classe === 'ok';
+  msg.style.display = 'block';
+  msg.style.background = ok ? 'var(--green-bg)' : 'var(--brick-bg)';
+  msg.style.color = ok ? 'var(--green)' : 'var(--brick)';
+  msg.innerHTML = texte;
+}
+
+async function envoyerAvis(){
+  const btn = document.getElementById('btn-envoyer-avis');
+  const texte = (document.getElementById('avis-texte').value || '').trim();
+  const prenom = (document.getElementById('avis-prenom').value || '').trim();
+  const demarche = document.getElementById('avis-demarche').value || '';
+
+  if(!_avisNote){ retourAvis('ko', "Choisissez d'abord une note."); return; }
+  if(texte.length < 20){ retourAvis('ko', "Votre avis est trop court : écrivez au moins une phrase complète."); return; }
+  if(texte.length > AVIS_MAX){ retourAvis('ko', "Votre avis dépasse " + AVIS_MAX + " caractères."); return; }
+
+  const user = window._fbCurrentUser;
+  if(!user){ retourAvis('ko', "Vous devez être connecté pour déposer un avis."); return; }
+
+  btn.disabled = true;
+  const libelle = btn.textContent;
+  btn.textContent = 'Envoi…';
+
+  try{
+    await window._fbSetDoc(window._fbDoc(window._fbDb, 'avis', user.uid), {
+      uid: user.uid,
+      prenom: prenom.slice(0,30) || 'Anonyme',
+      note: _avisNote,
+      texte: texte,
+      demarche: demarche,
+      date: window._fbTimestamp(),
+      publie: false
+    });
+    document.getElementById('avis-form').style.display = 'none';
+    retourAvis('ok',
+      "<b>Merci, votre avis est bien enregistré.</b><br>Il sera publié sur le site après relecture, généralement sous quelques jours. " +
+      '<div style="margin-top:14px;"><button class="btn btn-ghost" onclick="retourAccueilApp()">Retour</button></div>');
+  } catch(e){
+    btn.disabled = false;
+    btn.textContent = libelle;
+    const refus = e && (e.code === 'permission-denied');
+    retourAvis('ko', refus
+      ? "Le dépôt d'avis est réservé aux personnes ayant souscrit un abonnement."
+      : "L'envoi a échoué. Vérifiez votre connexion et réessayez, ou écrivez-nous à contact@civicum.fr.");
+  }
+}
+
+/* Compteur de caractères */
+(function(){
+  const t = document.getElementById('avis-texte');
+  const c = document.getElementById('avis-compteur');
+  if(!t || !c) return;
+  t.addEventListener('input', () => {
+    c.textContent = t.value.length + ' / ' + AVIS_MAX;
+    c.style.color = t.value.length > AVIS_MAX ? 'var(--brick)' : 'var(--muted)';
+  });
+})();
+
+/* Chargement des avis publics au démarrage */
+window.addEventListener('load', () => { setTimeout(chargerAvisPublics, 600); });
+
+function showApp(tab){
   closeMobileMenu();
+  /* Onglet demandé : 'login' (défaut) ou 'register' */
+  window._gateTab = (tab === 'register') ? 'register' : 'login';
   // NE PAS afficher app-wrapper avant vérification Firebase
   // Juste cacher la landing et laisser checkExistingUnlock gérer l'affichage
   document.getElementById('screen-landing').classList.add('hidden');

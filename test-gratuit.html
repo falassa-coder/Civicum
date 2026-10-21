@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test examen civique gratuit — 40 questions sans inscription | Civicum</title>
-<meta name="description" content="Testez-vous gratuitement sur 40 questions de l'examen civique, dans les conditions officielles : 45 minutes, seuil de réussite à 80 %. Sans inscription, résultat immédiat par thématique.">
+<title>Test examen civique gratuit — 40 questions en conditions réelles | Civicum</title>
+<meta name="description" content="Testez-vous gratuitement sur 40 questions de l'examen civique, dans les conditions officielles : 45 minutes, seuil de réussite à 80 %. Résultat détaillé par thématique, envoyé par e-mail.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://civicum.fr/test-gratuit.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://civicum.fr/test-gratuit.html">
 <meta property="og:title" content="Test examen civique gratuit — 40 questions">
-<meta property="og:description" content="40 questions, 45 minutes, résultat immédiat. Sans inscription.">
+<meta property="og:description" content="40 questions, 45 minutes, résultat détaillé par thématique.">
 <meta property="og:image" content="https://civicum.fr/og-image.png">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Civicum">
@@ -39,7 +39,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Ce test est-il vraiment gratuit ?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Oui, et sans inscription. Les 40 questions, le chronomètre et le résultat détaillé par thématique sont accessibles immédiatement, sans compte et sans adresse e-mail." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Les 40 questions et le chronomètre sont accessibles librement, sans créer de compte. Pour recevoir votre résultat détaillé par thématique, vous indiquez un prénom, un nom et un moyen de contact à la fin du test." } },
         { "@type": "Question", "name": "Ce test remplace-t-il l'examen officiel ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Non. C'est un entraînement. L'examen civique officiel se passe uniquement dans un centre agréé et seul l'État délivre l'attestation de réussite." } },
         { "@type": "Question", "name": "Quel score faut-il obtenir ?",
@@ -153,6 +153,27 @@ section{padding:40px 0}
 .offre li{padding:7px 0 7px 26px;position:relative;font-size:15px}
 .offre li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
 
+/* formulaire de résultat */
+.form-champ{margin-bottom:16px}
+.form-champ label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.form-champ input{width:100%;padding:14px;border:1.5px solid var(--line-md);border-radius:var(--r);
+  font:inherit;background:var(--surface);color:var(--ink)}
+.form-champ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-bg)}
+.form-champ .aide{font-size:13px;color:var(--muted);margin-top:5px}
+.form-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.consent{display:flex;gap:11px;align-items:flex-start;background:var(--surface-2);
+  border-radius:var(--r);padding:14px;margin-bottom:18px;font-size:13.5px;line-height:1.55;cursor:pointer}
+.consent input{flex:none;width:19px;height:19px;margin-top:2px;accent-color:var(--gold);cursor:pointer}
+.form-erreur{background:#FDF0EE;color:#A82D1E;border-radius:var(--r);padding:13px 15px;
+  font-size:14.5px;margin-bottom:16px;display:none}
+.form-attente{display:flex;align-items:center;gap:10px;justify-content:center;color:var(--muted);font-size:15px}
+.scelle{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:26px 22px;
+  text-align:center;margin-bottom:26px}
+.scelle .pastille{display:inline-block;background:rgba(212,176,74,.16);color:var(--gold-lt);
+  border-radius:999px;padding:6px 15px;font-size:13px;font-weight:600;margin-bottom:12px}
+.scelle h2{color:var(--white);margin-bottom:8px}
+.scelle p{color:rgba(250,249,246,.72);font-size:15px;margin:0}
+@media (max-width:560px){.form-duo{grid-template-columns:1fr}}
 footer{background:var(--ink);color:rgba(250,249,246,.65);padding:34px 0;font-size:13.5px;margin-top:50px}
 footer a{color:var(--gold-lt)}
 .masque{display:none!important}
@@ -164,15 +185,18 @@ footer a{color:var(--gold-lt)}
 
 <div class="top"><div class="wrap">
   <a class="brand" href="/"><span>C</span>CIVICUM</a>
-  <a class="retour" href="/">Retour au site</a>
+  <span style="display:flex;gap:16px;align-items:center;">
+    <a class="retour" href="/#avis">Avis</a>
+    <a class="retour" href="/">Retour au site</a>
+  </span>
 </div></div>
 
 <!-- ÉCRAN 1 : INTRO -->
 <div id="ecran-intro">
   <section><div class="wrap">
-    <div class="eyebrow">Test gratuit · sans inscription</div>
+    <div class="eyebrow">Test gratuit · 40 questions</div>
     <h1>Testez-vous sur 40 questions de l'examen civique</h1>
-    <p class="lead">Mêmes conditions que l'épreuve officielle : 40 questions, 45 minutes, 80 % pour réussir. Résultat immédiat et détail par thématique. Aucun compte, aucune adresse e-mail demandée.</p>
+    <p class="lead">Mêmes conditions que l'épreuve officielle : 40 questions, 45 minutes, 80 % pour réussir. Votre résultat détaillé par thématique vous est envoyé à la fin du test — sans créer de compte.</p>
 
     <div class="faits">
       <div class="fait"><b>40</b><small>QUESTIONS</small></div>
@@ -197,10 +221,6 @@ footer a{color:var(--gold-lt)}
         <span class="t"><b>Naturalisation</b><small>Par décret ou par mariage · niveau de français B2 exigé</small></span>
         <span class="fl">→</span>
       </button>
-    </div>
-
-    <div class="avert">
-      Civicum est un service privé de préparation. L'examen civique officiel est organisé uniquement par l'État, dans des centres agréés, et seul l'État délivre l'attestation de réussite.
     </div>
 
     <h2>Ce que mesure l'examen civique</h2>
@@ -231,11 +251,66 @@ footer a{color:var(--gold-lt)}
   </div></section>
 </div>
 
-<!-- ÉCRAN 3 : RÉSULTAT -->
+<!-- ÉCRAN 3 : COORDONNÉES -->
+<div id="ecran-contact" class="masque">
+  <section><div class="wrap" style="max-width:560px">
+    <div class="scelle">
+      <span class="pastille">Test terminé</span>
+      <h2>Votre résultat est prêt</h2>
+      <p>Indiquez où vous l'envoyer : vous recevrez votre score, votre niveau par thématique et le corrigé complet.</p>
+    </div>
+
+    <div class="form-erreur" id="form-erreur"></div>
+
+    <div id="form-contact">
+      <div class="form-duo">
+        <div class="form-champ">
+          <label for="ct-prenom">Prénom</label>
+          <input type="text" id="ct-prenom" autocomplete="given-name" maxlength="40">
+        </div>
+        <div class="form-champ">
+          <label for="ct-nom">Nom</label>
+          <input type="text" id="ct-nom" autocomplete="family-name" maxlength="40">
+        </div>
+      </div>
+
+      <div class="form-champ">
+        <label for="ct-email">Adresse e-mail</label>
+        <input type="email" id="ct-email" autocomplete="email" maxlength="120" placeholder="vous@exemple.fr" inputmode="email">
+        <div class="aide">C'est à cette adresse que votre résultat détaillé sera envoyé.</div>
+      </div>
+
+      <div class="form-champ">
+        <label for="ct-tel">Téléphone <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
+        <input type="tel" id="ct-tel" autocomplete="tel" maxlength="25" placeholder="06 12 34 56 78" inputmode="tel">
+        <div class="aide">Si vous préférez être rappelé plutôt que de laisser un e-mail, indiquez seulement ce numéro.</div>
+      </div>
+
+      <label class="consent" for="ct-consent">
+        <input type="checkbox" id="ct-consent">
+        <span>J'accepte que Civicum conserve ces informations pour m'envoyer mon résultat et des informations sur la préparation à l'examen civique. Je peux demander leur suppression à tout moment en écrivant à <b>contact@civicum.fr</b>.</span>
+      </label>
+
+      <button class="btn btn-or" id="btn-envoyer-ct" onclick="envoyerCoordonnees()" style="width:100%">Voir et recevoir mon résultat</button>
+      <p style="font-size:12.5px;color:var(--muted);text-align:center;margin:14px 0 0">
+        Vos coordonnées ne sont ni vendues ni transmises à des tiers.
+      </p>
+    </div>
+
+    <div id="form-attente" class="form-attente masque" style="padding:30px 0">
+      <span style="width:20px;height:20px;border:2.5px solid var(--line-md);border-top-color:var(--gold);border-radius:50%;display:inline-block;animation:tourne .8s linear infinite"></span>
+      Envoi de votre résultat…
+    </div>
+    <style>@keyframes tourne{to{transform:rotate(360deg)}}</style>
+  </div></section>
+</div>
+
+<!-- ÉCRAN 4 : RÉSULTAT -->
 <div id="ecran-fin" class="masque">
   <section><div class="wrap">
     <div class="eyebrow" id="fin-niveau"></div>
     <h1 style="margin-bottom:22px">Votre résultat</h1>
+    <div id="fin-confirmation" style="display:none"></div>
     <div class="score">
       <div class="n" id="fin-score">0/40</div>
       <div class="pc" id="fin-pc"></div>
@@ -261,7 +336,8 @@ footer a{color:var(--gold-lt)}
         <li>Formation de français (FLE) de A1 à B2, en ligne ou en petit groupe</li>
       </ul>
       <div class="actions" style="justify-content:center">
-        <a class="btn btn-or" href="/">Découvrir la plateforme</a>
+        <a class="btn btn-or" href="/#inscription">Créer mon compte</a>
+        <a class="btn btn-ink" href="/">Découvrir la plateforme</a>
         <button class="btn btn-vide" onclick="recommencer()">Refaire un test</button>
       </div>
       <p style="font-size:13px;color:var(--muted);margin:18px 0 0">À partir de 9,99 € par mois. Sans engagement.</p>
@@ -282,7 +358,7 @@ let jeu = [], pos = 0, reponses = [], reste = 45*60, tick = null, niveau = "";
 
 function melanger(t){ const a=t.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 const $ = id => document.getElementById(id);
-function voir(e){ ["ecran-intro","ecran-quiz","ecran-fin"].forEach(x=>$(x).classList.toggle("masque",x!==e)); window.scrollTo(0,0); }
+function voir(e){ ["ecran-intro","ecran-quiz","ecran-contact","ecran-fin"].forEach(x=>$(x).classList.toggle("masque",x!==e)); window.scrollTo(0,0); }
 
 function demarrer(n){
   niveau = n;
@@ -319,7 +395,15 @@ function afficher(){
 function choisir(cle){ reponses[pos] = cle; afficher(); if(pos < jeu.length-1) setTimeout(()=>allerA(pos+1), 180); }
 function allerA(i){ if(i>=0 && i<jeu.length){ pos=i; afficher(); window.scrollTo(0,0);} }
 function suivante(){ if(pos === jeu.length-1) terminer(); else allerA(pos+1); }
-function recommencer(){ voir("ecran-intro"); }
+function recommencer(){ _resultat = null; voir("ecran-intro"); }
+
+/* ── URL de la fonction Cloud qui enregistre le prospect et envoie le résultat.
+      À remplacer par l'URL réelle, visible dans Console Firebase → Functions
+      une fois « enregistrerResultatTest » déployée. ───────────────────── */
+const URL_RESULTAT = "https://enregistrerresultattest-qsnykdqtqq-uc.a.run.app";
+
+let _resultat = null;      /* résultat calculé, révélé après saisie */
+let _tentatives = 0;
 
 function terminer(){
   clearInterval(tick);
@@ -332,8 +416,84 @@ function terminer(){
     parTheme[q.theme].tot++; if(ok) parTheme[q.theme].ok++;
   });
   const pc = Math.round(bonnes/jeu.length*100);
-  $("fin-niveau").textContent = "Test " + LIB[niveau];
-  $("fin-score").textContent = bonnes + "/" + jeu.length;
+
+  /* Le résultat est calculé mais pas encore montré : on demande d'abord
+     où l'envoyer. */
+  _resultat = { bonnes, total: jeu.length, pc, parTheme, niveau };
+  _tentatives = 0;
+  const err = $("form-erreur"); if(err) err.style.display = "none";
+  voir("ecran-contact");
+  const p1 = $("ct-prenom"); if(p1) setTimeout(() => p1.focus(), 120);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Saisie des coordonnées puis révélation du résultat
+   ───────────────────────────────────────────────────────────── */
+function erreurFormulaire(texte){
+  const b = $("form-erreur");
+  b.textContent = texte;
+  b.style.display = "block";
+  b.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function emailPlausible(v){
+  return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v);
+}
+function telPlausible(v){
+  return v.replace(/[^0-9]/g, "").length >= 9;
+}
+
+async function envoyerCoordonnees(){
+  const prenom = $("ct-prenom").value.trim();
+  const nom    = $("ct-nom").value.trim();
+  const email  = $("ct-email").value.trim();
+  const tel    = $("ct-tel").value.trim();
+  const ok     = $("ct-consent").checked;
+
+  if(prenom.length < 2) return erreurFormulaire("Indiquez votre prénom.");
+  if(nom.length < 2)    return erreurFormulaire("Indiquez votre nom.");
+  if(!email && !tel)    return erreurFormulaire("Indiquez une adresse e-mail ou un numéro de téléphone pour recevoir votre résultat.");
+  if(email && !emailPlausible(email)) return erreurFormulaire("Cette adresse e-mail semble incorrecte. Vérifiez-la.");
+  if(!email && tel && !telPlausible(tel)) return erreurFormulaire("Ce numéro de téléphone semble incomplet.");
+  if(!ok) return erreurFormulaire("Cochez la case pour que nous puissions vous envoyer votre résultat.");
+
+  $("form-erreur").style.display = "none";
+  $("form-contact").classList.add("masque");
+  $("form-attente").classList.remove("masque");
+
+  try{
+    const rep = await fetch(URL_RESULTAT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prenom, nom, email, telephone: tel, consentement: true,
+        niveau: _resultat.niveau,
+        libelleNiveau: LIB[_resultat.niveau],
+        bonnes: _resultat.bonnes,
+        total:  _resultat.total,
+        pourcentage: _resultat.pc,
+        parTheme: _resultat.parTheme
+      })
+    });
+    if(!rep.ok) throw new Error("réponse " + rep.status);
+    afficherResultat(!!email);
+  } catch(e){
+    _tentatives++;
+    $("form-attente").classList.add("masque");
+    if(_tentatives < 2){
+      $("form-contact").classList.remove("masque");
+      erreurFormulaire("L'envoi n'a pas abouti. Vérifiez votre connexion et réessayez.");
+    } else {
+      /* Deux échecs : on ne retient pas le résultat en otage d'un incident technique. */
+      afficherResultat(false, true);
+    }
+  }
+}
+
+function afficherResultat(parMail, incident){
+  const { bonnes, total, pc, parTheme } = _resultat;
+  $("fin-niveau").textContent = "Test " + LIB[_resultat.niveau];
+  $("fin-score").textContent = bonnes + "/" + total;
   $("fin-pc").textContent = pc + "% — seuil officiel : 80 % (32/40)";
   $("fin-verdict").innerHTML = pc >= 80
     ? "Vous êtes <b>au-dessus du seuil</b>. Confirmez en refaisant plusieurs tests : l'examen officiel tire ses questions dans une banque bien plus large."
@@ -361,6 +521,22 @@ function terminer(){
       return '<div class="' + cl + '">' + q.options[cle] +
              (cle === q.bonne ? "  ✓ bonne réponse" : (cle === r ? "  ✗ votre réponse" : "")) + '</div>';
     }).join("") + '</div>').join("");
+
+  /* Bandeau de confirmation d'envoi */
+  const conf = $("fin-confirmation");
+  if(conf){
+    if(incident){
+      conf.style.cssText = "background:var(--warn-bg);color:#6B4715;border-radius:var(--r);padding:14px 16px;margin-bottom:20px;font-size:14.5px";
+      conf.innerHTML = "Votre résultat s'affiche ci-dessous, mais l'envoi par e-mail n'a pas pu aboutir. Écrivez-nous à <b>contact@civicum.fr</b> si vous souhaitez en recevoir une copie.";
+    } else if(parMail){
+      conf.style.cssText = "background:var(--ok-bg);color:var(--ok);border-radius:var(--r);padding:14px 16px;margin-bottom:20px;font-size:14.5px";
+      conf.innerHTML = "<b>Votre résultat vous a été envoyé par e-mail.</b> S'il n'arrive pas d'ici quelques minutes, pensez à regarder dans vos courriers indésirables.";
+    } else {
+      conf.style.cssText = "background:var(--ok-bg);color:var(--ok);border-radius:var(--r);padding:14px 16px;margin-bottom:20px;font-size:14.5px";
+      conf.innerHTML = "<b>C'est noté.</b> Nous vous rappellerons au numéro indiqué. Votre résultat détaillé s'affiche ci-dessous.";
+    }
+    conf.style.display = "block";
+  }
 
   voir("ecran-fin");
 }
