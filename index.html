@@ -1070,6 +1070,42 @@ details[open] summary::after { transform: rotate(45deg); }
   .nav-auth .btn-sm { padding: 8px 11px; font-size: 12.5px; }
   .brand-name { display: none; }
 }
+
+/* ===== Barre de navigation : réservée aux abonnés ===== */
+#app-wrapper:not(.acces-ouvert) .bottom-nav { display: none !important; }
+
+/* ===== Sélecteur de niveau ===== */
+.niveau-carte {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  background: var(--surface); border: 1.5px solid var(--border-md); border-radius: 12px;
+  padding: 16px; cursor: pointer; font-family: var(--sans);
+  transition: border-color .15s, box-shadow .15s, transform .1s;
+}
+.niveau-carte + .niveau-carte { margin-top: 10px; }
+.niveau-carte:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(15,27,45,.07); }
+.niveau-carte:active { transform: scale(.995); }
+.niveau-carte:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.niveau-carte.active { border-color: var(--gold); background: var(--gold-bg); box-shadow: inset 0 0 0 1px var(--gold); }
+.nc-code {
+  flex: none; width: 50px; height: 50px; border-radius: 12px;
+  background: var(--navy); color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14.5px; font-weight: 700; letter-spacing: .02em;
+}
+.niveau-carte.active .nc-code { background: var(--gold); color: #fff; }
+.nc-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.nc-nom { font-size: 15.5px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.nc-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.nc-nb { font-size: 12px; font-weight: 600; color: var(--gold); margin-top: 2px; }
+.nc-nb.attente { color: var(--muted); font-weight: 400; font-style: italic; }
+.nc-fl { flex: none; color: var(--gold); font-size: 19px; opacity: .6; }
+@media(max-width:480px){
+  .niveau-carte { padding: 14px; gap: 12px; }
+  .nc-code { width: 44px; height: 44px; font-size: 13px; border-radius: 10px; }
+  .nc-nom { font-size: 14.5px; }
+  .nc-desc { font-size: 12.5px; }
+  .nc-fl { display: none; }
+}
 </style>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -2086,19 +2122,19 @@ details[open] summary::after { transform: rotate(45deg); }
 <!-- Bottom navigation mobile -->
 <nav class="bottom-nav" id="bottom-nav">
   <div class="bottom-nav-inner">
-    <button class="bn-item active" id="bn-home" onclick="show('screen-level');">
+    <button class="bn-item active" id="bn-home" onclick="exigerAcces(()=>show('screen-level'));">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
       Accueil
     </button>
-    <button class="bn-item" id="bn-quiz" onclick="show('screen-level');">
+    <button class="bn-item" id="bn-quiz" onclick="exigerAcces(()=>show('screen-level'));">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Quiz
     </button>
-    <button class="bn-item" id="bn-cours" onclick="renderCourseLevelList();show('screen-course-level');">
+    <button class="bn-item" id="bn-cours" onclick="exigerAcces(()=>{renderCourseLevelList();show('screen-course-level');});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
       Cours
     </button>
-    <button class="bn-item" id="bn-dash" onclick="renderDashboard();show('screen-dashboard');">
+    <button class="bn-item" id="bn-dash" onclick="exigerAcces(()=>{renderDashboard();show('screen-dashboard');});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       Bilan
     </button>
@@ -2664,6 +2700,7 @@ async function onUserConnected(user){
         <div style="margin-top:12px;font-size:12px;color:#666;">Paiement sécurisé par Stripe. Accès activé immédiatement après paiement.</div>
         ${abonnementExpire ? '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(46,125,82,.2);font-size:13px;"><a href="#" onclick="ouvrirAvis();return false;" style="color:#2e7d52;font-weight:600;">Donner mon avis sur Civicum →</a></div>' : ''}
       </div>`;
+    ouvrirAcces(false);
     show('screen-gate');
     switchAuthTab('login');
     return;
@@ -2696,12 +2733,15 @@ async function onUserConnected(user){
       + '<div style="font-weight:700;color:#a8651e;margin-bottom:6px;">Impossible de charger les questions</div>'
       + '<div style="color:#333;">Vérifiez votre connexion internet puis reconnectez-vous. Si le problème persiste, écrivez-nous à contact@civicum.fr.</div>'
       + '</div>';
+    ouvrirAcces(false);
     show('screen-gate');
     return;
   }
   afficherChargement(false);
 
   try{ localStorage.setItem('access_unlocked','true'); localStorage.setItem('access_nom',nom); }catch(e){}
+  ouvrirAcces(true);
+  renderLevelList();          /* les compteurs ne sont connus qu'après chargement */
   renderDashboard();
   show('screen-dashboard');
 }
@@ -2731,6 +2771,9 @@ function startSessionWatcher(uid){
 
 /* Logout */
 function doLogout(){
+  ouvrirAcces(false);
+  _questionsChargees = false;
+  ALL_LEVELS = { "CSP": [], "CR": [], "N": [] };
   if(_sessionWatcher){ _sessionWatcher(); _sessionWatcher=null; }
   _sessionToken = null;
   if(window._fbAuth) window._fbSignOut(window._fbAuth).catch(()=>{});
@@ -2744,6 +2787,28 @@ document.getElementById('btn-login').addEventListener('click', tryLogin);
 document.getElementById('login-pwd').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
 document.getElementById('btn-register').addEventListener('click', tryRegister);
 document.getElementById('btn-send-reset').addEventListener('click', trySendReset);
+
+/* Vrai uniquement après vérification de l'abonnement dans onUserConnected.
+   Tant qu'il est faux, aucun écran de l'espace n'est atteignable et la
+   barre de navigation du bas reste masquée. */
+let _accesOuvert = false;
+
+function ouvrirAcces(ouvert){
+  _accesOuvert = !!ouvert;
+  const appW = document.getElementById('app-wrapper');
+  if(appW) appW.classList.toggle('acces-ouvert', _accesOuvert);
+}
+
+/* Toute navigation interne passe par ici : sans abonnement valide,
+   on renvoie vers l'écran de connexion / paiement. */
+function exigerAcces(action){
+  if(!_accesOuvert){
+    show('screen-gate');
+    switchAuthTab('login');
+    return;
+  }
+  action();
+}
 
 function ouvrirCoquilleApp(){
   const appW = document.getElementById('app-wrapper');
@@ -2878,9 +2943,12 @@ async function chargerQuestions(){
 }
 
 const LEVEL_CONFIG = [
-  { key: "CSP", name: "Carte de séjour pluriannuelle (CSP)", desc: "Niveau fondamental — 3 réponses par question" },
-  { key: "CR",  name: "Carte de résident (CR)", desc: "Niveau intermédiaire — 4 réponses par question" },
-  { key: "N",   name: "Naturalisation", desc: "Niveau approfondi — 4 réponses par question" },
+  { key: "CSP", code: "CSP", court: "Carte de séjour pluriannuelle",
+    name: "Carte de séjour pluriannuelle (CSP)", desc: "Niveau fondamental · 3 réponses par question" },
+  { key: "CR",  code: "CR",  court: "Carte de résident (10 ans)",
+    name: "Carte de résident (CR)", desc: "Niveau intermédiaire · 4 réponses par question" },
+  { key: "N",   code: "NAT", court: "Naturalisation",
+    name: "Naturalisation", desc: "Niveau approfondi · 4 réponses par question" },
 ];
 
 const THEME_ORDER = [
@@ -2938,12 +3006,22 @@ const levelListEl = document.getElementById('level-list');
 function renderLevelList(){
   levelListEl.innerHTML = '';
   LEVEL_CONFIG.forEach(lv => {
-    const count = ALL_LEVELS[lv.key].length;
+    const count = (ALL_LEVELS[lv.key] || []).length;
     const el = document.createElement('button');
-    el.className = 'level-option';
+    el.className = 'niveau-carte';
     el.type = 'button';
     el.dataset.value = lv.key;
-    el.innerHTML = `<span class="l-left"><span class="l-name">${lv.name}</span><span class="l-desc">${lv.desc}</span></span><span class="l-count">${count} questions</span>`;
+    const etiquette = count
+      ? `<span class="nc-nb">${count} questions</span>`
+      : `<span class="nc-nb attente">chargement…</span>`;
+    el.innerHTML =
+      `<span class="nc-code">${lv.code}</span>` +
+      `<span class="nc-txt">` +
+        `<span class="nc-nom">${lv.court}</span>` +
+        `<span class="nc-desc">${lv.desc}</span>` +
+        etiquette +
+      `</span>` +
+      `<span class="nc-fl" aria-hidden="true">→</span>`;
     el.addEventListener('click', () => { selectedLevel = lv.key; updateLevelActive(); selectedTheme='ALL'; renderThemeList(); show('screen-setup'); });
     levelListEl.appendChild(el);
   });
@@ -4395,9 +4473,16 @@ function renderCourseLevelList(){
   courseLevelListEl.innerHTML = '';
   COURSE_LEVEL_CONFIG.forEach(lv => {
     const el = document.createElement('button');
-    el.className = 'level-option';
+    el.className = 'niveau-carte';
     el.type = 'button';
-    el.innerHTML = `<span class="l-left"><span class="l-name">${lv.name}</span><span class="l-desc">${lv.desc}</span></span><span class="l-count">5 thèmes</span>`;
+    el.innerHTML =
+      `<span class="nc-code">${lv.code || (lv.key === 'N' ? 'NAT' : lv.key)}</span>` +
+      `<span class="nc-txt">` +
+        `<span class="nc-nom">${lv.name}</span>` +
+        `<span class="nc-desc">${lv.desc}</span>` +
+        `<span class="nc-nb">5 thématiques</span>` +
+      `</span>` +
+      `<span class="nc-fl" aria-hidden="true">→</span>`;
     el.addEventListener('click', () => {
       courseSelectedLevel = lv.key;
       renderCourseThemeList();
@@ -4660,14 +4745,11 @@ function switchFormationSubtab(which){
    NAVIGATION — logo et retour
    ============================================================ */
 function retourAccueilApp(){
-  /* Dans l'application, le logo ramène à l'accueil de l'espace */
-  const connecte = !!(window._fbCurrentUser);
-  if(connecte && document.getElementById('screen-dashboard')){
+  /* Le logo ramène au tableau de bord — pour un abonné seulement */
+  exigerAcces(() => {
     try{ renderDashboard(); }catch(e){}
     show('screen-dashboard');
-  } else {
-    show('screen-level');
-  }
+  });
 }
 
 function retourSiteVitrine(){
