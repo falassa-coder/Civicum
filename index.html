@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="Préparation à l'examen civique et formation de français (FLE), en ligne ou en petit groupe.">
 
 <!-- Données structurées JSON-LD -->
-<script type="application/ld+json">
+<script type="application/ld+json" id="ld-principal">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -56,15 +56,33 @@
       "provider": { "@id": "https://civicum.fr/#organisation" },
       "inLanguage": "fr",
       "offers": [
-        { "@type": "Offer", "name": "Accès 1 mois", "price": "9.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
-        { "@type": "Offer", "name": "Accès 3 mois", "price": "19.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
-        { "@type": "Offer", "name": "Accès 1 an", "price": "49.99", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" }
+        { "@type": "Offer", "name": "Accès 10 jours", "price": "10.00", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
+        { "@type": "Offer", "name": "Accès 1 mois", "price": "20.00", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" },
+        { "@type": "Offer", "name": "Full pack 6 mois", "price": "50.00", "priceCurrency": "EUR", "category": "Abonnement", "url": "https://civicum.fr/" }
       ],
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "courseMode": "online",
         "courseWorkload": "PT10H"
       }
+    },
+    {
+      "@type": "Course",
+      "name": "Test de niveau de français A1 à C2 — format TCF Tout public",
+      "description": "Trois séries d'entraînement au format des épreuves de compréhension du TCF Tout public : compréhension orale, maîtrise des structures de la langue, compréhension écrite, avec estimation du niveau CECRL.",
+      "provider": { "@id": "https://civicum.fr/#organisation" },
+      "inLanguage": "fr",
+      "url": "https://civicum.fr/tcf-tout-public.html",
+      "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online" }
+    },
+    {
+      "@type": "Course",
+      "name": "Préparation au TCF IRN niveau B2",
+      "description": "Entraînement aux quatre épreuves du TCF IRN au niveau B2, exigé pour la naturalisation depuis le 1er janvier 2026.",
+      "provider": { "@id": "https://civicum.fr/#organisation" },
+      "inLanguage": "fr",
+      "url": "https://civicum.fr/tcf-b2.html",
+      "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online" }
     },
     {
       "@type": "Course",
@@ -263,7 +281,7 @@ h3 { font-size: clamp(17px, 2.5vw, 21px); }
   border-bottom: 1px solid var(--border);
 }
 .nav-in { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.brand { display: flex; align-items: center; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; flex: none; margin-right: 18px; }
 .mono {
   width: 32px; height: 32px; background: var(--ink);
   border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
@@ -271,8 +289,88 @@ h3 { font-size: clamp(17px, 2.5vw, 21px); }
 }
 .brand-name { font-family: var(--serif); font-size: 17px; letter-spacing: .06em; color: var(--ink); }
 .nav-links { display: flex; align-items: center; gap: 20px; }
-.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; white-space: nowrap; }
 .nav-links a.navlink:hover, .nav-links a.tab-link.active { color: var(--ink); font-weight: 600; }
+/* Neuf entrées : au-dessous de 1400 px la barre se resserre plutôt que de
+   passer à la ligne, et la mention « Créer un compte » s'abrège. */
+@media (min-width:981px){
+  .nav-in { gap: 16px; }
+  .nav-auth { flex: none; }
+  .nav-links { gap: 13px; flex: 0 1 auto; justify-content: flex-end; }
+  .nav-links a.navlink-gold { color: var(--gold); font-weight: 600; }
+  .nav-links a { font-size: 13.2px; }
+  .brand-name { font-size: 15px; }
+  .brand { margin-right: 10px; }
+  .nav-auth .btn-sm { padding: 8px 12px; font-size: 13px; }
+}
+@media (min-width:981px) and (max-width:1160px){
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 12.6px; }
+  .brand-name { display: none; }
+}
+
+/* ===== Onglet « Le contenu » : montrer avant de vendre ===== */
+.ct-chiffres{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:38px}
+.ct-chiffres div{background:var(--surface);padding:20px 14px;text-align:center}
+.ct-chiffres b{display:block;font-family:var(--serif);font-size:clamp(22px,4vw,30px);line-height:1.1;color:var(--navy);font-weight:400}
+.ct-chiffres small{display:block;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
+
+.ct-module{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;margin-bottom:22px;box-shadow:var(--sh-sm)}
+.ct-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+.ct-num{flex:none;width:42px;height:42px;border-radius:11px;background:var(--navy);color:var(--gold-lt);display:grid;place-items:center;font-family:var(--serif);font-size:19px}
+.ct-head .t{flex:1;min-width:0}
+.ct-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(19px,3vw,22px);line-height:1.25;margin:0 0 5px;color:var(--navy)}
+.ct-head p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.6}
+.ct-cle{display:inline-block;background:var(--gold-bg);color:var(--gold);font-weight:700;font-size:12.5px;border-radius:6px;padding:4px 10px;margin-top:9px}
+
+.ct-tab{width:100%;border-collapse:collapse;font-size:14px;margin:2px 0 18px}
+.ct-tab th,.ct-tab td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right}
+.ct-tab th:first-child,.ct-tab td:first-child{text-align:left}
+.ct-tab thead th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ct-tab tfoot td{font-weight:700;color:var(--navy);border-bottom:none;border-top:1.5px solid var(--border-md)}
+
+.ct-liste{list-style:none;padding:0;margin:0 0 18px}
+.ct-liste li{position:relative;padding:5px 0 5px 22px;font-size:14.5px;color:var(--ink-60);line-height:1.65}
+.ct-liste li::before{content:"";position:absolute;left:2px;top:14px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+.ct-extrait{background:var(--surface-2);border-radius:var(--r);padding:20px;border-left:3px solid var(--gold)}
+.ct-tag{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:13px}
+.ct-doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;font-size:14.5px;line-height:1.7;color:var(--ink-60);margin-bottom:14px;white-space:pre-line}
+.ct-doc .ti{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px;white-space:normal}
+.ct-q{font-weight:600;font-size:15.5px;color:var(--navy);margin-bottom:12px;line-height:1.5}
+.ct-opt{display:flex;gap:10px;align-items:flex-start;padding:8px 11px;border-radius:var(--r-sm);font-size:14.5px;line-height:1.5;margin-bottom:5px;background:var(--surface);border:1px solid transparent}
+.ct-opt .l{flex:none;font-weight:700;color:var(--muted);width:15px}
+.ct-opt.bonne{background:var(--green-bg);border-color:rgba(30,107,69,.25)}
+.ct-opt.bonne .l{color:var(--green)}
+.ct-opt .ok{margin-left:auto;color:var(--green);font-weight:700;flex:none}
+.ct-pourquoi{font-size:14px;color:var(--ink-60);line-height:1.7;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+.ct-pourquoi b{color:var(--navy)}
+
+.ct-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+
+.ct-exclus{background:var(--gold-bg);border:1px solid rgba(184,150,46,.32);border-radius:var(--r-lg);padding:24px;margin:32px 0}
+.ct-exclus h3{font-family:var(--serif);font-weight:400;font-size:20px;color:var(--navy);margin:0 0 6px}
+.ct-exclus > p{font-size:14.5px;color:var(--muted);margin:0 0 12px;line-height:1.6}
+.ct-exclus ul{list-style:none;padding:0;margin:0}
+.ct-exclus li{padding:5px 0 5px 24px;position:relative;font-size:14.5px;color:var(--ink-60);line-height:1.65}
+.ct-exclus li::before{content:"\00d7";position:absolute;left:5px;color:var(--brick);font-weight:700}
+
+.badge-fr{display:inline-block;margin-left:9px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--brick);background:rgba(166,74,42,.1);border:1px solid rgba(166,74,42,.25);border-radius:5px;padding:2px 7px;vertical-align:2px;white-space:nowrap}
+.masque-fr{display:none !important}
+.bandeau-essai{background:#FBF1E6;border:1px solid rgba(168,101,30,.3);border-left:3px solid #A8651E;border-radius:10px;padding:15px 18px;margin-bottom:22px;font-size:14.5px;line-height:1.65;color:#6B4715}
+.bandeau-essai b{color:#5A3A10}
+
+.ct-court{display:none}
+@media (max-width:760px){
+  .ct-long{display:none}
+  .ct-court{display:inline}
+  .ct-chiffres{grid-template-columns:repeat(2,1fr)}
+  .ct-duo{grid-template-columns:1fr}
+  .ct-module{padding:20px}
+  .ct-extrait{padding:16px}
+  .ct-tab{font-size:12.5px}
+  .ct-tab th,.ct-tab td{padding:8px 3px}
+}
 .nav-cta { padding: 9px 18px; font-size: 14px; }
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
 .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: all .25s; }
@@ -1248,7 +1346,9 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
     </a>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
-      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;">Nos formations</a>
+      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;">Formations</a>
+      <a class="navlink tab-link" href="#" data-tab="contenu" onclick="switchTab('contenu');return false;">Le contenu</a>
+      <a class="navlink tab-link" href="#" data-tab="francais" onclick="switchTab('francais');return false;">Français&nbsp;/&nbsp;TCF</a>
       <a class="navlink tab-link" href="#" data-tab="public-tab" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="avis" onclick="switchTab('avis');return false;">Avis</a>
@@ -1526,6 +1626,21 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
     </div>
   </section>
 
+  <!-- BANDEAU FRANÇAIS / TCF -->
+  <section>
+    <div class="wrap">
+      <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3055 100%);border-radius:16px;padding:34px 30px;border:1px solid rgba(169,132,62,.45);">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Nouveau — Français / TCF</div>
+        <h2 style="color:var(--cream);font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(22px,3.3vw,30px);line-height:1.25;margin-bottom:12px;">L'examen civique ne suffit plus :<br>un niveau de français est désormais exigé</h2>
+        <p style="color:rgba(246,242,233,.82);font-size:15px;line-height:1.7;max-width:620px;margin-bottom:22px;">A2 pour la carte de séjour pluriannuelle, B1 pour la carte de résident, B2 pour la naturalisation. Commencez par situer votre niveau — trois séries de test au format TCF Tout public, de A1 à C2, avec une estimation à la fin.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-gold" href="/tcf-tout-public.html">Tester mon niveau</a>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('contenu');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Voir le contenu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA FINAL -->
   <section id="avis-accueil" style="display:none;">
     <div class="wrap">
@@ -1548,6 +1663,241 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
         <a class="btn" href="#" onclick="showApp('register');return false;" style="background:var(--cream);color:var(--navy);">Créer mon compte</a>
         <a class="btn btn-ghost" href="#" onclick="switchTab('tarifs');return false;" style="color:var(--cream);border-color:rgba(246,242,233,.35);">Voir les tarifs</a>
       </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : LE CONTENU ===== -->
+<div id="tab-contenu" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Le contenu</div>
+        <h2>Ce que vous achetez, en détail</h2>
+        <p>Pas de promesse vague. Voici les chiffres exacts, la répartition réelle du contenu, et des extraits tels qu'ils apparaissent dans la plateforme — avec leur correction.</p>
+      </div>
+
+      <div class="ct-chiffres">
+        <div><b>783</b><small>questions et documents originaux</small></div>
+        <div><b>4</b><small>modules de préparation</small></div>
+        <div><b>A1&nbsp;→&nbsp;C2</b><small>six niveaux de français couverts</small></div>
+        <div><b>100&nbsp;%</b><small>des réponses expliquées</small></div>
+      </div>
+
+      <!-- ---------- Module 1 ---------- -->
+      <article class="ct-module">
+        <div class="ct-head">
+          <span class="ct-num">1</span>
+          <div class="t">
+            <h3>Examen civique</h3>
+            <p>Les 657 questions, réparties par niveau de démarche et par thématique, comme à l'épreuve officielle. Chaque niveau a sa propre banque : on ne vous fait pas réviser des questions qui ne tomberont pas chez vous.</p>
+            <span class="ct-cle">657 questions · 3 niveaux · 5 thématiques</span>
+          </div>
+        </div>
+
+        <table class="ct-tab">
+          <thead><tr><th>Thématique</th><th><span class="ct-long">Carte de séjour</span><span class="ct-court">CSP</span></th><th><span class="ct-long">Carte de résident</span><span class="ct-court">Résident</span></th><th><span class="ct-long">Naturalisation</span><span class="ct-court">Natur.</span></th></tr></thead>
+          <tbody>
+            <tr><td>Principes et valeurs de la République</td><td>37</td><td>40</td><td>38</td></tr>
+            <tr><td>Système institutionnel et politique</td><td>46</td><td>50</td><td>56</td></tr>
+            <tr><td>Droits et devoirs</td><td>30</td><td>38</td><td>36</td></tr>
+            <tr><td>Histoire, géographie et culture</td><td>47</td><td>49</td><td>83</td></tr>
+            <tr><td>Vivre dans la société française</td><td>31</td><td>32</td><td>44</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td>191</td><td>209</td><td>257</td></tr></tfoot>
+        </table>
+
+        <ul class="ct-liste">
+          <li>Un cours structuré par thématique, à lire avant de s'entraîner</li>
+          <li>L'examen blanc chronométré : 40 questions, 45 minutes, seuil de 32 bonnes réponses</li>
+          <li>Le détail de vos résultats thématique par thématique, pour savoir où réviser</li>
+        </ul>
+
+        <div class="ct-extrait">
+          <div class="ct-tag">Extrait réel · niveau naturalisation · droits et devoirs</div>
+          <div class="ct-q">Que doit faire un citoyen s'il est appelé à être juré dans un procès d'assises ?</div>
+          <div class="ct-opt bonne"><span class="l">A</span><span>Il doit répondre à la convocation, sauf motif légitime d'exemption</span><span class="ok">&#10003;</span></div>
+          <div class="ct-opt"><span class="l">B</span><span>Il doit obligatoirement accepter, sans aucune exemption possible</span></div>
+          <div class="ct-opt"><span class="l">C</span><span>Il peut refuser sans justification</span></div>
+          <div class="ct-opt"><span class="l">D</span><span>Il doit payer une amende pour être dispensé</span></div>
+          <div class="ct-pourquoi"><b>Pourquoi :</b> être juré est une obligation civique, mais la loi prévoit des motifs d'exemption — âge, raisons professionnelles ou familiales graves. Les propositions B et C posent chacune un absolu que le droit ne retient pas.</div>
+        </div>
+      </article>
+
+      <!-- ---------- Module 2 ---------- -->
+      <article class="ct-module">
+        <div class="ct-head">
+          <span class="ct-num">2</span>
+          <div class="t">
+            <h3>Test de niveau de français, A1 à C2<span class="badge-fr"></span></h3>
+            <p>Trois séries au format des épreuves de compréhension du TCF Tout public. Chaque série contient deux questions par niveau et par épreuve, ce qui permet de situer votre niveau à la fin, épreuve par épreuve.</p>
+            <span class="ct-cle">108 documents · 3 séries · 36 questions par série</span>
+          </div>
+        </div>
+
+        <ul class="ct-liste">
+          <li>Compréhension orale : du message sur un répondeur au commentaire argumenté</li>
+          <li>Structures de la langue : de l'article défini à la concession au subjonctif</li>
+          <li>Compréhension écrite : de l'affiche de mairie au texte critique</li>
+          <li>Une estimation de niveau à la fin, et le détail palier par palier</li>
+        </ul>
+
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.65;margin-bottom:14px;">Voici deux questions de la même épreuve, à deux niveaux différents. L'écart entre les deux vous dit à quoi ressemble la progression.</p>
+
+        <div class="ct-duo">
+          <div class="ct-extrait">
+            <div class="ct-tag">Extrait réel · niveau A2</div>
+            <div class="ct-doc"><div class="ti">Compréhension orale</div>— Pardon, je cherche la Poste. — Alors, vous continuez tout droit jusqu'au feu, vous tournez à gauche, et c'est à cinquante mètres, en face de la pharmacie. — C'est loin à pied ? — Non, cinq minutes.</div>
+            <div class="ct-q">Où se trouve la Poste ?</div>
+            <div class="ct-opt"><span class="l">A</span><span>À droite après le feu</span></div>
+            <div class="ct-opt bonne"><span class="l">B</span><span>En face de la pharmacie</span><span class="ok">&#10003;</span></div>
+            <div class="ct-opt"><span class="l">C</span><span>À côté du feu rouge</span></div>
+            <div class="ct-opt"><span class="l">D</span><span>À cinquante minutes à pied</span></div>
+            <div class="ct-pourquoi"><b>Pourquoi :</b> « c'est à cinquante mètres, en face de la pharmacie ». Le trajet passe à gauche au feu, non à droite, et dure cinq minutes.</div>
+          </div>
+
+          <div class="ct-extrait">
+            <div class="ct-tag">Extrait réel · niveau B2</div>
+            <div class="ct-doc"><div class="ti">Compréhension écrite</div>On plaide pour la simplification administrative, et qui s'y opposerait ? Mais il faut voir ce que ce mot autorise. Dans la plupart des cas, simplifier signifie supprimer une pièce justificative, donc un contrôle. Lorsque le contrôle portait sur une formalité inutile, le gain est réel. Lorsqu'il protégeait un tiers — le locataire, le salarié, l'épargnant — la simplification pour l'un est un transfert de risque vers l'autre. La question utile n'est donc jamais « faut-il simplifier ? », mais « au bénéfice de qui, et au détriment de qui ? ».</div>
+            <div class="ct-q">Quelle est la position de l'auteur ?</div>
+            <div class="ct-opt"><span class="l">A</span><span>Toute simplification administrative est nuisible</span></div>
+            <div class="ct-opt"><span class="l">B</span><span>Les contrôles administratifs doivent être multipliés</span></div>
+            <div class="ct-opt"><span class="l">C</span><span>La simplification administrative est toujours bénéfique</span></div>
+            <div class="ct-opt bonne"><span class="l">D</span><span>Il faut examiner qui gagne et qui perd dans chaque simplification</span><span class="ok">&#10003;</span></div>
+            <div class="ct-pourquoi"><b>Pourquoi :</b> l'auteur reconnaît un gain réel dans certains cas et pose la question « au bénéfice de qui, et au détriment de qui ? ». Il ne condamne donc pas le principe.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- Module 3 ---------- -->
+      <article class="ct-module">
+        <div class="ct-head">
+          <span class="ct-num">3</span>
+          <div class="t">
+            <h3>Préparation au TCF IRN, niveau B2<span class="badge-fr"></span></h3>
+            <p>Le test exigé pour la naturalisation, dans son format réel : quatre épreuves, et pas d'exercice de grammaire isolé — contrairement au TCF Tout public, le TCF IRN n'en comporte pas. Les documents de compréhension s'écoutent et se lisent une fois, comme le jour de l'épreuve.</p>
+            <span class="ct-cle">4 épreuves · compréhension et expression</span>
+          </div>
+        </div>
+
+        <ul class="ct-liste">
+          <li>Compréhension orale et écrite, avec corrigé commenté question par question</li>
+          <li>Trois tâches de production écrite, avec le nombre de mots attendu et les critères d'évaluation</li>
+          <li>Trois tâches de production orale, avec la consigne et le temps de parole</li>
+        </ul>
+
+        <div class="ct-extrait">
+          <div class="ct-tag">Extrait réel · compréhension écrite</div>
+          <div class="ct-doc"><div class="ti">Courrier administratif</div>Madame, Monsieur,
+
+Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les éléments que vous nous avez transmis permettent d'établir votre éligibilité au dispositif. Toutefois, le versement ne pourra intervenir qu'après réception de l'attestation de loyer complétée et signée par votre bailleur, document qui ne figurait pas dans votre envoi.
+
+À défaut de réception sous deux mois, votre demande sera classée sans suite et une nouvelle demande devra être déposée. Nous attirons votre attention sur le fait qu'un classement entraîne la perte du bénéfice de la date de dépôt initiale.</div>
+          <div class="ct-q">Que risque le destinataire s'il ne répond pas dans le délai ?</div>
+          <div class="ct-opt"><span class="l">A</span><span>Son droit à l'aide sera définitivement supprimé</span></div>
+          <div class="ct-opt bonne"><span class="l">B</span><span>Il devra recommencer la démarche et perdra l'antériorité de sa demande</span><span class="ok">&#10003;</span></div>
+          <div class="ct-opt"><span class="l">C</span><span>Il devra rembourser les sommes déjà perçues</span></div>
+          <div class="ct-opt"><span class="l">D</span><span>Son dossier sera transmis à un autre organisme</span></div>
+          <div class="ct-pourquoi"><b>Pourquoi :</b> le courrier annonce un classement sans suite, l'obligation de déposer une nouvelle demande, et « la perte du bénéfice de la date de dépôt initiale ». Le droit n'est pas supprimé, et aucun versement n'a eu lieu.</div>
+        </div>
+      </article>
+
+      <!-- ---------- Module 4 ---------- -->
+      <article class="ct-module">
+        <div class="ct-head">
+          <span class="ct-num">4</span>
+          <div class="t">
+            <h3>Ce que vous gardez en main</h3>
+            <p>Un entraînement ne sert que si l'on sait où l'on en est. Chaque réponse est expliquée, et votre progression est conservée d'une séance à l'autre.</p>
+          </div>
+        </div>
+        <ul class="ct-liste">
+          <li><b>Chaque réponse est justifiée</b> — pas seulement la bonne : on vous dit aussi pourquoi les autres sont fausses</li>
+          <li><b>Votre tableau de bord</b> — questions traitées, taux de réussite, échéance de votre accès</li>
+          <li><b>Reprise là où vous vous êtes arrêtée</b>, sur téléphone comme sur ordinateur</li>
+          <li><b>Aucune reconduction automatique</b> — l'accès s'arrête de lui-même, vous ne serez jamais prélevée à votre insu</li>
+        </ul>
+      </article>
+
+      <!-- ---------- Ce qui n'est pas inclus ---------- -->
+      <div class="ct-exclus">
+        <h3>Ce qui n'est pas inclus</h3>
+        <p>Autant le dire avant l'achat plutôt qu'après.</p>
+        <ul>
+          <li>L'attestation officielle : seul l'État la délivre pour l'examen civique, et France Éducation international pour le TCF</li>
+          <li>L'inscription à une session d'examen, qui se fait auprès de votre préfecture ou d'un centre agréé</li>
+          <li>La correction individuelle de vos productions écrites et orales : les consignes et les critères sont fournis, la correction par un examinateur ne l'est pas</li>
+          <li>Un accompagnement juridique sur votre dossier : Civicum prépare aux épreuves, pas aux démarches</li>
+        </ul>
+      </div>
+
+      <div style="text-align:center;margin-top:30px;">
+        <a class="btn btn-primary" href="#" onclick="switchTab('tarifs');return false;">Voir les tarifs</a>
+        <p id="note-formules" style="font-size:13.5px;color:var(--muted);margin-top:14px;">Les trois formules donnent accès à la totalité de ce contenu. Seule la durée change.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB : FRANÇAIS / TCF ===== -->
+<div id="tab-francais" class="tab-content" style="display:none;">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Français — TCF</div>
+        <h2>Le niveau de français exigé pour votre démarche</h2>
+        <p>Depuis le 1<sup>er</sup> janvier 2026, un niveau de français est requis en plus de l'examen civique. Il est attesté par un test de langue, le plus souvent le TCF. Civicum vous situe d'abord, puis vous entraîne au bon niveau.</p>
+      </div>
+
+      <div class="bandeau-essai masque-fr" id="bandeau-fr" style="max-width:720px;margin:0 auto 28px;">
+        <b>Version de test.</b> Les deux modules de français sont ouverts aux abonnés pendant cette phase, mais ils ne sont pas encore compris dans l'abonnement, qui porte sur l'examen civique. Ils entreront dans l'offre à la prochaine mise à jour des tarifs.
+      </div>
+
+      <div style="max-width:720px;margin:0 auto 34px;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);">
+          <div style="flex:none;width:52px;height:40px;border-radius:9px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:15px;">A2</div>
+          <div style="flex:1;"><b style="color:var(--navy);font-size:15px;">Carte de séjour pluriannuelle</b><div style="font-size:13.5px;color:var(--muted);line-height:1.55;">Première demande de titre pluriannuel</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);">
+          <div style="flex:none;width:52px;height:40px;border-radius:9px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:15px;">B1</div>
+          <div style="flex:1;"><b style="color:var(--navy);font-size:15px;">Carte de résident</b><div style="font-size:13.5px;color:var(--muted);line-height:1.55;">Titre de dix ans</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+          <div style="flex:none;width:52px;height:40px;border-radius:9px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:15px;">B2</div>
+          <div style="flex:1;"><b style="color:var(--navy);font-size:15px;">Naturalisation</b><div style="font-size:13.5px;color:var(--muted);line-height:1.55;">Acquisition de la nationalité française</div></div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:0;">
+        <article class="card feat" style="border-top:3px solid var(--gold);display:flex;flex-direction:column;">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><path d="M10 34V14a2 2 0 0 1 2-2h11v24H12a2 2 0 0 1-2-2Z" fill="none" stroke="#FBF8F1" stroke-width="2.2" stroke-linejoin="round"/><path d="M38 34V14a2 2 0 0 0-2-2H25v24h11a2 2 0 0 0 2-2Z" fill="none" stroke="#D4B04A" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+          <h3>Test de niveau A1 → C2</h3>
+          <p style="flex:1;">Trois séries au format des épreuves de compréhension du TCF Tout public : compréhension orale, structures de la langue, compréhension écrite. À la fin, une estimation de votre niveau, épreuve par épreuve, avec un corrigé commenté.</p>
+          <a class="btn btn-gold" href="/tcf-tout-public.html" style="margin-top:16px;align-self:flex-start;">Faire le test</a>
+        </article>
+        <article class="card feat" style="border-top:3px solid var(--navy);display:flex;flex-direction:column;">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="20" r="9" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><path d="M24 11v18M17 20h14" stroke="#D4B04A" stroke-width="2" stroke-linecap="round"/><path d="M16 31l-3 10 11-5 11 5-3-10" fill="none" stroke="#FBF8F1" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+          <h3>Préparation TCF IRN B2</h3>
+          <p style="flex:1;">Le test exigé pour la naturalisation, dans son format réel : quatre épreuves, sans exercice de grammaire isolé. Documents d'entraînement originaux, corrigés commentés et tâches de production écrite et orale.</p>
+          <a class="btn btn-ghost" href="/tcf-b2.html" style="margin-top:16px;align-self:flex-start;">Voir la préparation</a>
+        </article>
+        <article class="card feat" style="border-top:3px solid var(--brick);display:flex;flex-direction:column;">
+          <div class="feat-ic"><svg viewBox="0 0 48 48"><rect x="9" y="13" width="30" height="22" rx="3" fill="none" stroke="#FBF8F1" stroke-width="2.2"/><path d="M16 21h16M16 27h10" stroke="#D4B04A" stroke-width="2" stroke-linecap="round"/><path d="M20 35l-3 6 9-6" fill="none" stroke="#FBF8F1" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+          <h3>Formation FLE accompagnée</h3>
+          <p style="flex:1;">Pour celles et ceux qui partent de loin, un parcours encadré de A1 à B2, construit sur les situations de la vie courante : emploi, formation, logement, mobilité, santé. Le volume d'heures dépend de votre niveau de départ.</p>
+          <a class="btn btn-ghost" href="#" onclick="switchTab('formation-tab');switchFormationSubtab('fle');return false;" style="margin-top:16px;align-self:flex-start;">En savoir plus</a>
+        </article>
+      </div>
+
+      <div style="max-width:720px;margin:34px auto 0;background:#FBF1E6;border-left:3px solid #A8651E;border-radius:10px;padding:16px 18px;font-size:14.5px;color:#6B4715;line-height:1.65;">
+        <b>Par où commencer ?</b> Si vous ne connaissez pas votre niveau, passez d'abord le test A1&nbsp;→&nbsp;C2 : il vous indique où vous en êtes et quelle préparation choisir. Les trois contenus sont inclus dans le même abonnement.
+      </div>
+
+      <div style="text-align:center;margin-top:30px;">
+        <a class="btn btn-primary" href="#" onclick="switchTab('tarifs');return false;">Voir les tarifs</a>
+      </div>
+
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:26px;max-width:720px;margin-left:auto;margin-right:auto;line-height:1.7;">Le TCF est organisé par France Éducation international, seul habilité à délivrer une attestation de niveau. Civicum prépare à l'épreuve : les documents d'entraînement sont des créations originales respectant le format officiel, ils ne reproduisent aucun sujet. Vérifiez le niveau exigé pour votre démarche auprès de votre préfecture avant de vous inscrire à une session.</p>
     </div>
   </section>
 </div>
@@ -1672,28 +2022,22 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
         <h2>Un abonnement simple, sans engagement</h2>
         <p>Des tarifs accessibles à tous pour la plateforme d'examen civique. Paiement en ligne sécurisé par carte bancaire via Stripe — accès activé immédiatement après confirmation du paiement. <a href="#" onclick="switchTab('formation-tab');switchFormationSubtab('fle');return false;" style="color:var(--gold);font-weight:600;">Tarifs de la formation FLE →</a></p>
       </div>
-      <div class="pricing">
-        <div class="plan">
-          <div class="plan-name">1 mois</div>
-          <div class="plan-price">9<small>,99&nbsp;€</small></div>
-          <div class="plan-sub">Pour une révision intensive</div>
-          <a class="btn btn-ghost" href="#" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx');return false;">S'abonner</a>
-        </div>
-        <div class="plan pop">
-          <div class="plan-tag">Le plus choisi</div>
-          <div class="plan-name">3 mois</div>
-          <div class="plan-price">19<small>,99&nbsp;€</small></div>
-          <div class="plan-sub">Le temps de tout maîtriser</div>
-          <a class="btn btn-gold" href="#" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy');return false;">S'abonner</a>
-        </div>
-        <div class="plan">
-          <div class="plan-name">Accès illimité (1 an)</div>
-          <div class="plan-price">49<small>,99&nbsp;€</small></div>
-          <div class="plan-sub">Valable 1 an, accès complet</div>
-          <a class="btn btn-ghost" href="#" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS');return false;">S'abonner</a>
-        </div>
+      <div class="pricing" id="pricing"></div>
+
+      <div style="max-width:620px;margin:26px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;">
+        <div class="eyebrow" style="margin-bottom:12px;">Ce que contient chaque formule</div>
+        <p id="note-meme-contenu" style="font-size:14.5px;color:var(--muted);line-height:1.75;margin:0 0 14px;">Les trois formules donnent accès au <b style="color:var(--navy);">même contenu</b> : seule la durée change. Il n'y a pas de version réduite.</p>
+        <ul style="list-style:none;padding:0;margin:0;font-size:14.5px;line-height:1.8;color:var(--muted);">
+          <li>— Les <b style="color:var(--navy);">657 questions</b> de l'examen civique, par niveau et par thématique</li>
+          <li>— Les cours structurés et l'examen blanc chronométré</li>
+          <li>— La <b style="color:var(--navy);">préparation au TCF IRN B2</b> (naturalisation)<span class="badge-fr"></span></li>
+          <li>— Le <b style="color:var(--navy);">test de niveau de français A1 à C2</b>, format TCF Tout public, trois séries<span class="badge-fr"></span></li>
+          <li>— Le suivi de votre progression et les corrigés commentés</li>
+        </ul>
+        <a href="#" onclick="switchTab('contenu');return false;" style="display:inline-block;margin-top:14px;color:var(--gold);font-weight:600;font-size:14.5px;">Voir le contenu en détail, avec des extraits &rarr;</a>
       </div>
-      <p class="pricing-note">Offre de lancement limitée aux premiers abonnés.</p>
+
+      <p class="pricing-note">Paiement unique, sans reconduction automatique : l'accès s'arrête de lui-même au terme choisi.</p>
       <div style="text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
         <span style="font-size:12px;color:var(--muted);">Paiement accepté :</span>
         <span style="background:#000;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;">Apple Pay</span>
@@ -1850,7 +2194,7 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
 <div id="tab-formation-tab" class="tab-content" style="display:none;">
   <section>
     <div class="wrap" style="max-width:800px;">
-      <div class="eyebrow" style="margin-bottom:12px;">Nos formations</div>
+      <div class="eyebrow" style="margin-bottom:12px;">Formations</div>
       <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(24px,4vw,34px);margin-bottom:8px;color:var(--navy);">Deux parcours complémentaires pour votre intégration</h2>
       <p style="color:var(--muted);font-size:15px;margin-bottom:8px;">Civicum propose deux formations distinctes. Choisissez celle qui correspond à votre besoin — ou suivez les deux.</p>
 
@@ -1922,16 +2266,16 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
       <!-- Formule combo -->
       <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3055 100%);border-radius:14px;padding:24px;margin-bottom:24px;border:1px solid var(--gold);">
         <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">⭐ Offre combinée recommandée</div>
-        <div style="font-size:16px;font-weight:700;color:var(--cream);margin-bottom:8px;">Formation présentielle + 3 mois Civicum <span style="background:var(--gold);color:var(--navy);border-radius:4px;padding:2px 8px;font-size:12px;margin-left:4px;">OFFERTS</span></div>
-        <div style="font-size:13px;color:rgba(246,242,233,.75);margin-bottom:16px;">Préparez-vous en amont avec la plateforme pendant 3 mois, puis consolidez en journée avec le formateur. Un accompagnement complet inclus dans le prix de la formation.</div>
+        <div style="font-size:16px;font-weight:700;color:var(--cream);margin-bottom:8px;">Formation présentielle + accès Civicum offert <span style="background:var(--gold);color:var(--navy);border-radius:4px;padding:2px 8px;font-size:12px;margin-left:4px;">OFFERTS</span></div>
+        <div style="font-size:13px;color:rgba(246,242,233,.75);margin-bottom:16px;">Préparez-vous en amont sur la plateforme, puis consolidez en journée avec le formateur. Un accompagnement complet inclus dans le prix de la formation.</div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
           <div style="font-family:'Libre Caslon Display',serif;font-size:36px;color:var(--gold);">80 €</div>
           <div style="display:flex;flex-direction:column;">
             <div style="font-size:13px;color:rgba(246,242,233,.9);font-weight:600;">Formation journée complète</div>
-            <div style="font-size:12px;color:var(--gold);">+ Accès Civicum 3 mois offerts (valeur 19,99 €)</div>
+            <div style="font-size:12px;color:var(--gold);">+ L'abonnement Civicum complet, offert</div>
           </div>
         </div>
-        <div style="background:rgba(169,132,62,.2);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(246,242,233,.85);">✨ Économisez 19,99 € par rapport à une souscription séparée</div>
+        <div style="background:rgba(169,132,62,.2);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(246,242,233,.85);">✨ L'abonnement Civicum ne vous est pas facturé en plus</div>
       </div>
       <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;">
         <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:14px;">S'inscrire — Prise de contact</div>
@@ -2670,9 +3014,7 @@ async function tryRegister(){
         <div style="font-weight:700;color:#2e7d52;font-size:15px;margin-bottom:10px;">✅ Compte créé avec succès !</div>
         <div style="color:#333;margin-bottom:14px;">Choisissez votre formule pour activer votre accès (paiement sécurisé par carte) :</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx')">1 mois — 9,99&nbsp;€</button>
-          <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy')">3 mois — 19,99&nbsp;€</button>
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
+          <div class="choix-tarifs" data-etoile="non"></div>
         </div>
       </div>`;
   } catch(e){
@@ -2697,7 +3039,155 @@ async function trySendReset(){
 }
 
 /* ============ PAIEMENT STRIPE ============ */
+/* ============ TARIFS ============
+   Les trois identifiants ci-dessous sont les « price ID » créés dans
+   Stripe (Catalogue de produits → chaque tarif → ID de tarif).
+   C'est le SEUL endroit du site où ils figurent : en cas de changement
+   de prix, créez le nouveau tarif dans Stripe et remplacez l'identifiant
+   ici — et uniquement ici.
+
+   Les durées correspondantes doivent être déclarées à l'identique dans
+   DUREES_PAR_PRIX, côté Cloud Function (functions/index.js), sans quoi
+   le paiement aboutit mais l'accès n'est pas ouvert.
+============================================================ */
+/* Un seul interrupteur.
+
+   false → les tarifs actuels restent en vigueur (9,99 / 19,99 / 49,99).
+           C'est la position à garder tant que les nouveaux tarifs ne sont
+           pas créés dans Stripe : le site reste vendeur pendant vos tests.
+
+   true  → bascule vers 10 / 20 / 50, une fois les trois tarifs créés dans
+           Stripe et leurs identifiants recopiés ci-dessous.
+
+   Les cartes de la rubrique Tarifs, les boutons des fenêtres d'abonnement
+   et les données structurées de la page suivent automatiquement : il n'y a
+   pas d'autre endroit à modifier dans ce fichier. */
+const TARIFS_2026 = false;
+
+const TARIFS = {
+  actuels: {
+    decouverte: { id: "price_1TxtEJIAgyQD2PevhFzo26Nx", jours: 30,  montant: "9,99 €",  duree: "1 mois", ld: "9.99",
+                  nom: "1 mois", sous: "Pour une révision intensive", tag: "" },
+    mois:       { id: "price_1TxnuSIAgyQD2Pev3g7laCsy", jours: 90,  montant: "19,99 €", duree: "3 mois", ld: "19.99",
+                  nom: "3 mois", sous: "Le temps de tout maîtriser", tag: "Le plus choisi" },
+    pack:       { id: "price_1TxoKlIAgyQD2PevfAbHkMBS", jours: 365, montant: "49,99 €", duree: "1 an", ld: "49.99",
+                  nom: "Accès 1 an", sous: "Valable 1 an, accès complet", tag: "" }
+  },
+  nouveaux: {
+    decouverte: { id: "price_A_REMPLACER_10J", jours: 10,  montant: "10 €", duree: "10 jours", ld: "10.00",
+                  nom: "10 jours", sous: "Pour une révision de dernière ligne droite", tag: "" },
+    mois:       { id: "price_A_REMPLACER_1M",  jours: 30,  montant: "20 €", duree: "1 mois", ld: "20.00",
+                  nom: "1 mois", sous: "Le temps de couvrir tout le programme", tag: "Le plus choisi" },
+    pack:       { id: "price_A_REMPLACER_6M",  jours: 180, montant: "50 €", duree: "6 mois", ld: "50.00",
+                  nom: "6 mois", sous: "Examen civique <i>et</i> français — tout le contenu", tag: "Full pack" }
+  }
+};
+
+const PRIX = TARIFS_2026 ? TARIFS.nouveaux : TARIFS.actuels;
+const CLES_PRIX = ["decouverte", "mois", "pack"];
+
+/* Rendu des trois formules, des boutons d'abonnement et des données
+   structurées à partir de PRIX — une seule source de vérité. */
+function afficherTarifs(){
+  const insec = (s) => String(s).replace(/ /g, "&nbsp;");
+
+  const grille = document.getElementById("pricing");
+  if(grille){
+    grille.innerHTML = CLES_PRIX.map((cle) => {
+      const p = PRIX[cle];
+      const m = p.montant.match(/^(\d+)(.*)$/) || [null, p.montant, ""];
+      const vedette = cle === "mois";
+      const navy = p.tag === "Full pack";
+      return '<div class="plan' + (vedette ? " pop" : "") + '">' +
+        (p.tag ? '<div class="plan-tag"' +
+            (navy ? ' style="background:var(--navy);color:var(--cream);"' : "") +
+            '>' + p.tag + '</div>' : "") +
+        '<div class="plan-name">' + p.nom + '</div>' +
+        '<div class="plan-price">' + m[1] + '<small>' + insec(m[2]) + '</small></div>' +
+        '<div class="plan-sub">' + p.sous + '</div>' +
+        '<a class="btn ' + (vedette ? "btn-gold" : "btn-ghost") + '" href="#" ' +
+          'onclick="payer(PRIX.' + cle + '.id);return false;">S\'abonner</a>' +
+      '</div>';
+    }).join("");
+  }
+
+  document.querySelectorAll(".choix-tarifs").forEach((zone) => {
+    const etoile = zone.dataset.etoile === "oui";
+    zone.innerHTML = CLES_PRIX.map((cle) => {
+      const p = PRIX[cle];
+      const vedette = cle === "mois";
+      return '<button class="btn ' + (vedette ? "btn-gold" : "btn-ghost") + '" ' +
+        'style="width:100%;justify-content:center;" onclick="payer(PRIX.' + cle + '.id)">' +
+        p.nom + ' — ' + insec(p.montant) + (vedette && etoile ? " ⭐" : "") + '</button>';
+    }).join("");
+  });
+
+  /* Données structurées : éviter qu'un prix périmé remonte dans Google. */
+  const ld = document.getElementById("ld-principal");
+  if(ld){
+    try{
+      const donnees = JSON.parse(ld.textContent);
+      (donnees["@graph"] || []).forEach((n) => {
+        if(n["@type"] === "Course" && Array.isArray(n.offers)){
+          n.offers = CLES_PRIX.map((cle) => ({
+            "@type": "Offer",
+            "name": "Accès " + PRIX[cle].duree,
+            "price": PRIX[cle].ld,
+            "priceCurrency": "EUR",
+            "category": "Abonnement",
+            "url": "https://civicum.fr/"
+          }));
+        }
+      });
+      ld.textContent = JSON.stringify(donnees);
+    } catch(e){ /* les données structurées restent en l'état */ }
+  }
+}
+
+/* Phase d'essai du français.
+
+   Tant que TARIFS_2026 vaut false, l'abonnement vendu est celui de l'examen
+   civique : le français est ouvert aux abonnés, mais il n'est pas compris
+   dans ce qu'ils ont payé. On le dit, partout où il est présenté, plutôt
+   que de le laisser croire. Le même interrupteur fait disparaître ces
+   mentions le jour où la nouvelle offre entre en vigueur. */
+const FRANCAIS_INCLUS = TARIFS_2026;
+
+function afficherPhaseEssai(){
+  document.querySelectorAll(".badge-fr").forEach((b) => {
+    b.textContent = FRANCAIS_INCLUS ? "" : "version de test";
+    b.className = "badge-fr" + (FRANCAIS_INCLUS ? " masque-fr" : "");
+  });
+
+  const note = document.getElementById("note-formules");
+  if(note){
+    note.innerHTML = FRANCAIS_INCLUS
+      ? "Les trois formules donnent accès à la totalité de ce contenu. Seule la durée change."
+      : "Les trois formules donnent accès à l'<b style=\"color:var(--navy);\">examen civique</b> dans sa totalité. " +
+        "Les deux modules de français sont en <b style=\"color:var(--navy);\">version de test</b> : ils sont ouverts " +
+        "à tous les abonnés pendant cette phase, sans être compris dans l'abonnement. Ils le seront dans la prochaine offre.";
+  }
+
+  const bandeau = document.getElementById("bandeau-fr");
+  if(bandeau) bandeau.classList.toggle("masque-fr", FRANCAIS_INCLUS);
+
+  const meme = document.getElementById("note-meme-contenu");
+  if(meme && !FRANCAIS_INCLUS){
+    meme.innerHTML = "Les trois formules donnent accès au <b style=\"color:var(--navy);\">même contenu</b> : seule la durée change. " +
+      "Les modules de français, signalés ci-dessous, sont en version de test — ouverts aux abonnés, mais pas encore compris dans l'abonnement.";
+  }
+}
+
+function demarrerPage(){ afficherTarifs(); afficherPhaseEssai(); }
+
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", demarrerPage);
+else demarrerPage();
+
 async function payer(priceId){
+  if(typeof priceId === "string" && priceId.indexOf("A_REMPLACER") !== -1){
+    setGateError("Ce tarif n'est pas encore activé. Écrivez-nous à contact@civicum.fr.");
+    return;
+  }
   const user = (window._fbAuth && window._fbAuth.currentUser) || window._fbCurrentUser;
   if(!user){
     setGateError("Veuillez d'abord créer votre compte ou vous connecter.");
@@ -2783,9 +3273,7 @@ async function onUserConnected(user){
         <div style="font-weight:700;color:#2e7d52;font-size:15px;margin-bottom:10px;">${abonnementExpire ? '⏳ Votre accès est arrivé à échéance' : `👋 Bienvenue ${nom || ''} !`}</div>
         <div style="color:#333;margin-bottom:14px;">${abonnementExpire ? 'Votre progression est conservée. Choisissez une formule pour reprendre là où vous en étiez :' : 'Votre compte est créé. Choisissez votre formule pour activer votre accès immédiatement :'}</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxtEJIAgyQD2PevhFzo26Nx')">1 mois — 9,99&nbsp;€</button>
-          <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="payer('price_1TxnuSIAgyQD2Pev3g7laCsy')">3 mois — 19,99&nbsp;€ ⭐</button>
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="payer('price_1TxoKlIAgyQD2PevfAbHkMBS')">Accès 1 an — 49,99&nbsp;€</button>
+          <div class="choix-tarifs" data-etoile="oui"></div>
         </div>
         <div style="margin-top:12px;font-size:12px;color:#666;">Paiement sécurisé par Stripe. Accès activé immédiatement après paiement.</div>
         ${abonnementExpire ? '<div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(46,125,82,.2);"><div style="font-size:12.5px;color:#555;margin-bottom:8px;">Vous ne souhaitez pas renouveler ? Votre retour nous est utile.</div><button class="btn btn-ghost" onclick="ouvrirAvis()" style="width:100%;justify-content:center;font-size:13.5px;padding:11px;">Donner mon avis sur Civicum</button></div>' : ''}
@@ -4476,9 +4964,10 @@ function coursePagesFor(themeKey, levelKey){
 
 
 /* ============ STRUCTURED COURSES (separate access) ============
-   Accès cours : colonne 5 (cours=oui) OU formule 3 mois/à vie.
+   Accès cours : colonne 5 (cours=oui) OU formule longue durée.
+   Les anciens libellés sont conservés pour les comptes déjà créés.
 ============================================================ */
-const FORMULES_AVEC_COURS = ["3 mois","acces illimite 1 an","à vie","vie"];
+const FORMULES_AVEC_COURS = ["6 mois","full pack","1 mois","3 mois","acces illimite 1 an","à vie","vie"];
 function rowHasCours(row){
   const cours = (row[5]||'').trim().toLowerCase();
   if(cours==='oui'||cours==='yes') return true;
@@ -4663,7 +5152,15 @@ checkExistingUnlock(true);   /* restauration silencieuse : ne pas ouvrir l'app a
   const cible = (location.hash || '').toLowerCase();
   if(cible === '#inscription') setTimeout(() => showApp('register'), 350);
   else if(cible === '#connexion') setTimeout(() => showApp('login'), 350);
-  else if(cible === '#avis') setTimeout(() => switchTab('avis'), 250);
+  else {
+    /* Tout onglet peut être atteint directement par son ancre : #contenu,
+       #tarifs, #francais, #avis… Pratique pour les liens envoyés par e-mail
+       et pour les pages TCF qui renvoient vers une rubrique précise. */
+    const onglets = ['accueil','contenu','francais','tarifs','avis','apropos',
+                     'faq-tab','formation-tab','public-tab','contact-tab'];
+    const nom = cible.replace('#','');
+    if(onglets.indexOf(nom) !== -1) setTimeout(() => switchTab(nom), 250);
+  }
 })();
 
 

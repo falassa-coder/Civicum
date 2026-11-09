@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de niveau de français A1 à C2 — format TCF Tout public | Civicum</title>
+<meta name="description" content="Trois séries d'entraînement au format du TCF Tout public : compréhension orale, structures de la langue, compréhension écrite. Estimation de votre niveau de A1 à C2 à la fin du test.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://civicum.fr/tcf-tout-public.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://civicum.fr/tcf-tout-public.html">
+<meta property="og:title" content="Test de niveau de français — format TCF Tout public">
+<meta property="og:description" content="Trois séries d'entraînement, 36 questions par série, estimation de niveau de A1 à C2.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Civicum">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Course",
+      "name": "Test de niveau de français au format TCF Tout public",
+      "description": "Entraînement aux trois épreuves de compréhension du TCF Tout public, avec estimation du niveau CECRL de A1 à C2.",
+      "provider": { "@type": "EducationalOrganization", "name": "Civicum", "url": "https://civicum.fr" },
+      "inLanguage": "fr",
+      "teaches": "Compréhension orale, structures de la langue, compréhension écrite",
+      "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Civicum", "item": "https://civicum.fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Test de niveau TCF Tout public", "item": "https://civicum.fr/tcf-tout-public.html" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B2D; --ink-60:#3D4F63; --gold:#B8962E; --gold-lt:#D4B04A; --gold-bg:#FBF6EA;
+  --white:#FAF9F6; --surface:#FFF; --surface-2:#F4F3F0; --line:rgba(15,27,45,.1); --line-md:rgba(15,27,45,.2);
+  --ok:#1E6B45; --ok-bg:#EAF5EF; --warn:#A8651E; --warn-bg:#FBF1E6; --ko:#A82D1E; --ko-bg:#FDF0EE;
+  --muted:#6B6459;
+  --serif:'DM Serif Display',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r:10px; --r-lg:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--gold)}
+section{padding:36px 0}
+
+.top{background:var(--ink);color:var(--white);padding:14px 0;position:sticky;top:0;z-index:30}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}
+.brand span{width:28px;height:28px;border:1.5px solid var(--gold);color:var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-size:16px;letter-spacing:0}
+.top a.retour{color:rgba(250,249,246,.7);text-decoration:none;font-size:14px}
+.top a.retour:hover{color:var(--gold)}
+
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:clamp(27px,5.2vw,40px);line-height:1.15;margin:0 0 14px;font-weight:400}
+h2{font-family:var(--serif);font-size:25px;font-weight:400;margin:0 0 12px}
+h3{font-size:16px;font-weight:700;margin:0 0 8px}
+.lead{font-size:18px;color:var(--ink-60);margin:0 0 26px}
+
+.epreuves{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:24px}
+.ep{background:var(--surface);padding:16px 18px;display:flex;align-items:center;gap:14px}
+.ep .code{flex:none;width:44px;height:44px;border-radius:11px;background:var(--gold-bg);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:13px}
+.ep .t{flex:1;min-width:0}
+.ep .t b{display:block;font-size:15.5px}
+.ep .t small{color:var(--muted);font-size:13.5px}
+.ep-meta{flex:none;font-size:13px;color:var(--muted);text-align:right;white-space:nowrap}
+
+.encadre{border-radius:var(--r);padding:15px 17px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+.encadre.info{background:var(--gold-bg);border-left:3px solid var(--gold);color:#5C4A14}
+.encadre.alerte{background:var(--warn-bg);border-left:3px solid var(--warn);color:#6B4715}
+.encadre b{font-weight:700}
+
+.modules{display:grid;gap:12px;margin-bottom:22px}
+.mod{display:flex;align-items:center;gap:15px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:17px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s,transform .1s}
+.mod:hover{border-color:var(--gold)}
+.mod:active{transform:scale(.995)}
+.mod .n{flex:none;width:46px;height:46px;border-radius:11px;background:var(--ink);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:13px}
+.mod .t{flex:1}
+.mod .t b{display:block;font-size:16px;margin-bottom:2px}
+.mod .t small{color:var(--muted);font-size:13.5px}
+.mod .fl{flex:none;color:var(--gold);font-size:19px}
+
+.barre{position:sticky;top:56px;z-index:20;background:var(--white);border-bottom:1px solid var(--line);padding:12px 0}
+.barre .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.compte{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chrono{font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums}
+.chrono.urgent{color:var(--ko)}
+.jauge{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:9px}
+.jauge i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+
+.contexte{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600}
+.lecteur{background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:22px;margin-bottom:20px;text-align:center}
+.lecteur .gros{width:72px;height:72px;border-radius:50%;border:none;background:#fff;margin:0 auto 12px;display:grid;place-items:center;cursor:pointer}
+.lecteur .gros svg{width:30px;height:30px;fill:var(--ink)}
+.lecteur .gros:disabled{opacity:.35;cursor:not-allowed}
+.lecteur small{display:block;font-size:14px;opacity:.82}
+.lecteur .rejouer{background:none;border:none;color:var(--gold-lt);font:inherit;font-size:13px;margin-top:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:20px}
+.doc .titre{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.doc p{margin:0 0 11px;font-size:15.5px;line-height:1.7;white-space:pre-line}
+.doc p:last-child{margin-bottom:0}
+
+.enonce{font-family:var(--serif);font-size:clamp(19px,3.4vw,24px);line-height:1.35;margin:0 0 20px;font-weight:400}
+.reps{display:grid;gap:10px;margin-bottom:24px}
+.rep{display:flex;align-items:flex-start;gap:13px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,background .15s}
+.rep:hover{border-color:var(--line-md)}
+.rep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.rep .l{flex:none;width:27px;height:27px;border-radius:7px;background:var(--surface-2);display:grid;place-items:center;font-size:13.5px;font-weight:600;color:var(--ink-60)}
+.rep.choisie{border-color:var(--gold);background:var(--gold-bg)}
+.rep.choisie .l{background:var(--gold);color:#fff}
+
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:var(--r);padding:15px 26px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.9}
+.btn-or{background:var(--gold);color:#fff}
+.btn-ink{background:var(--ink);color:var(--white)}
+.btn-vide{background:transparent;border:1.5px solid var(--line-md);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.score{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:32px 24px;text-align:center;margin-bottom:22px}
+.score .n{font-family:var(--serif);font-size:54px;line-height:1;color:var(--gold-lt)}
+.score .pc{font-size:15px;opacity:.8;margin-top:6px}
+.corrige{margin-bottom:26px}
+.q{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:10px;background:var(--surface)}
+.q.faux{border-left:3px solid var(--ko)}
+.q.juste{border-left:3px solid var(--ok)}
+.q .en{font-weight:600;margin-bottom:10px;font-size:15px}
+.q .li{font-size:14.5px;padding:7px 11px;border-radius:6px;margin-bottom:5px;color:var(--muted)}
+.q .li.bonne{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.q .li.mienne{background:var(--ko-bg);color:var(--ko);font-weight:600}
+.q .pourquoi{font-size:14px;color:var(--ink-60);background:var(--surface-2);border-radius:7px;padding:11px 13px;margin-top:9px;line-height:1.6}
+
+.tache{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:14px}
+.tache .tete{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.tache .num{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tache .vol{font-size:13px;color:var(--muted)}
+.tache .consigne{font-size:15.5px;line-height:1.65;margin-bottom:14px}
+.tache ul{list-style:none;padding:0;margin:0}
+.tache li{padding:5px 0 5px 22px;position:relative;font-size:14px;color:var(--ink-60)}
+.tache li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+
+.offre{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:26px;text-align:center;margin-top:30px}
+footer{background:var(--ink);color:rgba(250,249,246,.65);padding:32px 0;font-size:13.5px;margin-top:46px}
+footer a{color:var(--gold-lt)}
+
+.verrou{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:30px 24px;text-align:center;margin-bottom:22px}
+.verrou-ic{font-size:26px;margin-bottom:10px;opacity:.75}
+.verrou-t{font-family:var(--serif);font-size:23px;margin-bottom:10px}
+.verrou p{color:var(--ink-60);font-size:15.5px;max-width:420px;margin:0 auto 20px}
+.verrou-prix{font-size:13px;color:var(--muted);margin-top:16px}
+.chargement{display:flex;align-items:center;justify-content:center;gap:11px;color:var(--muted);font-size:15px;padding:28px 0}
+.chargement .rond{width:19px;height:19px;border:2.5px solid var(--line-md);border-top-color:var(--gold);border-radius:50%;display:inline-block;animation:tourne .85s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.contenu-inclus{background:var(--surface-2);border-radius:var(--r-lg);padding:22px;margin-top:26px}
+.contenu-inclus ul{list-style:none;padding:0;margin:0}
+.contenu-inclus li{padding:7px 0 7px 24px;position:relative;font-size:15px;line-height:1.6}
+.contenu-inclus li::before{content:"\2713";position:absolute;left:0;color:var(--gold);font-weight:700}
+.masque{display:none!important}
+@media (max-width:560px){.actions{flex-direction:column}.btn{width:100%}.ep{flex-wrap:wrap}.ep-meta{flex:0 0 100%;margin:5px 0 0 58px;text-align:left;font-weight:600;color:var(--gold);white-space:normal}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.bandeau-essai{background:#FBF1E6;border:1px solid rgba(168,101,30,.3);border-left:3px solid #A8651E;border-radius:10px;padding:15px 18px;margin-bottom:22px;font-size:14.5px;line-height:1.65;color:#6B4715}
+.bandeau-essai b{color:#5A3A10}
+
+/* ---- Spécifique au test de niveau ---- */
+.echelle{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.echelle div{background:var(--surface);padding:11px 4px;text-align:center}
+.echelle b{display:block;font-size:14px}
+.echelle small{font-size:10.5px;color:var(--muted);letter-spacing:.03em}
+
+.serie-liste{display:grid;gap:12px;margin-bottom:8px}
+.serie{display:flex;align-items:center;gap:15px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:17px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s,transform .1s}
+.serie:hover{border-color:var(--gold)}
+.serie:active{transform:scale(.995)}
+.serie .n{flex:none;width:46px;height:46px;border-radius:11px;background:var(--ink);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:15px;font-family:var(--serif)}
+.serie .t{flex:1}
+.serie .t b{display:block;font-size:16px;margin-bottom:2px}
+.serie .t small{color:var(--muted);font-size:13.5px}
+.serie .fl{flex:none;color:var(--gold);font-size:19px}
+.serie.faite .n{background:var(--ok);}
+
+.etapes{display:flex;gap:7px;margin-bottom:20px}
+.etapes i{flex:1;height:3px;border-radius:2px;background:var(--surface-2)}
+.etapes i.ok{background:var(--ok)}
+.etapes i.now{background:var(--gold)}
+
+.consigne-carte{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;margin-bottom:20px}
+.consigne-carte .gd{font-family:var(--serif);font-size:27px;margin:0 0 6px}
+.consigne-carte .sous{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+.consigne-carte ul{list-style:none;padding:0;margin:0 0 20px}
+.consigne-carte li{padding:6px 0 6px 23px;position:relative;font-size:15px;color:var(--ink-60);line-height:1.6}
+.consigne-carte li::before{content:"\2013";position:absolute;left:0;color:var(--gold)}
+
+.lacune{font-family:var(--serif);font-size:clamp(20px,3.6vw,26px);line-height:1.5;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 22px;margin-bottom:20px}
+.lacune u{text-decoration:none;border-bottom:2.5px dashed var(--gold);padding:0 22px}
+
+.niv-global{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:30px 24px;text-align:center;margin-bottom:16px}
+.niv-global .lb{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+.niv-global .gd{font-family:var(--serif);font-size:60px;line-height:1;color:var(--gold-lt)}
+.niv-global .de{font-size:14.5px;opacity:.85;margin-top:8px}
+
+.niv-detail{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:18px}
+.niv-ligne{background:var(--surface);padding:15px 17px;display:flex;align-items:center;gap:14px}
+.niv-ligne .code{flex:none;width:42px;height:42px;border-radius:10px;background:var(--gold-bg);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:12.5px}
+.niv-ligne .t{flex:1;min-width:0}
+.niv-ligne .t b{display:block;font-size:15px}
+.niv-ligne .t small{color:var(--muted);font-size:13px}
+.niv-ligne .v{flex:none;font-family:var(--serif);font-size:25px;color:var(--ink)}
+.niv-ligne .v.bas{color:var(--muted);font-size:15px;font-family:var(--sans);font-weight:600}
+
+.paliers{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:14px 0 22px}
+.palier{background:var(--surface);display:flex;align-items:center;gap:12px;padding:10px 14px;font-size:14px}
+.palier .nv{flex:none;width:34px;font-weight:700;color:var(--ink-60)}
+.palier .pts{flex:none;width:52px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.palier .bar{flex:1;height:7px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.palier .bar i{display:block;height:100%;background:var(--gold)}
+.palier.rate .bar i{background:var(--ko)}
+.palier.plein .bar i{background:var(--ok)}
+
+.onglets{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:18px;overflow-x:auto}
+.onglets button{background:none;border:none;border-bottom:2.5px solid transparent;padding:10px 13px;font:inherit;font-size:14.5px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+.onglets button.actif{color:var(--ink);border-bottom-color:var(--gold)}
+.q .nvbadge{display:inline-block;font-size:10.5px;letter-spacing:.07em;font-weight:700;color:var(--gold);background:var(--gold-bg);border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:1px}
+.mention{font-size:13px;color:var(--muted);line-height:1.6;margin-top:18px}
+@media (max-width:560px){
+  .echelle{grid-template-columns:repeat(3,1fr)}
+  .niv-ligne{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a class="brand" href="/"><span>C</span>CIVICUM</a>
+  <a class="retour" href="/">Retour au site</a>
+</div></div>
+
+<!-- ================= ÉCRAN 1 : PRÉSENTATION ================= -->
+<div id="ecran-intro">
+  <section><div class="wrap">
+    <div class="eyebrow">TCF Tout public · Test de niveau</div>
+    <h1>Évaluer votre niveau de français, de A1 à C2</h1>
+    <p class="lead">Trois séries d'entraînement au format des épreuves de compréhension du TCF Tout public. À la fin de chaque série, une estimation de votre niveau, épreuve par épreuve.</p>
+
+    <h2>Les trois épreuves travaillées ici</h2>
+    <div class="epreuves">
+      <div class="ep"><span class="code">CO</span><span class="t"><b>Compréhension orale</b><small>QCM, 4 propositions par question</small></span><span class="ep-meta">29 items · 25 min</span></div>
+      <div class="ep"><span class="code">MSL</span><span class="t"><b>Maîtrise des structures de la langue</b><small>Grammaire et lexique en contexte</small></span><span class="ep-meta">18 items · 15 min</span></div>
+      <div class="ep"><span class="code">CE</span><span class="t"><b>Compréhension écrite</b><small>QCM, 4 propositions par question</small></span><span class="ep-meta">29 items · 45 min</span></div>
+    </div>
+
+    <div class="encadre info">
+      <b>Pourquoi pas de production écrite ni orale ?</b> Le TCF Tout public comporte aussi deux épreuves complémentaires d'expression, corrigées par un examinateur. Elles ne peuvent pas être notées automatiquement : ce test porte donc sur les trois épreuves obligatoires de compréhension, les seules dont le résultat soit calculable en ligne. Les tâches d'expression sont travaillées dans la <a href="/tcf-b2.html">préparation TCF&nbsp;IRN</a>.
+    </div>
+
+    <h2>L'échelle de niveaux</h2>
+    <div class="echelle">
+      <div><b>A1</b><small>Découverte</small></div>
+      <div><b>A2</b><small>Survie</small></div>
+      <div><b>B1</b><small>Seuil</small></div>
+      <div><b>B2</b><small>Avancé</small></div>
+      <div><b>C1</b><small>Autonome</small></div>
+      <div><b>C2</b><small>Maîtrise</small></div>
+    </div>
+    <p>Depuis le 1<sup>er</sup> janvier 2026, le niveau <b>A2</b> est exigé pour une première carte de séjour pluriannuelle, <b>B1</b> pour la carte de résident et <b>B2</b> pour la naturalisation. Ce test vous situe sur cette échelle avant de choisir votre préparation.</p>
+
+    <div class="encadre alerte">
+      <b>Une estimation, pas un résultat officiel.</b> Le TCF est calibré sur 76 items et un barème propre à France Éducation international. Ce test en compte 36 par série : il indique une tendance fiable, non une note transposable. Seule une session officielle délivre une attestation de niveau.
+    </div>
+
+    <h2>Commencer</h2>
+
+    <div id="zone-acces">
+      <div class="verrou" id="verrou">
+        <div class="verrou-ic">&#128274;</div>
+        <div class="verrou-t">Réservé aux abonnés</div>
+        <p>Les trois séries, les corrigés commentés et l'estimation de niveau font partie de l'abonnement Civicum.</p>
+        <div class="actions" style="justify-content:center">
+          <a class="btn btn-or" href="/#inscription">Créer mon compte</a>
+          <a class="btn btn-vide" href="/#connexion">J'ai déjà un compte</a>
+        </div>
+        <div class="verrou-prix">Compris dans l'abonnement Civicum. Paiement unique, sans reconduction automatique.</div>
+      </div>
+
+      <div id="attente" class="chargement masque"><span class="rond"></span> Vérification de votre accès…</div>
+
+      <div class="bandeau-essai masque" id="bandeau-essai">
+        <b>Version de test.</b> Ce module est ouvert à tous les abonnés pendant cette phase, mais il n'est pas compris dans l'abonnement actuel, qui porte sur l'examen civique. Profitez-en, et dites-nous ce qui manque&nbsp;: il entrera dans l'offre à la prochaine mise à jour des tarifs. Un mot à <a href="mailto:contact@civicum.fr" style="color:#8A5A14;font-weight:600;">contact@civicum.fr</a> nous aide beaucoup.
+      </div>
+      <div id="series" class="masque">
+        <div class="serie-liste" id="serie-liste"></div>
+        <p class="mention">Chaque série comporte 36 questions — 12 par épreuve, réparties sur les six niveaux. Comptez environ 38 minutes pour une série complète. Les trois séries sont indépendantes : vous pouvez les enchaîner ou les espacer.</p>
+      </div>
+    </div>
+
+    <div class="contenu-inclus">
+      <h3>Ce que contient chaque série</h3>
+      <ul>
+        <li>12 documents de compréhension orale, du message simple au commentaire argumenté</li>
+        <li>12 questions de structures de la langue, de l'article défini à la concession au subjonctif</li>
+        <li>12 textes de compréhension écrite, de l'affiche au texte critique</li>
+        <li>Un corrigé commenté question par question, avec le niveau visé</li>
+        <li>Une estimation de niveau par épreuve et une estimation globale</li>
+      </ul>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= ÉCRAN 2 : CONSIGNE D'ÉPREUVE ================= -->
+<div id="ecran-consigne" class="masque">
+  <section><div class="wrap">
+    <div class="etapes" id="etapes-c"><i></i><i></i><i></i></div>
+    <div class="consigne-carte">
+      <div class="eyebrow" id="c-serie">Série 1</div>
+      <div class="gd" id="c-nom">Compréhension orale</div>
+      <div class="sous" id="c-vol">12 questions · 10 minutes</div>
+      <ul id="c-points"></ul>
+      <div class="actions">
+        <button class="btn btn-ink" id="c-lancer">Commencer l'épreuve</button>
+        <button class="btn btn-vide" onclick="quitter()">Abandonner</button>
+      </div>
+    </div>
+    <p class="mention">Le chronomètre démarre dès que vous commencez. À son terme, l'épreuve se clôt et les questions sans réponse sont comptées comme fausses — comme à l'examen. Vous pouvez revenir en arrière tant que le temps court.</p>
+  </div></section>
+</div>
+
+<!-- ================= ÉCRAN 3 : TEST ================= -->
+<div id="ecran-test" class="masque">
+  <div class="barre"><div class="wrap">
+    <div style="flex:1">
+      <div class="compte"><span id="t-ep">CO</span> · question <b id="t-i">1</b> sur <span id="t-n">12</span></div>
+      <div class="jauge"><i id="t-jauge"></i></div>
+    </div>
+    <div class="chrono" id="t-chrono">00:00</div>
+  </div></div>
+  <section><div class="wrap">
+    <div class="contexte" id="t-contexte">Document 1</div>
+    <div id="t-document"></div>
+    <div class="enonce" id="t-enonce"></div>
+    <div class="reps" id="t-reps"></div>
+    <div class="actions">
+      <button class="btn btn-vide" id="t-prec">Précédente</button>
+      <button class="btn btn-ink" id="t-suiv">Suivante</button>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= ÉCRAN 4 : RÉSULTAT ================= -->
+<div id="ecran-resultat" class="masque">
+  <section><div class="wrap">
+    <div class="eyebrow" id="r-serie">Série 1 · Résultat</div>
+    <h1 style="font-size:clamp(24px,4.6vw,34px)">Votre estimation de niveau</h1>
+
+    <div class="niv-global">
+      <div class="lb">Niveau estimé</div>
+      <div class="gd" id="r-niveau">B1</div>
+      <div class="de" id="r-score">24 bonnes réponses sur 36</div>
+    </div>
+
+    <div class="niv-detail" id="r-detail"></div>
+
+    <div class="encadre info masque" id="r-irregulier"></div>
+
+    <div class="encadre alerte" id="r-avert">
+      Estimation Civicum, non officielle. Le TCF repose sur 76 items et un barème propre à France Éducation international.
+    </div>
+
+    <h2>Comment ce niveau est calculé</h2>
+    <p>Chaque épreuve comporte deux questions par niveau, de A1 à C2. Votre niveau pour une épreuve est le plus haut palier que vous franchissez <b>sans en manquer aucun en dessous</b> : il faut au moins une bonne réponse sur deux à chaque palier. Le total de bonnes réponses sert ensuite de plafond, pour qu'une réussite isolée sur une question difficile ne suffise pas à créditer un niveau. Le niveau global est la moyenne des trois épreuves, arrondie au palier inférieur.</p>
+
+    <h2>Palier par palier</h2>
+    <div class="onglets" id="r-onglets"></div>
+    <div class="paliers" id="r-paliers"></div>
+
+    <h2>Corrigé commenté</h2>
+    <div class="corrige" id="r-corrige"></div>
+
+    <div class="actions" style="flex-wrap:wrap">
+      <button class="btn btn-ink" onclick="quitter()">Choisir une autre série</button>
+      <a class="btn btn-vide" href="/">Retour au site</a>
+    </div>
+  </div></section>
+</div>
+
+<footer><div class="wrap">
+  <b style="color:var(--white)">Civicum</b> — service privé de préparation.
+  Le TCF est organisé par France Éducation international, seul habilité à délivrer une attestation de niveau.
+  Les documents de ce test sont des créations originales respectant le format de l'épreuve ; ils ne reproduisent aucun sujet officiel.
+  <br><br>
+  <a href="/">Accueil</a> · <a href="/tcf-b2.html">TCF IRN B2</a> · <a href="/test-gratuit.html">Test civique gratuit</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+</div></footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const app = initializeApp({
+    apiKey: "AIzaSyBQjD8NPUtoUSSVQ0A1Lju7kQ6YtBNr7rM",
+    authDomain: "civicum-30071.firebaseapp.com",
+    projectId: "civicum-30071",
+    storageBucket: "civicum-30071.firebasestorage.app",
+    messagingSenderId: "870696168739",
+    appId: "1:870696168739:web:c64ad16f675a2547a0f096"
+  });
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  window._fbDb = db; window._fbDoc = doc; window._fbGetDoc = getDoc;
+
+  onAuthStateChanged(auth, async (user) => {
+    window._fbUser = user || null;
+    let acces = false, expire = false;
+    if(user){
+      try{
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if(snap.exists()){
+          const d = snap.data();
+          const nonExpire = !d.expireLe || d.expireLe > Date.now();
+          acces  = d.actif === true && nonExpire;
+          expire = d.actif === true && !nonExpire;
+        }
+      } catch(e){ /* règles ou réseau : accès refusé */ }
+    }
+    window._tcfAcces = acces;
+    if(typeof majAcces === "function") majAcces(acces, !!user, expire);
+  });
+</script>
+
+<script>
+/* ==================================================================
+   TEST DE NIVEAU — FORMAT TCF TOUT PUBLIC
+   La banque d'items est lue dans Firestore (document tcf/TOUT-PUBLIC),
+   accessible en lecture aux seuls comptes actifs. Aucune réponse
+   n'est présente dans ce fichier.
+   ================================================================== */
+
+const NIVEAUX = ["A1","A2","B1","B2","C1","C2"];
+const ORDRE   = ["co","msl","ce"];
+const DUREES  = { co: 600, msl: 600, ce: 1080 };   /* proportionnelles au barème officiel */
+const LIBELLE = {
+  co:  { nom:"Compréhension orale", code:"CO",
+         points:["Chaque document ne s'écoute qu'une fois, comme à l'examen.",
+                 "Lisez la question avant d'écouter : elle oriente l'attention.",
+                 "Les documents sont courts au début, plus longs et plus abstraits ensuite."] },
+  msl: { nom:"Maîtrise des structures de la langue", code:"MSL",
+         points:["Une phrase à compléter par l'une des quatre propositions.",
+                 "Grammaire et lexique en contexte, sans exercice isolé.",
+                 "Une seule proposition est correcte ; les autres sont des erreurs courantes."] },
+  ce:  { nom:"Compréhension écrite", code:"CE",
+         points:["Documents authentiques dans leur forme : affiche, courriel, article, texte critique.",
+                 "La réponse se trouve toujours dans le texte, parfois de façon implicite.",
+                 "Prenez le temps de relire : c'est l'épreuve la plus longue."] }
+};
+
+/* Phase d'essai : tant que le français n'est pas compris dans l'abonnement
+   vendu, on le signale aux abonnés qui y accèdent. Passer à true en même
+   temps que TARIFS_2026 dans index.html. */
+const FRANCAIS_INCLUS = false;
+
+let BANQUE = null;
+let serie = null, iEp = 0, items = [], iQ = 0, reponses = [], resultats = {};
+let minuteur = null, reste = 0, ecoutes = {};
+const faites = new Set();
+
+const $ = (id) => document.getElementById(id);
+function voir(id){
+  ["ecran-intro","ecran-consigne","ecran-test","ecran-resultat"]
+    .forEach(e => $(e).classList.toggle("masque", e !== id));
+  window.scrollTo(0,0);
+}
+function ech(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+/* ---------------- Accès ---------------- */
+
+function majAcces(acces, connecte, expire){
+  const verrou = $("verrou"), attente = $("attente");
+  if(!verrou) return;
+  attente.classList.add("masque");
+  if(acces){
+    verrou.classList.add("masque");
+    const bandeau = document.getElementById("bandeau-essai");
+    if(bandeau && !FRANCAIS_INCLUS) bandeau.classList.remove("masque");
+    chargerBanque();
+  } else {
+    verrou.classList.remove("masque");
+    $("series").classList.add("masque");
+    if(connecte){
+      verrou.querySelector(".verrou-t").textContent =
+        expire ? "Votre accès a expiré" : "Votre accès n'est pas actif";
+      verrou.querySelector("p").textContent = expire
+        ? "Votre abonnement est arrivé à échéance. Réactivez-le pour retrouver les séries et votre historique."
+        : "Votre compte existe, mais aucun abonnement n'y est rattaché pour le moment.";
+      verrou.querySelector(".btn-or").textContent = expire ? "Réactiver mon accès" : "Choisir un abonnement";
+      verrou.querySelector(".btn-vide").classList.add("masque");
+    }
+  }
+}
+
+async function chargerBanque(){
+  if(BANQUE) { listerSeries(); return; }
+  $("attente").classList.remove("masque");
+  try{
+    const snap = await window._fbGetDoc(window._fbDoc(window._fbDb, "tcf", "TOUT-PUBLIC"));
+    if(!snap.exists()) throw new Error("banque absente");
+    BANQUE = snap.data();
+    $("attente").classList.add("masque");
+    listerSeries();
+  } catch(e){
+    $("attente").innerHTML =
+      "Le contenu n'a pas pu être chargé. Rechargez la page, ou écrivez-nous à " +
+      "<a href='mailto:contact@civicum.fr'>contact@civicum.fr</a>.";
+  }
+}
+
+function listerSeries(){
+  const z = $("serie-liste");
+  z.innerHTML = "";
+  (BANQUE.series || []).forEach((s, k) => {
+    const b = document.createElement("button");
+    b.className = "serie" + (faites.has(s.id) ? " faite" : "");
+    b.innerHTML =
+      '<span class="n">' + (faites.has(s.id) ? "&#10003;" : (k+1)) + '</span>' +
+      '<span class="t"><b>' + ech(s.titre) + '</b><small>36 questions · 3 épreuves · environ 38 min' +
+      (faites.has(s.id) ? " · déjà passée" : "") + '</small></span>' +
+      '<span class="fl">&rarr;</span>';
+    b.addEventListener("click", () => demarrerSerie(s.id));
+    z.appendChild(b);
+  });
+  $("series").classList.remove("masque");
+}
+
+/* ---------------- Déroulement ---------------- */
+
+function demarrerSerie(id){
+  if(!BANQUE || !window._tcfAcces){ voir("ecran-intro"); return; }
+  serie = (BANQUE.series || []).find(s => s.id === id);
+  if(!serie) return;
+  iEp = 0; resultats = {};
+  consigne();
+}
+
+function consigne(){
+  const ep = ORDRE[iEp], L = LIBELLE[ep];
+  $("c-serie").textContent = serie.titre + " · épreuve " + (iEp+1) + " sur 3";
+  $("c-nom").textContent = L.nom;
+  $("c-vol").textContent = serie[ep].length + " questions · " + Math.round(DUREES[ep]/60) + " minutes";
+  $("c-points").innerHTML = L.points.map(p => "<li>" + ech(p) + "</li>").join("");
+  const et = $("etapes-c").children;
+  for(let k=0;k<3;k++) et[k].className = k < iEp ? "ok" : (k === iEp ? "now" : "");
+  $("c-lancer").textContent = iEp === 0 ? "Commencer l'épreuve" : "Continuer";
+  voir("ecran-consigne");
+}
+
+function lancerEpreuve(){
+  const ep = ORDRE[iEp];
+  items = serie[ep];
+  iQ = 0; reponses = new Array(items.length).fill(null); ecoutes = {};
+  reste = DUREES[ep];
+  $("t-ep").textContent = LIBELLE[ep].code;
+  $("t-n").textContent = items.length;
+  majChrono();
+  clearInterval(minuteur);
+  minuteur = setInterval(() => {
+    reste--; majChrono();
+    if(reste <= 0){ clearInterval(minuteur); finEpreuve(); }
+  }, 1000);
+  afficher();
+  voir("ecran-test");
+}
+
+function majChrono(){
+  const m = Math.max(0, Math.floor(reste/60)), s = Math.max(0, reste%60);
+  const c = $("t-chrono");
+  c.textContent = String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  c.classList.toggle("urgent", reste <= 60);
+}
+
+function afficher(){
+  const ep = ORDRE[iEp], it = items[iQ];
+  $("t-i").textContent = iQ + 1;
+  $("t-jauge").style.width = ((iQ+1)/items.length*100) + "%";
+  $("t-contexte").textContent = (ep === "msl" ? "Phrase " : "Document ") + (iQ+1);
+
+  const doc = $("t-document");
+  if(ep === "co"){
+    const vu = ecoutes[iQ];
+    doc.innerHTML =
+      '<div class="lecteur">' +
+        '<button class="gros" id="t-play"' + (vu ? " disabled" : "") + ' aria-label="Écouter le document">' +
+          '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>' +
+        '<small id="t-etat">' + (vu ? "Document déjà écouté" : "Écouter une fois") + '</small>' +
+        '<button class="rejouer' + (vu ? "" : " masque") + '" id="t-rejouer">Relire le document (hors conditions d\'examen)</button>' +
+      '</div>' +
+      '<div class="doc masque" id="t-script"><div class="titre">Transcription</div><p>' + ech(it.script) + '</p></div>';
+    /* Première écoute : la transcription apparaît sans redessiner l'écran.
+       En revenant sur la question, elle est de nouveau masquée — le document
+       ne s'entend qu'une fois, comme à l'examen. */
+    $("t-play").addEventListener("click", (e) => {
+      ecoutes[iQ] = true;
+      e.currentTarget.disabled = true;
+      $("t-etat").textContent = "Document déjà écouté";
+      $("t-rejouer").classList.remove("masque");
+      $("t-script").classList.remove("masque");
+    });
+    $("t-rejouer").addEventListener("click", () => $("t-script").classList.remove("masque"));
+  } else if(ep === "ce"){
+    doc.innerHTML = '<div class="doc"><div class="titre">' + ech(it.titre) + '</div><p>' + ech(it.texte) + '</p></div>';
+  } else {
+    doc.innerHTML = '<div class="lacune">' + ech(it.phrase).replace("___","<u></u>") + '</div>';
+  }
+
+  $("t-enonce").textContent = ep === "msl"
+    ? "Complétez la phrase par la proposition qui convient."
+    : it.question;
+
+  $("t-reps").innerHTML = "";
+  ["A","B","C","D"].forEach(l => {
+    const b = document.createElement("button");
+    b.className = "rep" + (reponses[iQ] === l ? " choisie" : "");
+    b.innerHTML = '<span class="l">' + l + '</span><span>' + ech(it.options[l]) + '</span>';
+    b.addEventListener("click", () => { reponses[iQ] = l; afficher(); });
+    $("t-reps").appendChild(b);
+  });
+
+  $("t-prec").disabled = iQ === 0;
+  $("t-suiv").textContent = iQ === items.length - 1 ? "Terminer l'épreuve" : "Suivante";
+  window.scrollTo(0,0);
+}
+
+function finEpreuve(){
+  clearInterval(minuteur);
+  const ep = ORDRE[iEp];
+  resultats[ep] = { reponses: reponses.slice(), items: items };
+  iEp++;
+  if(iEp < ORDRE.length) consigne();
+  else { faites.add(serie.id); afficherResultat(); }
+}
+
+function quitter(){
+  clearInterval(minuteur);
+  listerSeries();
+  voir("ecran-intro");
+}
+
+/* ---------------- Estimation de niveau ---------------- */
+
+/* Deux items par niveau. On monte palier par palier tant qu'au moins
+   une réponse sur deux est juste ; le total sert de plafond pour
+   qu'une réussite isolée ne crédite pas un niveau. */
+function estimer(items, reps){
+  const par = {}; NIVEAUX.forEach(n => par[n] = { ok:0, tot:0 });
+  let total = 0;
+  items.forEach((it, i) => {
+    const p = par[it.n]; if(!p) return;
+    p.tot++;
+    if(reps[i] === it.correct){ p.ok++; total++; }
+  });
+  let echelon = -1;
+  for(let k=0;k<NIVEAUX.length;k++){
+    const p = par[NIVEAUX[k]];
+    if(p.tot && p.ok / p.tot >= 0.5) echelon = k; else break;
+  }
+  const plafond = Math.min(5, Math.max(0, Math.ceil(total / 2) - 1));
+  const brut = echelon;
+  if(echelon > plafond) echelon = plafond;
+  /* Profil irrégulier : des questions difficiles réussies alors qu'un
+     palier bas est manqué. On retient le dernier palier complet, mais
+     on le signale, sinon le résultat paraît incohérent. */
+  const manque = (brut >= 0 && brut < 5) ? NIVEAUX[brut + 1] : (brut < 0 ? "A1" : null);
+  const irregulier = manque && (plafond - brut >= 2);
+  return { echelon, niveau: echelon < 0 ? null : NIVEAUX[echelon],
+           total, nb: items.length, par, irregulier, manque };
+}
+
+function afficherResultat(){
+  const est = {}; let somme = 0, nTot = 0, okTot = 0;
+  ORDRE.forEach(ep => {
+    est[ep] = estimer(resultats[ep].items, resultats[ep].reponses);
+    somme += est[ep].echelon;
+    okTot += est[ep].total; nTot += est[ep].nb;
+  });
+  const gl = Math.floor(somme / ORDRE.length);
+
+  $("r-serie").textContent = serie.titre + " · Résultat";
+  $("r-niveau").textContent = gl < 0 ? "A1 —" : NIVEAUX[gl];
+  $("r-score").textContent = okTot + " bonnes réponses sur " + nTot +
+    (gl < 0 ? " — le palier A1 n'est pas encore consolidé" : "");
+
+  $("r-detail").innerHTML = ORDRE.map(ep => {
+    const e = est[ep];
+    return '<div class="niv-ligne">' +
+      '<span class="code">' + LIBELLE[ep].code + '</span>' +
+      '<span class="t"><b>' + ech(LIBELLE[ep].nom) + '</b><small>' +
+        e.total + " / " + e.nb + ' bonnes réponses</small></span>' +
+      (e.niveau
+        ? '<span class="v">' + e.niveau + '</span>'
+        : '<span class="v bas">A1 non consolidé</span>') +
+    '</div>';
+  }).join("");
+
+  const bancals = ORDRE.filter(ep => est[ep].irregulier);
+  const note = $("r-irregulier");
+  if(bancals.length){
+    note.classList.remove("masque");
+    note.innerHTML = "<b>Profil irrégulier.</b> En " +
+      bancals.map(ep => LIBELLE[ep].nom.toLowerCase() + " (palier " + est[ep].manque + ")").join(", ") +
+      ", vous réussissez des questions de niveau supérieur tout en manquant un palier plus bas. " +
+      "Le niveau retenu s'arrête au dernier palier complet : c'est celui-là qu'il faut consolider en priorité. " +
+      "Le détail palier par palier, plus bas, montre où se situe la lacune.";
+  } else {
+    note.classList.add("masque");
+  }
+
+  const onglets = $("r-onglets");
+  onglets.innerHTML = "";
+  ORDRE.forEach((ep, k) => {
+    const b = document.createElement("button");
+    b.textContent = LIBELLE[ep].code;
+    b.className = k === 0 ? "actif" : "";
+    b.addEventListener("click", () => {
+      [...onglets.children].forEach(c => c.classList.remove("actif"));
+      b.classList.add("actif");
+      paliers(est[ep]); corrige(ep);
+    });
+    onglets.appendChild(b);
+  });
+  paliers(est[ORDRE[0]]); corrige(ORDRE[0]);
+  voir("ecran-resultat");
+}
+
+function paliers(e){
+  $("r-paliers").innerHTML = NIVEAUX.map(n => {
+    const p = e.par[n], pc = p.tot ? (p.ok/p.tot*100) : 0;
+    const cl = p.tot === 0 ? "" : (p.ok === p.tot ? " plein" : (p.ok === 0 ? " rate" : ""));
+    return '<div class="palier' + cl + '">' +
+      '<span class="nv">' + n + '</span>' +
+      '<span class="bar"><i style="width:' + pc + '%"></i></span>' +
+      '<span class="pts">' + p.ok + " / " + p.tot + '</span></div>';
+  }).join("");
+}
+
+function corrige(ep){
+  const r = resultats[ep];
+  $("r-corrige").innerHTML = r.items.map((it, i) => {
+    const mienne = r.reponses[i], juste = mienne === it.correct;
+    const intitule = ep === "msl" ? it.phrase : it.question;
+    const lignes = ["A","B","C","D"].map(l => {
+      let c = "li";
+      if(l === it.correct) c += " bonne";
+      else if(l === mienne) c += " mienne";
+      return '<div class="' + c + '">' + l + ". " + ech(it.options[l]) +
+             (l === it.correct ? " &#10003;" : (l === mienne ? " &#10007;" : "")) + '</div>';
+    }).join("");
+    return '<div class="q ' + (juste ? "juste" : "faux") + '">' +
+      '<div class="en">' + (i+1) + ". " + ech(intitule) +
+        '<span class="nvbadge">' + it.n + '</span></div>' +
+      lignes +
+      (mienne === null ? '<div class="li">Sans réponse</div>' : "") +
+      '<div class="pourquoi">' + ech(it.explication) + '</div>' +
+    '</div>';
+  }).join("");
+}
+
+/* ---------------- Branchements ---------------- */
+
+$("c-lancer").addEventListener("click", lancerEpreuve);
+$("t-prec").addEventListener("click", () => { if(iQ > 0){ iQ--; afficher(); } });
+$("t-suiv").addEventListener("click", () => {
+  if(iQ < items.length - 1){ iQ++; afficher(); } else finEpreuve();
+});
+window.addEventListener("beforeunload", (e) => {
+  if(minuteur && reste > 0){ e.preventDefault(); e.returnValue = ""; }
+});
+</script>
+</body>
+</html>
