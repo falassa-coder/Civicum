@@ -198,9 +198,6 @@ footer a{color:var(--gold-lt)}
 
     <h2>Le niveau exigé, précisément</h2>
     <p>Le niveau retenu n'est pas une moyenne : il dépend de votre épreuve la plus faible. Les organismes de préparation indiquent qu'une tolérance existe — trois épreuves au niveau B2 et la quatrième dans le haut du B1 — mais le barème exact relève des textes officiels.</p>
-    <div class="encadre alerte">
-      Avant toute démarche, vérifiez le barème en vigueur auprès de France Éducation international ou de votre préfecture. Civicum prépare à l'épreuve, mais ne se substitue pas à l'information officielle.
-    </div>
 
     <h2>L'entraînement</h2>
 
@@ -254,7 +251,7 @@ footer a{color:var(--gold-lt)}
     </div>
 
     <div class="encadre alerte">
-      <b>Sur les enregistrements.</b> Les documents sonores de cette page sont lus par la synthèse vocale de votre navigateur. C'est suffisant pour travailler la méthode, mais le jour de l'épreuve vous entendrez des voix réelles, avec un débit naturel, des hésitations et parfois du bruit de fond. Entraînez-vous aussi avec des documents authentiques — radio, podcasts, journaux télévisés.
+      <b>Sur les enregistrements.</b> Les documents sonores sont lus par la synthèse vocale de votre navigateur : utile pour la méthode, mais le jour de l'épreuve les voix sont réelles. Entraînez-vous aussi avec des documents authentiques — radio, podcasts, journaux télévisés.
     </div>
   </div></section>
 </div>
@@ -290,7 +287,7 @@ footer a{color:var(--gold-lt)}
       <div class="pc" id="fin-pc"></div>
     </div>
     <div class="encadre alerte">
-      Ce score est un repère d'entraînement, <b>pas une estimation de niveau TCF</b>. Le test officiel repose sur une échelle calibrée de 25 items par épreuve, qu'aucun exercice en ligne ne peut reproduire.
+      Repère d'entraînement, <b>pas une estimation de niveau TCF</b>. <a href="/cgu.html#resultats">En savoir plus</a>
     </div>
 
     <h2>Le corrigé</h2>
@@ -328,10 +325,10 @@ footer a{color:var(--gold-lt)}
 </div>
 
 <footer><div class="wrap">
-  <b style="color:var(--white)">Civicum</b> — préparation à l'examen civique et au français (FLE).<br>
-  Service privé de préparation, indépendant de l'administration. Le TCF est conçu et délivré par France Éducation international.<br>
-  Les documents de cette page sont des créations originales de Civicum, au format de l'épreuve.<br>
-  <a href="/">civicum.fr</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+  <b style="color:var(--white)">Civicum</b> — service privé de préparation, indépendant de l'administration.
+  Documents originaux au format de l'épreuve ; le TCF est conçu et délivré par France Éducation international.
+  <br><br>
+  <a href="/">Accueil</a> · <a href="/tcf-tout-public.html">Test de niveau</a> · <a href="/cgu.html">Conditions générales</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
 </div></footer>
 
 <script type="module">
@@ -450,13 +447,29 @@ async function chargerBanque(){
   try{
     ch.classList.remove("masque");
     const snap = await window._fbGetDoc(window._fbDoc(window._fbDb, "tcf", "B2"));
-    if(!snap.exists()) throw new Error("document tcf/B2 introuvable");
+    if(!snap.exists()) throw { code: "not-found" };
     BANQUE = snap.data();
     remplirProduction();
     ch.classList.add("masque");
     return true;
   } catch(e){
-    ch.innerHTML = "Impossible de charger les documents. Vérifiez votre connexion, puis rechargez la page.";
+    /* Trois causes possibles, trois messages : un « ça n'a pas marché »
+       générique ne dit ni à vous ni à l'abonné ce qu'il faut faire. */
+    const code = e && e.code;
+    let msg;
+    if(code === "permission-denied"){
+      msg = "Votre accès n'est pas reconnu. Si vous venez de vous abonner, "
+          + "déconnectez-vous puis reconnectez-vous. Si votre abonnement est "
+          + "arrivé à échéance, réactivez-le depuis votre tableau de bord.";
+    } else if(code === "not-found"){
+      msg = "Le contenu de cette page n'est pas encore en ligne. "
+          + "Nous le mettons en place : réessayez dans quelques heures.";
+    } else {
+      msg = "Les documents n'ont pas pu être chargés. Vérifiez votre connexion "
+          + "et rechargez la page.";
+    }
+    ch.innerHTML = msg + " <a href='mailto:contact@civicum.fr'>contact@civicum.fr</a>";
+    console.error("Chargement de la banque B2 :", code || e);
     return false;
   }
 }

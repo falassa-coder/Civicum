@@ -274,10 +274,6 @@ footer a{color:var(--gold-lt)}
     </div>
     <p>Depuis le 1<sup>er</sup> janvier 2026, le niveau <b>A2</b> est exigé pour une première carte de séjour pluriannuelle, <b>B1</b> pour la carte de résident et <b>B2</b> pour la naturalisation. Ce test vous situe sur cette échelle avant de choisir votre préparation.</p>
 
-    <div class="encadre alerte">
-      <b>Une estimation, pas un résultat officiel.</b> Le TCF est calibré sur 76 items et un barème propre à France Éducation international. Ce test en compte 36 par série : il indique une tendance fiable, non une note transposable. Seule une session officielle délivre une attestation de niveau.
-    </div>
-
     <h2>Commencer</h2>
 
     <div id="zone-acces">
@@ -372,7 +368,7 @@ footer a{color:var(--gold-lt)}
     <div class="encadre info masque" id="r-irregulier"></div>
 
     <div class="encadre alerte" id="r-avert">
-      Estimation Civicum, non officielle. Le TCF repose sur 76 items et un barème propre à France Éducation international.
+      <b>Estimation Civicum, non officielle.</b> Le TCF officiel repose sur 76 items et un barème calibré. <a href="/cgu.html#resultats">En savoir plus</a>
     </div>
 
     <h2>Comment ce niveau est calculé</h2>
@@ -393,11 +389,10 @@ footer a{color:var(--gold-lt)}
 </div>
 
 <footer><div class="wrap">
-  <b style="color:var(--white)">Civicum</b> — service privé de préparation.
-  Le TCF est organisé par France Éducation international, seul habilité à délivrer une attestation de niveau.
-  Les documents de ce test sont des créations originales respectant le format de l'épreuve ; ils ne reproduisent aucun sujet officiel.
+  <b style="color:var(--white)">Civicum</b> — service privé de préparation, indépendant de l'administration.
+  Documents originaux respectant le format de l'épreuve, sans reproduction d'aucun sujet officiel.
   <br><br>
-  <a href="/">Accueil</a> · <a href="/tcf-b2.html">TCF IRN B2</a> · <a href="/test-gratuit.html">Test civique gratuit</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+  <a href="/">Accueil</a> · <a href="/tcf-b2.html">TCF IRN B2</a> · <a href="/test-gratuit.html">Test civique gratuit</a> · <a href="/cgu.html">Conditions générales</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
 </div></footer>
 
 <script type="module">
@@ -515,14 +510,29 @@ async function chargerBanque(){
   $("attente").classList.remove("masque");
   try{
     const snap = await window._fbGetDoc(window._fbDoc(window._fbDb, "tcf", "TOUT-PUBLIC"));
-    if(!snap.exists()) throw new Error("banque absente");
+    if(!snap.exists()) throw { code: "not-found" };
     BANQUE = snap.data();
     $("attente").classList.add("masque");
     listerSeries();
   } catch(e){
-    $("attente").innerHTML =
-      "Le contenu n'a pas pu être chargé. Rechargez la page, ou écrivez-nous à " +
-      "<a href='mailto:contact@civicum.fr'>contact@civicum.fr</a>.";
+    /* Trois causes possibles, trois messages : un « ça n'a pas marché »
+       générique ne dit ni à vous ni à l'abonné ce qu'il faut faire. */
+    const code = e && e.code;
+    let msg;
+    if(code === "permission-denied"){
+      msg = "Votre accès n'est pas reconnu. Si vous venez de vous abonner, "
+          + "déconnectez-vous puis reconnectez-vous. Si votre abonnement est "
+          + "arrivé à échéance, réactivez-le depuis votre tableau de bord.";
+    } else if(code === "not-found"){
+      msg = "Le contenu de cette page n'est pas encore en ligne. "
+          + "Nous le mettons en place : réessayez dans quelques heures.";
+    } else {
+      msg = "Le contenu n'a pas pu être chargé. Vérifiez votre connexion et "
+          + "rechargez la page.";
+    }
+    $("attente").innerHTML = msg
+      + " <a href='mailto:contact@civicum.fr'>contact@civicum.fr</a>";
+    console.error("Chargement de la banque TOUT-PUBLIC :", code || e);
   }
 }
 

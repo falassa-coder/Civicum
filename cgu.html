@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conditions générales d'utilisation et de vente — Civicum</title>
+<meta name="description" content="Conditions générales d'utilisation et de vente de Civicum : objet du service, abonnement, rétractation, avis, données personnelles.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://civicum.fr/cgu.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B2D; --ink-60:#3D4F63; --gold:#B8962E; --gold-lt:#D4B04A; --gold-bg:#FBF6EA;
+  --white:#FAF9F6; --surface:#FFF; --surface-2:#F4F3F0; --line:rgba(15,27,45,.1); --line-md:rgba(15,27,45,.2);
+  --ok:#1E6B45; --ok-bg:#EAF5EF; --warn:#A8651E; --warn-bg:#FBF1E6; --ko:#A82D1E; --ko-bg:#FDF0EE;
+  --muted:#6B6459;
+  --serif:'DM Serif Display',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r:10px; --r-lg:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--gold)}
+section{padding:36px 0}
+
+.top{background:var(--ink);color:var(--white);padding:14px 0;position:sticky;top:0;z-index:30}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}
+.brand span{width:28px;height:28px;border:1.5px solid var(--gold);color:var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-size:16px;letter-spacing:0}
+.top a.retour{color:rgba(250,249,246,.7);text-decoration:none;font-size:14px}
+.top a.retour:hover{color:var(--gold)}
+
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:clamp(27px,5.2vw,40px);line-height:1.15;margin:0 0 14px;font-weight:400}
+h2{font-family:var(--serif);font-size:25px;font-weight:400;margin:0 0 12px}
+h3{font-size:16px;font-weight:700;margin:0 0 8px}
+.lead{font-size:18px;color:var(--ink-60);margin:0 0 26px}
+
+.epreuves{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:24px}
+.ep{background:var(--surface);padding:16px 18px;display:flex;align-items:center;gap:14px}
+.ep .code{flex:none;width:44px;height:44px;border-radius:11px;background:var(--gold-bg);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:13px}
+.ep .t{flex:1;min-width:0}
+.ep .t b{display:block;font-size:15.5px}
+.ep .t small{color:var(--muted);font-size:13.5px}
+.ep-meta{flex:none;font-size:13px;color:var(--muted);text-align:right;white-space:nowrap}
+
+.encadre{border-radius:var(--r);padding:15px 17px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+.encadre.info{background:var(--gold-bg);border-left:3px solid var(--gold);color:#5C4A14}
+.encadre.alerte{background:var(--warn-bg);border-left:3px solid var(--warn);color:#6B4715}
+.encadre b{font-weight:700}
+
+.modules{display:grid;gap:12px;margin-bottom:22px}
+.mod{display:flex;align-items:center;gap:15px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:17px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s,transform .1s}
+.mod:hover{border-color:var(--gold)}
+.mod:active{transform:scale(.995)}
+.mod .n{flex:none;width:46px;height:46px;border-radius:11px;background:var(--ink);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:13px}
+.mod .t{flex:1}
+.mod .t b{display:block;font-size:16px;margin-bottom:2px}
+.mod .t small{color:var(--muted);font-size:13.5px}
+.mod .fl{flex:none;color:var(--gold);font-size:19px}
+
+.barre{position:sticky;top:56px;z-index:20;background:var(--white);border-bottom:1px solid var(--line);padding:12px 0}
+.barre .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.compte{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chrono{font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums}
+.chrono.urgent{color:var(--ko)}
+.jauge{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:9px}
+.jauge i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+
+.contexte{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600}
+.lecteur{background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:22px;margin-bottom:20px;text-align:center}
+.lecteur .gros{width:72px;height:72px;border-radius:50%;border:none;background:#fff;margin:0 auto 12px;display:grid;place-items:center;cursor:pointer}
+.lecteur .gros svg{width:30px;height:30px;fill:var(--ink)}
+.lecteur .gros:disabled{opacity:.35;cursor:not-allowed}
+.lecteur small{display:block;font-size:14px;opacity:.82}
+.lecteur .rejouer{background:none;border:none;color:var(--gold-lt);font:inherit;font-size:13px;margin-top:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:20px}
+.doc .titre{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.doc p{margin:0 0 11px;font-size:15.5px;line-height:1.7;white-space:pre-line}
+.doc p:last-child{margin-bottom:0}
+
+.enonce{font-family:var(--serif);font-size:clamp(19px,3.4vw,24px);line-height:1.35;margin:0 0 20px;font-weight:400}
+.reps{display:grid;gap:10px;margin-bottom:24px}
+.rep{display:flex;align-items:flex-start;gap:13px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,background .15s}
+.rep:hover{border-color:var(--line-md)}
+.rep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.rep .l{flex:none;width:27px;height:27px;border-radius:7px;background:var(--surface-2);display:grid;place-items:center;font-size:13.5px;font-weight:600;color:var(--ink-60)}
+.rep.choisie{border-color:var(--gold);background:var(--gold-bg)}
+.rep.choisie .l{background:var(--gold);color:#fff}
+
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:var(--r);padding:15px 26px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.9}
+.btn-or{background:var(--gold);color:#fff}
+.btn-ink{background:var(--ink);color:var(--white)}
+.btn-vide{background:transparent;border:1.5px solid var(--line-md);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.score{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:32px 24px;text-align:center;margin-bottom:22px}
+.score .n{font-family:var(--serif);font-size:54px;line-height:1;color:var(--gold-lt)}
+.score .pc{font-size:15px;opacity:.8;margin-top:6px}
+.corrige{margin-bottom:26px}
+.q{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:10px;background:var(--surface)}
+.q.faux{border-left:3px solid var(--ko)}
+.q.juste{border-left:3px solid var(--ok)}
+.q .en{font-weight:600;margin-bottom:10px;font-size:15px}
+.q .li{font-size:14.5px;padding:7px 11px;border-radius:6px;margin-bottom:5px;color:var(--muted)}
+.q .li.bonne{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.q .li.mienne{background:var(--ko-bg);color:var(--ko);font-weight:600}
+.q .pourquoi{font-size:14px;color:var(--ink-60);background:var(--surface-2);border-radius:7px;padding:11px 13px;margin-top:9px;line-height:1.6}
+
+.tache{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:14px}
+.tache .tete{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.tache .num{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tache .vol{font-size:13px;color:var(--muted)}
+.tache .consigne{font-size:15.5px;line-height:1.65;margin-bottom:14px}
+.tache ul{list-style:none;padding:0;margin:0}
+.tache li{padding:5px 0 5px 22px;position:relative;font-size:14px;color:var(--ink-60)}
+.tache li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+
+.offre{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:26px;text-align:center;margin-top:30px}
+footer{background:var(--ink);color:rgba(250,249,246,.65);padding:32px 0;font-size:13.5px;margin-top:46px}
+footer a{color:var(--gold-lt)}
+
+.verrou{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:30px 24px;text-align:center;margin-bottom:22px}
+.verrou-ic{font-size:26px;margin-bottom:10px;opacity:.75}
+.verrou-t{font-family:var(--serif);font-size:23px;margin-bottom:10px}
+.verrou p{color:var(--ink-60);font-size:15.5px;max-width:420px;margin:0 auto 20px}
+.verrou-prix{font-size:13px;color:var(--muted);margin-top:16px}
+.chargement{display:flex;align-items:center;justify-content:center;gap:11px;color:var(--muted);font-size:15px;padding:28px 0}
+.chargement .rond{width:19px;height:19px;border:2.5px solid var(--line-md);border-top-color:var(--gold);border-radius:50%;display:inline-block;animation:tourne .85s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.contenu-inclus{background:var(--surface-2);border-radius:var(--r-lg);padding:22px;margin-top:26px}
+.contenu-inclus ul{list-style:none;padding:0;margin:0}
+.contenu-inclus li{padding:7px 0 7px 24px;position:relative;font-size:15px;line-height:1.6}
+.contenu-inclus li::before{content:"\2713";position:absolute;left:0;color:var(--gold);font-weight:700}
+.masque{display:none!important}
+@media (max-width:560px){.actions{flex-direction:column}.btn{width:100%}.ep{flex-wrap:wrap}.ep-meta{flex:0 0 100%;margin:5px 0 0 58px;text-align:left;font-weight:600;color:var(--gold);white-space:normal}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.bandeau-essai{background:#FBF1E6;border:1px solid rgba(168,101,30,.3);border-left:3px solid #A8651E;border-radius:10px;padding:15px 18px;margin-bottom:22px;font-size:14.5px;line-height:1.65;color:#6B4715}
+.bandeau-essai b{color:#5A3A10}
+
+/* ---- Spécifique aux CGU ---- */
+.sommaire{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:34px}
+.sommaire ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.sommaire li{padding:4px 0;font-size:14.5px}
+.sommaire a{color:var(--ink-60);text-decoration:none}
+.sommaire a:hover{color:var(--gold)}
+article.art{margin-bottom:34px;scroll-margin-top:80px}
+article.art h2{font-family:var(--serif);font-weight:400;font-size:clamp(19px,3vw,23px);margin:0 0 12px;color:var(--ink);padding-bottom:9px;border-bottom:1px solid var(--line)}
+article.art h3{font-size:15.5px;font-weight:600;margin:20px 0 7px;color:var(--ink)}
+article.art p,article.art li{font-size:15px;line-height:1.75;color:var(--ink-60)}
+article.art p{margin:0 0 13px}
+article.art ul{margin:0 0 13px;padding-left:20px}
+article.art li{margin-bottom:5px}
+.aremplir{background:var(--gold-bg);border:1px dashed var(--gold);border-radius:var(--r-sm);padding:4px 9px;font-size:13.5px;color:var(--gold);font-weight:600;display:inline-block}
+.maj{font-size:13.5px;color:var(--muted);margin-bottom:30px}
+@media (max-width:620px){ .sommaire ol{columns:1} }
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a class="brand" href="/"><span>C</span>CIVICUM</a>
+  <a class="retour" href="/">Retour au site</a>
+</div></div>
+
+<section><div class="wrap">
+  <div class="eyebrow">Informations légales</div>
+  <h1>Conditions générales d'utilisation et de vente</h1>
+  <p class="maj">En vigueur au 9 novembre 2026. Elles s'appliquent à l'ensemble du site civicum.fr et à tous les abonnements souscrits à compter de cette date.</p>
+
+  <div class="sommaire">
+    <ol>
+      <li><a href="#editeur">L'éditeur du site</a></li>
+      <li><a href="#objet">Ce qu'est Civicum</a></li>
+      <li><a href="#limites">Ce que Civicum ne fait pas</a></li>
+      <li><a href="#contenu">Le contenu et son origine</a></li>
+      <li><a href="#resultats">Scores et estimations de niveau</a></li>
+      <li><a href="#compte">Compte et abonnement</a></li>
+      <li><a href="#retractation">Droit de rétractation</a></li>
+      <li><a href="#avis">Les avis publiés</a></li>
+      <li><a href="#donnees">Vos données personnelles</a></li>
+      <li><a href="#responsabilite">Responsabilité</a></li>
+      <li><a href="#modif">Modification et droit applicable</a></li>
+    </ol>
+  </div>
+
+  <article class="art" id="editeur">
+    <h2>1. L'éditeur du site</h2>
+    <p>Le site civicum.fr est édité par <b>MFS Services et Conseils</b>.</p>
+    <ul>
+      <li>Forme juridique et capital : <span class="aremplir">à compléter</span></li>
+      <li>Siège social : <span class="aremplir">adresse à compléter</span></li>
+      <li>SIREN / SIRET : <span class="aremplir">à compléter</span></li>
+      <li>Numéro de TVA intracommunautaire, le cas échéant : <span class="aremplir">à compléter</span></li>
+      <li>Directrice de la publication : Kadidia Diallo</li>
+      <li>Contact : <a href="mailto:contact@civicum.fr">contact@civicum.fr</a> — 06 98 22 07 31 (appel ou WhatsApp)</li>
+    </ul>
+    <p>Hébergement du site : GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis). Hébergement des données et des paiements : Google Firebase (Google Ireland Limited) et Stripe Payments Europe Ltd.</p>
+  </article>
+
+  <article class="art" id="objet">
+    <h2>2. Ce qu'est Civicum</h2>
+    <p>Civicum est un <b>service privé de préparation</b>. Il propose, par abonnement, des contenus d'entraînement à l'examen civique français et aux tests de français exigés dans le cadre des démarches de séjour et de naturalisation.</p>
+    <p>L'accès se fait en ligne, depuis un navigateur, sans installation. Il comprend des questions à choix multiple, des cours, des examens blancs chronométrés, des corrigés commentés et un suivi de progression.</p>
+  </article>
+
+  <article class="art" id="limites">
+    <h2>3. Ce que Civicum ne fait pas</h2>
+    <p>Civicum est <b>indépendant de l'administration française</b> et n'agit pour le compte d'aucun organisme officiel. En particulier :</p>
+    <ul>
+      <li>Civicum ne délivre <b>aucune attestation officielle</b>. L'attestation de réussite à l'examen civique est délivrée par l'État ; les attestations de niveau de français le sont par France Éducation international ou par les centres agréés.</li>
+      <li>Civicum <b>n'inscrit pas</b> à une session d'examen. L'inscription se fait auprès de votre préfecture, de l'OFII ou d'un centre d'examen agréé.</li>
+      <li>Civicum ne corrige pas individuellement vos productions écrites et orales : les consignes, les critères et des exemples sont fournis, la correction par un examinateur ne l'est pas.</li>
+      <li>Civicum ne fournit aucun conseil juridique sur votre dossier et ne garantit aucun résultat à l'examen.</li>
+    </ul>
+    <p>Les barèmes, seuils et niveaux exigés évoluent par voie réglementaire. Les informations publiées sur le site sont tenues à jour avec soin mais ne remplacent pas l'information officielle, qu'il vous revient de vérifier auprès de l'administration compétente avant toute démarche.</p>
+  </article>
+
+  <article class="art" id="contenu">
+    <h2>4. Le contenu et son origine</h2>
+    <p>L'ensemble des questions, textes, documents d'entraînement et corrigés diffusés sur Civicum sont des <b>créations originales</b>. Ils respectent le format des épreuves officielles — nombre d'items, typologie, durées, barème — sans en reproduire le contenu.</p>
+    <p>Les sujets du TCF et du DELF appartiennent à France Éducation international. Aucun n'est reproduit sur ce site, ni en tout ni en partie.</p>
+    <p>Ces contenus sont protégés par le droit d'auteur. L'abonnement ouvre un droit d'usage personnel et non exclusif, pour la durée souscrite. Leur reproduction, leur diffusion, leur revente ou leur mise à disposition de tiers, à titre gratuit ou onéreux, sont interdites.</p>
+  </article>
+
+  <article class="art" id="resultats">
+    <h2>5. Scores et estimations de niveau</h2>
+    <p>Les scores obtenus sur Civicum sont des <b>repères d'entraînement</b>. Ils n'ont aucune valeur officielle et ne préjugent pas du résultat d'un examen.</p>
+    <h3>Examen civique</h3>
+    <p>Le seuil de réussite affiché (32 bonnes réponses sur 40, soit 80 %) reprend celui de l'épreuve officielle. L'examen réel tire ses questions dans une banque plus large que celle du site.</p>
+    <h3>Estimation de niveau de français</h3>
+    <p>Le test de niveau proposé sur civicum.fr reprend le format des épreuves de compréhension du TCF Tout public, mais comporte 36 questions par série là où l'épreuve officielle en compte 76, avec un barème calibré propre à France Éducation international. Le niveau annoncé en fin de test est une <b>estimation</b>, utile pour choisir sa préparation, non transposable en note officielle. Seule une session officielle délivre une attestation de niveau.</p>
+    <h3>Documents sonores</h3>
+    <p>Les documents de compréhension orale sont restitués par la synthèse vocale de votre navigateur. C'est suffisant pour travailler la méthode, mais le jour de l'épreuve vous entendrez des voix réelles, avec un débit naturel et parfois du bruit de fond.</p>
+  </article>
+
+  <article class="art" id="compte">
+    <h2>6. Compte et abonnement</h2>
+    <h3>Création du compte</h3>
+    <p>La création d'un compte est gratuite et requiert une adresse e-mail valide et un mot de passe. Vous êtes responsable de la confidentialité de vos identifiants. Un compte est personnel : son partage entraîne la suspension de l'accès sans remboursement.</p>
+    <h3>Abonnement</h3>
+    <p>L'accès aux contenus est ouvert par un abonnement payant, à durée déterminée, dont le tarif et la durée sont indiqués sur la page Tarifs au moment de l'achat. Il s'agit d'un <b>paiement unique, sans reconduction automatique</b> : aucun prélèvement n'intervient après celui de la souscription, et l'accès prend fin de lui-même à son terme.</p>
+    <p>Les paiements sont traités par Stripe. Civicum n'a jamais connaissance de vos coordonnées bancaires et ne les conserve pas.</p>
+    <h3>Changement de tarif</h3>
+    <p>Un changement de tarif ne s'applique jamais à un abonnement en cours. Il ne prend effet qu'à l'occasion d'une nouvelle souscription.</p>
+    <h3>Fin de l'abonnement</h3>
+    <p>À l'échéance, l'accès aux contenus se ferme. Votre compte et votre progression sont conservés : une nouvelle souscription les retrouve en l'état, dans les conditions indiquées sur le site.</p>
+  </article>
+
+  <article class="art" id="retractation">
+    <h2>7. Droit de rétractation</h2>
+    <p>L'abonnement porte sur un contenu numérique fourni immédiatement, sans support matériel.</p>
+    <p>Conformément à l'article L.221-28 13° du code de la consommation, en souscrivant vous <b>demandez expressément l'exécution immédiate</b> de la prestation et <b>renoncez à votre droit de rétractation</b> de quatorze jours. Cette renonciation vous est présentée au moment du paiement et requiert votre accord exprès.</p>
+    <p>Elle ne vous prive d'aucun autre droit. En cas d'erreur technique de notre fait — accès non ouvert après paiement, double facturation, contenu indisponible — écrivez-nous à <a href="mailto:contact@civicum.fr">contact@civicum.fr</a> : la situation est régularisée ou remboursée.</p>
+  </article>
+
+  <article class="art" id="avis">
+    <h2>8. Les avis publiés</h2>
+    <p>Conformément à l'article L.111-7-2 du code de la consommation, voici comment les avis affichés sur ce site sont recueillis et traités.</p>
+    <ul>
+      <li>Un avis ne peut être déposé que depuis un compte <b>ayant effectivement souscrit un abonnement</b>, actuel ou échu. Un compte ne peut déposer qu'un seul avis.</li>
+      <li>Certains avis nous parviennent par e-mail ou par message. Ils sont publiés tels qu'ils ont été reçus, sans modification de leur sens, et le message d'origine est conservé.</li>
+      <li>Les avis sont relus avant publication, dans un délai de quelques jours. Cette relecture porte sur le respect de la loi et des personnes, jamais sur le caractère favorable ou défavorable du propos.</li>
+      <li>Un avis est refusé s'il est injurieux, diffamatoire, hors sujet, s'il contient des données personnelles de tiers, ou s'il émane d'un compte n'ayant jamais souscrit.</li>
+      <li>Les avis ne sont <b>ni achetés, ni sollicités contre contrepartie</b>, et aucun avis n'est supprimé au motif qu'il serait défavorable.</li>
+      <li>Les avis sont affichés sans limite de durée, du plus récent au plus ancien. Pour obtenir le retrait du vôtre, écrivez à <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>.</li>
+    </ul>
+  </article>
+
+  <article class="art" id="donnees">
+    <h2>9. Vos données personnelles</h2>
+    <p>Responsable du traitement : MFS Services et Conseils. Contact : <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>.</p>
+    <h3>Ce qui est collecté, et pourquoi</h3>
+    <ul>
+      <li><b>Compte</b> — adresse e-mail, nom si vous le renseignez, date de création, état de l'abonnement et date d'échéance. Base légale : l'exécution du contrat.</li>
+      <li><b>Progression</b> — questions traitées, résultats, historique des tests. Base légale : l'exécution du contrat.</li>
+      <li><b>Test gratuit</b> — prénom, nom, e-mail ou téléphone, et score, lorsque vous demandez à recevoir votre résultat. Base légale : votre consentement, recueilli par une case à cocher.</li>
+      <li><b>Paiement</b> — traité par Stripe, qui est seul destinataire de vos coordonnées bancaires.</li>
+    </ul>
+    <h3>Qui y a accès</h3>
+    <p>Les données sont hébergées par Google Firebase, dans l'Union européenne (région europe-west9, Paris). Les e-mails sont acheminés par Brevo. Aucune donnée n'est vendue ni cédée à des tiers à des fins publicitaires.</p>
+    <h3>Durée de conservation</h3>
+    <p>Les données de compte sont conservées tant que le compte existe, puis trois ans après le dernier contact. Les contacts issus du test gratuit sont conservés trois ans à compter du dernier échange.</p>
+    <h3>Vos droits</h3>
+    <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité. Écrivez à <a href="mailto:contact@civicum.fr">contact@civicum.fr</a> : il y est donné suite sous un mois. Chaque e-mail d'information comporte un lien de désinscription. Vous pouvez adresser une réclamation à la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
+    <h3>Cookies</h3>
+    <p>Le site ne dépose aucun cookie publicitaire ni traceur de mesure d'audience tiers. Seuls sont utilisés les stockages techniques nécessaires à votre connexion et au maintien de votre session.</p>
+  </article>
+
+  <article class="art" id="responsabilite">
+    <h2>10. Responsabilité</h2>
+    <p>Civicum met en œuvre les moyens raisonnables pour assurer l'exactitude de ses contenus et la disponibilité du service. Il ne peut toutefois garantir ni une disponibilité ininterrompue, ni l'absence totale d'erreur dans les contenus, ni la réussite à un examen.</p>
+    <p>En cas d'indisponibilité prolongée qui nous serait imputable, la durée de votre abonnement est prolongée d'autant sur simple demande.</p>
+  </article>
+
+  <article class="art" id="modif">
+    <h2>11. Modification et droit applicable</h2>
+    <p>Ces conditions peuvent être modifiées. La version applicable à votre abonnement est celle en vigueur au jour de votre souscription ; la date figure en tête de page.</p>
+    <p>Les présentes sont soumises au droit français. En cas de différend, une solution amiable sera recherchée en priorité : écrivez à <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>. À défaut d'accord, vous pouvez recourir gratuitement à un médiateur de la consommation, puis saisir la juridiction compétente.</p>
+  </article>
+</div></section>
+
+<footer><div class="wrap">
+  <b style="color:var(--white)">Civicum</b> — service privé de préparation, indépendant de l'administration.
+  <br><br>
+  <a href="/">Accueil</a> · <a href="/#tarifs">Tarifs</a> · <a href="/test-gratuit.html">Test gratuit</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+</div></footer>
+</body>
+</html>

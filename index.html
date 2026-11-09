@@ -291,22 +291,17 @@ h3 { font-size: clamp(17px, 2.5vw, 21px); }
 .nav-links { display: flex; align-items: center; gap: 20px; }
 .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; white-space: nowrap; }
 .nav-links a.navlink:hover, .nav-links a.tab-link.active { color: var(--ink); font-weight: 600; }
-/* Neuf entrées : au-dessous de 1400 px la barre se resserre plutôt que de
-   passer à la ligne, et la mention « Créer un compte » s'abrège. */
+/* Six entrées principales : la barre tient à l'aise. Les rubriques
+   secondaires sont dans le pied de page. */
 @media (min-width:981px){
-  .nav-in { gap: 16px; }
+  .nav-in { gap: 20px; }
   .nav-auth { flex: none; }
-  .nav-links { gap: 13px; flex: 0 1 auto; justify-content: flex-end; }
+  .nav-links { gap: 20px; flex: 0 1 auto; justify-content: flex-end; }
   .nav-links a.navlink-gold { color: var(--gold); font-weight: 600; }
-  .nav-links a { font-size: 13.2px; }
-  .brand-name { font-size: 15px; }
-  .brand { margin-right: 10px; }
-  .nav-auth .btn-sm { padding: 8px 12px; font-size: 13px; }
 }
-@media (min-width:981px) and (max-width:1160px){
-  .nav-links { gap: 10px; }
-  .nav-links a { font-size: 12.6px; }
-  .brand-name { display: none; }
+@media (min-width:981px) and (max-width:1080px){
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 13.2px; }
 }
 
 /* ===== Onglet « Le contenu » : montrer avant de vendre ===== */
@@ -688,6 +683,10 @@ footer { background: var(--ink); color: rgba(250,249,246,.6); padding: 40px 0; f
 .foot-links a { color: rgba(250,249,246,.55); transition: color .15s; }
 .foot-links a:hover { color: var(--white); }
 .foot-legal { font-size: 11px; color: rgba(250,249,246,.35); max-width: 300px; line-height: 1.6; }
+.foot-rubriques { display: flex; flex-direction: column; gap: 8px; }
+.foot-titre { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,249,246,.35); font-weight: 700; margin-bottom: 2px; }
+.foot-rubriques a { color: rgba(250,249,246,.55); font-size: 13px; transition: color .15s; }
+.foot-rubriques a:hover { color: var(--white); }
 
 /* ── WRAPPER APP ────────────────────────────────── */
 .app-wrapper { display: none; background: var(--white); min-height: 100vh; }
@@ -1346,15 +1345,10 @@ details.avis-note summary:focus-visible { outline: 2px solid var(--gold); outlin
     </a>
     <nav class="nav-links" id="main-nav">
       <a class="navlink tab-link active" href="#" data-tab="accueil" onclick="switchTab('accueil');return false;">Accueil</a>
-      <a class="navlink tab-link" href="#" data-tab="formation-tab" onclick="switchTab('formation-tab');return false;">Formations</a>
       <a class="navlink tab-link" href="#" data-tab="contenu" onclick="switchTab('contenu');return false;">Le contenu</a>
       <a class="navlink tab-link" href="#" data-tab="francais" onclick="switchTab('francais');return false;">Français&nbsp;/&nbsp;TCF</a>
-      <a class="navlink tab-link" href="#" data-tab="public-tab" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
       <a class="navlink tab-link" href="#" data-tab="tarifs" onclick="switchTab('tarifs');return false;">Tarifs</a>
       <a class="navlink tab-link" href="#" data-tab="avis" onclick="switchTab('avis');return false;">Avis</a>
-      <a class="navlink tab-link" href="#" data-tab="faq-tab" onclick="switchTab('faq-tab');return false;">FAQ</a>
-      <a class="navlink tab-link" href="#" data-tab="apropos" onclick="switchTab('apropos');return false;">À propos</a>
-      <a class="navlink tab-link" href="#" data-tab="contact-tab" onclick="switchTab('contact-tab');return false;">Contact</a>
       <a class="navlink navlink-gold" href="/test-gratuit.html">Test gratuit</a>
       <span class="nav-auth-mobile">
         <a class="btn btn-ghost" href="#" onclick="showApp('login');return false;">Se connecter</a>
@@ -1897,7 +1891,7 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
         <a class="btn btn-primary" href="#" onclick="switchTab('tarifs');return false;">Voir les tarifs</a>
       </div>
 
-      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:26px;max-width:720px;margin-left:auto;margin-right:auto;line-height:1.7;">Le TCF est organisé par France Éducation international, seul habilité à délivrer une attestation de niveau. Civicum prépare à l'épreuve : les documents d'entraînement sont des créations originales respectant le format officiel, ils ne reproduisent aucun sujet. Vérifiez le niveau exigé pour votre démarche auprès de votre préfecture avant de vous inscrire à une session.</p>
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:26px;line-height:1.7;">Service privé de préparation. Le TCF est organisé par France Éducation international, seul habilité à délivrer une attestation de niveau. <a href="/cgu.html" style="color:var(--gold);">Conditions générales</a></p>
     </div>
   </section>
 </div>
@@ -2044,7 +2038,7 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
         <span style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:#333;">Google Pay</span>
         <span style="background:#635BFF;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;">Carte bancaire</span>
       </div>
-      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">CIVICUM est un service privé de préparation, indépendant de l'administration. Il ne délivre pas l'attestation officielle de l'examen civique, qui est organisé uniquement par l'État.<br>Conformément à la législation sur les services numériques, aucun remboursement n'est accordé une fois l'accès activé.</p>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">Service privé de préparation, indépendant de l'administration. <a href="/cgu.html" style="color:var(--gold);">Conditions générales de vente</a></p>
       <div style="max-width:560px;margin:32px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Comment s'abonner ?</div>
         <ol style="padding-left:20px;font-size:14.5px;color:var(--muted);line-height:2.2;">
@@ -2538,7 +2532,14 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
       <a href="tel:+33698220731">06 98 22 07 31</a>
       <a href="https://civicum.fr">civicum.fr</a>
     </div>
-    <div class="foot-legal">
+    <div class="foot-rubriques">
+      <div class="foot-titre">Le site</div>
+      <a href="#" onclick="switchTab('formation-tab');return false;">Formations FLE</a>
+      <a href="#" onclick="switchTab('public-tab');return false;">Pour qui ?</a>
+      <a href="#" onclick="switchTab('faq-tab');return false;">Questions fréquentes</a>
+      <a href="#" onclick="switchTab('apropos');return false;">À propos</a>
+      <a href="#" onclick="switchTab('contact-tab');return false;">Contact</a>
+      <a href="/cgu.html">Conditions générales</a>
     </div>
   </div>
 </footer>
