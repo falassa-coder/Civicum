@@ -555,7 +555,7 @@ h3 { font-size: clamp(17px, 2.5vw, 21px); }
 /* ── BOTTOM NAV MOBILE ──────────────────────────── */
 .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--surface); border-top: 1px solid var(--border); padding: 8px 0 env(safe-area-inset-bottom,8px); box-shadow: 0 -2px 16px rgba(15,27,45,.07); }
 .bottom-nav-inner { display: flex; justify-content: space-around; align-items: center; }
-.bn-item { display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; padding: 5px 10px; color: var(--muted); font-size: 10px; font-weight: 600; transition: color .15s; letter-spacing: .04em; text-transform: uppercase; min-width: 56px; font-family: var(--sans); }
+.bn-item { display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; padding: 5px 6px; color: var(--muted); font-size: 9.5px; font-weight: 600; transition: color .15s; letter-spacing: .02em; text-transform: uppercase; min-width: 0; flex: 1; font-family: var(--sans); white-space: nowrap; }
 .bn-item.active { color: var(--ink); }
 .bn-item svg { width: 20px; height: 20px; stroke-width: 1.8; }
 
@@ -2563,6 +2563,10 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
       Cours
     </button>
+    <button class="bn-item" id="bn-francais" onclick="exigerAcces(()=>{location.href='/tcf-tout-public.html';});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 010 18a14 14 0 010-18z"/></svg>
+      Français
+    </button>
     <button class="bn-item" id="bn-dash" onclick="exigerAcces(()=>{renderDashboard();show('screen-dashboard');});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       Bilan
@@ -2652,6 +2656,17 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
       <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">📚 Cours structurés</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">5 thématiques officielles, fiches illustrées et mémorisation facilitée.</div>
       <button class="btn" id="open-courses" onclick="renderCourseLevelList();show('screen-course-level');return false;" style="background:var(--gold);color:#fff;border:none;width:100%;padding:13px;font-size:15px;justify-content:center;">Accéder aux cours</button>
+    </div>
+
+    <!-- FRANÇAIS / TCF -->
+    <div style="background:var(--paper);border:2px solid var(--brick);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:8px;">🇫🇷 Français — TCF</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6;">Depuis janvier 2026, un niveau de français est exigé en plus de l'examen civique : <b style="color:var(--navy);">A2</b> pour la carte de séjour, <b style="color:var(--navy);">B1</b> pour la carte de résident, <b style="color:var(--navy);">B2</b> pour la naturalisation.</div>
+      <div id="app-essai-fr" class="masque-fr" style="background:#FBF1E6;border-left:3px solid #A8651E;border-radius:8px;padding:11px 13px;font-size:12.5px;line-height:1.55;color:#6B4715;margin-bottom:12px;">
+        <b>Version de test.</b> Ouverte à tous les abonnés pendant cette phase, mais pas encore comprise dans votre abonnement. Dites-nous ce qui manque&nbsp;: <a href="mailto:contact@civicum.fr" style="color:#8A5A14;font-weight:600;">contact@civicum.fr</a>
+      </div>
+      <a class="btn" href="/tcf-tout-public.html" style="background:var(--brick);color:#fff;border:none;width:100%;padding:13px;font-size:14px;justify-content:center;margin-bottom:9px;text-decoration:none;">Tester mon niveau, de A1 à C2</a>
+      <a class="btn btn-ghost" href="/tcf-b2.html" style="width:100%;padding:13px;font-size:14px;justify-content:center;text-decoration:none;">Préparation TCF IRN B2</a>
     </div>
 
     <!-- AUTRES -->
@@ -3169,8 +3184,10 @@ function afficherPhaseEssai(){
         "à tous les abonnés pendant cette phase, sans être compris dans l'abonnement. Ils le seront dans la prochaine offre.";
   }
 
-  const bandeau = document.getElementById("bandeau-fr");
-  if(bandeau) bandeau.classList.toggle("masque-fr", FRANCAIS_INCLUS);
+  ["bandeau-fr", "app-essai-fr"].forEach((id) => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle("masque-fr", FRANCAIS_INCLUS);
+  });
 
   const meme = document.getElementById("note-meme-contenu");
   if(meme && !FRANCAIS_INCLUS){
