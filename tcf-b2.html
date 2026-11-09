@@ -399,20 +399,48 @@ function chargerVoix(){
 }
 if(window.speechSynthesis){ chargerVoix(); speechSynthesis.onvoiceschanged = chargerVoix; }
 
+function etatB2(txt){ const e = document.getElementById("b2-etat"); if(e) e.textContent = txt; }
+
+/* Aucun son ne sort ? On bascule sur la transcription plutôt que de
+   laisser l'abonné devant un bouton muet. Certains navigateurs acceptent
+   l'appel sans jamais produire de son : d'où le délai de garde. */
+function replierB2(raison){
+  etatB2(raison);
+  const t = document.getElementById("b2-script");
+  if(t) t.classList.remove("masque");
+}
+
 function lire(texte, surFin){
-  if(!window.speechSynthesis){ surFin && surFin(); return; }
+  if(!window.speechSynthesis){
+    replierB2("Votre navigateur ne lit pas les documents — transcription affichée");
+    surFin && surFin(); return;
+  }
   speechSynthesis.cancel();
+  chargerVoix();
+  if(!voixFr && speechSynthesis.getVoices().length === 0){
+    replierB2("Aucune voix installée sur cet appareil — transcription affichée");
+    surFin && surFin(); return;
+  }
+  etatB2("Lecture en cours…");
   /* Un dialogue est découpé aux tirets : deux voix alternées */
   const parts = texte.split(/\n?—\s*/).filter(s => s.trim());
   const multi = parts.length > 1;
+  let demarre = false;
   parts.forEach((p, i) => {
     const u = new SpeechSynthesisUtterance(p.trim());
     u.lang = "fr-FR"; u.rate = .92;
     u.pitch = multi ? (i % 2 === 0 ? .9 : 1.15) : 1;
     if(voixFr) u.voice = voixFr;
-    if(i === parts.length - 1 && surFin) u.onend = u.onerror = surFin;
+    u.onstart = () => { demarre = true; };
+    u.onerror = () => replierB2("La lecture a échoué — transcription affichée");
+    if(i === parts.length - 1){
+      u.onend = () => { if(demarre) etatB2("Document déjà écouté"); surFin && surFin(); };
+    }
     speechSynthesis.speak(u);
   });
+  setTimeout(() => {
+    if(!demarre) replierB2("Pas de son sur cet appareil — transcription affichée");
+  }, 1800);
 }
 
 
@@ -524,15 +552,25 @@ function afficher(){
       '<div class="lecteur">' +
         '<button class="gros" id="btn-ecoute"' + (deja ? " disabled" : "") + ' aria-label="Écouter">' +
           '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>' +
-        '<small>' + (deja ? "Document déjà écouté" : "Écouter le document — une seule fois") + '</small>' +
+        '<small id="b2-etat">' + (deja ? "Document déjà écouté" : "Écouter le document — une seule fois") + '</small>' +
         (deja ? '<button class="rejouer" onclick="rejouer()">Réécouter (hors conditions d\'examen)</button>' : '') +
-      '</div>';
+      '</div>' +
+      '<div class="doc masque" id="b2-script"><div class="titre">Transcription</div><p>' + echapper(q.script) + '</p></div>';
     const b = $("btn-ecoute");
     if(b) b.addEventListener("click", () => {
       ecoutes[pos] = (ecoutes[pos] || 0) + 1;
       b.disabled = true;
+      /* On ajoute « Réécouter » sans redessiner le lecteur : un nouveau
+         rendu effacerait le message d'état de la lecture en cours. */
+      if(!document.getElementById("b2-rejouer")){
+        const r = document.createElement("button");
+        r.className = "rejouer";
+        r.id = "b2-rejouer";
+        r.textContent = "Réécouter (hors conditions d'examen)";
+        r.addEventListener("click", rejouer);
+        b.parentNode.appendChild(r);
+      }
       lire(q.script, null);
-      afficher();
     });
   } else {
     $("q-support").innerHTML =
