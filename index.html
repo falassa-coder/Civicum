@@ -303,6 +303,44 @@ h3 { font-size: clamp(17px, 2.5vw, 21px); }
   .nav-links a { font-size: 13.2px; }
 }
 
+/* ═══ INTÉRIEUR DE L'APPLICATION : deux pièces ═══
+   Une seule décision à l'entrée, au lieu de huit boutons de couleurs
+   différentes. Chaque pièce ne montre que ses propres outils. */
+.ap-tete { margin-bottom: 20px; }
+.ap-titre { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 5vw, 27px);
+            color: var(--ink); margin: 0 0 7px; line-height: 1.2; }
+.ap-titre-piece { margin-bottom: 16px; }
+.ap-sous { font-size: 14.5px; line-height: 1.65; color: var(--muted); margin: 0 0 4px; }
+
+.ap-piece { display: block; width: 100%; text-align: left; border: 1.5px solid var(--line);
+            border-radius: 14px; padding: 22px; margin-bottom: 12px; cursor: pointer;
+            font: inherit; background: var(--surface); transition: border-color .18s, transform .12s; }
+.ap-piece:hover { transform: translateY(-1px); }
+.ap-piece:active { transform: scale(.995); }
+.ap-piece-t { display: block; font-family: var(--serif); font-size: clamp(18px, 4.4vw, 21px);
+              color: var(--ink); margin-bottom: 7px; line-height: 1.25; }
+.ap-piece-d { display: block; font-size: 14px; line-height: 1.65; color: var(--muted); margin-bottom: 14px; }
+.ap-piece-f { display: inline-block; font-size: 14px; font-weight: 600; }
+.ap-civique { border-left: 4px solid var(--navy); }
+.ap-civique:hover { border-color: var(--navy); border-left-color: var(--navy); }
+.ap-civique .ap-piece-f { color: var(--navy); }
+.ap-fr { border-left: 4px solid var(--gold); }
+.ap-fr:hover { border-color: var(--gold); border-left-color: var(--gold); }
+.ap-fr .ap-piece-f { color: var(--gold); }
+.ap-bilan { width: 100%; justify-content: center; margin-top: 6px; font-size: 14px; padding: 13px; }
+
+.ap-bloc { border-top: 1px solid var(--line); padding-top: 18px; margin-bottom: 22px; }
+.ap-bloc:last-child { margin-bottom: 0; }
+.ap-bloc-t { font-family: var(--serif); font-size: 17.5px; color: var(--ink); margin-bottom: 6px; }
+.ap-bloc-d { font-size: 13.5px; line-height: 1.6; color: var(--muted); margin-bottom: 14px; }
+.ap-large { width: 100%; justify-content: center; padding: 13px; font-size: 14.5px; text-decoration: none; }
+.ap-deux-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ap-deux-cols .btn { justify-content: center; padding: 13px; font-size: 14px; }
+.ap-essai { background: #FBF1E6; border-left: 3px solid #A8651E; border-radius: 9px;
+            padding: 13px 15px; font-size: 13px; line-height: 1.6; color: #6B4715; margin-bottom: 22px; }
+.ap-essai a { color: #8A5A14; font-weight: 600; }
+@media (max-width: 420px) { .ap-deux-cols { grid-template-columns: 1fr; } }
+
 /* ═══════════ ACCUEIL ═══════════
    Le fil directeur : la question que tout visiteur se pose en arrivant,
    « qu'est-ce que ma démarche exige de moi ? ». Le tableau y répond, et
@@ -2479,15 +2517,11 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
       Accueil
     </button>
-    <button class="bn-item" id="bn-quiz" onclick="exigerAcces(()=>show('screen-level'));">
+    <button class="bn-item" id="bn-civique" onclick="exigerAcces(()=>{show('screen-civique');renderLevelList();});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      Quiz
+      Civique
     </button>
-    <button class="bn-item" id="bn-cours" onclick="exigerAcces(()=>{renderCourseLevelList();show('screen-course-level');});">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-      Cours
-    </button>
-    <button class="bn-item" id="bn-francais" onclick="exigerAcces(()=>{location.href='/tcf-tout-public.html';});">
+    <button class="bn-item" id="bn-francais" onclick="exigerAcces(()=>show('screen-fr'));">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 010 18a14 14 0 010-18z"/></svg>
       Français
     </button>
@@ -2564,40 +2598,75 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
     <div id="gate-success" style="font-size:13px;color:var(--green);text-align:center;margin-top:10px;display:none;"></div>
   </section>
 
+  <!-- ══ ENTRÉE DE L'APPLICATION : deux pièces, rien d'autre ══ -->
   <section id="screen-level" class="card" hidden>
-    <button class="btn-link" onclick="renderDashboard();show('screen-dashboard');" style="margin-bottom:16px;">← Tableau de bord</button>
+    <div class="ap-tete">
+      <h2 class="ap-titre">Que préparez-vous&nbsp;?</h2>
+      <p class="ap-sous">Les deux démarches se cumulent. Vous pouvez passer de l'une à l'autre à tout moment.</p>
+    </div>
 
-    <!-- ENTRAÎNEMENT -->
-    <div style="background:var(--paper);border:2px solid var(--navy);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:10px;">🎯 Entraînement par questions</div>
-      <div class="qmeta" style="margin-bottom:12px;font-size:13px;">Choisir un niveau</div>
+    <button class="ap-piece ap-civique" onclick="exigerAcces(()=>{show('screen-civique');renderLevelList();});">
+      <span class="ap-piece-t">Je prépare l'examen civique</span>
+      <span class="ap-piece-d">657 questions par niveau de démarche, les cours des cinq thématiques, l'examen blanc chronométré.</span>
+      <span class="ap-piece-f">Entrer</span>
+    </button>
+
+    <button class="ap-piece ap-fr" onclick="exigerAcces(()=>show('screen-fr'));">
+      <span class="ap-piece-t">Je prépare le TCF</span>
+      <span class="ap-piece-d">Le test de niveau de A1 à C2 et la préparation au TCF IRN B2 exigé pour la naturalisation.</span>
+      <span class="ap-piece-f">Entrer</span>
+    </button>
+
+    <button class="btn btn-ghost ap-bilan" onclick="exigerAcces(()=>{renderDashboard();show('screen-dashboard');});">Voir ma progression</button>
+  </section>
+
+  <!-- ══ PIÈCE 1 : EXAMEN CIVIQUE ══ -->
+  <section id="screen-civique" class="card" hidden>
+    <button class="btn-link" onclick="show('screen-level');" style="margin-bottom:16px;">← Accueil</button>
+    <h2 class="ap-titre ap-titre-piece">Examen civique</h2>
+
+    <div class="ap-bloc">
+      <div class="ap-bloc-t">Entraînement par questions</div>
+      <div class="ap-bloc-d">Choisissez le niveau qui correspond à votre démarche.</div>
       <div class="levels" id="level-list"></div>
       <button class="btn btn-primary" id="btn-to-themes" style="display:none;">Continuer</button>
     </div>
 
-    <!-- COURS -->
-    <div style="background:var(--paper);border:2px solid var(--gold);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;">📚 Cours structurés</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">5 thématiques officielles, fiches illustrées et mémorisation facilitée.</div>
-      <button class="btn" id="open-courses" onclick="renderCourseLevelList();show('screen-course-level');return false;" style="background:var(--gold);color:#fff;border:none;width:100%;padding:13px;font-size:15px;justify-content:center;">Accéder aux cours</button>
+    <div class="ap-bloc">
+      <div class="ap-bloc-t">Les cours</div>
+      <div class="ap-bloc-d">Les cinq thématiques du programme officiel, en fiches courtes et illustrées.</div>
+      <button class="btn btn-gold ap-large" id="open-courses" onclick="renderCourseLevelList();show('screen-course-level');return false;">Accéder aux cours</button>
     </div>
 
-    <!-- FRANÇAIS / TCF -->
-    <div style="background:var(--paper);border:2px solid var(--brick);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
-      <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);font-weight:700;margin-bottom:8px;">🇫🇷 Français — TCF</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6;">Depuis janvier 2026, un niveau de français est exigé en plus de l'examen civique : <b style="color:var(--navy);">A2</b> pour la carte de séjour, <b style="color:var(--navy);">B1</b> pour la carte de résident, <b style="color:var(--navy);">B2</b> pour la naturalisation.</div>
-      <div id="app-essai-fr" class="masque-fr" style="background:#FBF1E6;border-left:3px solid #A8651E;border-radius:8px;padding:11px 13px;font-size:12.5px;line-height:1.55;color:#6B4715;margin-bottom:12px;">
-        <b>Version de test.</b> Ouverte à tous les abonnés pendant cette phase, mais pas encore comprise dans votre abonnement. Dites-nous ce qui manque&nbsp;: <a href="mailto:contact@civicum.fr" style="color:#8A5A14;font-weight:600;">contact@civicum.fr</a>
+    <div class="ap-bloc">
+      <div class="ap-bloc-t">Pour aller plus loin</div>
+      <div class="ap-deux-cols">
+        <button class="btn btn-ghost" id="open-portraits">Portraits et symboles</button>
+        <button class="btn btn-ghost" onclick="openMiseEnSituation();">Mises en situation</button>
       </div>
-      <a class="btn" href="/tcf-tout-public.html" style="background:var(--brick);color:#fff;border:none;width:100%;padding:13px;font-size:14px;justify-content:center;margin-bottom:9px;text-decoration:none;">Tester mon niveau, de A1 à C2</a>
-      <a class="btn btn-ghost" href="/tcf-b2.html" style="width:100%;padding:13px;font-size:14px;justify-content:center;text-decoration:none;">Préparation TCF IRN B2</a>
+    </div>
+  </section>
+
+  <!-- ══ PIÈCE 2 : FRANÇAIS / TCF ══ -->
+  <section id="screen-fr" class="card" hidden>
+    <button class="btn-link" onclick="show('screen-level');" style="margin-bottom:16px;">← Accueil</button>
+    <h2 class="ap-titre ap-titre-piece">Français — TCF</h2>
+    <p class="ap-sous">Depuis janvier 2026, un niveau de français est exigé en plus de l'examen civique : <b>A2</b> pour la carte de séjour, <b>B1</b> pour la carte de résident, <b>B2</b> pour la naturalisation.</p>
+
+    <div id="app-essai-fr" class="masque-fr ap-essai">
+      <b>Version de test.</b> Ouverte à tous les abonnés pendant cette phase, mais pas encore comprise dans votre abonnement. Dites-nous ce qui manque&nbsp;: <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
     </div>
 
-    <!-- AUTRES -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <button class="btn" id="open-portraits" style="background:var(--navy);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;">🖼️ Portraits &amp; Symboles</button>
-      <button class="btn btn-ghost" id="open-dashboard" style="font-size:14px;padding:13px;justify-content:center;">📊 Mon tableau de bord</button>
-      <button class="btn" onclick="openMiseEnSituation();" style="background:var(--brick);color:#fff;border:none;padding:13px;font-size:14px;justify-content:center;grid-column:1/-1;margin-top:2px;">🎭 Mises en situation</button>
+    <div class="ap-bloc">
+      <div class="ap-bloc-t">Situer mon niveau</div>
+      <div class="ap-bloc-d">Trois séries au format des épreuves de compréhension du TCF Tout public. Une estimation de A1 à C2 à la fin, épreuve par épreuve.</div>
+      <a class="btn btn-primary ap-large" href="/tcf-tout-public.html">Faire le test de niveau</a>
+    </div>
+
+    <div class="ap-bloc">
+      <div class="ap-bloc-t">Préparer le TCF IRN B2</div>
+      <div class="ap-bloc-d">Le test exigé pour la naturalisation, dans son format réel : quatre épreuves, compréhension et expression.</div>
+      <a class="btn btn-ghost ap-large" href="/tcf-b2.html">Accéder à la préparation</a>
     </div>
   </section>
 
@@ -2688,7 +2757,7 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
     <div id="dash-vide" class="db-vide" style="display:none;">
       <div class="db-vide-titre">Votre préparation commence ici</div>
       <p>Vos scores, votre progression par thématique et votre historique s'afficheront sur cette page dès votre premier entraînement.</p>
-      <button class="btn btn-primary" onclick="exigerAcces(()=>show('screen-level'));">Commencer un entraînement</button>
+      <button class="btn btn-primary" onclick="exigerAcces(()=>{show('screen-civique');renderLevelList();});">Commencer un entraînement</button>
     </div>
 
     <!-- Suivi (masqué tant qu'aucune session n'existe) -->
@@ -2711,9 +2780,8 @@ Votre demande d'aide au logement a fait l'objet d'un examen attentif. Les élém
     <div class="db-section">
       <div class="db-titre">Commencer un exercice</div>
       <div class="db-actions">
-        <button class="btn btn-primary" onclick="exigerAcces(()=>show('screen-level'));">Entraînement</button>
-        <button class="btn btn-gold" onclick="exigerAcces(()=>{renderCourseLevelList();show('screen-course-level');});">Cours</button>
-        <button class="btn btn-ghost db-large" onclick="exigerAcces(()=>openMiseEnSituation());">Mises en situation</button>
+        <button class="btn btn-primary" onclick="exigerAcces(()=>{show('screen-civique');renderLevelList();});">Examen civique</button>
+        <button class="btn btn-gold" onclick="exigerAcces(()=>show('screen-fr'));">Français — TCF</button>
       </div>
     </div>
 
@@ -3934,7 +4002,7 @@ function renderResults(timeExpired){
 
 // ---------- SCREEN SWITCHING ----------
 function show(id){
-  ['screen-gate','screen-level','screen-setup','screen-quiz','screen-results',
+  ['screen-gate','screen-level','screen-civique','screen-fr','screen-setup','screen-quiz','screen-results',
    'screen-course-gate','screen-course-level','screen-course-list','screen-course-lesson',
    'screen-portraits','screen-dashboard','screen-ms','screen-avis'].forEach(s => {
     document.getElementById(s).hidden = (s !== id);
@@ -5680,10 +5748,6 @@ function resumeLastSession(){
   show('screen-setup');
 }
 
-document.getElementById('open-dashboard').addEventListener('click', ()=>{
-  renderDashboard();
-  show('screen-dashboard');
-});
 document.getElementById('btn-dashboard-back').addEventListener('click', ()=>{ show('screen-level'); });
 document.getElementById('btn-clear-scores').addEventListener('click', ()=>{
   if(confirm('Effacer tout l\u2019historique de scores ?')){
