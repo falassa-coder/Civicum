@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammaire française A2 — 20 chapitres avec corrigés | Civicum</title>
+<meta name="description" content="Parcours de grammaire française niveau A2 : 20 chapitres de 20 minutes, règles, exemples commentés, dialogues et exercices auto-corrigés. Orienté démarches administratives.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://civicum.fr/grammaire-a2.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://civicum.fr/grammaire-a2.html">
+<meta property="og:title" content="Grammaire française A2 — 20 chapitres avec corrigés">
+<meta property="og:description" content="Règles, exemples commentés, dialogues et exercices auto-corrigés, du présent au passé composé.">
+<meta property="og:locale" content="fr_FR">
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"Course",
+  "name":"Grammaire française pratique, niveau A2",
+  "description":"Vingt chapitres de grammaire française de niveau A2, chacun d'environ vingt minutes : règles, exemples commentés, dialogue et exercices corrigés.",
+  "provider":{"@type":"EducationalOrganization","name":"Civicum","url":"https://civicum.fr"},
+  "inLanguage":"fr","educationalLevel":"A2",
+  "hasCourseInstance":{"@type":"CourseInstance","courseMode":"online"} }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B2D; --ink-60:#3D4F63; --gold:#B8962E; --gold-lt:#D4B04A; --gold-bg:#FBF6EA;
+  --white:#FAF9F6; --surface:#FFF; --surface-2:#F4F3F0; --line:rgba(15,27,45,.1); --line-md:rgba(15,27,45,.2);
+  --ok:#1E6B45; --ok-bg:#EAF5EF; --warn:#A8651E; --warn-bg:#FBF1E6; --ko:#A82D1E; --ko-bg:#FDF0EE;
+  --muted:#6B6459;
+  --serif:'DM Serif Display',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r:10px; --r-lg:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--gold)}
+section{padding:36px 0}
+
+.top{background:var(--ink);color:var(--white);padding:14px 0;position:sticky;top:0;z-index:30}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}
+.brand span{width:28px;height:28px;border:1.5px solid var(--gold);color:var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-size:16px;letter-spacing:0}
+.top a.retour{color:rgba(250,249,246,.7);text-decoration:none;font-size:14px}
+.top a.retour:hover{color:var(--gold)}
+
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:clamp(27px,5.2vw,40px);line-height:1.15;margin:0 0 14px;font-weight:400}
+h2{font-family:var(--serif);font-size:25px;font-weight:400;margin:0 0 12px}
+h3{font-size:16px;font-weight:700;margin:0 0 8px}
+.lead{font-size:18px;color:var(--ink-60);margin:0 0 26px}
+
+.epreuves{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:24px}
+.ep{background:var(--surface);padding:16px 18px;display:flex;align-items:center;gap:14px}
+.ep .code{flex:none;width:44px;height:44px;border-radius:11px;background:var(--gold-bg);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:13px}
+.ep .t{flex:1;min-width:0}
+.ep .t b{display:block;font-size:15.5px}
+.ep .t small{color:var(--muted);font-size:13.5px}
+.ep-meta{flex:none;font-size:13px;color:var(--muted);text-align:right;white-space:nowrap}
+
+.encadre{border-radius:var(--r);padding:15px 17px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+.encadre.info{background:var(--gold-bg);border-left:3px solid var(--gold);color:#5C4A14}
+.encadre.alerte{background:var(--warn-bg);border-left:3px solid var(--warn);color:#6B4715}
+.encadre b{font-weight:700}
+
+.modules{display:grid;gap:12px;margin-bottom:22px}
+.mod{display:flex;align-items:center;gap:15px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:17px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s,transform .1s}
+.mod:hover{border-color:var(--gold)}
+.mod:active{transform:scale(.995)}
+.mod .n{flex:none;width:46px;height:46px;border-radius:11px;background:var(--ink);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:13px}
+.mod .t{flex:1}
+.mod .t b{display:block;font-size:16px;margin-bottom:2px}
+.mod .t small{color:var(--muted);font-size:13.5px}
+.mod .fl{flex:none;color:var(--gold);font-size:19px}
+
+.barre{position:sticky;top:56px;z-index:20;background:var(--white);border-bottom:1px solid var(--line);padding:12px 0}
+.barre .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.compte{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chrono{font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums}
+.chrono.urgent{color:var(--ko)}
+.jauge{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:9px}
+.jauge i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+
+.contexte{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600}
+.lecteur{background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:22px;margin-bottom:20px;text-align:center}
+.lecteur .gros{width:72px;height:72px;border-radius:50%;border:none;background:#fff;margin:0 auto 12px;display:grid;place-items:center;cursor:pointer}
+.lecteur .gros svg{width:30px;height:30px;fill:var(--ink)}
+.lecteur .gros:disabled{opacity:.35;cursor:not-allowed}
+.lecteur small{display:block;font-size:14px;opacity:.82}
+.lecteur .rejouer{background:none;border:none;color:var(--gold-lt);font:inherit;font-size:13px;margin-top:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:20px}
+.doc .titre{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.doc p{margin:0 0 11px;font-size:15.5px;line-height:1.7;white-space:pre-line}
+.doc p:last-child{margin-bottom:0}
+
+.enonce{font-family:var(--serif);font-size:clamp(19px,3.4vw,24px);line-height:1.35;margin:0 0 20px;font-weight:400}
+.reps{display:grid;gap:10px;margin-bottom:24px}
+.rep{display:flex;align-items:flex-start;gap:13px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,background .15s}
+.rep:hover{border-color:var(--line-md)}
+.rep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.rep .l{flex:none;width:27px;height:27px;border-radius:7px;background:var(--surface-2);display:grid;place-items:center;font-size:13.5px;font-weight:600;color:var(--ink-60)}
+.rep.choisie{border-color:var(--gold);background:var(--gold-bg)}
+.rep.choisie .l{background:var(--gold);color:#fff}
+
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:var(--r);padding:15px 26px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.9}
+.btn-or{background:var(--gold);color:#fff}
+.btn-ink{background:var(--ink);color:var(--white)}
+.btn-vide{background:transparent;border:1.5px solid var(--line-md);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.score{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:32px 24px;text-align:center;margin-bottom:22px}
+.score .n{font-family:var(--serif);font-size:54px;line-height:1;color:var(--gold-lt)}
+.score .pc{font-size:15px;opacity:.8;margin-top:6px}
+.corrige{margin-bottom:26px}
+.q{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:10px;background:var(--surface)}
+.q.faux{border-left:3px solid var(--ko)}
+.q.juste{border-left:3px solid var(--ok)}
+.q .en{font-weight:600;margin-bottom:10px;font-size:15px}
+.q .li{font-size:14.5px;padding:7px 11px;border-radius:6px;margin-bottom:5px;color:var(--muted)}
+.q .li.bonne{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.q .li.mienne{background:var(--ko-bg);color:var(--ko);font-weight:600}
+.q .pourquoi{font-size:14px;color:var(--ink-60);background:var(--surface-2);border-radius:7px;padding:11px 13px;margin-top:9px;line-height:1.6}
+
+.tache{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-bottom:14px}
+.tache .tete{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.tache .num{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tache .vol{font-size:13px;color:var(--muted)}
+.tache .consigne{font-size:15.5px;line-height:1.65;margin-bottom:14px}
+.tache ul{list-style:none;padding:0;margin:0}
+.tache li{padding:5px 0 5px 22px;position:relative;font-size:14px;color:var(--ink-60)}
+.tache li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+
+.offre{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:26px;text-align:center;margin-top:30px}
+footer{background:var(--ink);color:rgba(250,249,246,.65);padding:32px 0;font-size:13.5px;margin-top:46px}
+footer a{color:var(--gold-lt)}
+
+.verrou{background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:30px 24px;text-align:center;margin-bottom:22px}
+.verrou-ic{font-size:26px;margin-bottom:10px;opacity:.75}
+.verrou-t{font-family:var(--serif);font-size:23px;margin-bottom:10px}
+.verrou p{color:var(--ink-60);font-size:15.5px;max-width:420px;margin:0 auto 20px}
+.verrou-prix{font-size:13px;color:var(--muted);margin-top:16px}
+.chargement{display:flex;align-items:center;justify-content:center;gap:11px;color:var(--muted);font-size:15px;padding:28px 0}
+.chargement .rond{width:19px;height:19px;border:2.5px solid var(--line-md);border-top-color:var(--gold);border-radius:50%;display:inline-block;animation:tourne .85s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.contenu-inclus{background:var(--surface-2);border-radius:var(--r-lg);padding:22px;margin-top:26px}
+.contenu-inclus ul{list-style:none;padding:0;margin:0}
+.contenu-inclus li{padding:7px 0 7px 24px;position:relative;font-size:15px;line-height:1.6}
+.contenu-inclus li::before{content:"\2713";position:absolute;left:0;color:var(--gold);font-weight:700}
+.masque{display:none!important}
+@media (max-width:560px){.actions{flex-direction:column}.btn{width:100%}.ep{flex-wrap:wrap}.ep-meta{flex:0 0 100%;margin:5px 0 0 58px;text-align:left;font-weight:600;color:var(--gold);white-space:normal}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.bandeau-essai{background:#FBF1E6;border:1px solid rgba(168,101,30,.3);border-left:3px solid #A8651E;border-radius:10px;padding:15px 18px;margin-bottom:22px;font-size:14.5px;line-height:1.65;color:#6B4715}
+.bandeau-essai b{color:#5A3A10}
+
+/* ---- Parcours de grammaire ---- */
+.gr-liste{display:grid;gap:10px;margin-bottom:10px}
+.gr-ch{display:flex;align-items:center;gap:15px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s}
+.gr-ch:hover{border-color:var(--gold)}
+.gr-num{flex:none;width:38px;height:38px;border-radius:10px;background:var(--surface-2);color:var(--muted);display:grid;place-items:center;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.gr-ch.fait .gr-num{background:var(--ok);color:#fff}
+.gr-t{flex:1;min-width:0}
+.gr-t b{display:block;font-size:15.5px;font-weight:600;margin-bottom:2px}
+.gr-t small{color:var(--muted);font-size:13px;line-height:1.45;display:block}
+.gr-fl{flex:none;color:var(--gold);font-size:18px}
+
+.gr-barre{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 17px;margin-bottom:20px;font-size:14px}
+.gr-barre .j{flex:1;height:7px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.gr-barre .j i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.gr-barre .c{flex:none;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+.gr-etape{border-top:1px solid var(--line);padding-top:22px;margin-top:26px}
+.gr-etape:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.gr-etape-t{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+
+.gr-regle{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin-bottom:14px}
+.gr-regle h3{font-family:var(--serif);font-weight:400;font-size:19px;margin:0 0 7px;color:var(--ink)}
+.gr-regle .intro{font-size:14.5px;color:var(--ink-60);line-height:1.65;margin:0 0 14px}
+.gr-conj{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.gr-conj span{background:var(--surface-2);padding:9px 12px;font-size:14px}
+.gr-conj span:nth-child(even){color:var(--muted)}
+.gr-nb{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:7px;padding:12px 14px;font-size:13.5px;line-height:1.65;color:var(--ink-60)}
+.gr-nb b{color:var(--gold);display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px}
+
+.gr-ex{border-left:2px solid var(--line-md);padding:3px 0 3px 15px;margin-bottom:15px}
+.gr-ex .p{font-size:16px;line-height:1.55;color:var(--ink);margin-bottom:4px}
+.gr-ex .n{font-size:13px;color:var(--muted);line-height:1.55}
+
+.gr-dial{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.gr-dial .lieu{font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.gr-rep{display:flex;gap:11px;margin-bottom:11px;font-size:15px;line-height:1.6}
+.gr-rep .qui{flex:none;min-width:88px;font-weight:600;color:var(--gold)}
+.gr-ecouter{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+
+.gr-exo{margin-bottom:26px}
+.gr-consigne{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:14px}
+.gr-item{margin-bottom:11px;font-size:15px;line-height:1.9}
+.gr-item .num{display:inline-block;width:22px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.gr-saisie{border:1.5px solid var(--line-md);border-radius:7px;padding:6px 10px;font:inherit;font-size:15px;min-width:150px;background:var(--surface);color:var(--ink)}
+.gr-saisie:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.gr-saisie.juste{border-color:var(--ok);background:var(--ok-bg)}
+.gr-saisie.faux{border-color:var(--ko);background:var(--ko-bg)}
+.gr-corr{display:block;margin:4px 0 0 22px;font-size:13.5px;line-height:1.6}
+.gr-corr.juste{color:var(--ok)}
+.gr-corr.faux{color:var(--ko)}
+.gr-corr .sol{font-weight:700}
+
+.gr-opts{display:flex;gap:8px;flex-wrap:wrap;margin:7px 0 0 22px}
+.gr-opt{border:1.5px solid var(--line-md);border-radius:8px;padding:8px 14px;font:inherit;font-size:14.5px;background:var(--surface);cursor:pointer;color:var(--ink)}
+.gr-opt:hover:not(:disabled){border-color:var(--gold)}
+.gr-opt:disabled{cursor:default;opacity:.55}
+.gr-opt.juste{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);opacity:1;font-weight:600}
+.gr-opt.faux{border-color:var(--ko);background:var(--ko-bg);color:var(--ko);opacity:1}
+.gr-pourquoi{margin:9px 0 0 22px;font-size:13.5px;line-height:1.65;color:var(--ink-60);background:var(--surface-2);border-radius:7px;padding:10px 13px}
+
+.gr-libre{margin-bottom:17px}
+.gr-libre .q{font-size:15px;line-height:1.6;margin-bottom:9px;color:var(--ink)}
+.gr-zone{width:100%;border:1.5px solid var(--line-md);border-radius:9px;padding:11px 13px;font:inherit;font-size:15px;line-height:1.7;min-height:88px;resize:vertical;background:var(--surface);color:var(--ink)}
+.gr-zone:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.gr-modele{background:var(--gold-bg);border-radius:8px;padding:12px 14px;font-size:14.5px;line-height:1.7;color:var(--ink-60);margin-top:9px}
+.gr-modele b{color:var(--gold);display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px}
+
+.gr-score{background:var(--ink);color:var(--white);border-radius:var(--r-lg);padding:24px;text-align:center;margin:26px 0 20px}
+.gr-score .gd{font-family:var(--serif);font-size:38px;line-height:1;color:var(--gold-lt)}
+.gr-score .de{font-size:14px;opacity:.85;margin-top:7px}
+@media (max-width:560px){
+  .gr-conj{grid-template-columns:1fr}
+  .gr-rep{flex-direction:column;gap:2px}
+  .gr-rep .qui{min-width:0}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a class="brand" href="/"><span>C</span>CIVICUM</a>
+  <a class="retour" href="/">Retour au site</a>
+</div></div>
+
+<!-- ══════════ PRÉSENTATION ══════════ -->
+<div id="ecran-intro">
+  <section><div class="wrap">
+    <div class="eyebrow">Français — niveau A2</div>
+    <h1>Grammaire pratique, en vingt chapitres</h1>
+    <p class="lead">Du présent au passé composé, les structures dont vous avez besoin pour vos démarches et votre vie quotidienne. Chaque chapitre demande environ vingt minutes et se corrige tout seul.</p>
+
+    <h2>Comment se déroule un chapitre</h2>
+    <div class="epreuves">
+      <div class="ep"><span class="code">1</span><span class="t"><b>La règle</b><small>Expliquée simplement, avec un encadré sur l'erreur à éviter</small></span><span class="ep-meta">5 min</span></div>
+      <div class="ep"><span class="code">2</span><span class="t"><b>Les exemples</b><small>Sept phrases commentées, tirées de situations réelles</small></span><span class="ep-meta">inclus</span></div>
+      <div class="ep"><span class="code">3</span><span class="t"><b>Le dialogue</b><small>Une scène de la vie courante, lue à voix haute</small></span><span class="ep-meta">3 min</span></div>
+      <div class="ep"><span class="code">4</span><span class="t"><b>Les exercices</b><small>Corrigés immédiatement, avec l'explication de chaque réponse</small></span><span class="ep-meta">8 min</span></div>
+      <div class="ep"><span class="code">5</span><span class="t"><b>À vous d'écrire</b><small>Une production libre, avec un modèle de réponse</small></span><span class="ep-meta">4 min</span></div>
+    </div>
+
+    <div class="encadre info">
+      <b>Pourquoi ce parcours est orienté démarches.</b> Les exemples et les dialogues se passent à la préfecture, au guichet, dans un centre social, chez le médecin. Vous apprenez la règle et, en même temps, les phrases qui vous serviront.
+    </div>
+
+    <h2>Le programme</h2>
+    <div class="contenu-inclus">
+      <ul>
+        <li><b>Chapitres 1 à 5</b> — être et avoir, il y a et c'est, les verbes en -er, faire et prendre, aller venir partir</li>
+        <li><b>Chapitres 6 à 10</b> — pouvoir vouloir devoir, savoir et connaître, possessifs et démonstratifs, la quantité, la comparaison</li>
+        <li><b>Chapitres 11 à 15</b> — les verbes pronominaux, la négation complexe, le futur proche, les indéfinis, les adverbes</li>
+        <li><b>Chapitres 16 à 20</b> — le passé composé, du plus simple au plus complexe, jusqu'aux verbes pronominaux</li>
+      </ul>
+    </div>
+
+    <h2>Commencer</h2>
+    <div id="zone-acces">
+      <div class="verrou" id="verrou">
+        <div class="verrou-ic">&#128274;</div>
+        <div class="verrou-t">Réservé aux abonnés</div>
+        <p>Les vingt chapitres, les corrigés commentés et le suivi de progression font partie de l'abonnement Civicum.</p>
+        <div class="actions" style="justify-content:center">
+          <a class="btn btn-or" href="/#inscription">Créer mon compte</a>
+          <a class="btn btn-vide" href="/#connexion">J'ai déjà un compte</a>
+        </div>
+        <div class="verrou-prix">Compris dans l'abonnement Civicum. Paiement unique, sans reconduction automatique.</div>
+      </div>
+
+      <div id="attente" class="chargement masque"><span class="rond"></span> Vérification de votre accès…</div>
+
+      <div id="parcours" class="masque">
+        <div class="bandeau-essai masque" id="bandeau-essai">
+          <b>Version de test.</b> Ce parcours est ouvert à tous les abonnés pendant cette phase, mais il n'est pas compris dans l'abonnement actuel, qui porte sur l'examen civique. Dites-nous ce qui manque&nbsp;: <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+        </div>
+        <div class="gr-barre">
+          <span class="j"><i id="gr-jauge" style="width:0%"></i></span>
+          <span class="c" id="gr-compte">0 / 20</span>
+        </div>
+        <div class="gr-liste" id="gr-liste"></div>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ══════════ UN CHAPITRE ══════════ -->
+<div id="ecran-chapitre" class="masque">
+  <section><div class="wrap">
+    <button class="btn btn-vide" onclick="quitter()" style="margin-bottom:20px;">&larr; Tous les chapitres</button>
+    <div class="eyebrow" id="ch-num">Chapitre 1</div>
+    <h1 id="ch-titre" style="font-size:clamp(23px,4.4vw,33px)">Titre</h1>
+    <p class="lead" id="ch-objectif">Objectif</p>
+
+    <div class="gr-etape"><div class="gr-etape-t">1 — La règle</div><div id="ch-regles"></div></div>
+    <div class="gr-etape"><div class="gr-etape-t">2 — Des exemples pour comprendre</div><div id="ch-exemples"></div></div>
+    <div class="gr-etape"><div class="gr-etape-t">3 — En situation</div><div id="ch-dialogue"></div></div>
+    <div class="gr-etape"><div class="gr-etape-t">4 — À votre tour</div><div id="ch-exercices"></div>
+      <div class="actions"><button class="btn btn-ink" id="ch-verifier">Vérifier mes réponses</button></div>
+      <div id="ch-score"></div>
+    </div>
+    <div class="gr-etape"><div class="gr-etape-t">5 — Écrire</div><div id="ch-libre"></div></div>
+
+    <div class="actions" style="flex-wrap:wrap;margin-top:28px;">
+      <button class="btn btn-ink" id="ch-suivant">Chapitre suivant &rarr;</button>
+      <button class="btn btn-vide" onclick="quitter()">Tous les chapitres</button>
+    </div>
+  </div></section>
+</div>
+
+<footer><div class="wrap">
+  <b style="color:var(--white)">Civicum</b> — service privé de préparation, indépendant de l'administration.
+  <br><br>
+  <a href="/">Accueil</a> · <a href="/tcf-tout-public.html">Test de niveau</a> · <a href="/tcf-b2.html">TCF IRN B2</a> · <a href="/cgu.html">Conditions générales</a> · <a href="mailto:contact@civicum.fr">contact@civicum.fr</a>
+</div></footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const app = initializeApp({
+    apiKey: "AIzaSyBQjD8NPUtoUSSVQ0A1Lju7kQ6YtBNr7rM",
+    authDomain: "civicum-30071.firebaseapp.com",
+    projectId: "civicum-30071",
+    storageBucket: "civicum-30071.firebasestorage.app",
+    messagingSenderId: "870696168739",
+    appId: "1:870696168739:web:c64ad16f675a2547a0f096"
+  });
+  const auth = getAuth(app), db = getFirestore(app);
+  window._fbDb = db; window._fbDoc = doc; window._fbGetDoc = getDoc;
+
+  onAuthStateChanged(auth, async (user) => {
+    let acces = false, expire = false;
+    if(user){
+      try{
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if(snap.exists()){
+          const d = snap.data();
+          const nonExpire = !d.expireLe || d.expireLe > Date.now();
+          acces  = d.actif === true && nonExpire;
+          expire = d.actif === true && !nonExpire;
+        }
+      } catch(e){ /* règles ou réseau : accès refusé */ }
+    }
+    window._grAcces = acces;
+    if(typeof majAcces === "function") majAcces(acces, !!user, expire);
+  });
+</script>
+
+<script>
+/* ==================================================================
+   PARCOURS DE GRAMMAIRE A2
+   Le contenu est lu dans Firestore (document fle/GRAMMAIRE-A2),
+   accessible aux seuls abonnements en cours. Aucun corrigé dans ce
+   fichier.
+   ================================================================== */
+
+const CLE_PROGRES = "civicum-grammaire-a2";
+let BANQUE = null, chapitre = null, iCh = 0;
+
+const $ = (id) => document.getElementById(id);
+function voir(id){
+  silence();
+  ["ecran-intro","ecran-chapitre"].forEach(e => $(e).classList.toggle("masque", e !== id));
+  window.scrollTo(0,0);
+}
+function ech(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+/* ---------- Progression : propre à l'appareil ---------- */
+function lireProgres(){
+  try{ return JSON.parse(localStorage.getItem(CLE_PROGRES) || "[]"); }
+  catch(e){ return []; }
+}
+function marquerFait(id){
+  try{
+    const p = lireProgres();
+    if(p.indexOf(id) === -1){ p.push(id); localStorage.setItem(CLE_PROGRES, JSON.stringify(p)); }
+  } catch(e){ /* navigation privée : la progression n'est pas conservée */ }
+}
+
+/* ---------- Synthèse vocale pour les dialogues ---------- */
+let voixFr = null;
+function chargerVoix(){
+  if(!window.speechSynthesis) return;
+  const v = speechSynthesis.getVoices().filter(x => x.lang && x.lang.toLowerCase().indexOf("fr") === 0);
+  voixFr = v.find(x => /Google|Amelie|Amélie|Audrey|Thomas|Virginie|Denise/i.test(x.name)) || v[0] || null;
+}
+if(window.speechSynthesis){ chargerVoix(); speechSynthesis.onvoiceschanged = chargerVoix; }
+function silence(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
+
+function lireDialogue(){
+  const etat = $("gr-etat");
+  if(!window.speechSynthesis){
+    if(etat) etat.textContent = "Votre navigateur ne lit pas les dialogues.";
+    return;
+  }
+  speechSynthesis.cancel();
+  chargerVoix();
+  if(!voixFr && speechSynthesis.getVoices().length === 0){
+    if(etat) etat.textContent = "Aucune voix installée sur cet appareil.";
+    return;
+  }
+  if(etat) etat.textContent = "Lecture en cours…";
+  let demarre = false;
+  chapitre.dialogue.lignes.forEach((l, i) => {
+    const u = new SpeechSynthesisUtterance(l.texte);
+    u.lang = "fr-FR"; u.rate = 0.88;
+    u.pitch = i % 2 === 0 ? 0.92 : 1.12;   /* deux interlocuteurs */
+    if(voixFr) u.voice = voixFr;
+    u.onstart = () => { demarre = true; };
+    if(i === chapitre.dialogue.lignes.length - 1){
+      u.onend = () => { if(etat && demarre) etat.textContent = "Dialogue terminé."; };
+    }
+    speechSynthesis.speak(u);
+  });
+  setTimeout(() => { if(!demarre && etat) etat.textContent = "Pas de son sur cet appareil."; }, 1800);
+}
+
+/* ---------- Accès ---------- */
+function majAcces(acces, connecte, expire){
+  const verrou = $("verrou");
+  if(!verrou) return;
+  $("attente").classList.add("masque");
+  if(acces){
+    verrou.classList.add("masque");
+    chargerBanque();
+  } else {
+    verrou.classList.remove("masque");
+    $("parcours").classList.add("masque");
+    if(connecte){
+      verrou.querySelector(".verrou-t").textContent =
+        expire ? "Votre accès a expiré" : "Votre accès n'est pas actif";
+      verrou.querySelector("p").textContent = expire
+        ? "Votre abonnement est arrivé à échéance. Réactivez-le pour retrouver le parcours et votre progression."
+        : "Votre compte existe, mais aucun abonnement n'y est rattaché pour le moment.";
+      verrou.querySelector(".btn-or").textContent = expire ? "Réactiver mon accès" : "Choisir un abonnement";
+      verrou.querySelector(".btn-vide").classList.add("masque");
+    }
+  }
+}
+
+async function chargerBanque(){
+  if(BANQUE){ listerChapitres(); return; }
+  $("attente").classList.remove("masque");
+  try{
+    const snap = await window._fbGetDoc(window._fbDoc(window._fbDb, "fle", "GRAMMAIRE-A2"));
+    if(!snap.exists()) throw { code: "not-found" };
+    BANQUE = snap.data();
+    $("attente").classList.add("masque");
+    listerChapitres();
+  } catch(e){
+    const code = e && e.code;
+    let msg;
+    if(code === "permission-denied"){
+      msg = "Votre accès n'est pas reconnu. Si vous venez de vous abonner, déconnectez-vous puis reconnectez-vous.";
+    } else if(code === "not-found"){
+      msg = "Le parcours n'est pas encore en ligne. Nous le mettons en place : réessayez dans quelques heures.";
+    } else {
+      msg = "Le contenu n'a pas pu être chargé. Vérifiez votre connexion et rechargez la page.";
+    }
+    $("attente").innerHTML = msg + " <a href='mailto:contact@civicum.fr'>contact@civicum.fr</a>";
+    console.error("Chargement de la grammaire A2 :", code || e);
+  }
+}
+
+function listerChapitres(){
+  const faits = lireProgres();
+  const liste = $("gr-liste");
+  liste.innerHTML = "";
+  (BANQUE.chapitres || []).forEach((c, k) => {
+    const fait = faits.indexOf(c.id) !== -1;
+    const b = document.createElement("button");
+    b.className = "gr-ch" + (fait ? " fait" : "");
+    b.innerHTML =
+      '<span class="gr-num">' + (fait ? "&#10003;" : c.n) + '</span>' +
+      '<span class="gr-t"><b>' + ech(c.titre) + '</b><small>' + ech(c.objectif) + '</small></span>' +
+      '<span class="gr-fl">&rarr;</span>';
+    b.addEventListener("click", () => ouvrirChapitre(k));
+    liste.appendChild(b);
+  });
+  const n = (BANQUE.chapitres || []).length;
+  $("gr-compte").textContent = faits.length + " / " + n;
+  $("gr-jauge").style.width = (n ? faits.length / n * 100 : 0) + "%";
+  $("parcours").classList.remove("masque");
+}
+
+/* ---------- Un chapitre ---------- */
+function ouvrirChapitre(k){
+  if(!BANQUE || !window._grAcces){ voir("ecran-intro"); return; }
+  iCh = k;
+  chapitre = BANQUE.chapitres[k];
+  if(!chapitre) return;
+
+  $("ch-num").textContent = "Chapitre " + chapitre.n + " sur " + BANQUE.chapitres.length;
+  $("ch-titre").textContent = chapitre.titre;
+  $("ch-objectif").textContent = chapitre.objectif;
+
+  /* 1 — les règles */
+  $("ch-regles").innerHTML = chapitre.regles.map((r) =>
+    '<div class="gr-regle">' +
+      '<h3>' + ech(r.titre) + '</h3>' +
+      (r.intro ? '<p class="intro">' + ech(r.intro) + '</p>' : "") +
+      (r.conjugaison && r.conjugaison.length
+        ? '<div class="gr-conj">' + r.conjugaison.map(p =>
+            '<span>' + ech(p[0]) + '</span><span>' + ech(p[1] || "") + '</span>').join("") + '</div>'
+        : "") +
+      (r.nb ? '<div class="gr-nb"><b>À retenir</b>' + ech(r.nb) + '</div>' : "") +
+    '</div>').join("");
+
+  /* 2 — les exemples, avant tout exercice */
+  $("ch-exemples").innerHTML = chapitre.exemples.map((e) =>
+    '<div class="gr-ex"><div class="p">' + ech(e.phrase) + '</div>' +
+    '<div class="n">' + ech(e.note) + '</div></div>').join("");
+
+  /* 3 — le dialogue */
+  const d = chapitre.dialogue;
+  $("ch-dialogue").innerHTML =
+    '<div class="gr-dial">' +
+      '<div class="lieu">' + ech(d.lieu) + '</div>' +
+      d.lignes.map(l => '<div class="gr-rep"><span class="qui">' + ech(l.qui) +
+                        '</span><span>' + ech(l.texte) + '</span></div>').join("") +
+      '<div class="gr-ecouter">' +
+        '<button class="btn btn-vide" id="gr-play">&#9654;&nbsp; Écouter le dialogue</button>' +
+        '<small id="gr-etat" style="color:var(--muted);font-size:13px;"></small>' +
+      '</div>' +
+    '</div>';
+  $("gr-play").addEventListener("click", lireDialogue);
+
+  /* 4 — les exercices auto-corrigés */
+  const exos = chapitre.exercices.filter(e => e.type !== "libre");
+  $("ch-exercices").innerHTML = exos.map((e, ie) => {
+    if(e.type === "trou"){
+      return '<div class="gr-exo"><div class="gr-consigne">' + ech(e.consigne) + '</div>' +
+        e.items.map((it, i) =>
+          '<div class="gr-item"><span class="num">' + (i+1) + '.</span> ' +
+          ech(it.avant) + ' <input class="gr-saisie" data-e="' + ie + '" data-i="' + i + '" ' +
+          'autocomplete="off" autocapitalize="off" spellcheck="false"> ' + ech(it.apres) +
+          '<span class="gr-corr masque" id="c-' + ie + '-' + i + '"></span></div>').join("") +
+        '</div>';
+    }
+    return '<div class="gr-exo"><div class="gr-consigne">' + ech(e.consigne) + '</div>' +
+      e.items.map((it, i) =>
+        '<div class="gr-item"><span class="num">' + (i+1) + '.</span> ' + ech(it.phrase) +
+        '<span class="gr-opts" data-e="' + ie + '" data-i="' + i + '">' +
+          it.options.map(o => '<button class="gr-opt" data-v="' + ech(o) + '">' + ech(o) + '</button>').join("") +
+        '</span><span class="gr-pourquoi masque" id="p-' + ie + '-' + i + '"></span></div>').join("") +
+      '</div>';
+  }).join("");
+
+  /* Les boutons se corrigent au clic ; les saisies attendent la vérification. */
+  $("ch-exercices").querySelectorAll(".gr-opts").forEach((zone) => {
+    const ie = +zone.dataset.e, i = +zone.dataset.i;
+    const it = exos[ie].items[i];
+    zone.querySelectorAll(".gr-opt").forEach((b) => {
+      b.addEventListener("click", () => {
+        const bon = b.dataset.v === it.reponse;
+        zone.querySelectorAll(".gr-opt").forEach((x) => {
+          x.disabled = true;
+          if(x.dataset.v === it.reponse) x.classList.add("juste");
+          else if(x === b) x.classList.add("faux");
+        });
+        const p = $("p-" + ie + "-" + i);
+        p.classList.remove("masque");
+        p.innerHTML = (bon ? "<b>C'est juste.</b> " : "<b>La bonne réponse est « " + ech(it.reponse) + " ».</b> ")
+                    + ech(it.pourquoi);
+      });
+    });
+  });
+
+  $("ch-score").innerHTML = "";
+  $("ch-verifier").disabled = false;
+  $("ch-verifier").textContent = "Vérifier mes réponses";
+
+  /* 5 — l'expression écrite */
+  const libres = chapitre.exercices.filter(e => e.type === "libre");
+  $("ch-libre").innerHTML = libres.map((e) =>
+    '<div class="gr-consigne">' + ech(e.consigne) + '</div>' +
+    e.questions.map((q, i) =>
+      '<div class="gr-libre">' +
+        '<div class="q">' + ech(q.q) + '</div>' +
+        '<textarea class="gr-zone" placeholder="Écrivez votre réponse ici…"></textarea>' +
+        '<button class="btn btn-vide" style="margin-top:9px;" data-m="' + i + '">Voir un exemple de réponse</button>' +
+        '<div class="gr-modele masque" id="m-' + i + '"><b>Exemple de réponse</b>' + ech(q.modele) + '</div>' +
+      '</div>').join("")).join("");
+  $("ch-libre").querySelectorAll("button[data-m]").forEach((b) => {
+    b.addEventListener("click", () => {
+      $("m-" + b.dataset.m).classList.remove("masque");
+      b.classList.add("masque");
+    });
+  });
+
+  $("ch-suivant").style.display = (k + 1 < BANQUE.chapitres.length) ? "" : "none";
+  voir("ecran-chapitre");
+}
+
+/* Comparaison souple : la casse, les espaces, le type d'apostrophe et le
+   point final ne doivent pas faire échouer une réponse correcte. */
+function normaliser(s){
+  return String(s || "").toLowerCase().trim()
+    .replace(/[’ʼ]/g, "'")
+    .replace(/\s+/g, " ")
+    .replace(/\s*([?!;:])\s*$/, "")
+    .replace(/\.$/, "")
+    .trim();
+}
+
+function verifier(){
+  const exos = chapitre.exercices.filter(e => e.type !== "libre");
+  let bons = 0, total = 0;
+
+  $("ch-exercices").querySelectorAll(".gr-saisie").forEach((input) => {
+    const ie = +input.dataset.e, i = +input.dataset.i;
+    const it = exos[ie].items[i];
+    const bon = normaliser(input.value) === normaliser(it.reponse);
+    total++; if(bon) bons++;
+    input.classList.remove("juste","faux");
+    input.classList.add(bon ? "juste" : "faux");
+    const c = $("c-" + ie + "-" + i);
+    c.classList.remove("masque","juste","faux");
+    c.classList.add(bon ? "juste" : "faux");
+    c.innerHTML = bon ? "&#10003; Juste." : "&#10007; Réponse attendue : <span class=\"sol\">" + ech(it.reponse) + "</span>";
+  });
+
+  exos.forEach((e, ie) => {
+    if(e.type !== "choix") return;
+    e.items.forEach((it, i) => {
+      total++;
+      const zone = $("ch-exercices").querySelector('.gr-opts[data-e="' + ie + '"][data-i="' + i + '"]');
+      const choisi = zone && zone.querySelector(".gr-opt.juste:not(:disabled), .gr-opt.juste");
+      const repondu = zone && zone.querySelector(".gr-opt:disabled");
+      const faux = zone && zone.querySelector(".gr-opt.faux");
+      if(repondu && !faux) bons++;
+      if(!repondu && zone){
+        zone.querySelectorAll(".gr-opt").forEach((x) => {
+          x.disabled = true;
+          if(x.dataset.v === it.reponse) x.classList.add("juste");
+        });
+        const p = $("p-" + ie + "-" + i);
+        p.classList.remove("masque");
+        p.innerHTML = "<b>Sans réponse. La solution est « " + ech(it.reponse) + " ».</b> " + ech(it.pourquoi);
+      }
+    });
+  });
+
+  const pc = total ? Math.round(bons / total * 100) : 0;
+  $("ch-score").innerHTML =
+    '<div class="gr-score"><div class="gd">' + bons + " / " + total + '</div>' +
+    '<div class="de">' + (pc >= 80 ? "Très bien. Vous pouvez passer au chapitre suivant."
+                        : pc >= 50 ? "C'est en bonne voie. Relisez la règle et les réponses expliquées."
+                        : "Reprenez la règle et les exemples, puis refaites les exercices.") + '</div></div>';
+  $("ch-verifier").disabled = true;
+  $("ch-verifier").textContent = "Réponses vérifiées";
+  marquerFait(chapitre.id);
+  $("ch-score").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function quitter(){ silence(); listerChapitres(); voir("ecran-intro"); }
+
+$("ch-verifier").addEventListener("click", verifier);
+$("ch-suivant").addEventListener("click", () => {
+  if(iCh + 1 < BANQUE.chapitres.length) ouvrirChapitre(iCh + 1);
+});
+</script>
+</body>
+</html>
